@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+    <Device CyclePeriod="50000" ConfigUpdatePeriod="3000000">
+        <Slot Address="1" ModuleType="33" />
+        <Slot Address="2" ModuleType="33" />
+        <Slot Address="3" ModuleType="33" />
+        <Slot Address="4" ModuleType="33" />
+        <Slot Address="5" ModuleType="33" />
+        <Slot Address="6" ModuleType="33" />
+        <Slot Address="7" ModuleType="33" />
+        <Slot Address="8" ModuleType="33" />
+    </Device>
+    <Crossconnect>
+        <Connection ItemName="SHU14_DI_A1_31" Device="" Slot="1" Channel="1" UUID="F0F5DF8E479BE1F37B1A04BD2822DC41" />
+        <Connection ItemName="SHU14_DI_A1_32" Device="" Slot="1" Channel="2" UUID="130DCF59497BF24C6E31FFB8E4066172" />
+        <Connection ItemName="SHU14_DI_A1_33" Device="" Slot="1" Channel="3" UUID="F4BAE66E48E6760BA8EEF096B7779874" />
+        <Connection ItemName="SHU14_DI_A1_34" Device="" Slot="1" Channel="4" UUID="3F061CE54DBF0DEDBF0AEC80F9DF7A09" />
+        <Connection ItemName="SHU14_DI_A1_35" Device="" Slot="1" Channel="5" UUID="226F553E44AFD983DED0C5BAA6AA44DA" />
+        <Connection ItemName="SHU14_DI_A1_36" Device="" Slot="1" Channel="6" UUID="76E9C64343AACF92F0D54C8DCFCD2B62" />
+        <Connection ItemName="SHU14_DI_A1_37" Device="" Slot="1" Channel="7" UUID="87582E1944627F3428C24F826BB7F8D5" />
+        <Connection ItemName="SHU14_DI_A1_38" Device="" Slot="1" Channel="8" UUID="1AEAB8B245963B810055AF98DA0B907E" />
+        <Connection ItemName="SHU14_DI_A1_39" Device="" Slot="1" Channel="9" UUID="C8D03FD041BE777EFB2F8DA2F3E62278" />
+        <Connection ItemName="SHU14_DI_A1_310" Device="" Slot="1" Channel="10" UUID="BA616F0A4CD5F64C66049DB3F4186669" />
+        <Connection ItemName="SHU14_DI_A1_311" Device="" Slot="1" Channel="11" UUID="37E8039043C2BBA323FCDFA357372AEF" />
+        <Connection ItemName="SHU14_DI_A1_312" Device="" Slot="1" Channel="12" UUID="C26F17CD489CAD7723B6B6A787FBD8A1" />
+        <Connection ItemName="SHU14_DI_A1_313" Device="" Slot="1" Channel="13" UUID="7A539BB742D0E074EED8F7828049BD51" />
+        <Connection ItemName="SHU14_DI_A1_314" Device="" Slot="1" Channel="14" UUID="6AFA25D34CB87A4AF008E28B195EC14C" />
+        <Connection ItemName="SHU14_DI_A1_315" Device="" Slot="1" Channel="15" UUID="0FEAC3D24ED9A54F883139B25FE89F4A" />
+        <Connection ItemName="SHU14_DI_A1_316" Device="" Slot="1" Channel="16" UUID="60D3D0724F9E3B5A80460AA7FA934096" />
+        <Connection ItemName="SHU14_DI_A1_41" Device="" Slot="2" Channel="1" UUID="B51D8A144F017F1A249CABA2D35E2AEA" />
+        <Connection ItemName="SHU14_DI_A1_42" Device="" Slot="2" Channel="2" UUID="DC53CB484FED6AECD1C1698B73EEE04A" />
+        <Connection ItemName="SHU14_DI_A1_43" Device="" Slot="2" Channel="3" UUID="85C9589048B579F986C5C18A97DCDC2B" />
+        <Connection ItemName="SHU14_DI_A1_44" Device="" Slot="2" Channel="4" UUID="6E54B5474CB2ECB97976BA860CC8FC04" />
+        <Connection ItemName="SHU14_DI_A1_45" Device="" Slot="2" Channel="5" UUID="5FBE7C514C51EB53DD28C48026FBE0E4" />
+        <Connection ItemName="SHU14_DI_A1_46" Device="" Slot="2" Channel="6" UUID="17F7D2124D9EA2D7B19BAA84ABA7E211" />
+        <Connection ItemName="SHU14_DI_A1_47" Device="" Slot="2" Channel="7" UUID="BDEB08D34F036CDD535CD9B949722907" />
+        <Connection ItemName="SHU14_DI_A1_48" Device="" Slot="2" Channel="8" UUID="AF93038A4CBEE40F6DB934B33E9B3498" />
+        <Connection ItemName="SHU14_DI_A1_49" Device="" Slot="2" Channel="9" UUID="A1AEEAE74ED733FF10E753AB2B6C843D" />
+        <Connection ItemName="SHU14_DI_A1_410" Device="" Slot="2" Channel="10" UUID="1C43D09548F6D08D32F5F48D50FA7D14" />
+        <Connection ItemName="SHU14_DI_A1_411" Device="" Slot="2" Channel="11" UUID="6EB19D7D4E10A0989A5CC2A88BF75E53" />
+        <Connection ItemName="SHU14_DI_A1_412" Device="" Slot="2" Channel="12" UUID="1B0F06164E0DE87FD0D7D69367C83D96" />
+        <Connection ItemName="SHU14_DI_A1_413" Device="" Slot="2" Channel="13" UUID="1875316D40FEF15A9B01F68C397FA246" />
+        <Connection ItemName="SHU14_DI_A1_414" Device="" Slot="2" Channel="14" UUID="210CB0244776BCCB4C24D591E0B10264" />
+        <Connection ItemName="SHU14_DI_A1_415" Device="" Slot="2" Channel="15" UUID="2F731AB945E59C5D6AD506BA1E2E3C05" />
+        <Connection ItemName="SHU14_DI_A1_416" Device="" Slot="2" Channel="16" UUID="3A69910C4526EA511ED948AFAEBDB1CA" />
+        <Connection ItemName="SHU14_DI_A1_51" Device="" Slot="3" Channel="1" UUID="176715514CABC317BDF7DE880188C115" />
+        <Connection ItemName="SHU14_DI_A1_52" Device="" Slot="3" Channel="2" UUID="9E233E814005E9EB9C500DACA31D8549" />
+        <Connection ItemName="SHU14_DI_A1_53" Device="" Slot="3" Channel="3" UUID="2A25E8B24031ACF3DA9523B5FFEDD27D" />
+        <Connection ItemName="SHU14_DI_A1_54" Device="" Slot="3" Channel="4" UUID="63B1AF814A2BF48BF6B11CA621834C97" />
+        <Connection ItemName="SHU14_DI_A1_55" Device="" Slot="3" Channel="5" UUID="4DF461C24645F5D8265A72A74E59EA69" />
+        <Connection ItemName="SHU14_DI_A1_56" Device="" Slot="3" Channel="6" UUID="33D5108F428A95BCDC7547A340AF4204" />
+        <Connection ItemName="SHU14_DI_A1_57" Device="" Slot="3" Channel="7" UUID="94C9B08441FE471A852F009E859F9A28" />
+        <Connection ItemName="SHU14_DI_A1_58" Device="" Slot="3" Channel="8" UUID="A550FDA7464611843859A488576743C9" />
+        <Connection ItemName="SHU14_DI_A1_59" Device="" Slot="3" Channel="9" UUID="1BDDB72F440BCC60009B20877840C908" />
+        <Connection ItemName="SHU14_DI_A1_510" Device="" Slot="3" Channel="10" UUID="38EFC2CE43EB84BFCC2E0F8DC865F489" />
+        <Connection ItemName="SHU14_DI_A1_511" Device="" Slot="3" Channel="11" UUID="85D6B8E14985A51F33A6F482C16BD827" />
+        <Connection ItemName="SHU14_DI_A1_512" Device="" Slot="3" Channel="12" UUID="F4C6494B47D4B0ED59D482B061DD22D3" />
+        <Connection ItemName="SHU14_DI_A1_513" Device="" Slot="3" Channel="13" UUID="9A36E3E94665E6BF589DA2913F238BCD" />
+        <Connection ItemName="SHU14_DI_A1_514" Device="" Slot="3" Channel="14" UUID="80694BC94A06844187FF5A898A618191" />
+        <Connection ItemName="SHU14_DI_A1_515" Device="" Slot="3" Channel="15" UUID="B66E877C4BE0013BE97F139C255B8FC1" />
+        <Connection ItemName="SHU14_DI_A1_516" Device="" Slot="3" Channel="16" UUID="0738836441CB8AF01CF77BA7BF58A4DF" />
+        <Connection ItemName="SHU14_DI_A1_61" Device="" Slot="4" Channel="1" UUID="A9C5CF07443327EF76C6FD8A999EFC14" />
+        <Connection ItemName="SHU14_DI_A1_62" Device="" Slot="4" Channel="2" UUID="9D4E5E2E4DE871B8AF13D584625A36DE" />
+        <Connection ItemName="SHU14_DI_A1_63" Device="" Slot="4" Channel="3" UUID="DD2114FB477155A5680FDFB71EF62A45" />
+        <Connection ItemName="SHU14_DI_A1_64" Device="" Slot="4" Channel="4" UUID="BF74ECC9473B6CB17267239CB9B720CC" />
+        <Connection ItemName="SHU14_DI_A1_65" Device="" Slot="4" Channel="5" UUID="3877E53D4373F26E58CBBEB1F2E10011" />
+        <Connection ItemName="SHU14_DI_A1_66" Device="" Slot="4" Channel="6" UUID="63079FDC441F214C8328C0AF3BC628CD" />
+        <Connection ItemName="SHU14_DI_A1_67" Device="" Slot="4" Channel="7" UUID="444208ED463D67D198D1D5ADAA9E3FAA" />
+        <Connection ItemName="SHU14_DI_A1_68" Device="" Slot="4" Channel="8" UUID="06B6D18A4AB4AAD922F78A9FC754095F" />
+        <Connection ItemName="SHU14_DI_A1_69" Device="" Slot="4" Channel="9" UUID="733E5D15429093A7473D619B43304B69" />
+        <Connection ItemName="SHU14_DI_A1_610" Device="" Slot="4" Channel="10" UUID="D2DF7CD24396A20D23844C93E4B3879B" />
+        <Connection ItemName="SHU14_DI_A1_611" Device="" Slot="4" Channel="11" UUID="BB10629F4FD435697AC52E9B8BC23AE2" />
+        <Connection ItemName="SHU14_DI_A1_612" Device="" Slot="4" Channel="12" UUID="72C707BB40B289B80AAFEEACED299414" />
+        <Connection ItemName="SHU14_DI_A1_613" Device="" Slot="4" Channel="13" UUID="EE35D0754A66F264764C6DBD8845A6A2" />
+        <Connection ItemName="SHU14_DI_A1_614" Device="" Slot="4" Channel="14" UUID="7F7CBE3D420C35E6A4EB6599FB354D50" />
+        <Connection ItemName="SHU14_DI_A1_615" Device="" Slot="4" Channel="15" UUID="746BA2B84C74ED9129D4BCBC750DE9E5" />
+        <Connection ItemName="SHU14_DI_A1_616" Device="" Slot="4" Channel="16" UUID="2F80C56E43412A838737B0B0DDC4610E" />
+        <Connection ItemName="SHU14_DI_A1_71" Device="" Slot="5" Channel="1" UUID="B3DA315742E8BD84DAFC4B95EBAED88F" />
+        <Connection ItemName="SHU14_DI_A1_72" Device="" Slot="5" Channel="2" UUID="0BAFB19A4BDBA7D4033E24B568E4E1BC" />
+        <Connection ItemName="SHU14_DI_A1_73" Device="" Slot="5" Channel="3" UUID="A2685786421837D9837A948C2D17B718" />
+        <Connection ItemName="SHU14_DI_A1_74" Device="" Slot="5" Channel="4" UUID="0C8877294197845E7CD168B662D318C4" />
+        <Connection ItemName="SHU14_DI_A1_75" Device="" Slot="5" Channel="5" UUID="E961A94742FEB3ADABEA8DB062EC6337" />
+        <Connection ItemName="SHU14_DI_A1_76" Device="" Slot="5" Channel="6" UUID="ED5576AF452B853FB3EB41968852A5D7" />
+        <Connection ItemName="SHU14_DI_A1_77" Device="" Slot="5" Channel="7" UUID="301E4B2B4604C74F8BD8A5824993E41E" />
+        <Connection ItemName="SHU14_DI_A1_78" Device="" Slot="5" Channel="8" UUID="5F8A64A74AAD98E1554D1AA89736FA7F" />
+        <Connection ItemName="SHU14_DI_A1_79" Device="" Slot="5" Channel="9" UUID="A74EACA54BDD5E3CEA7E389FBBE118AC" />
+        <Connection ItemName="SHU14_DI_A1_710" Device="" Slot="5" Channel="10" UUID="2B7BCC954AE4EFFA9E7449AFBD273881" />
+        <Connection ItemName="SHU14_DI_A1_711" Device="" Slot="5" Channel="11" UUID="5134860645E7D00AA0E5EBA048FB205F" />
+        <Connection ItemName="SHU14_DI_A1_712" Device="" Slot="5" Channel="12" UUID="38D923D9486C7C22AF21B3A854D602AA" />
+        <Connection ItemName="SHU14_DI_A1_713" Device="" Slot="5" Channel="13" UUID="4FF698D342824E72EC84F48A351D617B" />
+        <Connection ItemName="SHU14_DI_A1_714" Device="" Slot="5" Channel="14" UUID="081DBE94496B6C601275B7B52478A018" />
+        <Connection ItemName="SHU14_DI_A1_715" Device="" Slot="5" Channel="15" UUID="5EFDE9C64376291D3D4051BBE80DBABE" />
+        <Connection ItemName="SHU14_DI_A1_716" Device="" Slot="5" Channel="16" UUID="87DDB58B4C34FA3EA512BDB69A91CFA8" />
+        <Connection ItemName="SHU14_DI_A1_81" Device="" Slot="6" Channel="1" UUID="515B9E3F41F650FBD76EF2B0063C5B06" />
+        <Connection ItemName="SHU14_DI_A1_82" Device="" Slot="6" Channel="2" UUID="6A98382D485671E72B0FA896ACA73221" />
+        <Connection ItemName="SHU14_DI_A1_83" Device="" Slot="6" Channel="3" UUID="2F23A1C241EFCE26932B5AAC846A07AB" />
+        <Connection ItemName="SHU14_DI_A1_84" Device="" Slot="6" Channel="4" UUID="791837F1448A41EA13528CB06875B5AB" />
+        <Connection ItemName="SHU14_DI_A1_85" Device="" Slot="6" Channel="5" UUID="DCB3BDF549939E6D513DFD9723049DC1" />
+        <Connection ItemName="SHU14_DI_A1_86" Device="" Slot="6" Channel="6" UUID="C29003CB43001CB55C1C658117991920" />
+        <Connection ItemName="SHU14_DI_A1_87" Device="" Slot="6" Channel="7" UUID="4C24A2734BABBA3F1B8D36BE5777A547" />
+        <Connection ItemName="SHU14_DI_A1_88" Device="" Slot="6" Channel="8" UUID="3CED64E545C2855191996D91D203BE15" />
+        <Connection ItemName="SHU14_DI_A1_89" Device="" Slot="6" Channel="9" UUID="DA1CA5D54E89F96C525030A07CCBC77C" />
+        <Connection ItemName="SHU14_DI_A1_810" Device="" Slot="6" Channel="10" UUID="F08C04AB45839A4DDC255686E3B75740" />
+        <Connection ItemName="SHU14_DI_A1_811" Device="" Slot="6" Channel="11" UUID="8FD517F1492FF6758C4B46B625E4A7B5" />
+        <Connection ItemName="SHU14_DI_A1_812" Device="" Slot="6" Channel="12" UUID="3E1A9C464B6E15525FAE49A8B41251D4" />
+        <Connection ItemName="SHU14_DI_A1_813" Device="" Slot="6" Channel="13" UUID="D099074C4EEB387B5C10C4805A1F405D" />
+        <Connection ItemName="SHU14_DI_A1_814" Device="" Slot="6" Channel="14" UUID="D8FE855140A19F20295B51A9E3033B2C" />
+        <Connection ItemName="SHU14_DI_A1_815" Device="" Slot="6" Channel="15" UUID="BD8E26ED40345EAA6E2E7DB0EBB8DCE2" />
+        <Connection ItemName="SHU14_DI_A1_816" Device="" Slot="6" Channel="16" UUID="381556784899D60C0B77DDBD47AE318F" />
+        <Connection ItemName="SHU14_DI_A1_91" Device="" Slot="7" Channel="1" UUID="BA87A30C4664D7F05C55F09F465DEFE9" />
+        <Connection ItemName="SHU14_DI_A1_92" Device="" Slot="7" Channel="2" UUID="67FE81874EF269F0FBCB839E333E96BB" />
+        <Connection ItemName="SHU14_DI_A1_93" Device="" Slot="7" Channel="3" UUID="B0080F8E4929CF384F74AE8078670791" />
+        <Connection ItemName="SHU14_DI_A1_94" Device="" Slot="7" Channel="4" UUID="79E61C8F4701E8F07102EAAE857BBFB2" />
+        <Connection ItemName="SHU14_DI_A1_95" Device="" Slot="7" Channel="5" UUID="9F2FF47D4A8EA214934D0BBA549143BB" />
+        <Connection ItemName="SHU14_DI_A1_96" Device="" Slot="7" Channel="6" UUID="DEC4B866418A18FAE9D2808D8192EAC4" />
+        <Connection ItemName="SHU14_DI_A1_97" Device="" Slot="7" Channel="7" UUID="269AD505400E3C7083C9EF8E864E0B45" />
+        <Connection ItemName="SHU14_DI_A1_98" Device="" Slot="7" Channel="8" UUID="08EFEC6F423A3BB4C5DC7BAD7DA37BA1" />
+        <Connection ItemName="SHU14_DI_A1_99" Device="" Slot="7" Channel="9" UUID="2B6EAA91405EDD8E8E74F4B94CE04C58" />
+        <Connection ItemName="SHU14_DI_A1_910" Device="" Slot="7" Channel="10" UUID="A5BC4A474DE7EDC7AC47D3BCD77FF00F" />
+        <Connection ItemName="SHU14_DI_A1_911" Device="" Slot="7" Channel="11" UUID="50B5F8104823D6BB78ECB79FB9C9CDAE" />
+        <Connection ItemName="SHU14_DI_A1_912" Device="" Slot="7" Channel="12" UUID="4C87A0E341E4110A704F8FACF086C014" />
+        <Connection ItemName="SHU14_DI_A1_913" Device="" Slot="7" Channel="13" UUID="32D85085434A37EC3D9EA89F4C78EBBA" />
+        <Connection ItemName="SHU14_DI_A1_914" Device="" Slot="7" Channel="14" UUID="DE3C936C4213C3360591EA99A0F853CF" />
+        <Connection ItemName="SHU14_DI_A1_915" Device="" Slot="7" Channel="15" UUID="B42E16964B12241B650FA7B1B4293DE8" />
+        <Connection ItemName="SHU14_DI_A1_916" Device="" Slot="7" Channel="16" UUID="442A896A432B17B5FF5AC59271961EAD" />
+        <Connection ItemName="SHU14_DI_A1_101" Device="" Slot="8" Channel="1" UUID="F7DC5F0C476E7C6FEE78329B760CF970" />
+        <Connection ItemName="SHU14_DI_A1_102" Device="" Slot="8" Channel="2" UUID="FC19C5F744B9714B2B2D36B51DF8FDD0" />
+        <Connection ItemName="SHU14_DI_A1_103" Device="" Slot="8" Channel="3" UUID="1AA082DA400B376025DC149744EA282A" />
+        <Connection ItemName="SHU14_DI_A1_104" Device="" Slot="8" Channel="4" UUID="67FB1D1B481AA0FA4FFE2AA013ECBEFC" />
+        <Connection ItemName="SHU14_DI_A1_105" Device="" Slot="8" Channel="5" UUID="68A75AA740FA26AE9413B4AE8D7E7282" />
+        <Connection ItemName="SHU14_DI_A1_106" Device="" Slot="8" Channel="6" UUID="9FBA83AE49239F769A3E44A4FB4C4F6A" />
+        <Connection ItemName="SHU14_DI_A1_107" Device="" Slot="8" Channel="7" UUID="38D6ACA747BF03F28C2553A5ED911497" />
+        <Connection ItemName="SHU14_DI_A1_108" Device="" Slot="8" Channel="8" UUID="E445627747D2AD26FD0095AF3DBB0C7F" />
+        <Connection ItemName="SHU14_DI_A1_109" Device="" Slot="8" Channel="9" UUID="5F3EC6054378D07C5014EBAFD5A5DFC3" />
+        <Connection ItemName="SHU14_DI_A1_1010" Device="" Slot="8" Channel="10" UUID="4D34AEDE48FAB7CF42727885C4F943EC" />
+        <Connection ItemName="SHU14_DI_A1_1011" Device="" Slot="8" Channel="11" UUID="3FCDF965406B5087C4C7BD8256387AB1" />
+        <Connection ItemName="SHU14_DI_A1_1012" Device="" Slot="8" Channel="12" UUID="A81DC1FA4F76A545AA75DA97BF1A33B8" />
+        <Connection ItemName="SHU14_DI_A1_1013" Device="" Slot="8" Channel="13" UUID="FD953188407071E896A232B5996682B7" />
+        <Connection ItemName="SHU14_DI_A1_1014" Device="" Slot="8" Channel="14" UUID="F055B8614F39291C69C3EFBFAEB8C91E" />
+        <Connection ItemName="SHU14_DI_A1_1015" Device="" Slot="8" Channel="15" UUID="8BACB6084D4DA59852E4F5AB8B966F0A" />
+        <Connection ItemName="SHU14_DI_A1_1016" Device="" Slot="8" Channel="16" UUID="4E3A0DA64A61C54742FE8A984D0152C3" />
+        <Connection ItemName="SHU14_A1_10_flt" Device="" Slot="8" Channel="status" UUID="3C7E51144D58E61CBF1B0DBF00C75ADF" />
+        <Connection ItemName="SHU14_A1_3_flt" Device="" Slot="1" Channel="status" UUID="211EC30E4AE54CF787A6DDB027090B86" />
+        <Connection ItemName="SHU14_A1_4_flt" Device="" Slot="2" Channel="status" UUID="AB3604884F130C45FC149BADDED4192F" />
+        <Connection ItemName="SHU14_A1_5_flt" Device="" Slot="3" Channel="status" UUID="B6C7FE9845E9E0E0C0CA53B36AAFD825" />
+        <Connection ItemName="SHU14_A1_6_flt" Device="" Slot="4" Channel="status" UUID="F87CB0AD4C6A136E18FEDCBB711E0FD9" />
+        <Connection ItemName="SHU14_A1_7_flt" Device="" Slot="5" Channel="status" UUID="3634728D48D66EF7B826CBA67EBB907D" />
+        <Connection ItemName="SHU14_A1_8_flt" Device="" Slot="6" Channel="status" UUID="1C3D590D449E5E06A349029D58943C26" />
+        <Connection ItemName="SHU14_A1_9_flt" Device="" Slot="7" Channel="status" UUID="3E5A56524F507718A71569A2ED29C25F" />
+    </Crossconnect>
+</Configuration>

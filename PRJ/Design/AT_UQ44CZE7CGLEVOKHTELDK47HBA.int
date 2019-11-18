@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SubAppType v. 1.3 >
+<SubAppType Name="DRV_PLC_SHKU17_A6" Kind="DRIVER.SONET.LOCALBUS" Args="" Comment="" UUID="A77E668643D3DF7D80AC999D14D321AF">
+    <InterfaceList>
+        <Signal Name="@PID" UUID="D78A5EEB4040C43FA3DBD4B054EA5378" Type="STRING" Usage="output" />
+        <Signal Name="@STATE" UUID="2DF4E9CB48DE1B0A5EF652BDF9DC5630" Type="STRING" Usage="output" />
+        <Signal Name="@COMMAND" UUID="866DC4D8454AD7A79D4944B459393864" Type="STRING" />
+        <Signal Name="@COMMAND_VALUE" UUID="24D12C404878C2CAC0BD638F081891D6" Type="STRING" />
+        <Signal Name="@MESSAGE" UUID="A20FB6DC4B90F0EE63AD5796E8B2FED7" Type="STRING" Usage="output" />
+        <Signal Name="@MESSAGE_FRAMEWORK" UUID="27CB60E1499FE95BBC694D89B4C5B5A4" Type="STRING" Usage="output" />
+        <Signal Name="@EVENT" UUID="5B590EDD486CF54C856DBF8D575196B4" Type="STRING" />
+        <Signal Name="@RESERVED" UUID="678DA9664591F3DCD01BC39C6334FA9B" Type="BOOL" />
+        <Signal Name="@RESERVE" UUID="49FB933C4E6A8A1369C4B5859B55051F" Type="BOOL" />
+        <Signal Name="@LICENSE" UUID="F9CF3E834A934EC341D46BBC76F5716C" Type="STRING" Usage="output" />
+        <Signal Name="SHKU17_AI_A6_31" UUID="6A5DBC844134B6DA188B478E211F09B5" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа до крана 30В" />
+        <Signal Name="SHKU17_AI_A6_32" UUID="25D6495B444CD7C0143965AA5EC17FF8" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа после крана 30" />
+        <Signal Name="SHKU17_AI_A6_33" UUID="5B28F1D944FD9EE2272561A93C5B737A" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Положение АПК №1" />
+        <Signal Name="SHKU17_AI_A6_34" UUID="323EDDB8432BE2AD143E1A978CA56E21" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Положение АПК №2" />
+        <Signal Name="SHKU17_AI_A6_41" UUID="F603C3454C4DF86F1142E8BAA01104E3" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_AI_A6_42" UUID="072B3C8A4DB9880AA81F1899D3C75E9D" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа на выходе  группы 2" />
+        <Signal Name="SHKU17_AI_A6_43" UUID="D9B7544E4BD166C2B107FFAFE384D6BA" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_A6_3_flt" UUID="8793D58E491A6DA000C0AD9A91F1C102" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A6_3" />
+        <Signal Name="SHKU17_A6_4_flt" UUID="2EDCCE1D44E16091946CA2818D9542FA" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A6_4" />
+        <Signal Name="SHKU17_A6_5_flt" UUID="D214AD224B3E1C7AE86AA6B66F83493E" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A6_5" />
+        <Signal Name="SHKU17_AO_A6_51" UUID="F2589DAB436962518B864BB4F6B29F9D" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Управление АПК1" />
+        <Signal Name="SHKU17_AO_A6_52" UUID="3164E68B4EC36534A4B25E95851DF5BC" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Управление АПК2" />
+        <Signal Name="SHKU17_AO_A6_53" UUID="30ED2F724E94E0FB488C0D94C94850C5" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Резерв" />
+        <Signal Name="SHKU17_AO_A6_54" UUID="C121544F4807B0CF2C789AA4714E574B" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Резерв" />
+        <Signal Name="SHKU17_AI_A6_44" UUID="53ACD4494F0E6C8BB68C4F8E649424EA" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа на выходе  группы 2" />
+    </InterfaceList>
+</SubAppType>

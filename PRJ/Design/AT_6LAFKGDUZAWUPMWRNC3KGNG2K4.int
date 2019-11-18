@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SubAppType v. 1.3 >
+<SubAppType Name="main_SHKU17_A6" Kind="APPLICATION.ST.CONSOLE" Args="" Comment="" UUID="B5AB47464D4580383967BBB2D4399651">
+    <InterfaceList>
+        <Signal Name="@PID" UUID="232E8E004BD903810E0F6E98953C1224" Type="STRING" Usage="output" />
+        <Signal Name="@STATE" UUID="A63D6CE642AB427C11610AA7D6DDB237" Type="STRING" Usage="output" />
+        <Signal Name="@COMMAND" UUID="73FD2092427677296D3145854EFD5392" Type="STRING" />
+        <Signal Name="@COMMAND_VALUE" UUID="04D3D21E4749AB94DA45E2B1A93309F4" Type="STRING" />
+        <Signal Name="@MESSAGE" UUID="D624E19348BAD16FAC0237B38DD858AF" Type="STRING" Usage="output" />
+        <Signal Name="@MESSAGE_FRAMEWORK" UUID="9FF317874ACBEF090327F49BB7DF1005" Type="STRING" Usage="output" />
+        <Signal Name="@EVENT" UUID="57FD01C04670A58D393DB3B297AF7421" Type="STRING" />
+        <Signal Name="@RESERVED" UUID="9D409479406205BB6F4E9E8F5505E6A8" Type="BOOL" />
+        <Signal Name="@RESERVE" UUID="E64B8C3D4E4BF022855699B92C6C20B9" Type="BOOL" />
+        <Signal Name="@LICENSE" UUID="E3CA6CC442C80F052E90F8B24448CE6E" Type="STRING" Usage="output" />
+        <Signal Name="@NODE_RUN" UUID="E00C5B414003CC73A98394A0E9C239DB" Type="BOOL" />
+        <Signal Name="FirstScan_MAIN" UUID="44C8211746458A235F94B3A595A8FDFE" Type="BOOL" InitialValue="TRUE" Usage="" Comment="Флаг первого цикла" />
+        <Signal Name="Deblock" UUID="A489352B4818AE34244B03BF8AE72D31" Type="BOOL" Usage="" Comment="Деблокировка" />
+        <Signal Name="Kvitir" UUID="B4C73256413A26412B834B83661D958E" Type="BOOL" Usage="" Comment="Квитирование" />
+        <Signal Name="IMIT" UUID="1D4691674F57ED0926A52886CC825CE2" Type="BOOL" Usage="" Comment="Режим имитации. False - OFF, True - ON" />
+        <Signal Name="cycleTime_MAIN" UUID="C688268C48F777075578089908B1BF6B" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_MAIN_sys" UUID="0DF1BA6C49CA3FBCFFDBE2A8E8703856" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_AI" UUID="AA78EDA442D60D8FB4E4BAAE655227C6" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_AI_sys" UUID="12A88B264DC714ECCE660A86A6A51D43" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_DI" UUID="878A5A50466E95ED1583B48909161736" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_DI_sys" UUID="3EEAF6BB46A1F1837C01BEBD2B3FCEC1" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_VLV" UUID="20A32D424EE03EEC9BCC889BE0DCAF5A" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_VLV_sys" UUID="B2F8CF214B14D4BFC1C599B4ACFC4DCC" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_APS" UUID="0CD5CB7D4ED087285B9D2DBB1B5F11F2" Type="LREAL" Usage="" />
+        <Signal Name="cycleTime_APS_sys" UUID="6B18419148B6507FCAB8769D2D74D1A4" Type="LREAL" Usage="" />
+        <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
+        <Signal Name="Global_PRU" UUID="5CA346F84ED8B42055AD1B866DDC325D" Type="276E10E74011327F462F5EABFCC2FAE9" Usage="" Global="TRUE" Comment="Данные для ПРУ с ПЛК А1" />
+        <Signal Name="PRU_Link" UUID="DD472C334C6C376AA71888B9C43CF535" Type="WORD" Usage="" Global="TRUE" Comment="Статус связи с ПРУ" />
+        <Signal Name="DO_sound_AS" UUID="06E8EC0C4B1D426CD0799885F9C844D5" Type="BOOL" Usage="" Global="TRUE" Comment="Включение звуковой сигнализации АС" />
+        <Signal Name="DO_sound_PS" UUID="91EF99D440F55561FFA76D9BD418EA59" Type="BOOL" Usage="" Global="TRUE" Comment="Включение звуковой сигнализации ПС" />
+        <Signal Name="NO_sound_TS" UUID="C767C63B4240F5C204DDFEB7B245AD85" Type="BOOL" Usage="" Global="TRUE" Comment="Заглушка для технологических сообщений" />
+        <Signal Name="______________IO______________" UUID="9FF73C9A4002AB290B25FFA1F9EED0DC" Type="BOOL" Usage="" />
+        <Signal Name="SHKU17_AI_A6_31" UUID="6A5DBC844134B6DA188B478E211F09B5" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа до крана 30В" />
+        <Signal Name="SHKU17_AI_A6_32" UUID="25D6495B444CD7C0143965AA5EC17FF8" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа после крана 30" />
+        <Signal Name="SHKU17_AI_A6_33" UUID="5B28F1D944FD9EE2272561A93C5B737A" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Положение АПК №1" />
+        <Signal Name="SHKU17_AI_A6_34" UUID="323EDDB8432BE2AD143E1A978CA56E21" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Положение АПК №2" />
+        <Signal Name="SHKU17_AI_A6_41" UUID="F603C3454C4DF86F1142E8BAA01104E3" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_AI_A6_42" UUID="072B3C8A4DB9880AA81F1899D3C75E9D" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа на выходе  группы 2" />
+        <Signal Name="SHKU17_AI_A6_43" UUID="D9B7544E4BD166C2B107FFAFE384D6BA" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_AI_A6_44" UUID="53ACD4494F0E6C8BB68C4F8E649424EA" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа на выходе  группы 2" />
+        <Signal Name="SHKU17_AI_Pgaz_do_KR30V" UUID="7CBEEC694A3AED46E84799B002CAA124" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Давление газа до крана 30В" />
+        <Signal Name="SHKU17_AI_Pgaz_pos_KR30V" UUID="71574EFD4EC9A5845F15939C4EB82F82" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Давление газа после крана 30" />
+        <Signal Name="SHKU17_AI_Pos_APK1" UUID="011D7291408F68B2F6F94E8CE380218E" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Положение АПК №1" />
+        <Signal Name="SHKU17_AI_Pos_APK2" UUID="9AF4DBD34DF57C68A917838ACA1DC479" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Положение АПК №2" />
+        <Signal Name="SHKU17_AI_Tgaz_out_pos_KR44" UUID="BE0AE7F441CCD206C7A2F5866C87F4E1" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Температура газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_AI_Tgaz_out_gr2" UUID="9A14874B4CE55B9605796EAA815085C5" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Температура газа на выходе  группы 2" />
+        <Signal Name="SHKU17_AI_Pgaz_out_pos_KR44" UUID="883753BE4F44798F83FDC2B5F2CBA96C" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Давление газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_AI_Pgaz_out_gr2" UUID="9576546E4ABB624246433383C7818BAE" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Давление газа на выходе  группы 2" />
+        <Signal Name="SHKU17_AI_Pgaz_do_KR30V_flt" UUID="4EA9D7404691FAB5DA25BA8CD51923CB" Type="BOOL" Global="TRUE" Comment="Ошибка канала: Давление газа до крана 30В" />
+        <Signal Name="SHKU17_AI_Pgaz_pos_KR30V_flt" UUID="5628BB8749273C5C36752092573D61A7" Type="BOOL" Global="TRUE" Comment="Ошибка канала: Давление газа после крана 30" />
+        <Signal Name="SHKU17_AI_Pos_APK1_flt" UUID="B5A0D6A5498184853E0C9389A80D93A8" Type="BOOL" Global="TRUE" Comment="Ошибка канала: Положение АПК №1" />
+        <Signal Name="SHKU17_AI_Pos_APK2_flt" UUID="E1B2972A4B1E5983245B519F094597D9" Type="BOOL" Global="TRUE" Comment="Ошибка канала: Положение АПК №2" />
+        <Signal Name="SHKU17_AI_Tgaz_out_pos_KR44_flt" UUID="2B67D16248599B1BE830AD87F714A4F7" Type="BOOL" Global="TRUE" Comment="Ошибка канала: Температура газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_AI_Tgaz_out_gr2_flt" UUID="BBCFC4DA4A51E03F374AAA9803350F12" Type="BOOL" Global="TRUE" Comment="Ошибка канала: Температура газа на выходе  группы 2" />
+        <Signal Name="SHKU17_AI_Pgaz_out_pos_KR44_flt" UUID="8AFECB1643C5C822E9A81690DB63ECFA" Type="BOOL" Global="TRUE" Comment="Ошибка канала: Давление газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_AI_Pgaz_out_gr2_flt" UUID="0F3A57AB45E463FE4A9653A0540D153D" Type="BOOL" Global="TRUE" Comment="Ошибка канала: Давление газа на выходе  группы 2" />
+        <Signal Name="AI_DA_045" UUID="494774784871E02CDC52539925620480" Type="BOOL" Global="TRUE" Comment="0 - значение с поля, 1 - ручное задание" />
+        <Signal Name="AI_DA_046" UUID="88F696D744A20C101787EBB998703ACD" Type="BOOL" Global="TRUE" Comment="0 - значение с поля, 1 - ручное задание" />
+        <Signal Name="AI_DA_047" UUID="38685B354BDDDC6F4C18958B5FA3C1E7" Type="BOOL" Global="TRUE" Comment="0 - значение с поля, 1 - ручное задание" />
+        <Signal Name="AI_DA_048" UUID="35943C9B41BBDA6708A2CEAA4A32ABF8" Type="BOOL" Global="TRUE" Comment="0 - значение с поля, 1 - ручное задание" />
+        <Signal Name="AI_DA_049" UUID="490067CF4F3CABB2F77920B9586552DD" Type="BOOL" Global="TRUE" Comment="0 - значение с поля, 1 - ручное задание" />
+        <Signal Name="AI_DA_050" UUID="05C4BF984C4ACBABC5C7D5A1672DC8DF" Type="BOOL" Global="TRUE" Comment="0 - значение с поля, 1 - ручное задание" />
+        <Signal Name="AI_DA_051" UUID="14018CEA4FB6887CB9D5A886F3E4E24D" Type="BOOL" Global="TRUE" Comment="0 - значение с поля, 1 - ручное задание" />
+        <Signal Name="AI_DA_052" UUID="517FE30649148E7B1F3221B228B5F4E6" Type="BOOL" Global="TRUE" Comment="0 - значение с поля, 1 - ручное задание" />
+        <Signal Name="AI_MAN_045" UUID="9125D3834823D878A80CA8BB75CA4C25" Type="LREAL" Global="TRUE" Comment="Ручное задание AI" />
+        <Signal Name="AI_MAN_046" UUID="A3AC04354086A47A6DDBA99F5DF149C8" Type="LREAL" Global="TRUE" Comment="Ручное задание AI" />
+        <Signal Name="AI_MAN_047" UUID="0D6E92934BF21F9EF03225B3F006BE7A" Type="LREAL" Global="TRUE" Comment="Ручное задание AI" />
+        <Signal Name="AI_MAN_048" UUID="56878E1E4D5E31B5FBC396BABDBFA5CD" Type="LREAL" Global="TRUE" Comment="Ручное задание AI" />
+        <Signal Name="AI_MAN_049" UUID="ECFD5E5747FA42A3A6CB459EAA8EB5F9" Type="LREAL" Global="TRUE" Comment="Ручное задание AI" />
+        <Signal Name="AI_MAN_050" UUID="7A9569654049A6D2134E768C3A4F3D7D" Type="LREAL" Global="TRUE" Comment="Ручное задание AI" />
+        <Signal Name="AI_MAN_051" UUID="D4DDFA27463FFA03833B93925F7B2800" Type="LREAL" Global="TRUE" Comment="Ручное задание AI" />
+        <Signal Name="AI_MAN_052" UUID="ABE9DB794D2D6ED9BA1896861D8B5FAE" Type="LREAL" Global="TRUE" Comment="Ручное задание AI" />
+        <Signal Name="SHKU17_A6_3_flt" UUID="8793D58E491A6DA000C0AD9A91F1C102" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A6_3" />
+        <Signal Name="SHKU17_A6_4_flt" UUID="2EDCCE1D44E16091946CA2818D9542FA" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A6_4" />
+        <Signal Name="SHKU17_A6_5_flt" UUID="D214AD224B3E1C7AE86AA6B66F83493E" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A6_5" />
+        <Signal Name="SHKU17_AO_A6_51" UUID="F2589DAB436962518B864BB4F6B29F9D" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Управление АПК1" />
+        <Signal Name="SHKU17_AO_A6_52" UUID="3164E68B4EC36534A4B25E95851DF5BC" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Управление АПК2" />
+        <Signal Name="SHKU17_AO_A6_53" UUID="30ED2F724E94E0FB488C0D94C94850C5" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Резерв" />
+        <Signal Name="SHKU17_AO_A6_54" UUID="C121544F4807B0CF2C789AA4714E574B" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Резерв" />
+        <Signal Name="SHKU17_AO_Ctrl_APK1" UUID="D247427A4B17A8635E745B8FACC58D89" Type="REAL" Global="TRUE" Comment="Аналоговый выход (логика): Управление АПК1" />
+        <Signal Name="SHKU17_AO_Ctrl_APK2" UUID="1D0BB4524FC9523B83D2A1AD38CF7BE3" Type="REAL" Global="TRUE" Comment="Аналоговый выход (логика): Управление АПК2" />
+        <Signal Name="SHKU17_AO_Res_1" UUID="92C78F4648AE4511EFB315BDE5F7A784" Type="REAL" Global="TRUE" Comment="Аналоговый выход (логика): Резерв" />
+        <Signal Name="SHKU17_AO_Res_2" UUID="2B91367D41CB783E7DBC1582A1BDCC8C" Type="REAL" Global="TRUE" Comment="Аналоговый выход (логика): Резерв" />
+        <Signal Name="______________APS_______________" UUID="E553D83140B2F46EDDDF658DF936523A" Type="BOOL" Usage="" />
+        <Signal Name="APS_SHKU17_A6_3_flt" UUID="B23CB29841123C3374E463BD1FD7F20B" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A6.3" />
+        <Signal Name="APS_SHKU17_A6_4_flt" UUID="8B7D818848FDC9CA12337B9783C7DDC4" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A6.4" />
+        <Signal Name="APS_SHKU17_A6_5_flt" UUID="001F188648505CF7E44503BF6A805803" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A6.5" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_do_KR30V_flt" UUID="5B1C1D334031107B886146B852F37F8A" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа до крана 30В" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_pos_KR30V_flt" UUID="962A672B487C13B4431EDBAC61CC2AFE" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа после крана 30" />
+        <Signal Name="APS_SHKU17_AI_Pos_APK1_flt" UUID="F2B5D43845DB6D3F4536B49130C6C028" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Положение АПК №1" />
+        <Signal Name="APS_SHKU17_AI_Pos_APK2_flt" UUID="50EB35F84D493C9099150DB154404C74" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Положение АПК №2" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_out_pos_KR44_flt" UUID="B3840659403A024A69FB53981388B582" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа на выходе  за краном 44" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_out_gr2_flt" UUID="8704FB894688D5A58C6D5AB11D9C185E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа на выходе  группы 2" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_out_pos_KR44_flt" UUID="C4AB65E040D564A2B280968BCC6459E1" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа на выходе  за краном 44" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_out_gr2_flt" UUID="828BFB09455DB608C4AE6582FC48CC2E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа на выходе  группы 2" />
+        <Signal Name="APS_PRU_Link" UUID="194469CC40D33404BA633DA2D377DF3E" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ17. Отсутствие связи с ПРУ" />
+    </InterfaceList>
+</SubAppType>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="BCD81A324F743A20457847B9C4AC7A94" Name="MAIN_KC" Period="100">
+    <Variables>
+        <Variable UUID="109B7BDC480936A4BB89598C47EC8D6D" Name="FScan" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Usage="internal" />
+        <Variable UUID="5145F931403901A655B19DB57CAA2002" Name="DTC_start" Type="calc_dt" TypeUUID="E1A64949466CCCA81E37988A136D23C2" Usage="internal" />
+        <Variable UUID="82F374694948BAD94EA467B2C687568A" Name="prevTime" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Usage="internal" />
+        <Variable UUID="6533FE8441740994DDC03EB3517C1830" Name="currTime" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Usage="internal" />
+        <Variable UUID="3A21B97C4F4DA607D680EFBFE3990345" Name="DTC_duration" Type="calc_dt" TypeUUID="E1A64949466CCCA81E37988A136D23C2" Usage="internal" />
+        <Variable UUID="5AAA1E4848D47FD6179F8DAC84B13884" Name="prevTime_dur" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Usage="internal" />
+        <Variable UUID="94A29A864B80A3C382B12D876E56DF5A" Name="currTime_dur" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Usage="internal" />
+        <Variable UUID="31BD353C4A56495E6C224BB639730943" Name="PID_1" Type="PID_user" TypeUUID="43781A514C85CF667033A3A6153C5194" Usage="internal" />
+        <Variable UUID="3233EB6B494E083D3AE38AAA6E595397" Name="PID_2" Type="PID_user" TypeUUID="43781A514C85CF667033A3A6153C5194" Usage="internal" />
+        <Variable UUID="8DF4FA5341ADB8F204D15E8851D094FB" Name="Dummy" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+        <Variable UUID="565ABED744240D7235174BB4CBD1B142" Name="AOss" Type="ALG_AOS" TypeUUID="0D6658574B7F40913990CBB6FFD81FBA" Usage="internal" />
+        <Variable UUID="444D38BD4EBC05018F4CCA8E22536243" Name="OVER_PG_1" Type="ALG_OVER_PG_OUT" TypeUUID="E8044EB342BB494A6845F39D52CB6BEF" Usage="internal" />
+        <Variable UUID="FF7DF110433E2002BB0D5FB5D46D6C6E" Name="OVER_PG_2" Type="ALG_OVER_PG_OUT" TypeUUID="E8044EB342BB494A6845F39D52CB6BEF" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[//Использование C-библиотеки (время цикла и таймер 1с)
+FScan.0 := FirstscanMAIN_KC;
+DTC_start(cycleTimeMAIN_KC, prevTime, currTime, FScan);
+prevTime_dur := currTime;
+
+
+//ПИД-регулятор. Управление АПК-1
+PID_1(BOOL#0, HMI_SHKU17_APK_1_DA, SHKU17_AI_Pgaz_out_pos_KR44, SHKU17_PID_1_X0, SHKU17_PID_1_SP, SHKU17_PID_1_XD, SHKU17_PID_1_KP, SHKU17_PID_1_TR, SHKU17_PID_1_TD, T#1s, SHKU17_AO_Ctrl_APK1);
+
+
+//ПИД-регулятор. Управление АПК-2
+PID_2(BOOL#0, HMI_SHKU17_APK_2_DA, SHKU17_AI_Pgaz_out_gr2, SHKU17_PID_2_X0, SHKU17_PID_2_SP, SHKU17_PID_2_XD, SHKU17_PID_2_KP, SHKU17_PID_2_TR, SHKU17_PID_2_TD, T#1s, SHKU17_AO_Ctrl_APK2);
+
+
+
+//Определение статических режимов КЦ
+//Автоматический режим управления КЦ
+//Auto_KC(btn_RU_KC, DI_SHKU_EAO_PEAO, MD_KC_RU);
+
+//Режим ЭАО
+MD_EAO := SHKU17_DI_EAO_KC_PU OR SHKU17_DI_EAO_KC_PEAO;
+
+//Режим АО КЦ СС
+MD_AOS := NOT MD_EAO AND AOS_RUN;
+
+//Режим АО КЦ БС
+MD_AOB := NOT MD_EAO AND AOB_RUN;
+
+//Режим НО
+//MD_NO := NOT MD_EAO AND NOT DRUM_AOS_RUN AND NOT DRUM_AOB_RUN AND DRUM_NO_RUN;
+
+//Нет режимов НО, АО, ЭАО КЦ
+MD_STOP_net := NOT AOS_RUN AND NOT AOB_RUN AND NOT MD_EAO; //из условия исключен режим NO_RUN
+
+//Режим КЦ Кольцо
+MD_KOL := MD_STOP_net AND SHKU17_DI_KR6_ON OR SHKU17_DI_KR6As_ON;
+
+//Режим КЦ Магистраль
+//USL_1 := DI_CTU1_KR7_ON AND DI_CTU1_KR7A_ON AND DI_CTU1_KR8_ON AND DI_CTU1_KR8A_ON AND DI_CTU1_KR17_OFF AND DI_CTU1_KR17A_OFF AND DI_CTU1_KR17Abis_OFF AND DI_CTU1_KR18_OFF AND DI_CTU1_KR18A_OFF AND DI_CTU1_KR18Abis_OFF;
+//MD_MAG := (DI_CTU1_KR20_OFF OR DI_CTU1_KR20A_OFF) AND (GPA1_work OR GPA2_work OR GPA3_work OR GPA4_work) AND USL_1 AND MD_STOP_net;
+
+//КЦ отключен
+//MD_STOP := USL_2 AND MD_STOP_net AND NOT MD_KOL AND NOT MD_MAG AND (DI_CTU1_KR7_OFF AND DI_CTU1_KR7A_OFF AND DI_CTU1_KR8_OFF AND DI_CTU1_KR8A_OFF);
+
+//Состояние КЦ не определено
+MD_Undefined := NOT MD_STOP AND MD_STOP_net AND NOT MD_KOL AND NOT MD_MAG;
+
+//Аварийный останов КЦ со стравливанием газа
+AOss();
+
+//Открыть кран 6 по превышению давления газа на выходе 1 группы КЦ-1
+OVER_PG_1(SHKU17_AI_Pgaz_out_pos_KR44, HMI_SHKU17_AI_Pgaz_out_pos_KR44, MD_OVER_PG_1, ALG_OVER_PG_OUT_SHKU17_DO_KR6_ON);
+
+//Открыть кран 6А` по превышению давления газа на выходе 2 группы КЦ-1
+OVER_PG_2(SHKU17_AI_Pgaz_out_gr2, HMI_SHKU17_AI_Pgaz_out_gr2, MD_OVER_PG_2, ALG_OVER_PG_OUT_SHKU17_DO_KR6As_ON);
+
+//Открытие крана 6 при АО ГПА группы 1 КЦ-1
+IF SHKU17_DI_GPA1_Stop_in_gr OR SHKU17_DI_GPA2_Stop_in_gr THEN AO_GPA_GR1_KR6_ON := BOOL#1; ELSE AO_GPA_GR1_KR6_ON := BOOL#0; END_IF;
+
+//Открытие крана 6а' при АО ГПА группы 2 КЦ-1
+IF SHKU17_DI_GPA3_Stop_in_gr OR SHKU17_DI_GPA4_Stop_in_gr OR SHKU17_DI_GPA5_Stop_in_gr OR SHKU17_DI_GPA6_Stop_in_gr THEN AO_GPA_GR2_KR6As_ON := BOOL#1; ELSE AO_GPA_GR2_KR6As_ON := BOOL#0; END_IF;
+ 
+
+IF FirstscanMAIN_KC THEN FirstscanMAIN_KC := BOOL#0; FScan := BYTE#0; END_IF;
+
+DTC_duration(cycleTimeMAIN_KC_dur, prevTime_dur, currTime_dur, FScan);]]></ST>
+    <DataTypes />
+    <FBLibrary>
+        <FunctionBlock UUID="0D6658574B7F40913990CBB6FFD81FBA" Name="ALG_AOS" Comment="Алгоритм аварийного останова со стравливанием">
+            <Variables>
+                <Variable UUID="E8A3E4EF430EEF16CFEC4281A50C69D4" Name="ON" Type="RS" TypeUUID="53F400294BCD7C71EB041B90164F4F6F" Usage="internal" />
+                <Variable UUID="9CB1D73E4A74BA9440DBF5809C90D827" Name="USL_1" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                <Variable UUID="F85489F84A83533F7A42D7A1B2F43EC2" Name="STEP_1" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                <Variable UUID="AB348F5740B9E662EF476CB9E675B97D" Name="STEP_1_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                <Variable UUID="68B894184EC8ADA4A5B5089F645A144E" Name="USL_2" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                <Variable UUID="4801EED7480E82989AD7B88C716B41BF" Name="STEP_2" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                <Variable UUID="3AC6A05D423AED30E6E349B015874398" Name="STEP_2_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                <Variable UUID="6B71BD614869C781A827F4AE3599DE84" Name="USL_3" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[//Запуск алгоритма аварийного останова со стравливанием
+USL_1 := SHKU17_DI_AOss_KC_PU OR btn_AOS AND NOT (AOS_RUN OR ALG_AOS_OUT_DONE OR ALG_AOS_OUT_DONE_INCORRECT); 
+ON(USL_1, MD_EAO OR ALG_AOS_OUT_DONE OR ALG_AOS_OUT_DONE_INCORRECT, AOS_RUN);
+
+//Запуск таймера алгоритма. По превышению времени таймера формируем признак неудачного аварийного останова 
+IF AOS_RUN THEN IF AOS_TIMER_1 < LREAL#240 THEN AOS_TIMER_1 := AOS_TIMER_1 + cycleTimeMAIN_KC; END_IF; ELSE AOS_TIMER_1 := LREAL#0; END_IF; 
+IF AOS_TIMER_1 >= LREAL#240 AND AOS_RUN THEN 
+	ALG_AOS_OUT_DONE_INCORRECT := BOOL#1;
+	AOS_RUN := BOOL#0; 
+END_IF;   
+
+//Шаг первый алгоритма
+STEP_1(AOS_RUN, STEP_1_bool);
+IF STEP_1_bool THEN
+	ALG_AOS_OUT_SHKU17_DO_KR7_OFF	:= BOOL#1;
+	ALG_AOS_OUT_SHKU17_DO_KR8_OFF	:= BOOL#1;
+	ALG_AOS_OUT_SHKU17_DO_KR8s_OFF	:= BOOL#1;
+	ALG_AOS_OUT_SHKU17_DO_KR8A_OFF	:= BOOL#1;
+	ALG_AOS_OUT_SHKU17_DO_KR8As_OFF	:= BOOL#1;
+ELSE
+	ALG_AOS_OUT_SHKU17_DO_KR7_OFF	:= BOOL#0;
+	ALG_AOS_OUT_SHKU17_DO_KR8_OFF	:= BOOL#0;
+	ALG_AOS_OUT_SHKU17_DO_KR8s_OFF	:= BOOL#0;
+	ALG_AOS_OUT_SHKU17_DO_KR8A_OFF	:= BOOL#0;
+	ALG_AOS_OUT_SHKU17_DO_KR8As_OFF	:= BOOL#0;
+END_IF;
+
+//Шаг второй алгоритма
+USL_2 := AOS_RUN AND (SHKU17_DI_KR7_OFF AND SHKU17_DI_KR8_OFF AND SHKU17_DI_KR8s_OFF AND SHKU17_DI_KR8A_OFF AND SHKU17_DI_KR8As_OFF);
+STEP_2(USL_2, STEP_2_bool);
+IF STEP_2_bool THEN
+	ALG_AOS_OUT_SHKU17_DO_KR17_ON	:= BOOL#1;
+	ALG_AOS_OUT_SHKU17_DO_KR18_ON	:= BOOL#1;
+	ALG_AOS_OUT_SHKU17_DO_KR18A_ON	:= BOOL#1;
+ELSE
+	ALG_AOS_OUT_SHKU17_DO_KR17_ON	:= BOOL#0;
+	ALG_AOS_OUT_SHKU17_DO_KR18_ON	:= BOOL#0;
+	ALG_AOS_OUT_SHKU17_DO_KR18A_ON	:= BOOL#0;
+END_IF;
+
+//Успешное завершение алгоритма
+USL_3 := (AOS_RUN OR MD_EAO) AND SHKU17_DI_KR17_ON AND SHKU17_DI_KR18_ON AND SHKU17_DI_KR18A_ON;
+IF USL_3 THEN
+	ALG_AOS_OUT_DONE := BOOL#1;
+	AOS_RUN := BOOL#0;
+END_IF;
+
+IF Deblock THEN ALG_AOS_OUT_DONE_INCORRECT := BOOL#0; ALG_AOS_OUT_DONE := BOOL#0; END_IF;]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="E8044EB342BB494A6845F39D52CB6BEF" Name="ALG_OVER_PG_OUT" Comment="Алгоритм защиты от превышения давления газа на выходе группы  ГПА КЦ">
+            <Variables>
+                <Variable UUID="46C7A87443BF178ED3DFD8852DE73BD0" Name="CV_Val" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="input" />
+                <Variable UUID="26523B38428CAF8E5CE49E81D917EF57" Name="PV_Val" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="input" />
+                <Variable UUID="F95A8E22408AFF0BC0D2179D34616737" Name="MD_OVER_PG" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="output" />
+                <Variable UUID="50ADC01D4BD99E2C1F808A827B2B2768" Name="KR6_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="output" />
+            </Variables>
+            <ST><![CDATA[//По превышению давления газа на выходе открываем кран 6
+IF CV_Val > PV_Val THEN 
+	MD_OVER_PG := BOOL#1;	
+	KR6_OFF := BOOL#1; 
+	ELSE
+		MD_OVER_PG := BOOL#0; 
+		KR6_OFF := BOOL#0;
+END_IF;   ]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="43781A514C85CF667033A3A6153C5194" Name="PID_user">
+            <Variables>
+                <Variable UUID="54CBC6EB49A82CDDF84247BC34AD4A4E" Name="FW_REV" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                <Variable UUID="32E2955443183615342827AA0408DBB4" Name="AUTO" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                <Variable UUID="A57D9C714F4093D081AE91934434D1D8" Name="AI_IN" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="input" />
+                <Variable UUID="E20665CC467658423A88DFADB279E28B" Name="X0" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="inout" />
+                <Variable UUID="E5D4486D470AD512EA299B85F6121131" Name="SP" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="input" />
+                <Variable UUID="D29D9D754466ED6BBED9CF8768FBC387" Name="XD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="input" />
+                <Variable UUID="9609AE9D41750A95F82398BA47BC402C" Name="KP" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="input" />
+                <Variable UUID="5BCB9F2641BB684A510173911E730C7E" Name="TR" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="input" />
+                <Variable UUID="01500B9742866DA4D29E8289F290103D" Name="TD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="input" />
+                <Variable UUID="58BEBE40491AAE3CA6D1B6B1563C27E5" Name="CTIME" Type="TIME" TypeUUID="3EFD49044E055B696F5570BA288FA8D5" Usage="input" />
+                <Variable UUID="EA88EDDD46D552D003482AAF0F509333" Name="XOUT" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="inout" />
+                <Variable UUID="45D11EB94BE27EC218C49E98FBFAB798" Name="X0_lgc" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="600059194CED9F2108CB59A6B82443C7" Name="PV" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="52DB4BB34E2F160A69E691B5BB9E1F68" Name="AUTO_lgc" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                <Variable UUID="69F063BF4BA2D588B4D873908023EB9A" Name="XOUT_lgc" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="FE3A9F72441850F918837194353C20D0" Name="PV_lgc" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="E4CFA4C04720048C583780B64431E768" Name="SP_lgc" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
+                <Variable UUID="1E6D7267433E23FC1505809534570145" Name="PID" Type="PID" TypeUUID="522DBFF440FE1425EB96479F8F0993E8" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[X0_lgc := X0 * REAL#100;
+IF (ABS(AI_IN - SP) <= XD) THEN PV := SP; ELSE PV := AI_IN; END_IF;
+
+IF NOT FW_REV THEN
+	AUTO_lgc := NOT AUTO AND (NOT (XOUT_lgc = REAL#0 AND AI_IN < (SP - XD)) AND NOT (XOUT_lgc = REAL#10000 AND AI_IN > (SP + XD)));
+	PV_lgc := PV;
+	SP_lgc := SP;	
+ELSE
+	AUTO_lgc := NOT AUTO AND (NOT (XOUT_lgc = REAL#0 AND AI_IN > (SP - XD)) AND NOT (XOUT_lgc = REAL#10000 AND AI_IN < (SP + XD)));
+	PV_lgc := SP;
+	SP_lgc := PV;	
+END_IF;
+
+PID(AUTO_lgc, PV_lgc, SP_lgc, X0_lgc, KP, TR, TD, CTIME, XOUT_lgc);
+
+IF XOUT_lgc < REAL#0 THEN XOUT_lgc := REAL#0; END_IF;
+IF XOUT_lgc > REAL#10000 THEN XOUT_lgc := REAL#10000; END_IF;
+IF AUTO_lgc THEN X0 := XOUT_lgc / REAL#100; END_IF;
+XOUT := XOUT_lgc / REAL#100;]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

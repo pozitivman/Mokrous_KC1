@@ -1,0 +1,1647 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="F2D867224FC0B0F7FB0299A9857A77DE" Name="main_SHU14_A1" Period="100" PutDataAtEndOfCycle="false">
+    <Variables>
+        <Variable UUID="9E8659C640EAE49215A7999A9E2DFC43" Name="clock_MAIN_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="991F367E4F312E19F91AAEBF752907B7" Name="clock_MAIN_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+        <Variable UUID="9FC8ADB144A5B8956FEF8580F3FAB62C" Name="AI_fb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="8ED81BFD41D4C397CE576B8DDA0A69D7" Name="DI_fb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="6D7E1DC34CED6ECF2CA16A8A91B19359" Name="DO_fb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="4A3497F04640B565CF606AA7AE0FA690" Name="AO_fb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="211616CB4A25407D56D22FB304C4B6F1" Name="ALG_fb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="BD52709945DE8E5AE6635B99256A1A97" Name="APS_fb" Type="fb_APS" TypeUUID="9897171E4FEBD18FC96ED584B018BA4A" Usage="internal" />
+        <Variable UUID="4B0054234E58D9A4559FE5AA3AACD4F0" Name="Arch_fb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="5959334E448A9E170BF5D8AB648A9E3E" Name="Link_fb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="A9A1BFE44DCEC98F63AE8C9B52655459" Name="PRU_fb" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        <Variable UUID="B411AA784CF63E9F34C071B9135A2557" Name="DIO_fb" Type="fb_DIO" TypeUUID="56BA70B34AA3DB5B8751F596CC37FDCB" Usage="internal" />
+        <Variable UUID="DC4B257A40D2B2068B3FDDBA4E80F482" Name="IM_fb" Type="fb_IM" TypeUUID="12348825468FAE80F7C0F2B2A2C39D25" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[clock_MAIN_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_MAIN_prev := clock_MAIN_cur; END_IF;
+cycleTime_MAIN := clock_MAIN_cur - clock_MAIN_prev;
+clock_MAIN_prev := clock_MAIN_cur;
+
+
+IMIT := Global_BTN.IMIT;
+Deblock := Global_BTN.Deblock;
+Kvitir  := Global_BTN.Kvitir;
+
+
+//Обработка ИО
+DIO_fb();
+
+//ALG_fb();
+
+IM_fb();
+
+APS_fb();
+
+// Данные для архива
+//Arch_fb();
+
+// Данные для ПРУ
+//PRU_fb();
+
+// Данные для соседних узлов
+//Link_fb();
+
+
+IF FirstScan_MAIN THEN FirstScan_MAIN := BOOL#0; END_IF;
+clock_MAIN_cur := CLOCK();
+cycleTime_MAIN_sys := clock_MAIN_cur - clock_MAIN_prev;]]></ST>
+    <DataTypes>
+        <Struct UUID="1BAF67EA4508F1DF24788E9EEF5F2A24" Name="ACT_Cfg">
+            <Field UUID="5FC7B8EC4CF918BB986C3680B3274107" Name="tmrCmdSP" Comment="таймер подачи команды" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="802040604BCDBF85174F8D940702E9BA" Name="tmrPressSP" Comment="таймер дожима" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+        </Struct>
+        <Struct UUID="AE95B89745063A53816B2DAB80F9D225" Name="ACT_Ctrl">
+            <Field UUID="B521CCB54178366AC90E38A8F01C4BDD" Name="RA" Comment="дистанционный или автоматический режим управления" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="FF6E228A4F4252AF7B044E93BF1C4CF9" Name="noR" Comment="блокировка дистанционного режима управления" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="D36AA2784D178751B98A68BA90AE140A" Name="rOnOff" Comment="команда &apos;включить/выключить&apos; (&apos;открыть/закрыть&apos;) в дистанционном режиме" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="AEFB037F488E7878DD36EC977CBD0949" Name="aOnOff" Comment="команда &apos;включить/выключить&apos; (&apos;открыть/закрыть&apos;) в автоматич режиме" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="234E1C79444037E76DA479B95D64F8D4" Name="rep" Comment="повторить последнюю команду" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="5F7B9A594BF0F6B0E30C3CB1709DCC4A" Name="cwOn" Comment="не учитывать контроль цепи управления команды &apos;открыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="013167D54FE220938D38F893DC2670CF" Name="cwOff" Comment="не учитывать контроль цепи управления команды &apos;закрыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="1A18D4AB4C52B0B9C231259E0399BE82" Name="dummy" Comment="резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="97AF58EA4833D5C32C58E5A54A550EB9" Name="ACT_Dbg">
+            <Field UUID="523E6FD54252C6F48B9CD8A0A9B58654" Name="rev" Comment="дата разработки ревизии блока (число, месяц, год)" Type="DWORD" TypeUUID="53CAB7E947643F098D755BB9A02688FA" />
+            <Field UUID="95DD922A4665D89F245954BFD333F723" Name="tmrCmdon" Comment="Таймер команды &apos;включить&apos;: текущее значение" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="532D90284AC1370B647B91939E2DF5A1" Name="tmrCmdoff" Comment="Таймер команды &apos;выключить&apos;: текущее значение" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="F94992664E922629E17EDF9E9EBFA97B" Name="tmrPresson" Comment="Таймер дожима &apos;включить&apos;: текущее значение" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="4F340B7B4CEF0061BC1303AFB42B4AF8" Name="tmrPressoff" Comment="Таймер дожима &apos;выключить&apos;: текущее значение" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="22BE4D054887EA320E1A798B508E5B0D" Name="spDelayncon" Comment="Уставка таймера задержки сигнала &apos;не открыт&apos;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="CEF957054BFEDBA5BB3880BC3E846A7C" Name="spDelayncoff" Comment="Уставка таймера задержки сигнала &apos;не закрыт&apos;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="7CE3FB2D49F80561F49E519413549264" Name="tmrDelayncon" Comment="Таймер задержки сигнала &apos;не открыт&apos;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="5DF45A6D42A69C38CEFB07946CC4361F" Name="tmrDelayncoff" Comment="Таймер задержки сигнала &apos;не закрыт&apos;" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="7B8C5C5E43B8EA9861027CB60D88AF2F" Name="cmdon" Comment="Внутренняя команда &apos;включить/открыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="5CAF6BE948E310D1242DE1BC90E6DD29" Name="cmdoff" Comment="Внутренняя команда &apos;выключить/закрыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="5DD1E7AE4166F967CF25D1981A0BEBCF" Name="ONScmdon" Comment="Команда оператора &apos;включить&apos;-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="8F79C4FC45129E9BD806DE80E256B1B2" Name="ONScmdoff" Comment="Команда оператора &apos;выключить&apos;-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="AAACA97F486F5D2054BC8C90CB2D1DE9" Name="ONSon" Comment="Включен (открыт)-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="A83EB9C749722FADFB35C9843F16EDDF" Name="ONSoff" Comment="Выключен (открыт)-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="686055E8464E72A577603F885DCE4847" Name="ONSrep" Comment="Повторить последнюю команду-на один цикл" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="98032FB240110A38E290D7ACDC997456" Name="tmp" Comment="Вспомогательная переменная для ONScmdon" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="D1017C5643F8024A41272A886C2C6039" Name="tmp2" Comment="Вспомогательная переменная для ONSon" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="AF8FB49343098BEF281A239A408A36E0" Name="tmp3" Comment="Вспомогательная переменная для ONScmdoff" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="4E58906D406AC8BC52322E894F62BC58" Name="tmp4" Comment="Вспомогательная переменная для ONSoff" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="187398BC4C7E06D5227A9FA46B2DD6B2" Name="tmp5" Comment="Вспомогательная переменная для ONSrep" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="04D883F4483A0B71E445BBAEB8732E13" Name="storeCmdon" Comment="Подавалась команда оператора &apos;включить&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="E046312940C857E2114086BE451D28CD" Name="storeCmdoff" Comment="Подавалась команда оператора &apos;выключить&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="0FF2F10545ABE32C7A4D278CAD23EC22" Name="storeOn" Comment="Срабатывал концевик положения &apos;включен&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="6B4FB4D144E9613B6E8731B8CD9FB41E" Name="storeOff" Comment="Срабатывал концевик положения &apos;выключен&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="B928D2544460054293C69B969F60B7C1" Name="storeNon" Comment="Условия формирования флага &apos;не открыт&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="03399E1E463C4AB28EE395B807BB24D6" Name="storeNoff" Comment="Условия формирования флага &apos;не закрыт&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="2326BC7A45CD0A021B427384457AFF96" Name="storeRep" Comment="Условия формирования флага &apos;повтор последней команды&apos;-запомнить" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="03B94E7848CC387CE3EBA4BC7CEB3554" Name="prevOuton" Comment="Состояние команды &apos;включить/открыть&apos; на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="968731204B11C9A24892F8A74F2006D3" Name="prevOutoff" Comment="Состояние команды &apos;выключить/закрыть&apos; на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="84E01BFB45FAED8C4DFBAE91DCD69BE3" Name="chngOuton" Comment="Задний фронт команды &apos;включить/открыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="7086F09C41B4123CA8D2D9BAD4CCBE79" Name="chngOutoff" Comment="Задний фронт команды &apos;выключить/закрыть&apos;" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="A6CACC7C4544D1DD6468F1B219B08E15" Name="fstExe" Comment="При первом выполнении равен нулю" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="672B0B434F62B49954267CBF89A35477" Name="starter" Comment="Классический пускатель (справедливо для механизма типа 12)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="56057966470BBC3B251D33A57A1BCC2A" Name="ACT_In">
+            <Field UUID="01C69AF94D51500C37AC7EA94CC76521" Name="on" Comment="включен (открыт)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="3646458945E05F268E776294D710283E" Name="off" Comment="выключен (закрыт)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="160A3CC94C2AFB9DB43B649B3B269A96" Name="con" Comment="контроль цепи включения (открытия)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="243D85F2475A066F95F984A4FA4E52A3" Name="coff" Comment="контроль цепи выключения (закрытия)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="40B9A1F645017834571663AA5E09BCE7" Name="ACT_Oper">
+            <Field UUID="63CBB398402DC985D61AC996AD5FCB8E" Name="non" Comment="Не включен (не открыт)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="CFBEFF5C4039215506069BB7EE7259E5" Name="noff" Comment="Не выключен (не закрыт)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="28EAEC3E4E56AFA4F8FAE4BBB853ACBA" Name="nstart" Comment="Не стронулся" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="1A0EC4E6457C42C7BC41FA9E3402BA2B" Name="selfon" Comment="Самопроизвольное включение (открытие)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="3979071A40215F915671DA9DF1C54259" Name="selfoff" Comment="Самопроизвольное закрытие (выключение)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="A502DED244B99EC30C85AF850291F940" Name="flt" Comment="Неисправность концевых выключателей" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="E77A54F841B412D712D7749212ED7557" Name="ncon" Comment="Нет контроля цепи включения (открытия)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="DCECC5484F293734DD9717B24B0DC132" Name="ncoff" Comment="Нет контроля цепи выключения (закрытия)" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="A431822143EA31E39B1242B2541F6239" Name="ACT_Out">
+            <Field UUID="F667F7D94948573E99A575B79FB68CB1" Name="outon" Comment="Управляющая команда &apos;включить/открыть&apos; на механизм" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="D30A2C6D47150544B19A3FB86E6EF771" Name="outoff" Comment="Управляющая команда &apos;отключить/закрыть&apos; на механизм" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="4FDB28FA463D4C3F8FD03DB6206E7A97" Name="dummy" Comment="Резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="DC1021DF4ADB119F31CDB5BB62704656" Name="dummy2" Comment="Резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="37DEEBFB47D139D18B308AA498AC5181" Name="AI_Config">
+            <Field UUID="4517D8014BA5F1A31DC490A2FCD8E76C" Name="Span" Comment="диапазон датчика в EU" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="625B09604DB57060C6C6D9827263FB2B" Name="Offset" Comment="смещение датчика в EU" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="E8C5F5114E8FDA42A3894991253BBACF" Name="gain" Comment="диапазон калибровки канала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="E3A7F5EE4A6A89CBB7AB0EA58E189C69" Name="bias" Comment="смещение калибровки канала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="8FDDC5F142B3E3FD3E64F296CC14CF38" Name="ROC" Comment="скорость изменения сигнала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="DAE597984FC2AFA050E92B89986AE362" Name="Tf" Comment="постоянная фильтра &gt; 0.001" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="DAE8C99E4AC2A2FFD926D99C5A1C4101" Name="Manual_Target" Comment="задание для выхода блока в ручном режиме" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="1C0121064E4AD06F66B3878676614D38" Name="Manual_Rate" Comment="скорость изменения выхода блока в ручном режиме" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="8392C9FF4B63129DB1C5A5A5BF293B29" Name="min_fault_sensor_Eu" Comment="если сигнал с датчика Status.Input_sensor_eu меньше этого значения, то отказ канала [5]" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="0B3A58DE4B6F9A69D574C1A5202FA3D9" Name="max_fault_sensor_Eu" Comment="если сигнал с датчика Status.Input_sensor_eu больше этого значения, то отказ канала [7]" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="1568C2D746CAB3E44D7DD794373B2957" Name="recovery_time" Comment="время восстановления канала после исчезновения неисправности" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="DFEE44C24DDA9848DAE5728113B9F98E" Name="repair_time" Comment="время через которое канал будет автоматически выведен из ручного режима" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="A875986F466C964AEDE6E09BAC1A420F" Name="min_ADC" Comment="минимальное значение в единицах АЦП для обрабатываемого канала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="EEEBBC024094CD578E5CC690A42B31BA" Name="max_ADC" Comment="максимальное значение в единицах АЦП для обрабатываемого канала" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="DD0C2FD94FDC5B075E8EF3B0976396FA" Name="Eu_sensor" Comment="номер единицы измерения датчика из initEU" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="FE78DF8A49E2C0290692989A746BB472" Name="Eu_PV" Comment="номер единицы измерения параметра из initEU" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="D14C10A6499566BA5E16118672FFEB92" Name="Eu_user" Comment="номер единицы измерения пользовательского параметра из initEU" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="D512793C40FE66F0B75F7385CA7266F9" Name="TypePolynom" Comment="тип полинома при обработке датчика температуры" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="FBCDD0414B10DB6493C7C8B6EDD7A350" Name="Manual_Enable" Comment="разрешение работы блока в ручном режиме" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="D218EFEB43A6B44F29A49093FD91251D" Name="Manual_Auto" Comment="команда перевода блока в ручной режим" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="ED41C85B410EF42D53B165A3F5065F93" Name="derivative_Enable" Comment="включение вычисления производной по 12-ти точкам" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="FA5F1E584485BFA64539D184086F7725" Name="ROC_Enable" Comment="включить контроль за максимальным и минимальным значениями ROC" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="8962095743492D1AA5ED9D8540DAE4AA" Name="reset" Comment="команда сброса блока" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="F179480A40ED28CE5CA45E92B3EEB8CD" Name="Dummy" Comment="резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+        </Struct>
+        <Struct UUID="15E6646F4A972351230A6EB14BD06369" Name="AI_Dbg">
+            <Field UUID="822FEFA14B48E2A770D14CBD34A10B69" Name="rev" Comment="дата разработки ревизии блока (число, месяц, год)" Type="DWORD" TypeUUID="53CAB7E947643F098D755BB9A02688FA" />
+            <Field UUID="71C2F45A4D402F4D0FF69FA766FDF8F5" Name="vData" Comment="EU -&gt; 0..1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="60F61306485F85381318F39EBF53829C" Name="PrevSpan" Comment="pAI.Config.Span на предыдущем цикле" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="A2907BDE48E1318096C5CFB3C5C09B42" Name="PrevOffset" Comment="pAI.Config.Offset на предыдущем цикле" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="181ADBB442E788AF2FB4B78D1C5E65F7" Name="Gain_user" Comment="gain_user для вычисления PV_user" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="1C52F9D24DD2BEFA1A95C7B858900E6B" Name="Bias_user" Comment="bias_user для вычисления PV_user" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="432CB21E49AD1501D72CE0980A7DE140" Name="Reset_time_delay" Comment="время, оставшееся до восстановления канала после ухода отказа" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="D6A533284EAC0A7242D2839B0F19FB77" Name="valueReal" Comment="буфер для Status.Input_sensor_eu, используется для ROC" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="4" Array="TRUE" />
+            <Field UUID="CAB98A81424C8807ADF4EEBDB9383DF3" Name="valueFilt" Comment="буфер для фильтр значений отображенных на 0..1, 12=Status.pid" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Size="13" Array="TRUE" />
+            <Field UUID="3582F6594775E1865F09C0873064E1D8" Name="remaining_repain_time" Comment="тоже, что Status.remaining_repair_time, но = Config.repair_time при норм работе" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="0D0C16C242AD7F128F75269F9CA5A24F" Name="Manual_Rate" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="61623D914440D27D1EF888B1287A72AF" Name="Manual_Target" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="A505C15042B28798A999A9BECB71D669" Name="PrevTypePolynom" Comment="pAI.Config.TypePolynom на предыдущем цикле" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="31868FF34C857A6C116855992391F194" Name="Eu_sensor" Comment="pAI.Config.Eu_sensor на предыдущем цикле" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="85DAFB944821BD7AFB02DEB8E75292D5" Name="Eu_PV" Comment="pAI.Config.EU_PV на предыдущем цикле" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="724505764CC94736CC58F99A3FBF7604" Name="Eu_user" Comment="pAI.Config.EU_user на предыдущем цикле" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+            <Field UUID="4B84FCA94175AD0A050DCB99EE1DB029" Name="ROC_Enable" Comment="pAI.Config.ROC_Enable на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="E07EC107421E6F67D91AAB98ADFA3AEE" Name="PrevManual" Comment="значение Manual на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="DF257C1B462BDED976767283D26EFBAD" Name="Manual" Comment="временная переменная для Config.Manual_Auto" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="1BE9B69C4235DB8F7EA3D8B1C3161674" Name="fault_code_0" Comment="fault_code[0] на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="331BCB524DCDAB04DD3E44B698A9DDCC" Name="derivative_Enable" Comment="Config.derivative_Enable на предыдущем цикле" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" />
+            <Field UUID="ECA59B6947B07BFF5AEEBE8C8F3C8C39" Name="Dummy" Comment="резерв" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Size="3" Array="TRUE" />
+        </Struct>
+        <Struct UUID="E1ACFD3D43543C79AAA943865FE5B719" Name="AI_Oper">
+            <Field UUID="60B72BF545F4AE46D70897A35B8CBEE1" Name="In" Comment="входной сигнал" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="6680870F41E57E1CD12DE7BD939D5023" Name="PV_calc_eu" Comment="сигнал с датчика, преобразованный к единицам Config.Eu_PV" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="7A87352B49C8CB38C656E1A1CFA4E6B0" Name="PV_sensor_eu" Comment="сигнал с датчика в инженерных единицах датчика Config.Eu_sensor" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="6D15E55E46CC5037C519119244707FAC" Name="PV_calc_SIdU" Comment="сигнал с датчика, преобразованный к единицам СИ" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="9D4B46F5447EC3EDC8E93796EA46C83B" Name="PV_user" Comment="сигнал с датчика, преобразованный к единицам Config.Eu_user" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="ABDC2E134E9C00A6130C79956556F230" Name="Input_sensor_eu" Comment="сигнал с датчика в единицах датчика (для термометра будут Ом-ы)" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="A70F51954A5EC3620F5CE89B65BC6521" Name="pid" Comment="фильтрованное значение входного сигнала в диапазоне 0..1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="2BEE6DB44C971279794FC7A860DE1E8D" Name="Span" Comment="диапазон для вычисления параметра Status.PV_calc_eu" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="739714974BF6C5D05FF06D9ADC6A9B34" Name="Offset" Comment="смещение для вычисления параметра Status.PV_calc_eu" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="7F9A64E942E9C3230B7D77B02AE9B088" Name="Span_SIdU" Comment="диапазон датчика в единицах СИ" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="F2BAB0B14BE0511E727E1C94143EC2B4" Name="Offset_SIdU" Comment="смещение датчика в единицах СИ" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="00FE3B0F4496D33E61F986BF56927A13" Name="ROC_max" Comment="максимальное значение ROC, если ROC_enable = 1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="8A14BDC34EB871AFF63759AA38809FB0" Name="ROC_min" Comment="минимальное значение ROC, если ROC_enable = 1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="0F9230254ABFB33678C3908A2E5EEEDB" Name="derivative" Comment="производная по 12-ти точкам в диапазоне 0..1" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="D667A86941F501C69C684BB68D9923A5" Name="derivative_eu" Comment="derivative * Status.Span" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="65B9EDBD4C9234D7E11C3B9ABFD8F320" Name="remaining_repair_time" Comment="время, оставшееся до перевода канала в автомат" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <Field UUID="F548944D4A7DC828DEA66BA8786ED508" Name="fault_code" Comment="коды отказов канала" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Size="32" Array="TRUE" />
+        </Struct>
+        <Struct UUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Name="support_ACT">
+            <Field UUID="C128AC9F4B6FC9CAE98F99929AB61438" Name="Config" Comment="конфигурационные параметры" Type="ACT_Cfg" TypeUUID="1BAF67EA4508F1DF24788E9EEF5F2A24" />
+            <Field UUID="9A0D205548B279A70FCE5AAC91CD9AAD" Name="Control" Comment="управляющие команды" Type="ACT_Ctrl" TypeUUID="AE95B89745063A53816B2DAB80F9D225" />
+            <Field UUID="D36203864CAC129BA092BABA6B5C5CCA" Name="Ins" Comment="входные сигналы" Type="ACT_In" TypeUUID="56057966470BBC3B251D33A57A1BCC2A" />
+            <Field UUID="42F147E24EE30E8BA4D0AA8D3994A7A2" Name="Outs" Comment="выходные команды" Type="ACT_Out" TypeUUID="A431822143EA31E39B1242B2541F6239" />
+            <Field UUID="B5837346411737AA71AEF5A2F846CB96" Name="Oper" Comment="параметры для интерфейса" Type="ACT_Oper" TypeUUID="40B9A1F645017834571663AA5E09BCE7" />
+            <Field UUID="72308134420C94E25CC2CFB61EBFE43D" Name="Debug" Comment="отладочные параметры" Type="ACT_Dbg" TypeUUID="97AF58EA4833D5C32C58E5A54A550EB9" />
+        </Struct>
+        <Struct UUID="3F43D496436EC9B56764D6B2DB84565A" Name="support_AI">
+            <Field UUID="98292A4244CEC586AB0D90A88781030F" Name="Oper" Comment="Вычисленные переменные" Type="AI_Oper" TypeUUID="E1ACFD3D43543C79AAA943865FE5B719" />
+            <Field UUID="69B5262E44356F990EAB9A80D859EFD7" Name="Config" Comment="Конфигурационные параметры" Type="AI_Config" TypeUUID="37DEEBFB47D139D18B308AA498AC5181" />
+            <Field UUID="BE0ABC8948C2FE38AC542A8F92BFFD11" Name="Debug" Comment="Отладочные переменные" Type="AI_Dbg" TypeUUID="15E6646F4A972351230A6EB14BD06369" />
+        </Struct>
+    </DataTypes>
+    <FBLibrary>
+        <Folder Name="APS" Comment="" Data="" UUID="1CB78C94468445C7F16178A7BDF45514">
+            <FunctionBlock UUID="283C54A241581C4A51CBAD8C5BD38EC0" Name="AE_Proc">
+                <Variables>
+                    <Variable UUID="2640D4C347D9AEED753D038568D7636C" Name="IN_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="94D4B914498557BD0985DB8EC324D21B" Name="IN_time" Type="TIME" TypeUUID="3EFD49044E055B696F5570BA288FA8D5" Usage="input" />
+                    <Variable UUID="B05FBA9B481735CA4CEB948562D677DD" Name="Dblck" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="D5A38288412084BD5578519EFA0BD425" Name="Kvitir" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="A675F9C14D5367F0999833B63FD03C10" Name="Sound" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                    <Variable UUID="B631FF1D437570757B99F996D81BF070" Name="AE_OUT" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="output" />
+                    <Variable UUID="B2EBE73844621835F04AB6954018EE31" Name="Trigger" Type="SR" TypeUUID="2E4DE4324E1F5E488B22EE9160EBE03C" Usage="internal" />
+                    <Variable UUID="763273024B7BD83FE1B96796240076CA" Name="CV_time" Type="TIME" TypeUUID="3EFD49044E055B696F5570BA288FA8D5" Usage="internal" />
+                    <Variable UUID="35091D0C49AA435DA31A919F1E0CA80F" Name="Timer" Type="TON" TypeUUID="EAA43B6B4DCDCEA72AB748B4554FD2AD" Usage="internal" />
+                    <Variable UUID="F6836D0B435BF4AA6DB953B08C1CF4C5" Name="AE_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="6F8CAF604BEBD8DB8F3FA5AE763411E2" Name="Sound_on" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="872BBEC941972672CF1E83BEF9611F08" Name="Sound_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[Timer(IN_bool, IN_time, AE_ON, CV_time);
+Trigger(AE_ON, Dblck, AE_OUT);
+//Включение звука
+Sound_on(AE_OUT, Sound_bool);
+IF Sound_bool THEN Sound := BOOL#1; END_IF;
+IF Kvitir THEN Sound := BOOL#0; END_IF;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="9897171E4FEBD18FC96ED584B018BA4A" Name="fb_APS">
+                <Variables>
+                    <Variable UUID="2F6BD4614B1AC0A5E90910BB096A4637" Name="clock_APS_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="C64DC2DA473ED85885059D961DBCACE4" Name="clock_APS_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="2E68574942C5CD37012F5DAA5F1F8BF3" Name="APS_TASK_alg" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="B2FA59934C33B172F0DDE881321E1CB0" Name="APS_TASK" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="CA65303B4459895C3BE0A3B30013AC75" Name="Deblock_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="091347FD414696D72F7CC0973AE6BDCA" Name="AE_063" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="646E9AFA4D77D167F1C9E9B9993CAF7B" Name="AE_064" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="652AB0C940F8A01F73900DBBEB7EE45B" Name="AE_065" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2F27EC4B42DB7D6DC5A27DA56AD7A821" Name="AE_066" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F3348223439DAA8B54F127A9E1B706AE" Name="AE_067" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A3D1B9174377ACAEA2CBAEAFA1D53410" Name="AE_068" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="384404304CF2110749B3368D80D77F08" Name="AE_069" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2A3E67CE49FCB8199F75D3AF04A1B520" Name="AE_070" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="088EA56348EF99560D7616BBB5BFEDF1" Name="AE_071" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6C629FEE4DB88CA996D3C3B3A507E139" Name="AE_072" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A2EC6F684308E6B5F0FA7D8A6B96DE0F" Name="AE_073" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B5BFDE3A442BF2DE573C789E80DB5518" Name="AE_150" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="634AAC9548CDDE20DC08168EB61A2D95" Name="AE_151" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="CBC571D741BC03E7B3F3B5BF74908027" Name="AE_152" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F1745C774A76E500C9494D9D6BAC114D" Name="AE_153" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="68B2F01F4F031DD01B37988A3F0A72F3" Name="AE_154" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6B28456C4E06C0ABA410CA826331F633" Name="AE_155" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="EC26FF58401277181F1DBDA8ADB55E72" Name="AE_156" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5071C2B04F4DBF01742694908EDAC7A8" Name="AE_157" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C2877230458DB3DA50B287B5204DC7FA" Name="AE_158" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DBCA42CC480081497F5908937BBD8580" Name="AE_159" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BCB8BD4C4065517ADA2765B0E71F6F6C" Name="AE_160" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="28A50B854DBB08044E0EB49288DE3A6B" Name="AE_161" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F05A44414FFB5F470891AD8ECE64337C" Name="AE_186" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C9D65603412B6AF1ECCB758D36531FB5" Name="AE_187" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="053698894A26BDF34D9383AA406E10EF" Name="AE_188" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="87DAEE1942A27C055E6E3583F2D55D1E" Name="AE_189" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="7F04B77643CE4A51CB9B1D9A24A292FE" Name="AE_190" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5E2679C64230D11A23035B86A28374BB" Name="AE_191" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="343B4FB246F393E1368A9B942ADF1433" Name="AE_192" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="788F80F04AC41D5F7F0BBD965CC37221" Name="AE_193" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DE1E01564449DD8D1C9B3D806DD19303" Name="AE_194" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B3958CEC43688B57B2DBC2B1A3A0D871" Name="AE_195" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6452C0EC438D152B8CEC5DA24A48D907" Name="AE_196" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="18F674314A439B24931BABBE6A3FAF51" Name="AE_197" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3F7E98D4496F98F2E6BDE2A118D059A2" Name="AE_222" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BBCE2E0748B4407702A56E9E09009678" Name="AE_223" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="86AA1856410E57F0308CB7A400AC02F3" Name="AE_224" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="99ACB53740913856C7598CAE20C759BC" Name="AE_225" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="7CA544FD4F7D86BDFE56F29294FF9EAB" Name="AE_226" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="31DB20314E35A5FC401624A7AC7D945C" Name="AE_227" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3B15EFDA4DBCFE6329ACFBA97D99CA16" Name="AE_228" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D4A8816C405C0E25A627E3AAB58F6CEA" Name="AE_229" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3F8795814F72D72BAA4145AA23AB56BC" Name="AE_230" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BA171ECD4705C2EAD2ABDEB53FAC9EC4" Name="AE_231" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F5FBCE624D9F1983530E7785F8ACF277" Name="AE_232" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5956748C4927EA7630BF02981F8550D2" Name="AE_233" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C1F1590340FE726757DFB39D905EBA9C" Name="AE_258" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A3D2A87C485D7F4572D2EE923311D645" Name="AE_259" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BD3A315242A4E20C2BE661BEA77FAB44" Name="AE_260" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="190D426F46C14184956D6DB9191F2BA3" Name="AE_261" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4647B02F457C145FCCF1599453E43E93" Name="AE_262" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E60A62B145E5440D1DC0D49046AB70BA" Name="AE_263" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9D4B91CD4D0DAE9C134E4ABDB8195B18" Name="AE_264" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="13105D294922B8CFAC43A899F0056CB1" Name="AE_265" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BCDE7C084A5E3ACFDE3E4E82C95C28BB" Name="AE_266" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="50D9F23248D83FA24CB1EDB190789975" Name="AE_267" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6A4AD16448ADAF531062B9866D8879F5" Name="AE_268" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6FABE44A4F90C95EF3104F9BBBDE1E6D" Name="AE_269" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5ADF59AF440D019F2BAF1E9DFC110E0D" Name="AE_294" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E4B048744AB2E168F98B3BBA3C2A3449" Name="AE_295" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3AF5DF794DED42696F98EEBF9052F0A0" Name="AE_296" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="214204F645300D68DDEB0C9BD6DA7FE5" Name="AE_297" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D73D2D8F4B89FC75728AACA5F80DBF03" Name="AE_298" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1E7B49F54ACE90E4A0D075B95D213468" Name="AE_299" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B13C5955449BEA6A7136BD9FEA610AEF" Name="AE_300" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="99FB6E3E4D123BAE1605A1ACDBDBBD6D" Name="AE_301" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="13725BD94D9C3B5B5223A0B4FF6B8DBF" Name="AE_302" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="745EDBD240B82AFE01B51BAD04F73254" Name="AE_303" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E7C971A846921942C0A4C3BF52F0194A" Name="AE_304" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="ADF92CDB48510CB0D321D9B340A9C2FC" Name="AE_305" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9EF617A14A8E68AD4812259C38CAE88E" Name="AE_330" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DCFFD3EB4DD8F801591972AADCBDB3B7" Name="AE_331" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E2FD568E47D2C35F42474BAE4556FFA0" Name="AE_332" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5DCE6C0A417D0A1CCF1742812BA65111" Name="AE_333" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9E7D29F249349336B58969BA1A7D4B2E" Name="AE_334" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4B476E8A46D74017C91ACFA95C6604AF" Name="AE_335" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FA68576544C260C93881CF86A4134F1D" Name="AE_336" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="ED2A1E584BD61EA338FBB9A6904D5496" Name="AE_337" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="CC67426A480131A0AF4AD2BA1B031566" Name="AE_338" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8DA6C15247C53E8EBBF7169A4D5AA294" Name="AE_339" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="59CA92294CEEC2B37F9AC3B3E22DE4CE" Name="AE_340" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4AF7EB4C47EE717C047BEA838525C992" Name="AE_341" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="890A08D3452CBD47533960B47CE1E764" Name="AE_366" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E2024DC04CAA51AD35937BA6B4821C4D" Name="AE_367" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8CD0B9CC4F2D04AEA3073885728C5703" Name="AE_368" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="AA67228F41DF314DDF76A8891818D3E2" Name="AE_369" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="679017D34BD1538C7FCEA8BD44332F55" Name="AE_370" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E5CECC6646C9630F7A8EE0B404025953" Name="AE_371" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D296AFBF4C2ADD4C635F87820256425F" Name="AE_372" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2826F24B443293ADC3BF3DA430230074" Name="AE_373" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1326D30F4716E53ACA5E9582E898CC54" Name="AE_374" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C35BF41A46F0A4F8D655B39C2979C3D9" Name="AE_375" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="837554984D7C2A8D4301D0B2A21EC5D3" Name="AE_376" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C6864BD2423093D920D8E5B8F60F9709" Name="AE_377" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0CE306BE4EB58EF27AB215A29774EE3E" Name="AE_402" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9E1C3C694B33D0025333ED9DBC54C5C3" Name="AE_403" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="EE4E87F744B387CB0112339E5D138E4F" Name="AE_404" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="CEAFC8034D6A49644B95F099876CF4B2" Name="AE_405" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6D850BCC420D0C37294D138E4B26689B" Name="AE_406" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9F1228D54B4D93A9966D6BBE57D3D9D0" Name="AE_407" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="70C6CA5345437344546385831572098A" Name="AE_408" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DDE7B9FD4AA154E4FC7FA68966686981" Name="AE_409" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="41F706A24FA19F86BE5D1A81604E9E7A" Name="AE_410" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4614E1E04F14CD9CE11C4484E3FE7ADF" Name="AE_411" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8CC6D1D14E8497E6128C25B82A195AD9" Name="AE_412" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="23319C0A489E8F973C849D9C0E2579AB" Name="AE_413" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F570848C420BBE71B71410A340357B09" Name="AE_500" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8857765F4A2F7D6C2A6367953CC0FA3C" Name="AE_501" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DB6A502C4BEEB557043A26B45467C493" Name="AE_502" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="94F64ED8401DA2590DEF0BA838600BF2" Name="AE_503" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="47DD06DA4C457AE258262B9CF25BBF1D" Name="AE_504" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C633C0494E371E73FC1C0F998B9FF495" Name="AE_505" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F7DDB34D461D1A9C1F5924B3F12C698B" Name="AE_506" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D091DE5C40E65E241182939D0A4513DE" Name="AE_507" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="315150A543598EBAACC5238FAA19857B" Name="AE_508" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="04A6EB9A4849A0AEB807728710A6657A" Name="AE_509" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C3BF6A54409D06CD23CCAE8F3E80781E" Name="AE_510" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E19301444F96FDD1B225499D419638DA" Name="AE_511" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="063A1ED548D1573493742687AC838F1D" Name="AE_512" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F387AE4E4D48DE0B3759A1ABE2B74BC9" Name="AE_513" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="36F342BD4570B865E6A562BAF9542BF4" Name="AE_514" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8C14106E4A6595330DDB45A85C59B8A6" Name="AE_515" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="78133E364707916B6DC7D3B7A57D94DF" Name="AE_516" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5FE3EA9B4BBE0EE32104289EDC21B517" Name="AE_517" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4BE08D024218AE85F5E79E81CA258F75" Name="AE_518" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="40B3E5F74F08C4E323AA3D88907331C0" Name="AE_519" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8A4A6E9A4083B440355ED1ADC476DC8A" Name="AE_520" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9F7845DC441AFFE66ED0FF9AC857E69D" Name="AE_521" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="40A9175C454A93C4F2A8458DE9654CB4" Name="AE_522" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="270909AB41A19DF7893758804F881568" Name="AE_523" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B41B011D4BD21BE5D1020BA527340004" Name="AE_524" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="19E112C041EC576983AD438687DCFFA2" Name="AE_525" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9FB9D17B4BA542CA7FF502B3AFFDC5BE" Name="AE_526" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5F4899F64A84F5FAED021197A969AE76" Name="AE_527" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2EB63CBE44C0C6AC45E12F99C655FFD2" Name="AE_528" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5B86635E40ECEAF06CF84587888BBC0D" Name="AE_529" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="13A97B304FEA56E3E5DDC495BAE5E308" Name="AE_530" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4D8EB3014AB906FE8C999AAA341F3748" Name="AE_531" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="64DA0170448A5E5D757F1384FE45A65A" Name="AE_532" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5524014E49757355032581BFF9F1DBEA" Name="AE_533" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B40905744DC0C1348A07F3ABEABFFAA7" Name="AE_534" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B515846F48E0B97BD5BD7C8D1B31F258" Name="AE_535" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="09AA4395495AECA901DC19B630BA9F8C" Name="AE_536" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="95D394AB450D99FB53D7BE8AEB78AC82" Name="AE_537" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4627E3294ED240827C914288769FFA59" Name="AE_538" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8126DE8646E4C8618ED2EB90D5AFEC9A" Name="AE_539" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5D7D62394BD382B322E6C19E6E2D004F" Name="AE_540" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="81B4F3064C3E7E35EE8D06BCFC742D99" Name="AE_541" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1D4C42F44A1F8975EF5BF8AB91DB4A52" Name="AE_542" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="89615DE647F286A1881F0D8D544F43B0" Name="AE_543" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4F2C3D1C4E30794D111F338E0E271D62" Name="AE_544" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F31DCB574C1D1D7C957BA3BE6BBDAFCF" Name="AE_545" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="83A6DBDD48D1930EAD94059A615FB1B6" Name="AE_546" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="EFA82E394F6D6DBFC2C20D98868AF624" Name="AE_547" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F6BF5E034AB89CBE6AAC2A89B8902C8F" Name="AE_548" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="CC0DAB35485E6021A82CC19AC00E999F" Name="AE_549" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="92BE3F3D49D601F3A5BFFF97DBDB78C2" Name="AE_550" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="EAC1C720462C003557D43EBE455C999F" Name="AE_551" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BB32773346624BA707ADF688901E9DEA" Name="AE_552" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FCA1D5024AC9D7EE667BE387EDB7CEE8" Name="AE_553" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="256B7FC54AFBDCB576F11F8B26960238" Name="AE_554" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5D151F984F811535607D74AFBA835F36" Name="AE_555" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="AF16E71B46FD90471202A3AD6D140C3C" Name="AE_556" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3F35D9B44B9538041CD8B7A425184FB5" Name="AE_557" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DAB41501436518399923BEBDA074EBEF" Name="AE_558" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="48E3688C433A23189C2364BF8993F282" Name="AE_559" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="64CA312941D8FEB49C6B0F9143299499" Name="AE_560" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E4C65DB6446D2674E4973CAF7E799F9D" Name="AE_561" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B417FE854BAB92615CDFEEAEF30143D2" Name="AE_562" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="90CC9ACD44566BDEC2FACDBCF8629A57" Name="AE_563" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1938A087459FC00F69BCC38045D754CC" Name="AE_564" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5E7BBAD74A4A7ECAC8B984B64E81B668" Name="AE_565" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3919E74141A85E3C6D4013A17D4F91FF" Name="AE_566" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="EB1F6E404C2E804A8CDF619AA303DD70" Name="AE_567" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="83568DA64BF58B191CE0A199608DADE7" Name="AE_568" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="ED1BB81049F8B114754E18ACA314A59B" Name="AE_569" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F41ADB4A4C565C11B9FD1588FD80FCF1" Name="AE_570" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="66A5F3254D32053DA1C326931A25153B" Name="AE_571" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="AE8412C84464F9D07ACF2782D9C2939B" Name="AE_572" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="15111EE548DD23802FB16EBBB853B97B" Name="AE_573" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4D0001DF4496CB3447ECF2BA0BAEAB06" Name="AE_574" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D5ADF860485290307EC24B8DD5E5A225" Name="AE_575" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DABEC1654EDC8085A52AD98C88EE9BDA" Name="AE_576" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0D5D398241443E02A48F588CE3C663F9" Name="AE_577" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E9FED9BB43BF05617549BE99E79326B5" Name="AE_578" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="52FFFE974EEB8621D04478A49CBD8E99" Name="AE_579" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C64F247640C9C699114659B8C5822AC0" Name="AE_580" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="19EE38A4410E2B8D527653975110517A" Name="AE_581" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0846763D46D7369EE57CEF95066F3CEB" Name="AE_582" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FF7FA00540B4827233F90A9F03B974C5" Name="AE_583" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BFA063C04C5506C4DE29E59715160762" Name="AE_584" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="28FBB97542389085EF9D5E9BA8B09D99" Name="AE_585" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B66CE2D4499E66C7A8A5A2B2FF364215" Name="AE_586" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C117B2774529C6A1D92E90A930074FA8" Name="AE_587" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B793F2C34B398FE86DEDC1B87F3B41DE" Name="AE_588" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A56EFBA0443AFB2AAAB445AEC2A954C6" Name="AE_589" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F648447A438F61A949757DB2196E665F" Name="AE_590" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="616E3BFC47CE582368469797EFD36F5B" Name="AE_591" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8C37089D4F0FEDE45F7F4CA56625F8C8" Name="AE_592" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6BCAC18848CB5BF84E6D90BDE767B38D" Name="AE_593" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3EB2D0BF41E29C093970A1802DA0B6D8" Name="AE_594" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="24E654E84B0D421AA547DCAD7B56F815" Name="AE_595" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E0FA20A54245F4C8EABE55BA690FEB9F" Name="AE_596" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5E58B1034F3DC96D978238BF1613ED60" Name="AE_597" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="268DEAB34F24F13AAF90C18ECE0C5614" Name="AE_598" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D7132E634A4E90B8A85C9FBE93B79DB4" Name="AE_599" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="ECF1662647297D6714D8CAAE4E3DAD32" Name="AE_600" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B3D5F73C425E8DD1ECDA77A5A9CB5788" Name="AE_601" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6594CEED4A99C3BAC631E885970DE830" Name="AE_602" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="27C267ED444DE44061413C91B112BB61" Name="AE_603" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DCF73A754F506E07710322B80102AF71" Name="AE_604" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A64B4E1B49ED1E279A41F1871E46EE4D" Name="AE_605" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DB9893FE4004E10D17BFA885454F3A15" Name="AE_606" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4300097640F4648F16998CA4B760F233" Name="AE_607" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="24644FB4494A83BD55CF318B8B4F1630" Name="AE_608" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="AA25E86A478946528975AF86FC38F062" Name="AE_609" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="82374D8F4930C205C965159461496604" Name="AE_610" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="AAC83E4C45FB6A7D54A3ACB3F216A4CC" Name="AE_611" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="621D2BCF456729C3B2437E8170103C87" Name="AE_612" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1A8D977C4CDC424844B430B1A2866A70" Name="AE_613" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D50E98E04D8F156CAC2241824FE832B9" Name="AE_614" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9B31E9924E6FA87B29EE90B47DE45541" Name="AE_615" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0B5BFD2B4E0ED2B7E7D67C9D724534A5" Name="AE_616" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2CDB792F424FD150FC54A08A8E2E26A2" Name="AE_617" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D6B3C8284D166055BB13F6AEECF1C23B" Name="AE_618" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E643B0164218CBD5D720B297C51110B7" Name="AE_619" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="05923DA248DE539C04FC10937E548AD6" Name="AE_620" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="98C3979D4C283B68B392709C1B947725" Name="AE_621" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F50E82F448C7C6C584FB5AA9D8B21989" Name="AE_622" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C8B49027417E65BC23345583C1F34B33" Name="AE_623" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="50E212C248895AB3619DDA8F08165988" Name="AE_624" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="EC18ECD34968D424A57A2F9421284DA3" Name="AE_625" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="96C33DD34E59BE74746D16A4A86468B7" Name="AE_626" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="658912D34AE8C2A8E1F4F9AA8A60C66B" Name="AE_627" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A8EC65204CBE4CDFEDEA2A99AB2C0B85" Name="AE_628" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="26E497AF451EFF245A115D8032A5AB3A" Name="AE_629" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="7FA9A1AD4BDFF3E691914FAB2E4B825D" Name="AE_630" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5DB9E2FB420A44C38AC3C09B975AEDD9" Name="AE_631" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0E32EC49468058AA88576BB098657C72" Name="AE_632" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C58379C94EBB86C2FAAEA2AA9AC4E064" Name="AE_633" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B77B30BB43D250AC7DFB0B8614E8E6EC" Name="AE_634" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F5811BBB4570C30CB9889193473E0708" Name="AE_635" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C5E6E99B4BDB0858BA9C9CB7CC165033" Name="AE_636" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9AEC13924722E3DEE72C00809B565A74" Name="AE_637" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C61EADEF4BC61743899BEEA598A50D68" Name="AE_638" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F4DEEC604E31ED413E9664A994CE87F3" Name="AE_639" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C06B19E44500BA0AA343D1B60E9E5417" Name="AE_640" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C10F9AD343B8E9FDCA5C3487B886F98D" Name="AE_641" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2D15ECAD4F0A93D78A9CFC922B9C1794" Name="AE_642" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="440C32FD47286A205863ECBEFAD034C0" Name="AE_643" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6C2828AE4613C98FDDE0F1BFE96D823A" Name="AE_644" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2A16790F468A8704F4BFA18175BFBA84" Name="AE_645" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="51E8629544C3F9CEC463BB809F5E7FE4" Name="AE_646" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D2E34A8F4E287016A49C25AE89B2635B" Name="AE_647" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C5DCFFA049E56BA4224E0BB127449481" Name="AE_648" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E9729E864A50F1F7657627B36DFAAC89" Name="AE_649" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1D236C164E6060E8E32A9483D113A179" Name="AE_650" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="17A907E44E787F2BA2B97FB15729B5A1" Name="AE_651" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A336F0984506070172D63D86A3851BAE" Name="AE_652" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="45EFE09E4B735A1EC0F853960296934C" Name="AE_653" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="563E4DFB40CF5F97154BDF9154F1508E" Name="AE_654" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="26C66B9849B96A78223E388D9FD23FD1" Name="AE_655" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2236D50242E6912D84ECB3A34E0AD0BB" Name="AE_656" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="7A50A0A348CC69C429E19E8B4900A0CB" Name="AE_657" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2D5466944E2D6D74661282B456A34C20" Name="AE_658" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FB386247424C5C0E088D16BBED30A253" Name="AE_659" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5D3D348041C7316B0DA016B10B04E93B" Name="AE_660" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="21596AFF4D5A2C7B8FF37697F32F0082" Name="AE_661" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="00C1D3B242C58384BFC5C3A2E5EC2F40" Name="AE_662" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E1ABE6A04A76F7A2D9315E8D01EAA781" Name="AE_663" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6914D6CB4B78C521115AC58D21A946AE" Name="AE_664" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="57148FA94DBC74588CBF51A780B1C871" Name="AE_665" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FEDBA3224ECD55D872F22EB96FE76D14" Name="AE_666" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FE2F504147FA694239F9A1BD81ABB66B" Name="AE_667" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F4F5C537455012BF2F9D54AEE1BF9023" Name="AE_668" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9E47DC2044B5D8E2911E57B829D90404" Name="AE_669" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="736AF213494C02EA03C5D6BF5CDBD1C6" Name="AE_670" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="76D428F74A5AC120C7D1CF9B5F2C1FAE" Name="AE_671" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6E74804C45EE6A238B2EEFB1C25C33D5" Name="AE_672" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E2E157F142A4E3F3D3BDEBB9C2147397" Name="AE_673" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="69EEFD0D48CDFF583D594D9D504B45F7" Name="AE_674" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A8F75B56465EEE761519F696D13CBE8E" Name="AE_675" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4636603648CDD81E318B6E99D4D32FF0" Name="AE_676" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0BB437164D1F899794A8B88A5688B4D9" Name="AE_677" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0B44E5524664FD5C7D3AF7A7EDF51FEA" Name="AE_678" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6598E3C64FA89679011E46B2B6236A32" Name="AE_679" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5648AC8B4EED124A57F265B4BDF4B798" Name="AE_680" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="844E6DCC4B445FB82F85C29F929FFF9C" Name="AE_681" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DAA92E6B44500DE06CB6359F5F4AE1F4" Name="AE_682" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="53DDA3BB4F501BA6FA9359BEF19B55AB" Name="AE_683" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="52A51CCB4F878B0A908C0DB493AD6196" Name="AE_684" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1DDA20BE4E39C680C3DA3489962724FE" Name="AE_685" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="94763CB54274BA26AC94CB85FDC6DEB4" Name="AE_686" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C0498ECB42661166C9E0ADB72CE94063" Name="AE_687" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1907332144B7C5F46935EF99B3BE0162" Name="AE_688" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="58E457BA4B9980B0948648AF1D1DB838" Name="AE_689" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="40F092BF48AE404D3C2C81BC0275D983" Name="AE_690" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3BF7040E4CB3C5B4D30A2797772FC9DB" Name="AE_691" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="18E27E5846DA476F0A94568729969329" Name="AE_692" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="66DE9F384A4F33E09840019608A6C8FE" Name="AE_693" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BA459228471263DFF27B579FF5670F75" Name="AE_694" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DBBF1C6F406315B2243900851C2E4C2A" Name="AE_695" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A7E6AA8549C7E45CD78E75913B30FC33" Name="AE_696" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="CA3E678B46D16C539C21F6AA02D3F530" Name="AE_697" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="59718CD247FC0DE7F90768BB2CBCEAAF" Name="AE_698" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="960896DE487909BE9230508A8478B233" Name="AE_699" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="811405A14F0D616AFEC087ACD5436A82" Name="AE_700" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B422F8D044C85D61815C0781F99EC921" Name="AE_701" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F30D0DF94616316197B96195582DE78B" Name="AE_702" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FDD7DC264A2BD0E9FB91C1AFD3A7FF9A" Name="AE_703" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1ED3A49B4F280D905BB6D2892BE64DB5" Name="AE_704" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D1A6E06E4491ED3751312D834F229992" Name="AE_705" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5A80113C42B650FF8FAC418EB4D3EB8D" Name="AE_706" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A067C4F54108A201A28C58B72776DC3E" Name="AE_707" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0662C26C432C95386824389598BF20AF" Name="AE_708" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="04E3FFFB47467F48E5EB4CA94E2E1AF2" Name="AE_709" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="838AB81244EA3A5AEBE24393911B2E5F" Name="AE_710" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="962B3B6449D84A85FA45CE820FE4B7CA" Name="AE_711" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="50FF15E84036FC3A5F8EC384F0BB5E97" Name="AE_712" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3CBE08744AE4BD86D4E2318388B8FC7E" Name="AE_713" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B5ED196F4B14EEA7444E7C95934DA459" Name="AE_714" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D475DEE4407A862ADFAB1BAD1B8A37F1" Name="AE_715" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B3FF794D4A1994965A624E89736E6B0A" Name="AE_716" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="360567E449BA82674BC7CCA35DF6CF43" Name="AE_717" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="305EBDF244CF909492504982834B107A" Name="AE_718" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FB3958214AE984F5C40FE9825F101ECA" Name="AE_719" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="3E9DE1F341608D97296C258777DBB41D" Name="AE_720" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="7208AAE74936818256CA7F802D237061" Name="AE_721" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F3084C0049546BAAB15A06B54CBA8A51" Name="AE_722" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BD0B80014ED7EB245EEFBE8CF26A8579" Name="AE_723" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="BF99E5E34565A90796E2A9ABF685958F" Name="AE_724" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A08BA40647B50EFBF2D1799B48334AC3" Name="AE_725" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0E1866DB41112CB1FCCFF2B91A9A56DD" Name="AE_726" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0CD7DE204D87EF87B5FE20A0EE6AECB1" Name="AE_727" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E6BD469641DF075262EFE0A9CE0A3B6C" Name="AE_728" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="EECE670E4E3AF5158D40BD86D8280C07" Name="AE_729" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="183624FD47B9F75659D980A8FD4BF67C" Name="AE_730" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="22CCE78A45C1F557788045AC53797061" Name="AE_731" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="16A7857F4FE278BFA95671B895A1E4B7" Name="AE_732" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="818A359F4C23084788641FB71FFC714A" Name="AE_733" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="09BA14B948A48963AAA757A2A51088F7" Name="AE_734" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="68B7853946A967FE6ED418B3B703540F" Name="AE_735" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E8B7CB794AA3259186E73389C958548C" Name="AE_736" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="077930C7477719433A6FD993C1FD1259" Name="AE_737" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="88C12E4C4437E444B721499CAD501D78" Name="AE_738" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5CD5D68D4C5CE71F947825AD6F6559EA" Name="AE_739" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="102361BB488815785E75F3B5119E1CAE" Name="AE_740" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9E239BEF437FB7763D38C99D466A1A1F" Name="AE_741" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="FFC28A8841143DCAA933838913731B2F" Name="AE_742" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D5FD461F40F15708BA7A9EBD661527CC" Name="AE_743" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C864B5F543646271CFC29CB30016FBA1" Name="AE_744" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="7DDF7371405524649D3998B048CDD6FD" Name="AE_745" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="D8555B464E8633F2F64B1F96D1522673" Name="AE_746" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="4BF746CE4905B56D00C891ADDB49C17A" Name="AE_747" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DAA7DE2B40F10D6B3EC43388B8B4BE10" Name="AE_748" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="7C9B198C45CE20E307BC768B5874CF06" Name="AE_749" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="A239DD3F40350F1A6A0245B56AC09FCE" Name="AE_750" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="74BD725D40BAF2947987FD8FADC38B78" Name="AE_751" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="E4B8839440CDE19608AFA187DC3C82C8" Name="AE_752" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="DDDF38CD4C390C73A472CC919EA35196" Name="AE_753" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="798F54D54D508937F4A6CF88DA0038AF" Name="AE_754" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="9C655D5946E9FD2F0B455B942BE10A6A" Name="AE_755" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="25C1D332427AE9AD5F006AB1F8A59396" Name="AE_756" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="288B59944D41A5D401C1C48D44775399" Name="AE_757" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="6E221BFB4D524D611DB5A38E610943E6" Name="AE_758" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="2AABB09F4CE394D87368569826E54646" Name="AE_759" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="B76108DD47CE7121925E3BA6F8CDFF1C" Name="AE_760" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="5A0319A942DB4612BD7EC69D7667AD4C" Name="AE_761" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="1FE1EB96412E7FF2C97568A0D31AF478" Name="AE_762" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="C5017DA84F4E35A32661458375FDCE17" Name="AE_763" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="43F6437B4182E0FC9E747EA6F479B51B" Name="AE_764" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="7E2DB5DD43E2BE8348A78A9D71D567CC" Name="AE_765" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="0E2DF47546FB6C62B9EECF94E2B2CC99" Name="AE_766" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="8FF327EB444B1F12FB779BB1F569958A" Name="AE_767" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="F10F628045A693F3B8042F951D4D090D" Name="AE_768" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                    <Variable UUID="762E2B2443096C82F6B175B801E40ACF" Name="AE_769" Type="AE_Proc" TypeUUID="283C54A241581C4A51CBAD8C5BD38EC0" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[clock_APS_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_APS_prev := clock_APS_cur; END_IF;
+cycleTime_APS := clock_APS_cur - clock_APS_prev;
+clock_APS_prev := clock_APS_cur;
+APS_TASK_alg :=INT#0;
+IF Deblock AND NOT Deblock_last THEN
+	APS_TASK := INT#0;
+END_IF;
+Deblock_last := Deblock;
+
+
+//АПС ошибок модулей
+AE_063(SHU14_A1_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_3_flt);
+AE_064(SHU14_A1_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_4_flt);
+AE_065(SHU14_A1_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_5_flt);
+AE_066(SHU14_A1_6_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_6_flt);
+AE_067(SHU14_A1_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_7_flt);
+AE_068(SHU14_A1_8_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_8_flt);
+AE_069(SHU14_A1_9_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_9_flt);
+AE_070(SHU14_A1_10_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_10_flt);
+AE_071(SHU14_A2_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_3_flt);
+AE_072(SHU14_A2_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_4_flt);
+AE_073(SHU14_A2_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_5_flt);
+
+//АПС ошибок кранов
+AE_150(APS_SHU14_KRL1_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_non);
+AE_151(APS_SHU14_KRSOK2_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_non);
+AE_152(APS_SHU14_KRSOK3_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_non);
+AE_153(APS_SHU14_KR1_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_non);
+AE_154(APS_SHU14_KRD_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_non);
+AE_155(APS_SHU14_KRE_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_non);
+AE_156(APS_SHU14_KRU1_2_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_non);
+AE_157(APS_SHU14_KRUOK1_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_non);
+AE_158(APS_SHU14_KRUOK2_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_non);
+AE_159(APS_SHU14_KRS1_2_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_non);
+AE_160(APS_SHU14_KRS2_3_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_non);
+AE_161(APS_SHU14_KRUOK3_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_non);
+
+AE_186(APS_SHU14_KRL1_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_noff);
+AE_187(APS_SHU14_KRSOK2_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_noff);
+AE_188(APS_SHU14_KRSOK3_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_noff);
+AE_189(APS_SHU14_KR1_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_noff);
+AE_190(APS_SHU14_KRD_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_noff);
+AE_191(APS_SHU14_KRE_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_noff);
+AE_192(APS_SHU14_KRU1_2_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_noff);
+AE_193(APS_SHU14_KRUOK1_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_noff);
+AE_194(APS_SHU14_KRUOK2_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_noff);
+AE_195(APS_SHU14_KRS1_2_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_noff);
+AE_196(APS_SHU14_KRS2_3_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_noff);
+AE_197(APS_SHU14_KRUOK3_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_noff);
+
+AE_222(APS_SHU14_KRL1_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_nstart);
+AE_223(APS_SHU14_KRSOK2_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_nstart);
+AE_224(APS_SHU14_KRSOK3_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_nstart);
+AE_225(APS_SHU14_KR1_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_nstart);
+AE_226(APS_SHU14_KRD_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_nstart);
+AE_227(APS_SHU14_KRE_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_nstart);
+AE_228(APS_SHU14_KRU1_2_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_nstart);
+AE_229(APS_SHU14_KRUOK1_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_nstart);
+AE_230(APS_SHU14_KRUOK2_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_nstart);
+AE_231(APS_SHU14_KRS1_2_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_nstart);
+AE_232(APS_SHU14_KRS2_3_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_nstart);
+AE_233(APS_SHU14_KRUOK3_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_nstart);
+
+AE_258(APS_SHU14_KRL1_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_selfon);
+AE_259(APS_SHU14_KRSOK2_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_selfon);
+AE_260(APS_SHU14_KRSOK3_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_selfon);
+AE_261(APS_SHU14_KR1_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_selfon);
+AE_262(APS_SHU14_KRD_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_selfon);
+AE_263(APS_SHU14_KRE_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_selfon);
+AE_264(APS_SHU14_KRU1_2_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_selfon);
+AE_265(APS_SHU14_KRUOK1_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_selfon);
+AE_266(APS_SHU14_KRUOK2_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_selfon);
+AE_267(APS_SHU14_KRS1_2_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_selfon);
+AE_268(APS_SHU14_KRS2_3_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_selfon);
+AE_269(APS_SHU14_KRUOK3_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_selfon);
+
+AE_294(APS_SHU14_KRL1_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_selfoff);
+AE_295(APS_SHU14_KRSOK2_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_selfoff);
+AE_296(APS_SHU14_KRSOK3_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_selfoff);
+AE_297(APS_SHU14_KR1_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_selfoff);
+AE_298(APS_SHU14_KRD_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_selfoff);
+AE_299(APS_SHU14_KRE_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_selfoff);
+AE_300(APS_SHU14_KRU1_2_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_selfoff);
+AE_301(APS_SHU14_KRUOK1_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_selfoff);
+AE_302(APS_SHU14_KRUOK2_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_selfoff);
+AE_303(APS_SHU14_KRS1_2_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_selfoff);
+AE_304(APS_SHU14_KRS2_3_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_selfoff);
+AE_305(APS_SHU14_KRUOK3_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_selfoff);
+
+AE_330(APS_SHU14_KRL1_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_flt);
+AE_331(APS_SHU14_KRSOK2_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_flt);
+AE_332(APS_SHU14_KRSOK3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_flt);
+AE_333(APS_SHU14_KR1_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_flt);
+AE_334(APS_SHU14_KRD_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_flt);
+AE_335(APS_SHU14_KRE_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_flt);
+AE_336(APS_SHU14_KRU1_2_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_flt);
+AE_337(APS_SHU14_KRUOK1_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_flt);
+AE_338(APS_SHU14_KRUOK2_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_flt);
+AE_339(APS_SHU14_KRS1_2_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_flt);
+AE_340(APS_SHU14_KRS2_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_flt);
+AE_341(APS_SHU14_KRUOK3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_flt);
+
+AE_366(APS_SHU14_KRL1_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_ncon);
+AE_367(APS_SHU14_KRSOK2_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_ncon);
+AE_368(APS_SHU14_KRSOK3_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_ncon);
+AE_369(APS_SHU14_KR1_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_ncon);
+AE_370(APS_SHU14_KRD_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_ncon);
+AE_371(APS_SHU14_KRE_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_ncon);
+AE_372(APS_SHU14_KRU1_2_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_ncon);
+AE_373(APS_SHU14_KRUOK1_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_ncon);
+AE_374(APS_SHU14_KRUOK2_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_ncon);
+AE_375(APS_SHU14_KRS1_2_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_ncon);
+AE_376(APS_SHU14_KRS2_3_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_ncon);
+AE_377(APS_SHU14_KRUOK3_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_ncon);
+
+AE_402(APS_SHU14_KRL1_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_ncoff);
+AE_403(APS_SHU14_KRSOK2_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_ncoff);
+AE_404(APS_SHU14_KRSOK3_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_ncoff);
+AE_405(APS_SHU14_KR1_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_ncoff);
+AE_406(APS_SHU14_KRD_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_ncoff);
+AE_407(APS_SHU14_KRE_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_ncoff);
+AE_408(APS_SHU14_KRU1_2_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_ncoff);
+AE_409(APS_SHU14_KRUOK1_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_ncoff);
+AE_410(APS_SHU14_KRUOK2_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_ncoff);
+AE_411(APS_SHU14_KRS1_2_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_ncoff);
+AE_412(APS_SHU14_KRS2_3_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_ncoff);
+AE_413(APS_SHU14_KRUOK3_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_ncoff);
+
+//АПС по дискретам
+AE_654(SHU14_DI_Res_1, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_1);
+AE_655(SHU14_DI_Res_2, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_2);
+AE_656(SHU14_DI_Res_3, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_3);
+AE_657(SHU14_DI_Res_4, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_4);
+AE_658(SHU14_DI_Res_5, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_5);
+AE_659(SHU14_DI_Res_6, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_6);
+AE_660(SHU14_DI_Res_7, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_7);
+AE_661(SHU14_DI_Res_8, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_8);
+AE_662(SHU14_DI_Res_9, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_9);
+AE_663(SHU14_DI_Res_10, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_10);
+AE_664(SHU14_DI_SACL_OU_pt1, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_SACL_OU_pt1);
+AE_665(SHU14_DI_SACL_OU_pt2, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_SACL_OU_pt2);
+AE_666(SHU14_DI_SACL_OU_in_CamPr, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_SACL_OU_in_CamPr);
+AE_667(SHU14_DI_SAC3_OU_pt1, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_SAC3_OU_pt1);
+AE_668(SHU14_DI_SAC3_OU_pt2, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_SAC3_OU_pt2);
+AE_669(SHU14_DI_SAC3_OU_in_CamPr, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_SAC3_OU_in_CamPr);
+AE_670(SHU14_DI_Res_11, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_11);
+AE_671(SHU14_DI_Res_12, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_12);
+AE_672(SHU14_DI_Res_13, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_13);
+AE_673(SHU14_DI_Res_14, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_14);
+AE_674(SHU14_DI_Res_15, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_15);
+AE_675(SHU14_DI_Res_16, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_16);
+AE_676(SHU14_DI_Res_17, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_17);
+AE_677(SHU14_DI_Res_18, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_18);
+AE_678(SHU14_DI_Res_19, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_19);
+AE_679(SHU14_DI_Res_20, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_20);
+AE_680(SHU14_DI_Res_21, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_21);
+AE_681(SHU14_DI_Res_22, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_22);
+AE_682(SHU14_DI_Res_23, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_23);
+AE_683(SHU14_DI_Res_24, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_24);
+AE_684(SHU14_DI_Res_25, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_25);
+AE_685(SHU14_DI_Res_26, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_26);
+AE_686(NOT SHU14_DI_Ctrl_osn_pit_Ualter, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ctrl_osn_pit_Ualter);
+AE_687(NOT SHU14_DI_Ctr_res_pit_Uconst, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ctr_res_pit_Uconst);
+AE_688(NOT SHU14_DI_AP_on, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_AP_on);
+AE_689(NOT SHU14_DI_Dveri_opened, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Dveri_opened);
+AE_690(NOT SHU14_DI_Ctrl_ispr_razr, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ctrl_ispr_razr);
+AE_691(NOT SHU14_DI_Ispr_osn_IP24Vvn, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ispr_osn_IP24Vvn);
+AE_692(NOT SHU14_DI_Ispr_res_IP24Vvn, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ispr_res_IP24Vvn);
+AE_693(NOT SHU14_DI_Ispr_osn_IP24V_DI, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ispr_osn_IP24V_DI);
+AE_694(NOT SHU14_DI_Ispr_res_IP24V_DI, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ispr_res_IP24V_DI);
+AE_695(NOT SHU14_DI_Ispr_osn_IP24V_DO, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ispr_osn_IP24V_DO);
+AE_696(NOT SHU14_DI_Ispr_res_IP24V_DO, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ispr_res_IP24V_DO);
+AE_697(NOT SHU14_DI_Ispr_osn_IP24V_BEAO, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ispr_osn_IP24V_BEAO);
+AE_698(NOT SHU14_DI_Ispr_res_IP24V_BEAO, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ispr_res_IP24V_BEAO);
+AE_699(NOT SHU14_DI_Ctrl_pit_KR_220const, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Ctrl_pit_KR_220const);
+AE_700(SHU14_DI_EAO_KC_SHKU17, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_EAO_KC_SHKU17);
+AE_701(SHU14_DI_Res_27, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_27);
+AE_702(NOT SHU14_DI_EAO_KC_SHKU17_kcd, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_EAO_KC_SHKU17_kcd);
+AE_703(NOT SHU14_DI_BEAO_ready, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_BEAO_ready);
+AE_704(SHU14_DI_RU_KR, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_RU_KR);
+AE_705(SHU14_DI_Res_28, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_28);
+AE_706(SHU14_DI_Res_29, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_29);
+AE_707(SHU14_DI_Res_30, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_30);
+AE_708(SHU14_DI_Res_31, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_31);
+AE_709(SHU14_DI_Res_32, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_32);
+AE_710(SHU14_DI_Res_33, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_33);
+AE_711(SHU14_DI_Res_34, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_34);
+AE_712(SHU14_DI_Res_35, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_35);
+AE_713(SHU14_DI_Res_36, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_36);
+AE_714(SHU14_DI_Res_37, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_37);
+AE_715(SHU14_DI_Res_38, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_38);
+AE_716(SHU14_DI_Res_39, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_39);
+AE_717(SHU14_DI_Res_40, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_40);
+AE_717(SHU14_DI_KRL1_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRL1_OFF);
+AE_717(SHU14_DI_KRL1_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRL1_ON);
+AE_718(NOT SHU14_DI_KRL1_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRL1_IM);
+AE_719(NOT SHU14_DI_KRL1_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRL1_VK);
+AE_719(SHU14_DI_KRSOK2_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRSOK2_OFF);
+AE_719(SHU14_DI_KRSOK2_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRSOK2_ON);
+AE_720(NOT SHU14_DI_KRSOK2_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRSOK2_IM);
+AE_721(NOT SHU14_DI_KRSOK2_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRSOK2_VK);
+AE_721(SHU14_DI_KRSOK3_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRSOK3_OFF);
+AE_721(SHU14_DI_KRSOK3_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRSOK3_ON);
+AE_722(NOT SHU14_DI_KRSOK3_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRSOK3_IM);
+AE_723(NOT SHU14_DI_KRSOK3_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRSOK3_VK);
+AE_723(SHU14_DI_KR1_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KR1_OFF);
+AE_723(SHU14_DI_KR1_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KR1_ON);
+AE_724(NOT SHU14_DI_KR1_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KR1_IM);
+AE_725(NOT SHU14_DI_KR1_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KR1_VK);
+AE_725(SHU14_DI_KRD_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRD_OFF);
+AE_725(SHU14_DI_KRD_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRD_ON);
+AE_726(NOT SHU14_DI_KRD_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRD_IM);
+AE_727(NOT SHU14_DI_KRD_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRD_VK);
+AE_727(SHU14_DI_KRE_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRE_OFF);
+AE_727(SHU14_DI_KRE_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRE_ON);
+AE_728(NOT SHU14_DI_KRE_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRE_IM);
+AE_729(NOT SHU14_DI_KRE_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRE_VK);
+AE_730(SHU14_DI_Res_41, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_41);
+AE_731(SHU14_DI_Res_42, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_42);
+AE_732(SHU14_DI_Res_43, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_43);
+AE_733(SHU14_DI_Res_44, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_44);
+AE_734(SHU14_DI_Res_45, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_45);
+AE_735(SHU14_DI_Res_46, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_46);
+AE_736(SHU14_DI_Res_47, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_47);
+AE_737(SHU14_DI_Res_48, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_48);
+AE_737(SHU14_DI_KRU1_2_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRU1_2_OFF);
+AE_737(SHU14_DI_KRU1_2_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRU1_2_ON);
+AE_738(NOT SHU14_DI_KRU1_2_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRU1_2_IM);
+AE_739(NOT SHU14_DI_KRU1_2_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRU1_2_VK);
+AE_739(SHU14_DI_KRUOK1_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRUOK1_OFF);
+AE_739(SHU14_DI_KRUOK1_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRUOK1_ON);
+AE_740(NOT SHU14_DI_KRUOK1_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRUOK1_IM);
+AE_741(NOT SHU14_DI_KRUOK1_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRUOK1_VK);
+AE_741(SHU14_DI_KRUOK2_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRUOK2_OFF);
+AE_741(SHU14_DI_KRUOK2_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRUOK2_ON);
+AE_742(NOT SHU14_DI_KRUOK2_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRUOK2_IM);
+AE_743(NOT SHU14_DI_KRUOK2_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRUOK2_VK);
+AE_743(SHU14_DI_KRS1_2_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRS1_2_OFF);
+AE_743(SHU14_DI_KRS1_2_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRS1_2_ON);
+AE_744(NOT SHU14_DI_KRS1_2_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRS1_2_IM);
+AE_745(NOT SHU14_DI_KRS1_2_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRS1_2_VK);
+AE_745(SHU14_DI_KRS2_3_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRS2_3_OFF);
+AE_745(SHU14_DI_KRS2_3_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRS2_3_ON);
+AE_746(NOT SHU14_DI_KRS2_3_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRS2_3_IM);
+AE_747(NOT SHU14_DI_KRS2_3_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRS2_3_VK);
+AE_747(SHU14_DI_KRUOK3_OFF, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRUOK3_OFF);
+AE_747(SHU14_DI_KRUOK3_ON, T#101ms, Deblock, Kvitir, NO_sound_TS, APS_SHU14_DI_KRUOK3_ON);
+AE_748(NOT SHU14_DI_KRUOK3_IM, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRUOK3_IM);
+AE_749(NOT SHU14_DI_KRUOK3_VK, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_KRUOK3_VK);
+AE_750(SHU14_DI_Res_49, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_49);
+AE_751(SHU14_DI_Res_50, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_50);
+AE_752(SHU14_DI_Res_51, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_51);
+AE_753(SHU14_DI_Res_52, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_52);
+AE_754(SHU14_DI_Res_53, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_53);
+AE_755(SHU14_DI_Res_54, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_54);
+AE_756(SHU14_DI_Res_55, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_55);
+AE_757(SHU14_DI_Res_56, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_DI_Res_56);
+
+//Общая ошибка по кранам
+AE_758(APS_SHU14_KRL1_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_general);
+AE_759(APS_SHU14_KRSOK2_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK2_general);
+AE_760(APS_SHU14_KRSOK3_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRSOK3_general);
+AE_761(APS_SHU14_KR1_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KR1_general);
+AE_762(APS_SHU14_KRD_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRD_general);
+AE_763(APS_SHU14_KRE_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRE_general);
+AE_764(APS_SHU14_KRU1_2_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRU1_2_general);
+AE_765(APS_SHU14_KRUOK1_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK1_general);
+AE_766(APS_SHU14_KRUOK2_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK2_general);
+AE_767(APS_SHU14_KRS1_2_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS1_2_general);
+AE_768(APS_SHU14_KRS2_3_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRS2_3_general);
+AE_769(APS_SHU14_KRUOK3_general, T#101ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRUOK3_general);
+
+
+//Выходы АПС
+IF APS_TASK_alg > APS_TASK THEN
+	APS_TASK := APS_TASK_alg;
+END_IF;
+
+clock_APS_cur := CLOCK();
+cycleTime_APS_sys := clock_APS_cur - clock_APS_prev;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="IM" Comment="" Data="" UUID="5B11A279452DD94D646CBBACC2B3FE99">
+            <Folder Name="Valve" Comment="" Data="" UUID="F54F95214CBBD83078913188ACE73292">
+                <FunctionBlock UUID="232B7C9143F13A6D4049F38DADFC5E40" Name="IM_ctrl">
+                    <Variables>
+                        <Variable UUID="3676525D4923CBE4BB0404AECD12AEEA" Name="HMI_IM_DA" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="E3ABDB8D4D6719CD273316BB5A468AAD" Name="HMI_IM_rOn" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="FE2A1B784292D79F33118F8C36A373A2" Name="HMI_IM_rOff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="DF17F979462AF468EAA017B1FDD8B9C3" Name="CMD_IM_rOnOff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="E9C275D140F7A23402AEA0BEBE62C3E0" Name="CMD_IM_aOnOff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="34701F71405BB5C1F60ECFA569AF8DFE" Name="IM_rep" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="E26FC5BA4AD9BE4EB39D179E4D6A85F2" Name="DI_IM_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="ECCC11D84777C8ECFE05F7A8E24F9C7E" Name="DI_IM_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="2F1BC9F34E56374B0B140E8028CB3863" Name="IM_state" Type="WORD" TypeUUID="05CD1AAB4891B30C004C2799CA460884" Usage="inout" />
+                        <Variable UUID="B722827A41B9196192CF76A416A8B49A" Name="cmd_ON" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="05187FC94616FBAF82349C950B591AAB" Name="cmd_OFF" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="E0A53B354CD7D1F658AFED85AF34C958" Name="alg_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="79AE2D2443B83A9AECB150AFB1C69FFC" Name="alg_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[//KR.Control.RA.0 := HMI_KR_DA;
+IF HMI_IM_rOn AND HMI_IM_DA  THEN alg_ON  := BOOL#1; END_IF; HMI_IM_rOn  := BOOL#0;
+IF HMI_IM_rOff AND HMI_IM_DA THEN alg_OFF := BOOL#1; END_IF; HMI_IM_rOff := BOOL#0;
+IF alg_ON AND CMD_IM_rOnOff OR alg_OFF AND NOT CMD_IM_rOnOff THEN
+	IM_rep := BOOL#1;
+ELSE
+	IF alg_ON THEN CMD_IM_rOnOff := BOOL#1; END_IF;
+	IF alg_OFF THEN CMD_IM_rOnOff := BOOL#0; END_IF;
+END_IF;
+alg_ON := BOOL#0;
+alg_OFF := BOOL#0;
+
+//KR.Control.rOnOff.0 := CMD_KR_rOnOff;
+//KR.Control.aOnOff.0 := CMD_KR_aOnOff;
+//KR.Control.rep.0 := KR_rep; KR_rep := BOOL#0;
+
+//KR.Ins.on.0 := DI_KR_ON;
+//KR.Ins.off.0 := DI_KR_OFF;
+//KR.Ins.con.0 := DI_KRkcu_ON;
+//KR.Ins.coff.0 := DI_KRkcu_OFF;
+//APS_non := KR.Oper.non.0;
+//APS_noff := KR.Oper.noff.0;
+//APS_nstart := KR.Oper.nstart.0;
+//APS_selfon := KR.Oper.selfon.0;
+//APS_selfoff := KR.Oper.selfoff.0;
+//APS_flt := KR.Oper.flt.0;
+//APS_ncon := NOT DI_KRkcu_IM;
+//APS_ncoff := NOT DI_KRkcu_VK;
+//KR_state.0 := KR.Ins.off.0;
+//KR_state.1 := KR.Ins.on.0;
+IM_State.0 := DI_IM_ON;
+IM_State.1 := DI_IM_OFF;
+
+IF NOT HMI_IM_DA THEN CMD_IM_rOnOff := CMD_IM_aOnOff; ELSE CMD_IM_aOnOff := CMD_IM_rOnOff; END_IF;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="4DEEDC884344F791A1AE39AA878F86BA" Name="VLV_cfg">
+                    <Variables>
+                        <Variable UUID="EE1A61AA4406FAC2405ADEBC08B9F10C" Name="KR" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="inout" />
+                        <Variable UUID="3676525D4923CBE4BB0404AECD12AEEA" Name="HMI_KR_DA" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="E3ABDB8D4D6719CD273316BB5A468AAD" Name="HMI_KR_rOn" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="FE2A1B784292D79F33118F8C36A373A2" Name="HMI_KR_rOff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="DF17F979462AF468EAA017B1FDD8B9C3" Name="CMD_KR_rOnOff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="E9C275D140F7A23402AEA0BEBE62C3E0" Name="CMD_KR_aOnOff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="34701F71405BB5C1F60ECFA569AF8DFE" Name="KR_rep" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="E26FC5BA4AD9BE4EB39D179E4D6A85F2" Name="DI_KR_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="ECCC11D84777C8ECFE05F7A8E24F9C7E" Name="DI_KR_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="61D12F7F4CC20B1FB6195392148A036F" Name="DI_KRkcu_IM" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="4F0B230A47FA5E5E96C82E850E21F643" Name="DI_KRkcu_VK" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="A5F2523B45E916B24774C2AE272DCF82" Name="APS_non" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="FD6592F340289F3A6C465694B326B858" Name="APS_noff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="093263894657649C5BD3C78FDB87434D" Name="APS_nstart" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="EE46E94840E6A413B79C77A300DE6D41" Name="APS_selfon" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="3A2600F94C7E96F958CC328BB7802FE6" Name="APS_selfoff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="556FE10B4F7EB34E250C62AE5193C9CA" Name="APS_flt" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="1D330E944C6D1CB58F2451948F431EBF" Name="APS_ncon" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="4286A2224D8936BBC8882E80BCDC95F5" Name="APS_ncoff" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="2F1BC9F34E56374B0B140E8028CB3863" Name="KR_state" Type="WORD" TypeUUID="05CD1AAB4891B30C004C2799CA460884" Usage="inout" />
+                        <Variable UUID="F033209D4C3E2DAFFC29C0AF9A0444E0" Name="general" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="B722827A41B9196192CF76A416A8B49A" Name="cmd_ON" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="05187FC94616FBAF82349C950B591AAB" Name="cmd_OFF" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                        <Variable UUID="E0A53B354CD7D1F658AFED85AF34C958" Name="alg_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="79AE2D2443B83A9AECB150AFB1C69FFC" Name="alg_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[KR.Control.RA.0 := HMI_KR_DA;
+IF HMI_KR_rOn AND HMI_KR_DA  THEN alg_ON  := BOOL#1; END_IF; HMI_KR_rOn  := BOOL#0;
+IF HMI_KR_rOff AND HMI_KR_DA THEN alg_OFF := BOOL#1; END_IF; HMI_KR_rOff := BOOL#0;
+IF alg_ON AND CMD_KR_rOnOff OR alg_OFF AND NOT CMD_KR_rOnOff THEN
+	KR_rep := BOOL#1;
+ELSE
+	IF alg_ON THEN CMD_KR_rOnOff := BOOL#1; END_IF;
+	IF alg_OFF THEN CMD_KR_rOnOff := BOOL#0; END_IF;
+END_IF;
+alg_ON := BOOL#0;
+alg_OFF := BOOL#0;
+
+KR.Control.rOnOff.0 := CMD_KR_rOnOff;
+KR.Control.aOnOff.0 := CMD_KR_aOnOff;
+KR.Control.rep.0 := KR_rep; KR_rep := BOOL#0;
+
+KR.Ins.on.0 := DI_KR_ON;
+KR.Ins.off.0 := DI_KR_OFF;
+//KR.Ins.con.0 := DI_KRkcu_ON;
+//KR.Ins.coff.0 := DI_KRkcu_OFF;
+APS_non := KR.Oper.non.0;
+APS_noff := KR.Oper.noff.0;
+APS_nstart := KR.Oper.nstart.0;
+APS_selfon := KR.Oper.selfon.0;
+APS_selfoff := KR.Oper.selfoff.0;
+APS_flt := KR.Oper.flt.0;
+APS_ncon := NOT DI_KRkcu_IM;
+APS_ncoff := NOT DI_KRkcu_VK;
+KR_state.0 := KR.Ins.off.0;
+KR_state.1 := KR.Ins.on.0;
+
+IF NOT HMI_KR_DA THEN CMD_KR_rOnOff := CMD_KR_aOnOff; ELSE CMD_KR_aOnOff := CMD_KR_rOnOff; END_IF;
+
+//Общий сбой по исполительному механизму
+general := APS_non OR APS_noff OR APS_nstart OR APS_selfon OR APS_selfoff OR APS_flt OR APS_ncon OR APS_ncoff;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="5D3CCED94186C4C21A966E96887B1FD6" Name="VLV_imit">
+                    <Variables>
+                        <Variable UUID="E242F7EE45087E5F059C24B1D68412BD" Name="DO_KR_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="6B2C68904FA05C90BF1AB18751794B74" Name="DO_KR_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                        <Variable UUID="F61C4CE34333556EDF549AA9B05E6080" Name="DI_KR_ON" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="D999BD054A6D1605D6AE6B91A9A7C3D9" Name="DI_KR_OFF" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="inout" />
+                        <Variable UUID="D5390E814159D74B7F86C78309CB30F0" Name="delay_on" Type="TON" TypeUUID="EAA43B6B4DCDCEA72AB748B4554FD2AD" Usage="internal" />
+                        <Variable UUID="FD4C71AC4CC3AB663A2CE8AF53DA5E92" Name="delay_off" Type="TON" TypeUUID="EAA43B6B4DCDCEA72AB748B4554FD2AD" Usage="internal" />
+                        <Variable UUID="53A159A7404A9A0DBBC6F2B96D78FF12" Name="delay_vlv_bool1" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="BBC283A34FACE69CB89212883D9AE416" Name="delay_vlv_bool2" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="671D2129434643E69A11A19EEBBAB428" Name="delay_vlv_time1" Type="TIME" TypeUUID="3EFD49044E055B696F5570BA288FA8D5" Usage="internal" />
+                        <Variable UUID="1F2741F34ADEEAE92D36729DBFD13DA5" Name="delay_vlv_time2" Type="TIME" TypeUUID="3EFD49044E055B696F5570BA288FA8D5" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[delay_on(DO_KR_ON, T#3s, delay_vlv_bool1, delay_vlv_time1);
+IF delay_vlv_bool1  THEN DI_KR_ON := BOOL#1; DI_KR_OFF := BOOL#0; END_IF;
+delay_off(DO_KR_OFF, T#3s, delay_vlv_bool2, delay_vlv_time2);
+IF delay_vlv_bool2 THEN DI_KR_ON := BOOL#0; DI_KR_OFF := BOOL#1; END_IF;]]></ST>
+                </FunctionBlock>
+                <Function UUID="68F4CDE543ED6A434DE0499B18752048" Name="VLV_init" ResultTypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5">
+                    <Variables>
+                        <Variable UUID="DC9F006747667D1BB04E80894BC5FD5B" Name="KR" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="input" />
+                        <Variable UUID="3B154A6246ED8F8A21AF2AAFE644384A" Name="tmrCmdSP" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="CC522D2346C462582A78E3ACB9239DD3" Name="tmrPressSP" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                        <Variable UUID="C1762F094B76DBCC71D24B8844AF2260" Name="cwOn" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Usage="input" />
+                        <Variable UUID="0B5A95C7430025D843F02AAF0DE34B77" Name="cwOff" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Usage="input" />
+                        <Variable UUID="0949883646DC6FCFD84A97A5AF1CFDC6" Name="RA" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    </Variables>
+                    <ST><![CDATA[KR.Config.tmrCmdSP := tmrCmdSP;
+KR.Config.tmrPressSP := tmrPressSP;
+KR.Control.cwOn := cwOn;
+KR.Control.cwOff := cwOff;
+KR.Control.RA.0 := RA;
+
+VLV_init := KR;]]></ST>
+                </Function>
+            </Folder>
+            <FunctionBlock UUID="C8FF2A1C4573F45C489BAE95EFDFB8B7" Name="fb_CMD_VLV">
+                <Variables />
+                <ST><![CDATA[]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="12348825468FAE80F7C0F2B2A2C39D25" Name="fb_IM">
+                <Variables>
+                    <Variable UUID="C75EAD944F314473B00D11A49018C395" Name="clock_VLV_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="1243E9B34B5650655A080F9943C55795" Name="clock_VLV_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="8FEA8E0A4FD3343833F436A33236A2A9" Name="CMD_VLV" Type="fb_CMD_VLV" TypeUUID="C8FF2A1C4573F45C489BAE95EFDFB8B7" Usage="internal" />
+                    <Variable UUID="4D3C514F4FBA62008C8EBCB9AC1B5939" Name="SEN_SHU14_KRL1" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="F5B24D8648069F088D4E1887677A5BA2" Name="SEN_SHU14_KRSOK2" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="6B47DB50421AB6CAB425D2940276CA64" Name="SEN_SHU14_KRSOK3" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="CE170A634AEB8C8E3933C3A2367EC931" Name="SEN_SHU14_KR1" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="5EB066F8412EE6EEAD108D855A6DCC27" Name="SEN_SHU14_KRD" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="77910B0740938F6731F58FA3DF96D077" Name="SEN_SHU14_KRE" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="657D0B1B4103A5D7AEB861A1D63B22F6" Name="SEN_SHU14_KRU1_2" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="17A2590C49E48964BE19D9A1B958EE01" Name="SEN_SHU14_KRUOK1" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="F946800247EA78CBE81E70BE75277741" Name="SEN_SHU14_KRUOK2" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="79C06AD34FB7FFCA9C44BEB6929935D1" Name="SEN_SHU14_KRS1_2" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="DA5ABCBC449A79802599E2AC8E494764" Name="SEN_SHU14_KRS2_3" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="B77E430848C7B3212AB3288B998D1D1E" Name="SEN_SHU14_KRUOK3" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="E28A9EF04B6C62AEF049A1BF6DF7B504" Name="cfg_SHU14_KRL1" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="805CEAB04B3CA0D0152F2ABD52967B16" Name="cfg_SHU14_KRSOK2" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="E76690B5466B7FBA7879F8AA62630E96" Name="cfg_SHU14_KRSOK3" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="AF91559344F362789550C58F12C400ED" Name="cfg_SHU14_KR1" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="DC09C0A64049F00A7DFFA392ACE7B380" Name="cfg_SHU14_KRD" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="B2844C534FD001B85B824A9B5B9D076B" Name="cfg_SHU14_KRE" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="425395534AF7FED800A60DB67F4260FC" Name="cfg_SHU14_KRU1_2" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="F5CB29F443FE87AFFDCF4F94A7C83610" Name="cfg_SHU14_KRUOK1" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="07F775B048AE84F7467F9EB470BF77FC" Name="cfg_SHU14_KRUOK2" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="1D6F66B649A09C9D7D0D09AA03ACF06C" Name="cfg_SHU14_KRS1_2" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="28A108D74CBD4B50D74231AF1EC8E31C" Name="cfg_SHU14_KRS2_3" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="416C344345A0AB6304ABC3A9D766B101" Name="cfg_SHU14_KRUOK3" Type="VLV_cfg" TypeUUID="4DEEDC884344F791A1AE39AA878F86BA" Usage="internal" />
+                    <Variable UUID="42BEAF034D0CDC49D4BDAB9ECF874EBB" Name="vlv_SHU14_KRL1" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="620FEBDE42C8A244298891B6B4A99782" Name="vlv_SHU14_KRSOK2" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="DDF56C7040FEB133658123A9FEE6B38B" Name="vlv_SHU14_KRSOK3" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="D977ADB7445D11C1B8C63A91898E209E" Name="vlv_SHU14_KR1" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="FE34E2BF46DA9832D8D59EA188F6A31A" Name="vlv_SHU14_KRD" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="974C2FF549730757539D17AD40A6CAEC" Name="vlv_SHU14_KRE" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="0E3EBE454D9EBD229F6BC88B3529CA8A" Name="vlv_SHU14_KRU1_2" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="63EE29DC4EF7451B574ADF97E91B5198" Name="vlv_SHU14_KRUOK1" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="1FFD5DB74685C17B608CC58A93AE59C8" Name="vlv_SHU14_KRUOK2" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="1D34BCBB47BA700A35B37A84126C8960" Name="vlv_SHU14_KRS1_2" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="5BA1594F4A4DDD102AB3E7B29048F318" Name="vlv_SHU14_KRS2_3" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="B0741C704617C298594FC88E962E833D" Name="vlv_SHU14_KRUOK3" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="9A33312040A11410D4584CA6CF06CB26" Name="imit_SHU14_KRL1" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="FCD6DD634FDD654F894482BE979C89C2" Name="imit_SHU14_KRSOK2" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="BC4A8CD8462FA17FD8D6E9812D6BC0D0" Name="imit_SHU14_KRSOK3" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="0CECF5D74AECC3F28EDC3495D830A2FB" Name="imit_SHU14_KR1" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="2FAC7DE74ABF5966FB8A5D98F86F24F7" Name="imit_SHU14_KRD" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="7674216145D6EF41476B3E96482DD761" Name="imit_SHU14_KRE" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="F5D68CAB4372C27D47070BA8FFEC5EC2" Name="imit_SHU14_KRU1_2" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="0EC6CEC640898F76900AD5A29C3755DB" Name="imit_SHU14_KRUOK1" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="ADA0E11448506FDDCF89A9874F29022E" Name="imit_SHU14_KRUOK2" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="A200B736435071B36F2A8DAA5A00E454" Name="imit_SHU14_KRS1_2" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="D7B2F5A84389659AB777CCB30C7822DD" Name="imit_SHU14_KRS2_3" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="AAC0865743175AFFC36DD39A4FB2A73F" Name="imit_SHU14_KRUOK3" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[clock_VLV_cur := CLOCK();
+IF FirstScan_MAIN THEN clock_VLV_prev := clock_VLV_cur; END_IF;
+cycleTime_VLV := clock_VLV_cur - clock_VLV_prev;
+clock_VLV_prev := clock_VLV_cur;
+
+
+IF FirstScan_MAIN THEN
+	SEN_SHU14_KRL1 	 := VLV_init(SEN_SHU14_KRL1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRSOK2 := VLV_init(SEN_SHU14_KRSOK2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRSOK3 := VLV_init(SEN_SHU14_KRSOK3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KR1 	 := VLV_init(SEN_SHU14_KR1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRD 	 := VLV_init(SEN_SHU14_KRD, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRE 	 := VLV_init(SEN_SHU14_KRE, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRU1_2 := VLV_init(SEN_SHU14_KRU1_2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRUOK1 := VLV_init(SEN_SHU14_KRUOK1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRUOK2 := VLV_init(SEN_SHU14_KRUOK2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRS1_2 := VLV_init(SEN_SHU14_KRS1_2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRS2_3 := VLV_init(SEN_SHU14_KRS2_3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHU14_KRUOK3 := VLV_init(SEN_SHU14_KRUOK3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+END_IF;
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////ОБРАБОТКА КОМАНД ИЗ ЛОГИКИ/////////////////////////////////////////
+CMD_VLV();
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Формирование входных сигналов и АПС для ИМ
+cfg_SHU14_KRL1(SEN_SHU14_KRL1,HMI_SHU14_KRL1_DA,HMI_SHU14_KRL1_rOn,HMI_SHU14_KRL1_rOff,CMD_SHU14_KRL1_rOnOff, CMD_SHU14_KRL1_aOnOff, HMI_SHU14_KRL1_rep, SHU14_DI_KRL1_ON, SHU14_DI_KRL1_OFF, true, true, APS_SHU14_KRL1_non, APS_SHU14_KRL1_noff, APS_SHU14_KRL1_nstart, APS_SHU14_KRL1_selfon, APS_SHU14_KRL1_selfoff, APS_SHU14_KRL1_flt, APS_SHU14_KRL1_ncon, APS_SHU14_KRL1_ncoff, SHU14_KRL1_state, APS_SHU14_KRL1_general);
+cfg_SHU14_KRSOK2(SEN_SHU14_KRSOK2,HMI_SHU14_KRSOK2_DA,HMI_SHU14_KRSOK2_rOn,HMI_SHU14_KRSOK2_rOff,CMD_SHU14_KRSOK2_rOnOff, CMD_SHU14_KRSOK2_aOnOff, HMI_SHU14_KRSOK2_rep, SHU14_DI_KRSOK2_ON, SHU14_DI_KRSOK2_OFF, true, true, APS_SHU14_KRSOK2_non, APS_SHU14_KRSOK2_noff, APS_SHU14_KRSOK2_nstart, APS_SHU14_KRSOK2_selfon, APS_SHU14_KRSOK2_selfoff, APS_SHU14_KRSOK2_flt, APS_SHU14_KRSOK2_ncon, APS_SHU14_KRSOK2_ncoff, SHU14_KRSOK2_state, APS_SHU14_KRSOK2_general);
+cfg_SHU14_KRSOK3(SEN_SHU14_KRSOK3,HMI_SHU14_KRSOK3_DA,HMI_SHU14_KRSOK3_rOn,HMI_SHU14_KRSOK3_rOff,CMD_SHU14_KRSOK3_rOnOff, CMD_SHU14_KRSOK3_aOnOff, HMI_SHU14_KRSOK3_rep, SHU14_DI_KRSOK3_ON, SHU14_DI_KRSOK3_OFF, true, true, APS_SHU14_KRSOK3_non, APS_SHU14_KRSOK3_noff, APS_SHU14_KRSOK3_nstart, APS_SHU14_KRSOK3_selfon, APS_SHU14_KRSOK3_selfoff, APS_SHU14_KRSOK3_flt, APS_SHU14_KRSOK3_ncon, APS_SHU14_KRSOK3_ncoff, SHU14_KRSOK3_state, APS_SHU14_KRSOK3_general);
+cfg_SHU14_KR1(SEN_SHU14_KR1,HMI_SHU14_KR1_DA,HMI_SHU14_KR1_rOn,HMI_SHU14_KR1_rOff,CMD_SHU14_KR1_rOnOff, CMD_SHU14_KR1_aOnOff, HMI_SHU14_KR1_rep, SHU14_DI_KR1_ON, SHU14_DI_KR1_OFF, true, true, APS_SHU14_KR1_non, APS_SHU14_KR1_noff, APS_SHU14_KR1_nstart, APS_SHU14_KR1_selfon, APS_SHU14_KR1_selfoff, APS_SHU14_KR1_flt, APS_SHU14_KR1_ncon, APS_SHU14_KR1_ncoff, SHU14_KR1_state, APS_SHU14_KR1_general);
+cfg_SHU14_KRD(SEN_SHU14_KRD,HMI_SHU14_KRD_DA,HMI_SHU14_KRD_rOn,HMI_SHU14_KRD_rOff,CMD_SHU14_KRD_rOnOff, CMD_SHU14_KRD_aOnOff, HMI_SHU14_KRD_rep, SHU14_DI_KRD_ON, SHU14_DI_KRD_OFF, true, true, APS_SHU14_KRD_non, APS_SHU14_KRD_noff, APS_SHU14_KRD_nstart, APS_SHU14_KRD_selfon, APS_SHU14_KRD_selfoff, APS_SHU14_KRD_flt, APS_SHU14_KRD_ncon, APS_SHU14_KRD_ncoff, SHU14_KRD_state, APS_SHU14_KRD_general);
+cfg_SHU14_KRE(SEN_SHU14_KRE,HMI_SHU14_KRE_DA,HMI_SHU14_KRE_rOn,HMI_SHU14_KRE_rOff,CMD_SHU14_KRE_rOnOff, CMD_SHU14_KRE_aOnOff, HMI_SHU14_KRE_rep, SHU14_DI_KRE_ON, SHU14_DI_KRE_OFF, true, true, APS_SHU14_KRE_non, APS_SHU14_KRE_noff, APS_SHU14_KRE_nstart, APS_SHU14_KRE_selfon, APS_SHU14_KRE_selfoff, APS_SHU14_KRE_flt, APS_SHU14_KRE_ncon, APS_SHU14_KRE_ncoff, SHU14_KRE_state, APS_SHU14_KRE_general);
+cfg_SHU14_KRU1_2(SEN_SHU14_KRU1_2,HMI_SHU14_KRU1_2_DA,HMI_SHU14_KRU1_2_rOn,HMI_SHU14_KRU1_2_rOff,CMD_SHU14_KRU1_2_rOnOff, CMD_SHU14_KRU1_2_aOnOff, HMI_SHU14_KRU1_2_rep, SHU14_DI_KRU1_2_ON, SHU14_DI_KRU1_2_OFF, true, true, APS_SHU14_KRU1_2_non, APS_SHU14_KRU1_2_noff, APS_SHU14_KRU1_2_nstart, APS_SHU14_KRU1_2_selfon, APS_SHU14_KRU1_2_selfoff, APS_SHU14_KRU1_2_flt, APS_SHU14_KRU1_2_ncon, APS_SHU14_KRU1_2_ncoff, SHU14_KRU1_2_state, APS_SHU14_KRU1_2_general);
+cfg_SHU14_KRUOK1(SEN_SHU14_KRUOK1,HMI_SHU14_KRUOK1_DA,HMI_SHU14_KRUOK1_rOn,HMI_SHU14_KRUOK1_rOff,CMD_SHU14_KRUOK1_rOnOff, CMD_SHU14_KRUOK1_aOnOff, HMI_SHU14_KRUOK1_rep, SHU14_DI_KRUOK1_ON, SHU14_DI_KRUOK1_OFF, true, true, APS_SHU14_KRUOK1_non, APS_SHU14_KRUOK1_noff, APS_SHU14_KRUOK1_nstart, APS_SHU14_KRUOK1_selfon, APS_SHU14_KRUOK1_selfoff, APS_SHU14_KRUOK1_flt, APS_SHU14_KRUOK1_ncon, APS_SHU14_KRUOK1_ncoff, SHU14_KRUOK1_state, APS_SHU14_KRUOK1_general);
+cfg_SHU14_KRUOK2(SEN_SHU14_KRUOK2,HMI_SHU14_KRUOK2_DA,HMI_SHU14_KRUOK2_rOn,HMI_SHU14_KRUOK2_rOff,CMD_SHU14_KRUOK2_rOnOff, CMD_SHU14_KRUOK2_aOnOff, HMI_SHU14_KRUOK2_rep, SHU14_DI_KRUOK2_ON, SHU14_DI_KRUOK2_OFF, true, true, APS_SHU14_KRUOK2_non, APS_SHU14_KRUOK2_noff, APS_SHU14_KRUOK2_nstart, APS_SHU14_KRUOK2_selfon, APS_SHU14_KRUOK2_selfoff, APS_SHU14_KRUOK2_flt, APS_SHU14_KRUOK2_ncon, APS_SHU14_KRUOK2_ncoff, SHU14_KRUOK2_state, APS_SHU14_KRUOK2_general);
+cfg_SHU14_KRS1_2(SEN_SHU14_KRS1_2,HMI_SHU14_KRS1_2_DA,HMI_SHU14_KRS1_2_rOn,HMI_SHU14_KRS1_2_rOff,CMD_SHU14_KRS1_2_rOnOff, CMD_SHU14_KRS1_2_aOnOff, HMI_SHU14_KRS1_2_rep, SHU14_DI_KRS1_2_ON, SHU14_DI_KRS1_2_OFF, true, true, APS_SHU14_KRS1_2_non, APS_SHU14_KRS1_2_noff, APS_SHU14_KRS1_2_nstart, APS_SHU14_KRS1_2_selfon, APS_SHU14_KRS1_2_selfoff, APS_SHU14_KRS1_2_flt, APS_SHU14_KRS1_2_ncon, APS_SHU14_KRS1_2_ncoff, SHU14_KRS1_2_state, APS_SHU14_KRS1_2_general);
+cfg_SHU14_KRS2_3(SEN_SHU14_KRS2_3,HMI_SHU14_KRS2_3_DA,HMI_SHU14_KRS2_3_rOn,HMI_SHU14_KRS2_3_rOff,CMD_SHU14_KRS2_3_rOnOff, CMD_SHU14_KRS2_3_aOnOff, HMI_SHU14_KRS2_3_rep, SHU14_DI_KRS2_3_ON, SHU14_DI_KRS2_3_OFF, true, true, APS_SHU14_KRS2_3_non, APS_SHU14_KRS2_3_noff, APS_SHU14_KRS2_3_nstart, APS_SHU14_KRS2_3_selfon, APS_SHU14_KRS2_3_selfoff, APS_SHU14_KRS2_3_flt, APS_SHU14_KRS2_3_ncon, APS_SHU14_KRS2_3_ncoff, SHU14_KRS2_3_state, APS_SHU14_KRS2_3_general);
+cfg_SHU14_KRUOK3(SEN_SHU14_KRUOK3,HMI_SHU14_KRUOK3_DA,HMI_SHU14_KRUOK3_rOn,HMI_SHU14_KRUOK3_rOff,CMD_SHU14_KRUOK3_rOnOff, CMD_SHU14_KRUOK3_aOnOff, HMI_SHU14_KRUOK3_rep, SHU14_DI_KRUOK3_ON, SHU14_DI_KRUOK3_OFF, true, true, APS_SHU14_KRUOK3_non, APS_SHU14_KRUOK3_noff, APS_SHU14_KRUOK3_nstart, APS_SHU14_KRUOK3_selfon, APS_SHU14_KRUOK3_selfoff, APS_SHU14_KRUOK3_flt, APS_SHU14_KRUOK3_ncon, APS_SHU14_KRUOK3_ncoff, SHU14_KRUOK3_state, APS_SHU14_KRUOK3_general);
+
+//ВЫЗОВ С-блоков
+vlv_SHU14_KRL1(SEN_SHU14_KRL1, cycleTime_VLV);
+vlv_SHU14_KRSOK2(SEN_SHU14_KRSOK2, cycleTime_VLV);
+vlv_SHU14_KRSOK3(SEN_SHU14_KRSOK3, cycleTime_VLV);
+vlv_SHU14_KR1(SEN_SHU14_KR1, cycleTime_VLV);
+vlv_SHU14_KRD(SEN_SHU14_KRD, cycleTime_VLV);
+vlv_SHU14_KRE(SEN_SHU14_KRE, cycleTime_VLV);
+vlv_SHU14_KRU1_2(SEN_SHU14_KRU1_2, cycleTime_VLV);
+vlv_SHU14_KRUOK1(SEN_SHU14_KRUOK1, cycleTime_VLV);
+vlv_SHU14_KRUOK2(SEN_SHU14_KRUOK2, cycleTime_VLV);
+vlv_SHU14_KRS1_2(SEN_SHU14_KRS1_2, cycleTime_VLV);
+vlv_SHU14_KRS2_3(SEN_SHU14_KRS2_3, cycleTime_VLV);
+vlv_SHU14_KRUOK3(SEN_SHU14_KRUOK3, cycleTime_VLV);
+
+//////////////////////////////////////////////////////////////////
+//ВЫХОД
+//////////////////////////////////////////////////////////////////
+SHU14_DO_KRL1_ON := SEN_SHU14_KRL1.Outs.outon.0;
+SHU14_DO_KRSOK2_ON := SEN_SHU14_KRSOK2.Outs.outon.0;
+SHU14_DO_KRSOK3_ON := SEN_SHU14_KRSOK3.Outs.outon.0;
+SHU14_DO_KR1_ON := SEN_SHU14_KR1.Outs.outon.0;
+SHU14_DO_KRD_ON := SEN_SHU14_KRD.Outs.outon.0;
+SHU14_DO_KRE_ON := SEN_SHU14_KRE.Outs.outon.0;
+SHU14_DO_KRU1_2_ON := SEN_SHU14_KRU1_2.Outs.outon.0;
+SHU14_DO_KRUOK1_ON := SEN_SHU14_KRUOK1.Outs.outon.0;
+SHU14_DO_KRUOK2_ON := SEN_SHU14_KRUOK2.Outs.outon.0;
+SHU14_DO_KRS1_2_ON := SEN_SHU14_KRS1_2.Outs.outon.0;
+SHU14_DO_KRS2_3_ON := SEN_SHU14_KRS2_3.Outs.outon.0;
+SHU14_DO_KRUOK3_ON := SEN_SHU14_KRUOK3.Outs.outon.0;
+
+SHU14_DO_KRL1_OFF := SEN_SHU14_KRL1.Outs.outoff.0;
+SHU14_DO_KRSOK2_OFF := SEN_SHU14_KRSOK2.Outs.outoff.0;
+SHU14_DO_KRSOK3_OFF := SEN_SHU14_KRSOK3.Outs.outoff.0;
+SHU14_DO_KR1_OFF := SEN_SHU14_KR1.Outs.outoff.0;
+SHU14_DO_KRD_OFF := SEN_SHU14_KRD.Outs.outoff.0;
+SHU14_DO_KRE_OFF := SEN_SHU14_KRE.Outs.outoff.0;
+SHU14_DO_KRU1_2_OFF := SEN_SHU14_KRU1_2.Outs.outoff.0;
+SHU14_DO_KRUOK1_OFF := SEN_SHU14_KRUOK1.Outs.outoff.0;
+SHU14_DO_KRUOK2_OFF := SEN_SHU14_KRUOK2.Outs.outoff.0;
+SHU14_DO_KRS1_2_OFF := SEN_SHU14_KRS1_2.Outs.outoff.0;
+SHU14_DO_KRS2_3_OFF := SEN_SHU14_KRS2_3.Outs.outoff.0;
+SHU14_DO_KRUOK3_OFF := SEN_SHU14_KRUOK3.Outs.outoff.0;
+
+IF IMIT THEN
+	imit_SHU14_KRL1(SHU14_DO_KRL1_ON, SHU14_DO_KRL1_OFF, SHU14_DI_KRL1_ON, SHU14_DI_KRL1_OFF);
+	imit_SHU14_KRSOK2(SHU14_DO_KRSOK2_ON, SHU14_DO_KRSOK2_OFF, SHU14_DI_KRSOK2_ON, SHU14_DI_KRSOK2_OFF);
+	imit_SHU14_KRSOK3(SHU14_DO_KRSOK3_ON, SHU14_DO_KRSOK3_OFF, SHU14_DI_KRSOK3_ON, SHU14_DI_KRSOK3_OFF);
+	imit_SHU14_KR1(SHU14_DO_KR1_ON, SHU14_DO_KR1_OFF, SHU14_DI_KR1_ON, SHU14_DI_KR1_OFF);
+	imit_SHU14_KRD(SHU14_DO_KRD_ON, SHU14_DO_KRD_OFF, SHU14_DI_KRD_ON, SHU14_DI_KRD_OFF);
+	imit_SHU14_KRE(SHU14_DO_KRE_ON, SHU14_DO_KRE_OFF, SHU14_DI_KRE_ON, SHU14_DI_KRE_OFF);
+	imit_SHU14_KRU1_2(SHU14_DO_KRU1_2_ON, SHU14_DO_KRU1_2_OFF, SHU14_DI_KRU1_2_ON, SHU14_DI_KRU1_2_OFF);
+	imit_SHU14_KRUOK1(SHU14_DO_KRUOK1_ON, SHU14_DO_KRUOK1_OFF, SHU14_DI_KRUOK1_ON, SHU14_DI_KRUOK1_OFF);
+	imit_SHU14_KRUOK2(SHU14_DO_KRUOK2_ON, SHU14_DO_KRUOK2_OFF, SHU14_DI_KRUOK2_ON, SHU14_DI_KRUOK2_OFF);
+	imit_SHU14_KRS1_2(SHU14_DO_KRS1_2_ON, SHU14_DO_KRS1_2_OFF, SHU14_DI_KRS1_2_ON, SHU14_DI_KRS1_2_OFF);
+	imit_SHU14_KRS2_3(SHU14_DO_KRS2_3_ON, SHU14_DO_KRS2_3_OFF, SHU14_DI_KRS2_3_ON, SHU14_DI_KRS2_3_OFF);
+	imit_SHU14_KRUOK3(SHU14_DO_KRUOK3_ON, SHU14_DO_KRUOK3_OFF, SHU14_DI_KRUOK3_ON, SHU14_DI_KRUOK3_OFF);
+END_IF;
+
+//Сброс команды "Повтор команды"
+SEN_SHU14_KRL1.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRSOK2.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRSOK3.Control.rep.0 := BOOL#0;
+SEN_SHU14_KR1.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRD.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRE.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRU1_2.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRUOK1.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRUOK2.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRS1_2.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRS2_3.Control.rep.0 := BOOL#0;
+SEN_SHU14_KRUOK3.Control.rep.0 := BOOL#0;
+
+//Инициализация
+IF FirstScan_MAIN THEN
+	CMD_SHU14_KRL1_aOnOff := SEN_SHU14_KRL1.Control.aOnOff.0;
+	CMD_SHU14_KRSOK2_aOnOff := SEN_SHU14_KRSOK2.Control.aOnOff.0;
+	CMD_SHU14_KRSOK3_aOnOff := SEN_SHU14_KRSOK3.Control.aOnOff.0;
+	CMD_SHU14_KR1_aOnOff := SEN_SHU14_KR1.Control.aOnOff.0;
+	CMD_SHU14_KRD_aOnOff := SEN_SHU14_KRD.Control.aOnOff.0;
+	CMD_SHU14_KRE_aOnOff := SEN_SHU14_KRE.Control.aOnOff.0;
+	CMD_SHU14_KRU1_2_aOnOff := SEN_SHU14_KRU1_2.Control.aOnOff.0;
+	CMD_SHU14_KRUOK1_aOnOff := SEN_SHU14_KRUOK1.Control.aOnOff.0;
+	CMD_SHU14_KRUOK2_aOnOff := SEN_SHU14_KRUOK2.Control.aOnOff.0;
+	CMD_SHU14_KRS1_2_aOnOff := SEN_SHU14_KRS1_2.Control.aOnOff.0;
+	CMD_SHU14_KRS2_3_aOnOff := SEN_SHU14_KRS2_3.Control.aOnOff.0;
+	CMD_SHU14_KRUOK3_aOnOff := SEN_SHU14_KRUOK3.Control.aOnOff.0;
+END_IF;
+
+
+clock_VLV_cur := CLOCK();
+cycleTime_VLV_sys := clock_VLV_cur - clock_VLV_prev;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="IO" Comment="" Data="" UUID="496F6DF4430DD3FF1D3BE5B971A28374">
+            <Function UUID="C336EB864AACD8ECF65FA69FB98274B0" Name="AI_Init" ResultTypeUUID="3F43D496436EC9B56764D6B2DB84565A">
+                <Variables>
+                    <Variable UUID="4D7F696F4DF0B3965ADFD88F5C297329" Name="AI_Curr" Type="support_AI" TypeUUID="3F43D496436EC9B56764D6B2DB84565A" Usage="input" />
+                    <Variable UUID="A6D244A242C939AEA1794BA5AAA34585" Name="Span" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                    <Variable UUID="F365D3914CD55DCC5E7831A23DA3B421" Name="Offset" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                    <Variable UUID="39CE467B43D1C7E4364B3AA8A6A9270F" Name="Tf" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                    <Variable UUID="5D7633344952A055DF14FC9AF9250DB6" Name="repair_time" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="input" />
+                    <Variable UUID="0E565FC24742CD2A54317C86DA77C0ED" Name="min_ADC" Type="DINT" TypeUUID="AF9665534C6D5BDEF9AE77B026938B65" Usage="input" />
+                    <Variable UUID="D1FE0AAC4B1347B1E8DE9B9C3B6458D3" Name="max_ADC" Type="DINT" TypeUUID="AF9665534C6D5BDEF9AE77B026938B65" Usage="input" />
+                    <Variable UUID="74C38AD0484A128FDC394BB342404B8F" Name="Eu_sensor" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="8FD6328C49D59343E5DAA88AC316C024" Name="Eu_PV" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="EC679AEF47D3103AA97D1C8285CAFC39" Name="Eu_user" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="6AB111EA494B7B387C9FE1AE36F3ED0A" Name="Manual_Enable" Type="BYTE" TypeUUID="C3C10A82401AD741FA0AB89DDE8B5F30" Usage="input" />
+                </Variables>
+                <ST><![CDATA[AI_Curr.Config.Span:=Span;
+AI_Curr.Config.Offset:=Offset;
+AI_Curr.Config.gain := LREAL#0.0;
+AI_Curr.Config.bias := LREAL#0.0;
+//AI_Curr.Config.ROC := Span/LREAL#2;
+AI_Curr.Config.ROC := LREAL#100000.0; // Параметр отключен
+AI_Curr.Config.Tf:=Tf;
+AI_Curr.Config.Manual_Target := LREAL#0;
+AI_Curr.Config.Manual_Rate := Span/LREAL#20;
+AI_Curr.Config.min_fault_sensor_Eu := Offset-Span*LREAL#0.025;
+AI_Curr.Config.max_fault_sensor_Eu := Span+Offset+Span*LREAL#0.012;
+AI_Curr.Config.recovery_time := LREAL#0.5;
+AI_Curr.Config.repair_time := repair_time;
+AI_Curr.Config.min_ADC := DINT_TO_LREAL(min_ADC);
+AI_Curr.Config.max_ADC := DINT_TO_LREAL(max_ADC);
+AI_Curr.Config.Eu_sensor := Eu_sensor;
+AI_Curr.Config.Eu_PV := Eu_PV;
+AI_Curr.Config.Eu_user := Eu_user;
+AI_Curr.Config.TypePolynom := INT#0;
+AI_Curr.Config.Manual_Enable := Manual_Enable;
+AI_Curr.Config.Manual_Auto := BYTE#0;
+AI_Curr.Config.derivative_Enable := BYTE#0;
+AI_Curr.Config.ROC_Enable := BYTE#0;
+AI_Curr.Config.reset := BYTE#0;
+
+AI_init := AI_Curr;]]></ST>
+            </Function>
+            <FunctionBlock UUID="BA6633384A3F7F4D88B8498C8D83E1AC" Name="DI_Proc">
+                <Variables>
+                    <Variable UUID="4561503648200CEACA77619DBA776BA5" Name="DI_raw" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="1C4F83BE4BA21FA7CB42EBA0997151EF" Name="cycle_set" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
+                    <Variable UUID="DC11E7534E9B83758544BE8EE2D25FDB" Name="Inv" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="input" />
+                    <Variable UUID="C05A88844838AB17B2D4E5A48643961F" Name="DI_out" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="output" />
+                    <Variable UUID="65A0008940805EE969D1ECA58A365846" Name="cycle_val" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="0B71B3104F3B9764A52305B82CC9CC51" Name="DI_in_last" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[IF NOT (DI_Raw XOR DI_in_last) THEN
+	cycle_val := cycle_val + INT#1;
+ELSE
+	cycle_val := INT#0;
+END_IF;
+
+IF cycle_val >= cycle_set THEN
+	DI_out := DI_Raw XOR Inv;
+END_IF;
+
+DI_in_last := DI_Raw;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="56BA70B34AA3DB5B8751F596CC37FDCB" Name="fb_DIO">
+                <Variables>
+                    <Variable UUID="EF7FE8E84E0E0EA860571BBCCACCCCE6" Name="clock_AI_cur" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="B8BAB99446C3A669A7DA4BAE174FC628" Name="clock_AI_prev" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
+                    <Variable UUID="C6C334744363A2F865F7E4856B5ACFFE" Name="IMIT_ON" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="0272E75D48C104C24F4741892B250882" Name="IMIT_ON_bool" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="A76D58244F2DC15E44BFE893B0DF039F" Name="AO_min" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="EAA235454665D25595EF48BEFC0FB91B" Name="AO_max" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="A70B117F4047488DB01E04D3CBE40017" Name="DI_001" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="326462DF16B44514A81F81699F1ED00E" Name="DI_002" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="759CDE07B8AA4A529176447A72C07242" Name="DI_003" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="C179A365B8A54361BE1BC5C27CDD7D3C" Name="DI_004" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="C30325912B08419995FEDFCE89FAE348" Name="DI_005" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="701B6650407F41A292E9BFFF782C1510" Name="DI_006" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="5F4D68E29D5148508DFE9ABA9474C788" Name="DI_007" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="DE46162F42804FD19106F9A9EE36503D" Name="DI_008" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="7FA4F621751C4CCFA90F11C7B2151D7A" Name="DI_009" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="686F3B31F63A40B295D677B9B08B1139" Name="DI_010" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="018E4E1748D240E58CDA962DC6E9D06A" Name="DI_011" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="0B2D77E67AEC45AC90010F57CB85A572" Name="DI_012" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8C64CA6B3E094DF6B025B3D39326131A" Name="DI_013" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="2CF39B4C050B4803A0CA33E720E54231" Name="DI_014" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="CD52EDE496724E4C80E0AB24B292A2D7" Name="DI_015" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="6A1DD81760404B5394B6C7A27DB7B59C" Name="DI_016" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="CDB2749761A845699637072D2DB04EA3" Name="DI_017" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="FDAF3C85159C4D3CBF2B2BC07A8F0015" Name="DI_018" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="16F4EADAB9BF4A3199ADBCCD75DE7D32" Name="DI_019" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8422A69F53034348A5BC61E4CC6000E0" Name="DI_020" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="83A869F074744D8F8F45926EEB34F765" Name="DI_021" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="2CC398BAE56F4FAE8CDEB12BA83F08F7" Name="DI_022" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="1E77DBD5FB7544F4B72083A60DB3D5A6" Name="DI_023" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8C4C1D8E469D4843B2E588C274B46F83" Name="DI_024" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="3E62E0E9428D430E8287665F33FEEC91" Name="DI_025" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="26FA9B82C1B846FB9078C759DBA91441" Name="DI_026" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="36708A5E164142D3974AB8F74D6DCDFE" Name="DI_027" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="268FB24EB09C4FED8DABEBA3D20F8BBA" Name="DI_028" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="B72772CC1DDA4E4A9FFCF48D6370CE41" Name="DI_029" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="E2138928BEBA4D4AA438753C4EEED18E" Name="DI_030" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="442096214514418C9AA658220F8415C6" Name="DI_031" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="C27F4A3433F04F79B7EDAB025516AB8C" Name="DI_032" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9A90C916B4BE4D2192B2D17C56112D9D" Name="DI_033" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="CEAF2603A7C2411D88F52528F5213E0D" Name="DI_034" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="EA416863DD3046C3BF311A59514B671C" Name="DI_035" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9F9E5D5BE3CE4A2AA9B14664ED74DE78" Name="DI_036" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="4A270122226A4F3B80DBBF80CF115177" Name="DI_037" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="1C0377707A9643AAB0E1C71C2FEEADDD" Name="DI_038" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="368E17ABCA2744C68759E62F41FDC73E" Name="DI_039" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="3717EA00D9324F69B62F758ED1DBC4ED" Name="DI_040" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="C22F5AFE334C49078E47514183758CFA" Name="DI_041" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9660A7F522904251A19D1EBA3043CBF1" Name="DI_042" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="1F32B3A1AB6F44F28213BD7ABF4CB438" Name="DI_043" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9E9A2F683BB24AF1AAC50D4AF89CED1F" Name="DI_044" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="7D6453F7378E470BB6C213298A183468" Name="DI_045" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="56E2431B32BA47C3AA051B0A45B50159" Name="DI_046" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="01EEB18AD475431E83040778944839A5" Name="DI_047" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="FF8B85000D89444BA14D8B98B1D58FA3" Name="DI_048" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="6506A24F0FD44937A8BE1F5972A964E6" Name="DI_049" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="24183E5CEFC94BBFA3076C680FF7C55B" Name="DI_050" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="DE8E3D29650540B98D8194CB8D9C3F53" Name="DI_051" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="611B04FE7EE2455B93E3BCCA26F502E4" Name="DI_052" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="ED9F48917E404779B044F564A314F7F3" Name="DI_053" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="17ED59CA729B4453B91B10C1FBBFD8E5" Name="DI_054" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="C7073599F5294D4CAA0CEB8B6F81B863" Name="DI_055" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8B04AEBE3435421FA7B806F4AD77F614" Name="DI_056" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="0BD9B64B83B04FDAAE47796983794F85" Name="DI_057" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8D831706162643CF96C0315DADF10D7E" Name="DI_058" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="197B39104A4C44109AD161AE0975FEED" Name="DI_059" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="A75FE396E6A04099A1ABCCA33416CC0E" Name="DI_060" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="05C2F893B3614D68B543377C367C54DB" Name="DI_061" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="B90809854B0148A1A7C3EECB9C4C3BDD" Name="DI_062" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="F3B1A56A65DB4AA69BB04A175033A235" Name="DI_063" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="92DEBC3D7AC74758A792FAF2ACAF9BE4" Name="DI_064" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8DB8A4CE957642768E586325FAC89D1F" Name="DI_065" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="14B4BD51473C4E8D9CFB9C4BC414CB37" Name="DI_066" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="07A2260EAA5C447BBADB11553E42BD3D" Name="DI_067" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="975CC401B19E4C0B9287355065B56CD0" Name="DI_068" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="1985D3225ED44E43B3FE1D8C1B6F01C9" Name="DI_069" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="6529999A58814C6E8D8066CEDFDE697F" Name="DI_070" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="D4C57354412E4108B9AB25550F935068" Name="DI_071" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="1AF78ECDA4274869BFE0C8170D86EC8F" Name="DI_072" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="62A5BCCE3B424480AECA6DF4F3709992" Name="DI_073" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8BBAAA0F209A42AFB5C0B78464CA0E74" Name="DI_074" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="0693B9DF411A4DE99BF2026E87F0D5B1" Name="DI_075" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="94A6DEF1112E42B8AB27848BCF62D872" Name="DI_076" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="3C1F18F862FB453F9FA5604EE8446B22" Name="DI_077" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="4BDC747359CB49419D838467D5F993A7" Name="DI_078" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="6DC40DEA3E5D4ECF89D9CB48C8529B98" Name="DI_079" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="C43A3679A9204FE3BA7E7F4328C51109" Name="DI_080" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9EB596CD53804FEF99D1F83559367D8D" Name="DI_081" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="64886643DEBF4EF194D0E7DB3C8BB009" Name="DI_082" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="64063BB1F28B4AB3A169B262C9D38335" Name="DI_083" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8E2FBDEA7D4C407B9D66ED8F233B1763" Name="DI_084" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="BA67F8698AAB468DB84AF82FB42F96FA" Name="DI_085" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="11E19370124E4D2F9935905293D40656" Name="DI_086" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="7A7653413FD64136B522962C085217AB" Name="DI_087" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="41DDF349048641D2B97EBA179AF63C63" Name="DI_088" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="92C9DCB5995048DEA7BF2AA9ACBADC12" Name="DI_089" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="2E2E9127FF7241FA9A0955108D8A1B35" Name="DI_090" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="1D05C9CA611F4D63BD6148405F7676D6" Name="DI_091" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="E5874E01BA0D45E9A501EC6C19569579" Name="DI_092" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8012E529E4D84799BD0ACE9502258FFF" Name="DI_093" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="E55EF54A8F544AB694EC0C6F6467E08F" Name="DI_094" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9604A7E5226C4F318B5EC1E69D1783D0" Name="DI_095" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="AEB9791598EB4E268D19C85A83BFA539" Name="DI_096" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="776F7E6873E349C2BCEEDA7C511667C2" Name="DI_097" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="2621BAC64AB0492AAA721CF302066393" Name="DI_098" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="66BBF6971C3F4E61B047AF9E5201DA05" Name="DI_099" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="8E8D8E85D4E9495A8BB646F338CB70F0" Name="DI_100" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="0D52EAE8736749F3A9297F88FB41A285" Name="DI_101" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="DC2CF093612D4B65B549627BFB5A14AC" Name="DI_102" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="5865B5117B9642C3AC90F5F2CD2FA2B5" Name="DI_103" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="FEB4B78428CF40FEA43B54584BE63013" Name="DI_104" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="FF4ACDCC7B8C4EF98D5A103216133D51" Name="DI_105" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="3EBB22A465CA4728A512EFD76B57C2F3" Name="DI_106" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="B96DF561AEC54A5187FDB003A4D185AB" Name="DI_107" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="6528583C9A7D44A1A2BD80970BD62223" Name="DI_108" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="E8C1811636004578A9877D9E5886A422" Name="DI_109" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="76D608BC8BF54313B01A3EC13E0B83E5" Name="DI_110" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9C92EB16DEAA4434B2C54E72D13446A4" Name="DI_111" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="5C5B1355A98C46C99C200010B32B3F2D" Name="DI_112" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="2CFBC61E6ED948EBAD1D18182AD71258" Name="DI_113" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="D3265A438F6348078D5345E1DD123B48" Name="DI_114" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="66A112E937A148A9AB983C732B02782B" Name="DI_115" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="70003A755B114C249DC70B79BE6F4606" Name="DI_116" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="376E15DA801648F4A0F576FA97683688" Name="DI_117" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="ED0AD096629B4CA182B9BB1EA39AB48A" Name="DI_118" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="7B9EB8161CB34FC2A5963BF0E751040D" Name="DI_119" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="F50E03A4D5874234BA5A3FF059765DAF" Name="DI_120" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="CF23A5D01302417EBC695663CE59645B" Name="DI_121" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="3C5E5F0383324CCFB3AF1F709048008E" Name="DI_122" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="FB0AFCADDEBC4DCAB5F209494188492C" Name="DI_123" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="6DD66A53DB9F4C0FB9D14E58EAC55D97" Name="DI_124" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="1EE80504CED64752A7D7A37537EA402A" Name="DI_125" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9E2E5C4D74374D099EF186C000F5FDC1" Name="DI_126" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="9C7132A10F32484CAE062A1526AED840" Name="DI_127" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                    <Variable UUID="672736180EA04D76B473C951FFF1B1B8" Name="DI_128" Type="DI_Proc" TypeUUID="BA6633384A3F7F4D88B8498C8D83E1AC" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[clock_AI_cur := CLOCK();
+IF FirstScan_MAIN THEN
+	clock_AI_prev := clock_AI_cur;
+END_IF;
+cycleTime_AI := clock_AI_cur - clock_AI_prev;
+clock_AI_prev := clock_AI_cur;
+
+
+IF NOT IMIT THEN
+	DI_001(SHU14_DI_A1_31, INT#3, BOOL#0, SHU14_DI_Res_1);
+	DI_002(SHU14_DI_A1_32, INT#3, BOOL#0, SHU14_DI_Res_2);
+	DI_003(SHU14_DI_A1_33, INT#3, BOOL#0, SHU14_DI_Res_3);
+	DI_004(SHU14_DI_A1_34, INT#3, BOOL#0, SHU14_DI_Res_4);
+	DI_005(SHU14_DI_A1_35, INT#3, BOOL#0, SHU14_DI_Res_5);
+	DI_006(SHU14_DI_A1_36, INT#3, BOOL#0, SHU14_DI_Res_6);
+	DI_007(SHU14_DI_A1_37, INT#3, BOOL#0, SHU14_DI_Res_7);
+	DI_008(SHU14_DI_A1_38, INT#3, BOOL#0, SHU14_DI_Res_8);
+	DI_009(SHU14_DI_A1_39, INT#3, BOOL#0, SHU14_DI_Res_9);
+	DI_010(SHU14_DI_A1_310, INT#3, BOOL#0, SHU14_DI_Res_10);
+	DI_011(SHU14_DI_A1_311, INT#3, BOOL#0, SHU14_DI_SACL_OU_pt1);
+	DI_012(SHU14_DI_A1_312, INT#3, BOOL#0, SHU14_DI_SACL_OU_pt2);
+	DI_013(SHU14_DI_A1_313, INT#3, BOOL#0, SHU14_DI_SACL_OU_in_CamPr);
+	DI_014(SHU14_DI_A1_314, INT#3, BOOL#0, SHU14_DI_SAC3_OU_pt1);
+	DI_015(SHU14_DI_A1_315, INT#3, BOOL#0, SHU14_DI_SAC3_OU_pt2);
+	DI_016(SHU14_DI_A1_316, INT#3, BOOL#0, SHU14_DI_SAC3_OU_in_CamPr);
+	DI_017(SHU14_DI_A1_41, INT#3, BOOL#0, SHU14_DI_Res_11);
+	DI_018(SHU14_DI_A1_42, INT#3, BOOL#0, SHU14_DI_Res_12);
+	DI_019(SHU14_DI_A1_43, INT#3, BOOL#0, SHU14_DI_Res_13);
+	DI_020(SHU14_DI_A1_44, INT#3, BOOL#0, SHU14_DI_Res_14);
+	DI_021(SHU14_DI_A1_45, INT#3, BOOL#0, SHU14_DI_Res_15);
+	DI_022(SHU14_DI_A1_46, INT#3, BOOL#0, SHU14_DI_Res_16);
+	DI_023(SHU14_DI_A1_47, INT#3, BOOL#0, SHU14_DI_Res_17);
+	DI_024(SHU14_DI_A1_48, INT#3, BOOL#0, SHU14_DI_Res_18);
+	DI_025(SHU14_DI_A1_49, INT#3, BOOL#0, SHU14_DI_Res_19);
+	DI_026(SHU14_DI_A1_410, INT#3, BOOL#0, SHU14_DI_Res_20);
+	DI_027(SHU14_DI_A1_411, INT#3, BOOL#0, SHU14_DI_Res_21);
+	DI_028(SHU14_DI_A1_412, INT#3, BOOL#0, SHU14_DI_Res_22);
+	DI_029(SHU14_DI_A1_413, INT#3, BOOL#0, SHU14_DI_Res_23);
+	DI_030(SHU14_DI_A1_414, INT#3, BOOL#0, SHU14_DI_Res_24);
+	DI_031(SHU14_DI_A1_415, INT#3, BOOL#0, SHU14_DI_Res_25);
+	DI_032(SHU14_DI_A1_416, INT#3, BOOL#0, SHU14_DI_Res_26);
+	DI_033(SHU14_DI_A1_51, INT#3, BOOL#1, SHU14_DI_Ctrl_osn_pit_Ualter);
+	DI_034(SHU14_DI_A1_52, INT#3, BOOL#1, SHU14_DI_Ctr_res_pit_Uconst);
+	DI_035(SHU14_DI_A1_53, INT#3, BOOL#1, SHU14_DI_AP_on);
+	DI_036(SHU14_DI_A1_54, INT#3, BOOL#1, SHU14_DI_Dveri_opened);
+	DI_037(SHU14_DI_A1_55, INT#3, BOOL#1, SHU14_DI_Ctrl_ispr_razr);
+	DI_038(SHU14_DI_A1_56, INT#3, BOOL#0, SHU14_DI_Ispr_osn_IP24Vvn);
+	DI_039(SHU14_DI_A1_57, INT#3, BOOL#0, SHU14_DI_Ispr_res_IP24Vvn);
+	DI_040(SHU14_DI_A1_58, INT#3, BOOL#0, SHU14_DI_Ispr_osn_IP24V_DI);
+	DI_041(SHU14_DI_A1_59, INT#3, BOOL#0, SHU14_DI_Ispr_res_IP24V_DI);
+	DI_042(SHU14_DI_A1_510, INT#3, BOOL#0, SHU14_DI_Ispr_osn_IP24V_DO);
+	DI_043(SHU14_DI_A1_511, INT#3, BOOL#0, SHU14_DI_Ispr_res_IP24V_DO);
+	DI_044(SHU14_DI_A1_512, INT#3, BOOL#0, SHU14_DI_Ispr_osn_IP24V_BEAO);
+	DI_045(SHU14_DI_A1_513, INT#3, BOOL#0, SHU14_DI_Ispr_res_IP24V_BEAO);
+	DI_046(SHU14_DI_A1_514, INT#3, BOOL#0, SHU14_DI_Ctrl_pit_KR_220const);
+	DI_047(SHU14_DI_A1_515, INT#3, BOOL#0, SHU14_DI_EAO_KC_SHKU17);
+	DI_048(SHU14_DI_A1_516, INT#3, BOOL#0, SHU14_DI_Res_27);
+	DI_049(SHU14_DI_A1_61, INT#3, BOOL#0, SHU14_DI_EAO_KC_SHKU17_kcd);
+	DI_050(SHU14_DI_A1_62, INT#3, BOOL#1, SHU14_DI_BEAO_ready);
+	DI_051(SHU14_DI_A1_63, INT#3, BOOL#0, SHU14_DI_RU_KR);
+	DI_052(SHU14_DI_A1_64, INT#3, BOOL#0, SHU14_DI_Res_28);
+	DI_053(SHU14_DI_A1_65, INT#3, BOOL#0, SHU14_DI_Res_29);
+	DI_054(SHU14_DI_A1_66, INT#3, BOOL#0, SHU14_DI_Res_30);
+	DI_055(SHU14_DI_A1_67, INT#3, BOOL#0, SHU14_DI_Res_31);
+	DI_056(SHU14_DI_A1_68, INT#3, BOOL#0, SHU14_DI_Res_32);
+	DI_057(SHU14_DI_A1_69, INT#3, BOOL#0, SHU14_DI_Res_33);
+	DI_058(SHU14_DI_A1_610, INT#3, BOOL#0, SHU14_DI_Res_34);
+	DI_059(SHU14_DI_A1_611, INT#3, BOOL#0, SHU14_DI_Res_35);
+	DI_060(SHU14_DI_A1_612, INT#3, BOOL#0, SHU14_DI_Res_36);
+	DI_061(SHU14_DI_A1_613, INT#3, BOOL#0, SHU14_DI_Res_37);
+	DI_062(SHU14_DI_A1_614, INT#3, BOOL#0, SHU14_DI_Res_38);
+	DI_063(SHU14_DI_A1_615, INT#3, BOOL#0, SHU14_DI_Res_39);
+	DI_064(SHU14_DI_A1_616, INT#3, BOOL#0, SHU14_DI_Res_40);
+	DI_065(SHU14_DI_A1_71, INT#3, BOOL#0, SHU14_DI_KRL1_OFF);
+	DI_066(SHU14_DI_A1_72, INT#3, BOOL#0, SHU14_DI_KRL1_ON);
+	DI_067(SHU14_DI_A1_73, INT#3, BOOL#0, SHU14_DI_KRL1_IM);
+	DI_068(SHU14_DI_A1_74, INT#3, BOOL#0, SHU14_DI_KRL1_VK);
+	DI_069(SHU14_DI_A1_75, INT#3, BOOL#0, SHU14_DI_KRSOK2_OFF);
+	DI_070(SHU14_DI_A1_76, INT#3, BOOL#0, SHU14_DI_KRSOK2_ON);
+	DI_071(SHU14_DI_A1_77, INT#3, BOOL#0, SHU14_DI_KRSOK2_IM);
+	DI_072(SHU14_DI_A1_78, INT#3, BOOL#0, SHU14_DI_KRSOK2_VK);
+	DI_073(SHU14_DI_A1_79, INT#3, BOOL#0, SHU14_DI_KRSOK3_OFF);
+	DI_074(SHU14_DI_A1_710, INT#3, BOOL#0, SHU14_DI_KRSOK3_ON);
+	DI_075(SHU14_DI_A1_711, INT#3, BOOL#0, SHU14_DI_KRSOK3_IM);
+	DI_076(SHU14_DI_A1_712, INT#3, BOOL#0, SHU14_DI_KRSOK3_VK);
+	DI_077(SHU14_DI_A1_713, INT#3, BOOL#0, SHU14_DI_KR1_OFF);
+	DI_078(SHU14_DI_A1_714, INT#3, BOOL#0, SHU14_DI_KR1_ON);
+	DI_079(SHU14_DI_A1_715, INT#3, BOOL#0, SHU14_DI_KR1_IM);
+	DI_080(SHU14_DI_A1_716, INT#3, BOOL#0, SHU14_DI_KR1_VK);
+	DI_081(SHU14_DI_A1_81, INT#3, BOOL#0, SHU14_DI_KRD_OFF);
+	DI_082(SHU14_DI_A1_82, INT#3, BOOL#0, SHU14_DI_KRD_ON);
+	DI_083(SHU14_DI_A1_83, INT#3, BOOL#0, SHU14_DI_KRD_IM);
+	DI_084(SHU14_DI_A1_84, INT#3, BOOL#0, SHU14_DI_KRD_VK);
+	DI_085(SHU14_DI_A1_85, INT#3, BOOL#0, SHU14_DI_KRE_OFF);
+	DI_086(SHU14_DI_A1_86, INT#3, BOOL#0, SHU14_DI_KRE_ON);
+	DI_087(SHU14_DI_A1_87, INT#3, BOOL#0, SHU14_DI_KRE_IM);
+	DI_088(SHU14_DI_A1_88, INT#3, BOOL#0, SHU14_DI_KRE_VK);
+	DI_089(SHU14_DI_A1_89, INT#3, BOOL#0, SHU14_DI_Res_41);
+	DI_090(SHU14_DI_A1_810, INT#3, BOOL#0, SHU14_DI_Res_42);
+	DI_091(SHU14_DI_A1_811, INT#3, BOOL#0, SHU14_DI_Res_43);
+	DI_092(SHU14_DI_A1_812, INT#3, BOOL#0, SHU14_DI_Res_44);
+	DI_093(SHU14_DI_A1_813, INT#3, BOOL#0, SHU14_DI_Res_45);
+	DI_094(SHU14_DI_A1_814, INT#3, BOOL#0, SHU14_DI_Res_46);
+	DI_095(SHU14_DI_A1_815, INT#3, BOOL#0, SHU14_DI_Res_47);
+	DI_096(SHU14_DI_A1_816, INT#3, BOOL#0, SHU14_DI_Res_48);
+	DI_097(SHU14_DI_A1_91, INT#3, BOOL#0, SHU14_DI_KRU1_2_OFF);
+	DI_098(SHU14_DI_A1_92, INT#3, BOOL#0, SHU14_DI_KRU1_2_ON);
+	DI_099(SHU14_DI_A1_93, INT#3, BOOL#0, SHU14_DI_KRU1_2_IM);
+	DI_100(SHU14_DI_A1_94, INT#3, BOOL#0, SHU14_DI_KRU1_2_VK);
+	DI_101(SHU14_DI_A1_95, INT#3, BOOL#0, SHU14_DI_KRUOK1_OFF);
+	DI_102(SHU14_DI_A1_96, INT#3, BOOL#0, SHU14_DI_KRUOK1_ON);
+	DI_103(SHU14_DI_A1_97, INT#3, BOOL#0, SHU14_DI_KRUOK1_IM);
+	DI_104(SHU14_DI_A1_98, INT#3, BOOL#0, SHU14_DI_KRUOK1_VK);
+	DI_105(SHU14_DI_A1_99, INT#3, BOOL#0, SHU14_DI_KRUOK2_OFF);
+	DI_106(SHU14_DI_A1_910, INT#3, BOOL#0, SHU14_DI_KRUOK2_ON);
+	DI_107(SHU14_DI_A1_911, INT#3, BOOL#0, SHU14_DI_KRUOK2_IM);
+	DI_108(SHU14_DI_A1_912, INT#3, BOOL#0, SHU14_DI_KRUOK2_VK);
+	DI_109(SHU14_DI_A1_913, INT#3, BOOL#0, SHU14_DI_KRS1_2_OFF);
+	DI_110(SHU14_DI_A1_914, INT#3, BOOL#0, SHU14_DI_KRS1_2_ON);
+	DI_111(SHU14_DI_A1_915, INT#3, BOOL#0, SHU14_DI_KRS1_2_IM);
+	DI_112(SHU14_DI_A1_916, INT#3, BOOL#0, SHU14_DI_KRS1_2_VK);
+	DI_113(SHU14_DI_A1_101, INT#3, BOOL#0, SHU14_DI_KRS2_3_OFF);
+	DI_114(SHU14_DI_A1_102, INT#3, BOOL#0, SHU14_DI_KRS2_3_ON);
+	DI_115(SHU14_DI_A1_103, INT#3, BOOL#0, SHU14_DI_KRS2_3_IM);
+	DI_116(SHU14_DI_A1_104, INT#3, BOOL#0, SHU14_DI_KRS2_3_VK);
+	DI_117(SHU14_DI_A1_105, INT#3, BOOL#0, SHU14_DI_KRUOK3_OFF);
+	DI_118(SHU14_DI_A1_106, INT#3, BOOL#0, SHU14_DI_KRUOK3_ON);
+	DI_119(SHU14_DI_A1_107, INT#3, BOOL#0, SHU14_DI_KRUOK3_IM);
+	DI_120(SHU14_DI_A1_108, INT#3, BOOL#0, SHU14_DI_KRUOK3_VK);
+	DI_121(SHU14_DI_A1_109, INT#3, BOOL#0, SHU14_DI_Res_49);
+	DI_122(SHU14_DI_A1_1010, INT#3, BOOL#0, SHU14_DI_Res_50);
+	DI_123(SHU14_DI_A1_1011, INT#3, BOOL#0, SHU14_DI_Res_51);
+	DI_124(SHU14_DI_A1_1012, INT#3, BOOL#0, SHU14_DI_Res_52);
+	DI_125(SHU14_DI_A1_1013, INT#3, BOOL#0, SHU14_DI_Res_53);
+	DI_126(SHU14_DI_A1_1014, INT#3, BOOL#0, SHU14_DI_Res_54);
+	DI_127(SHU14_DI_A1_1015, INT#3, BOOL#0, SHU14_DI_Res_55);
+	DI_128(SHU14_DI_A1_1016, INT#3, BOOL#0, SHU14_DI_Res_56);
+END_IF;
+
+
+SHU14_DO_A2_31 := SHU14_DO_KRL1_OFF;  //Дискретный выход (модуль): Кран Л1 закрыть
+SHU14_DO_A2_32 := SHU14_DO_KRL1_ON;  //Дискретный выход (модуль): Кран Л1 открыть
+SHU14_DO_A2_33 := SHU14_DO_KRSOK2_OFF;  //Дискретный выход (модуль): Кран  СОК2 закрыть
+SHU14_DO_A2_34 := SHU14_DO_KRSOK2_ON;  //Дискретный выход (модуль): Кран  СОК2 открыть
+SHU14_DO_A2_35 := SHU14_DO_KRSOK3_OFF;  //Дискретный выход (модуль): Кран СОК3 закрыть
+SHU14_DO_A2_36 := SHU14_DO_KRSOK3_ON;  //Дискретный выход (модуль): Кран СОК3 открыть
+SHU14_DO_A2_37 := SHU14_DO_KR1_OFF;  //Дискретный выход (модуль): Кран 1 закрыть
+SHU14_DO_A2_38 := SHU14_DO_KR1_ON;  //Дискретный выход (модуль): Кран 1 открыть
+SHU14_DO_A2_39 := SHU14_DO_KRD_OFF;  //Дискретный выход (модуль): Кран Д закрыть
+SHU14_DO_A2_310 := SHU14_DO_KRD_ON;  //Дискретный выход (модуль): Кран Д открыть
+SHU14_DO_A2_311 := SHU14_DO_KRE_OFF;  //Дискретный выход (модуль): Кран Е закрыть
+SHU14_DO_A2_312 := SHU14_DO_KRE_ON;  //Дискретный выход (модуль): Кран Е открыть
+SHU14_DO_A2_313 := SHU14_DO_Res_1;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_314 := SHU14_DO_Res_2;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_315 := SHU14_DO_Res_3;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_316 := SHU14_DO_Res_4;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_41 := SHU14_DO_KRU1_2_OFF;  //Дискретный выход (модуль): Кран Ю-1-2 закрыть
+SHU14_DO_A2_42 := SHU14_DO_KRU1_2_ON;  //Дискретный выход (модуль): Кран Ю-1-2 открыть
+SHU14_DO_A2_43 := SHU14_DO_KRUOK1_OFF;  //Дискретный выход (модуль): Кран ЮОК-1 закрыть
+SHU14_DO_A2_44 := SHU14_DO_KRUOK1_ON;  //Дискретный выход (модуль): Кран ЮОК-1 открыть
+SHU14_DO_A2_45 := SHU14_DO_KRUOK2_OFF;  //Дискретный выход (модуль): Кран ЮОК-2 закрыть
+SHU14_DO_A2_46 := SHU14_DO_KRUOK2_ON;  //Дискретный выход (модуль): Кран ЮОК-2 открыть
+SHU14_DO_A2_47 := SHU14_DO_KRS1_2_OFF;  //Дискретный выход (модуль): Кран С-1-2 закрыть
+SHU14_DO_A2_48 := SHU14_DO_KRS1_2_ON;  //Дискретный выход (модуль): Кран С-1-2 открыть
+SHU14_DO_A2_49 := SHU14_DO_KRS2_3_OFF;  //Дискретный выход (модуль): Кран С-2-3 закрыть
+SHU14_DO_A2_410 := SHU14_DO_KRS2_3_ON;  //Дискретный выход (модуль): Кран С-2-3 открыть
+SHU14_DO_A2_411 := SHU14_DO_KRUOK3_OFF;  //Дискретный выход (модуль): Кран ЮОК-3 закрыть
+SHU14_DO_A2_412 := SHU14_DO_KRUOK3_ON;  //Дискретный выход (модуль): Кран ЮОК-3 открыть
+SHU14_DO_A2_413 := SHU14_DO_Res_5;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_414 := SHU14_DO_Res_6;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_415 := SHU14_DO_Res_7;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_416 := SHU14_DO_Res_8;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_51 := SHU14_DO_Res_9;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_52 := SHU14_DO_Res_10;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_53 := SHU14_DO_Res_11;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_54 := SHU14_DO_Res_12;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_55 := SHU14_DO_Res_13;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_56 := SHU14_DO_Res_14;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_57 := SHU14_DO_Res_15;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_58 := SHU14_DO_Res_16;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_59 := SHU14_DO_Res_17;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_510 := SHU14_DO_Res_18;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_511 := SHU14_DO_Res_19;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_512 := SHU14_DO_Res_20;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_513 := SHU14_DO_Res_21;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_514 := SHU14_DO_Res_22;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_515 := SHU14_DO_Res_23;  //Дискретный выход (модуль): Резерв
+SHU14_DO_A2_516 := SHU14_DO_Res_24;  //Дискретный выход (модуль): Резерв
+
+
+IMIT_ON(IMIT, IMIT_ON_bool);
+IF IMIT_ON_bool THEN
+//Логика имитатора
+END_IF;
+
+
+clock_AI_cur := CLOCK();
+cycleTime_AI_sys := clock_AI_cur - clock_AI_prev;]]></ST>
+            </FunctionBlock>
+        </Folder>
+    </FBLibrary>
+</Program>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="DRUM_Tmp" Kind="Struct" UUID="1DF37C874FED1C6EDF68D794FB473A7D">
+    <Fields>
+        <Field Name="test_array" Type="REAL" UUID="96C010144D879FD74D676AB943AC2F48" ArraySize="20" />
+        <Field Name="ton1" Type="REAL" UUID="E773E20445701943583EBFB23F4D88D2" />
+        <Field Name="ton2" Type="REAL" UUID="D984D3204DDE4EFD0A6A29BD3D076546" />
+        <Field Name="RTRIG" Type="BYTE" UUID="80308C9A44393C4E10B24098BE3C74FD" ArraySize="2" />
+        <Field Name="RTRIG1" Type="INT" UUID="FAF3EFF64CE01EB95658D19663A06A2A" />
+        <Field Name="RTRIG2" Type="INT" UUID="5C13DAB84600045756230EACCFE62F33" />
+        <Field Name="RTRIG3" Type="INT" UUID="FC63FC4E4CD32718F9472DB07E28D831" />
+    </Fields>
+</Type>

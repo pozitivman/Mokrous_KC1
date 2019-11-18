@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TUnitstate" Kind="Struct" UUID="664E02A44B8DA261CA08E8A6D86FF0B0">
+    <Fields>
+        <Field Name="State" Type="INT" UUID="7404108546415B78BD849E8624993DF5" />
+        <Field Name="Transition" Type="DWORD" UUID="077EF4B64F933C228D42E7B57133A91F" ArraySize="32" />
+    </Fields>
+</Type>

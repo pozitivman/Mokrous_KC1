@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SubAppType v. 1.3 >
+<SubAppType Name="DRV_PLC_SHKU17_A1" Kind="DRIVER.SONET.LOCALBUS" Args="" Comment="" UUID="312DD74F4CDB2370194A77A4C41CCB40">
+    <InterfaceList>
+        <Signal Name="@PID" UUID="DB65A6D0437C00D0222520933DD2319E" Type="STRING" Usage="output" />
+        <Signal Name="@STATE" UUID="17E7FE844BFB4F403A300E8706052EBC" Type="STRING" Usage="output" />
+        <Signal Name="@COMMAND" UUID="F07649574D17530DAE3C9F842124FE1D" Type="STRING" />
+        <Signal Name="@COMMAND_VALUE" UUID="5D2B87AB44039686766A29B722A46D51" Type="STRING" />
+        <Signal Name="@MESSAGE" UUID="87A71D4B4FB27A73D3951BAFA337556D" Type="STRING" Usage="output" />
+        <Signal Name="@MESSAGE_FRAMEWORK" UUID="981AE36D4853D773B6D8318F546C5B0A" Type="STRING" Usage="output" />
+        <Signal Name="@EVENT" UUID="276446264EBFFE0F663D339AFFB3F233" Type="STRING" />
+        <Signal Name="@RESERVED" UUID="102B810649FEE074B6DC0A9945B92748" Type="BOOL" />
+        <Signal Name="@RESERVE" UUID="CDE5C2514501A8052E7DA9AF41701589" Type="BOOL" />
+        <Signal Name="@LICENSE" UUID="B604D1A849DB8D37FAE43BA7D8A1D9E8" Type="STRING" Usage="output" />
+        <Signal Name="SHKU17_AI_A1_31" UUID="B1FAA8FF4FA3358B449220ABD8B86B86" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура наружного воздуха" />
+        <Signal Name="SHKU17_AI_A1_32" UUID="18C63D9E447CEDD25C2B6CAE1B8384CD" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура грунта" />
+        <Signal Name="SHKU17_AI_A1_33" UUID="895289D64E1E53B4626647911DB2AAD2" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа до крана 7" />
+        <Signal Name="SHKU17_AI_A1_34" UUID="8C18F82D4B45E1E41318B4876546C231" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа после крана 8а" />
+        <Signal Name="SHKU17_AI_A1_41" UUID="3FEB79AD45C6BC1D3DA231AEFFE25BC4" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа после крана 8" />
+        <Signal Name="SHKU17_AI_A1_42" UUID="B7ED152B4AF818E52293549E85441BBE" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа после крана 8а’" />
+        <Signal Name="SHKU17_AI_A1_43" UUID="305A8D354774DA1DADCE328B8BE97474" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа после крана 8’" />
+        <Signal Name="SHKU17_AI_A1_44" UUID="A6741FEC4A10BA9676EAADB20DF658E2" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление атмосферного воздуха" />
+        <Signal Name="SHKU17_AI_A1_51" UUID="480F12264931939814FF20A004076202" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура воздуха в БС-1" />
+        <Signal Name="SHKU17_AI_A1_52" UUID="D7AE688A4A0F95A91D4F2E85CE5A57AA" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_AI_A1_53" UUID="2EC629FD4F66BB80089202B795FC51B6" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_AI_A1_54" UUID="8B5FE7EE4498F57A5061D083EDAEF37D" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Контроль 24 В ТИ" />
+        <Signal Name="SHKU17_AI_A1_61" UUID="7C9BA4314A864FEB2B007EAD7D8E71B3" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа  до  ПУ" />
+        <Signal Name="SHKU17_AI_A1_62" UUID="67FBEC224B620E0CE348D093BF46F2C2" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа  после ПУ шлейф 1" />
+        <Signal Name="SHKU17_AI_A1_63" UUID="D16CB7EE4CC4315EA234B5B1366B8BEE" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа  после ПУ шлейф 2" />
+        <Signal Name="SHKU17_AI_A1_64" UUID="38D6BF314C03ADCD7ACFAA83DB821E3A" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа  до  ПУ" />
+        <Signal Name="SHKU17_AI_A1_71" UUID="05E064614DFAF67FFE3EC8A8DA14EAD9" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа  после ПУ шейф 1" />
+        <Signal Name="SHKU17_AI_A1_72" UUID="1B09DD604FD673266ED1A9BBA116B653" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа  после ПУ шейф 2" />
+        <Signal Name="SHKU17_AI_A1_73" UUID="6C902CAB4D514F789FB66C9EF99E4860" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_AI_A1_74" UUID="CB8E3E41483F6950776DE786CB868791" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура пускового газа" />
+        <Signal Name="SHKU17_AI_A1_81" UUID="39D4232E45A9562A378CE1A4061B2986" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура топливного газа" />
+        <Signal Name="SHKU17_AI_A1_82" UUID="4F89049B44084B9D785D9D9A10562453" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление пускового газа, МПа" />
+        <Signal Name="SHKU17_AI_A1_83" UUID="3C650FB2428542CCC5A9E2A070F36452" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление топливного  газа, МПа" />
+        <Signal Name="SHKU17_AI_A1_84" UUID="2C7CD61D4405CF9FA8948E82C1202E51" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Контроль 24 В ТИ" />
+        <Signal Name="SHKU17_AI_A1_91" UUID="09408D654C22E67A53E21D92C6EB2057" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура на входе в КРП  нитка 1" />
+        <Signal Name="SHKU17_AI_A1_92" UUID="5D6B616944842AAD9B243C952894CC25" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура на входе в КРП  нитка 2" />
+        <Signal Name="SHKU17_AI_A1_93" UUID="6ECE18104B62E7B8E68424835C058CE7" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа на выходе КРП" />
+        <Signal Name="SHKU17_A1_3_flt" UUID="2305F3874709373A695B64BB20DF37F8" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A1_3" />
+        <Signal Name="SHKU17_A1_4_flt" UUID="41DF616541AB18D5A8DCE397F6B9E2B2" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A1_4" />
+        <Signal Name="SHKU17_A1_5_flt" UUID="CD9AA01C4AF2E9AD3AC3B0A07CD42D00" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A1_5" />
+        <Signal Name="SHKU17_A1_6_flt" UUID="A209C11F4CD27AEF624C0693487C9D55" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A1_6" />
+        <Signal Name="SHKU17_A1_7_flt" UUID="7D212ED54D9065F6AD26029950F07071" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A1_7" />
+        <Signal Name="SHKU17_A1_8_flt" UUID="22E34CEE4B51DE522071448DE376D76C" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A1_8" />
+        <Signal Name="SHKU17_A1_9_flt" UUID="F8EB649D4AB50613F1D255B285CCA61C" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A1_9" />
+        <Signal Name="SHKU17_A1_10_flt" UUID="798D88744ABAFC43D2100BAE3564E6C0" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A1_10" />
+        <Signal Name="SHKU17_AI_A1_94" UUID="71AFF86F4A2C38127C287183D2B39FFF" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_AI_A1_101" UUID="E9CA10D6408704F9F6063E8DE183BF9E" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление воды в пожарном коллекторе" />
+        <Signal Name="SHKU17_AI_A1_102" UUID="30824348435AC4EB8CC7E7A23FC5CCA2" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Уровень в пожарной емкости №1" />
+        <Signal Name="SHKU17_AI_A1_103" UUID="4D832A6B402F0AEEF3B1CA8A460FEF60" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Уровень в пожарной емкости №2" />
+        <Signal Name="SHKU17_AI_A1_104" UUID="452DFF1E4F60624C2F2910826EF3160E" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+    </InterfaceList>
+</SubAppType>

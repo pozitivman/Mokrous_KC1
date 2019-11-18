@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="DRUM_Cfg" Kind="Struct" UUID="26A74041473D960D9FE21F861B47F996">
+    <Fields>
+        <Field Name="TMR1" Type="REAL" UUID="B6F7C80E45A787AEA0DBD79EF485217D" ArraySize="50" />
+        <Field Name="TMR2" Type="REAL" UUID="0EAB973B4BBDE5703B4EF3AED11ED276" ArraySize="50" />
+        <Field Name="JP" Type="INT" UUID="008FDE4F436F5C58C84D61938D90758D" ArraySize="10" />
+        <Field Name="PTN" Type="DWORD" UUID="5741D3BE41D294E0A0F0299CDF1BBA0A" ArraySize="100" />
+    </Fields>
+</Type>

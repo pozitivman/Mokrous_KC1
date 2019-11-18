@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TPRU" Kind="Struct" UUID="276E10E74011327F462F5EABFCC2FAE9">
+    <Fields>
+        <Field Name="Check_link_bit" Type="BOOL" UUID="53AD069341213B41BDB13AA923FABA6E" Comment="Бит проверки связи с контроллером" />
+        <Field Name="Btn_AOS" Type="BOOL" UUID="8DBE0D614FD2098AF388BB856913EC08" Comment="Кнопка АОС на ПРУ" />
+        <Field Name="Btn_AOB" Type="BOOL" UUID="4B5B6D8C4BB16E765929CCB18D49C8B3" Comment="Кнопка АОB на ПРУ" />
+        <Field Name="Btn_NO" Type="BOOL" UUID="461C84F949C30F13264DA89406899065" Comment="Кнопка НО на ПРУ" />
+    </Fields>
+</Type>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="9E8EC5254FD166E55FBC80A47CA0B27A" Name="Path" Period="100">
+    <Variables>
+        <Variable UUID="0674B40E4A63C1ECBB2C458F4BEBB80D" Name="find_loader" Type="Loader_path_win" TypeUUID="2B25F9E744E4326930D49A8594981298" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[find_loader(PATH_LOADER[index_arm]);]]></ST>
+    <DataTypes />
+</Program>

@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SubAppType v. 1.3 >
+<SubAppType Name="EventRegister" Kind="APPLICATION.LUA" Args="" Comment="" UUID="9DC2006644500A69B2EBBDA8442F4371">
+    <InterfaceList>
+        <Signal Name="@PID" UUID="19ACDCE344134CAC60C642B9B0700004" Type="STRING" Usage="output" />
+        <Signal Name="@STATE" UUID="876F8425404D8F71A1A01D90A0302875" Type="STRING" Usage="output" />
+        <Signal Name="@COMMAND" UUID="6C55F47D4525D0D501DF4FB4BECE7483" Type="STRING" />
+        <Signal Name="@COMMAND_VALUE" UUID="CB8840044F48934DA48A17B8C716BD57" Type="STRING" />
+        <Signal Name="@MESSAGE" UUID="03BC21354CE47B96335E259472F0B21B" Type="STRING" Usage="output" />
+        <Signal Name="@MESSAGE_FRAMEWORK" UUID="46225CF145E84ECEA8C221BE10E793BD" Type="STRING" Usage="output" />
+        <Signal Name="@EVENT" UUID="630C08F04899B49F44A0E9B61E7A5476" Type="STRING" />
+        <Signal Name="@RESERVED" UUID="05F917F64C1C4CABA756CC9276C178BF" Type="BOOL" />
+        <Signal Name="@RESERVE" UUID="BDB1190041084819FDCFCA83A250D5EE" Type="BOOL" />
+        <Signal Name="@LICENSE" UUID="D916134443EE17DBFE88F48999A987EA" Type="STRING" Usage="output" />
+        <Signal Name="@WINDOW" UUID="5C5E02ED4F5E7BD62D93549262D4FDBE" Type="TWINDOW" ArraySize="32" InitialValue="[(VISIBLE:=TRUE, WIDTH:=640, HEIGHT:=480)]" />
+        <Signal Name="@NODE_ROLE" UUID="C95040394E38EA33840B5DB5D59AD651" Type="INT" />
+        <Signal Name="@NODE_ERROR" UUID="82EEE3104664B4DC7ED2EDB65F0369D4" Type="BOOL" />
+        <Signal Name="@NODE_PEER_ERROR" UUID="ECA03E02401ACD8D73BF899E943EFCE4" Type="BOOL" />
+        <Signal Name="@FAILOVER_PRESENCE" UUID="A5D61A8146250925571CFDA527752CCB" Type="BOOL" />
+        <Signal Name="@FAILOVER_ERROR" UUID="C5357AE045D86DECA332E8886996A546" Type="BOOL" />
+        <Signal Name="@FAILOVER_RESERVE" UUID="7C33ECAE4E4688856C528D861B6BD3BE" Type="BOOL" />
+        <Signal Name="@FAILOVER_RESERVED" UUID="890A2748453FA063C2B1F3972BECF444" Type="BOOL" />
+        <Signal Name="USER_NAME_NOW" UUID="6C7B06AE455CF2F2E501F2ADA0B63BAB" Type="STRING" ArraySize="10" Global="TRUE" Comment="Текущий пользователь" />
+        <Signal Name="APS_SHKU17_AI_Ptopl_gaz" UUID="E0673EC7402F569D0C9C2D9CAF807D5C" Type="BOOL" Usage="" Global="TRUE" Comment="Давление топливного  газа, МПа" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_out_KRP" UUID="E4FDF5304B83EBECC8BA1A8038A9FE54" Type="BOOL" Usage="" Global="TRUE" Comment="Давление газа на выходе КРП" />
+        <Signal Name="APS_SHKU17_AI_Pvod_pozh_Col" UUID="5C6ADA4340E5C068DBA8D8B4D52EF902" Type="BOOL" Usage="" Global="TRUE" Comment="Давление воды в пожарном коллекторе" />
+        <Signal Name="APS_SHKU17_AI_Lpozh_emk1" UUID="A1E91B0945BD325ABECB6B92E805B9D2" Type="BOOL" Usage="" Global="TRUE" Comment="Уровень в пожарной емкости №1" />
+        <Signal Name="APS_SHKU17_AI_Lpozh_emk2" UUID="94EC14F54F03CB111E6C38B98E303F83" Type="BOOL" Usage="" Global="TRUE" Comment="Уровень в пожарной емкости №2" />
+        <Signal Name="APS_SHKU17_A1_3_flt" UUID="07E96E184BF353C263F447A45F8210B9" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.3" />
+        <Signal Name="APS_SHKU17_A1_4_flt" UUID="531C73CF48F9CF3C1565F0B336D3186F" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.4" />
+        <Signal Name="APS_SHKU17_A1_5_flt" UUID="11E41A2C407A508AEC5E669013C5360E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.5" />
+        <Signal Name="APS_SHKU17_A1_6_flt" UUID="BED55ADA48769442EAE1849B9B7A0EAE" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.6" />
+        <Signal Name="APS_SHKU17_A1_7_flt" UUID="1790B72C42A0062AECBDCFBA6D2E06DA" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.7" />
+        <Signal Name="APS_SHKU17_A1_8_flt" UUID="40E0AEFD4AE136AA7A61719FBE4C6E78" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.8" />
+        <Signal Name="APS_SHKU17_A1_9_flt" UUID="467B37D244FDFC0DEBDA88B87C9D8A47" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.9" />
+        <Signal Name="APS_SHKU17_A1_10_flt" UUID="6E7861AB4719FB9DC0DC00A9920F1B79" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.10" />
+        <Signal Name="APS_SHKU17_A2_3_flt" UUID="AE98EC0F417C0EFF12389ABE04675FE9" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.3" />
+        <Signal Name="APS_SHKU17_A2_4_flt" UUID="5BE70C3F420D97FD888DDF8876F0696F" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.4" />
+        <Signal Name="APS_SHKU17_A2_5_flt" UUID="2D15B89C40702CFC411B4EA666A231DD" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.5" />
+        <Signal Name="APS_SHKU17_A2_6_flt" UUID="43A7E5BE4B2AD3159B84708F9AB7305F" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.6" />
+        <Signal Name="APS_SHKU17_A2_7_flt" UUID="BE4402BF497DA0F41EDB099A6F33416E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.7" />
+        <Signal Name="APS_SHKU17_A2_8_flt" UUID="BC2817804BB851E0A205FEADEC2D3024" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.8" />
+        <Signal Name="APS_SHKU17_A2_9_flt" UUID="E3D714AF4B781CA71A0ADD95F142A7E6" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.9" />
+        <Signal Name="APS_SHKU17_A2_10_flt" UUID="F9AA76BF41ECE752C0436391B5B3586B" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.10" />
+        <Signal Name="APS_SHKU17_A3_3_flt" UUID="CBE4A6D34CAC7C921C795192A071F724" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A3.3" />
+        <Signal Name="APS_SHKU17_A3_4_flt" UUID="3ACCABAF4F7AF74BF07DAA8B19D7EC9D" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A3.4" />
+        <Signal Name="APS_SHKU17_A3_5_flt" UUID="75B1642143C6C27936593CAAA5A39EF6" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A3.5" />
+        <Signal Name="APS_SHKU17_A3_6_flt" UUID="F6F3CF744A00B5691EF6D19A22026A74" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A3.6" />
+        <Signal Name="APS_SHKU17_A3_7_flt" UUID="864B19C24EE7A0BB52437D806A105778" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A3.7" />
+        <Signal Name="APS_SHKU17_A3_8_flt" UUID="953F783B40F2685D52C34AAD0CB64E57" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A3.8" />
+        <Signal Name="APS_SHKU17_A4_3_flt" UUID="23C7ECA34078112F862411A04F4FDA29" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A4.3" />
+        <Signal Name="APS_SHKU17_A4_4_flt" UUID="B9BDB6E942759B67663DE084072EEDB4" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A4.4" />
+        <Signal Name="APS_SHKU17_A4_5_flt" UUID="F6DFECDC48A015207BCC499402591AB5" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A4.5" />
+        <Signal Name="APS_SHKU17_A4_6_flt" UUID="C38881E44A5B45B1A9CC93815644EE2B" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A4.6" />
+        <Signal Name="APS_SHKU17_A4_7_flt" UUID="C10D3D2D4AEFF8751C3587A6FC034F8E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A4.7" />
+        <Signal Name="APS_SHKU17_A4_8_flt" UUID="DD33AFF14BCB34619C19CE94F4A79F90" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A4.8" />
+        <Signal Name="APS_SHKU17_A4_9_flt" UUID="65E2A0B549329FC8AF0E32801F89B82D" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A4.9" />
+        <Signal Name="APS_SHKU17_A4_10_flt" UUID="B2E08A424A4E8EE92C29EB9A31654170" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A4.10" />
+        <Signal Name="APS_SHKU17_A5_3_flt" UUID="1D65D7CA4737F36314C1879C8904E001" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A5.3" />
+        <Signal Name="APS_SHKU17_A5_4_flt" UUID="DF26EA114F9A821CA912539C90AF7D5B" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A5.4" />
+        <Signal Name="APS_SHKU17_A5_5_flt" UUID="AC0F71F04100908CD440D7B2B29C52AF" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A5.5" />
+        <Signal Name="APS_SHKU17_A5_6_flt" UUID="E87DBD8B471CBC267B2784B5575D398E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A5.6" />
+        <Signal Name="APS_SHKU17_A5_7_flt" UUID="783606DB4E1DB3DF3B1D4694CBDB8522" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A5.7" />
+        <Signal Name="APS_SHKU17_A5_8_flt" UUID="65295A8A44BB9552F1FEF4B07F129AE7" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A5.8" />
+        <Signal Name="APS_SHKU17_A5_9_flt" UUID="AECDA81444D864A54F71CA94C53C4EA5" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A5.9" />
+        <Signal Name="APS_SHKU17_A5_10_flt" UUID="F526696C411CFFD1EAB740AEB786466C" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A5.10" />
+        <Signal Name="APS_SHKU17_A6_3_flt" UUID="B23CB29841123C3374E463BD1FD7F20B" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A6.3" />
+        <Signal Name="APS_SHKU17_A6_4_flt" UUID="8B7D818848FDC9CA12337B9783C7DDC4" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A6.4" />
+        <Signal Name="APS_SHKU17_A6_5_flt" UUID="001F188648505CF7E44503BF6A805803" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A6.5" />
+        <Signal Name="APS_SHU14_A1_3_flt" UUID="89FC2F634DFF0F309F875495F4A2B42B" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.3" />
+        <Signal Name="APS_SHU14_A1_4_flt" UUID="C8D78CEB4B62ABD33C1EF3BA60C1E405" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.4" />
+        <Signal Name="APS_SHU14_A1_5_flt" UUID="08526EBE45E941268AFAEDB9F37A25DE" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.5" />
+        <Signal Name="APS_SHU14_A1_6_flt" UUID="72A5B7EC4BCD6E182D06FD826B1EB72D" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.6" />
+        <Signal Name="APS_SHU14_A1_7_flt" UUID="E01498614B0586AB7C0135BCE481495F" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.7" />
+        <Signal Name="APS_SHU14_A1_8_flt" UUID="AD364895401F730A36869F9585A745C4" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.8" />
+        <Signal Name="APS_SHU14_A1_9_flt" UUID="247F41AC489E319D7ED7769398C9D07C" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.9" />
+        <Signal Name="APS_SHU14_A1_10_flt" UUID="68D012F44CFC19CD9C657CBFE8172E43" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A1.10" />
+        <Signal Name="APS_SHU14_A2_3_flt" UUID="F4285549486483FA1B2344A293EA842D" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.3" />
+        <Signal Name="APS_SHU14_A2_4_flt" UUID="002A86FB4F2D7074E07A88B195F1D523" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.4" />
+        <Signal Name="APS_SHU14_A2_5_flt" UUID="F399C1E34D14D3052D29E6BEA2C0FA60" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка модуля Сонет: A2.5" />
+        <Signal Name="APS_SHKU17_AI_Tnar_vozd_flt" UUID="FC2037EE4DE6BD919B34AA9790829E99" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура наружного воздуха" />
+        <Signal Name="APS_SHKU17_AI_Tgrunt_flt" UUID="4FD77A5344B8FD64595737A5C4529DA6" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура грунта" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_do_KR7_flt" UUID="E35A56A74595BEBF48FFDCA11E6016A5" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа до крана 7" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_pos_KR8A_flt" UUID="1A8E67E94C04BD641C8480AB8F299A48" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа после крана 8а" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_pos_KR8_flt" UUID="F6B5D73646BF8C34598608A5F062D9ED" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа после крана 8" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_pos_KR8As_flt" UUID="7CCEDBB047376D83D0E0D38087E23A7C" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа после крана 8а’" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_pos_KR8s_flt" UUID="CDF1CD2541F9F4E39B4526B75CF4516A" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа после крана 8’" />
+        <Signal Name="APS_SHKU17_AI_Patm_vozd_flt" UUID="65788B57490FD7D3591A2F88FC27A178" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление атмосферного воздуха" />
+        <Signal Name="APS_SHKU17_AI_T_vozd_in_BS1_flt" UUID="E1394DBD494F657EE52D9292AF582AE3" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура воздуха в БС-1" />
+        <Signal Name="APS_SHKU17_AI_Res_1_flt" UUID="863837294146066546FB55B3C8A0820D" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_2_flt" UUID="1807B4B841FBC166ACFE2DA5B77C9881" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Ctrl_24V_TI_1_flt" UUID="418046DC4BD09A54F5C2B1A088B07B65" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Контроль 24 В ТИ" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_do_PU_flt" UUID="3EF5842649466B273969CD818C114F79" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа  до  ПУ" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_pos_PU_Sh1_flt" UUID="5EEE4ED94B4363448F5950A9D41DF7E0" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа  после ПУ шлейф 1" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_pos_PU_Sh2_flt" UUID="AACEE44640DF59A11F338C917D45D311" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа  после ПУ шлейф 2" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_do_PU_flt" UUID="B7D243654CE31F0F87421A835D7DD5F9" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа  до  ПУ" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_pos_PU_Sh1_flt" UUID="1C10F6E24F511EE4FF7CDCBB97D5DDE6" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа  после ПУ шейф 1" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_pos_PU_Sh2_flt" UUID="6A08AAF84FA431155E12399CF56FB8BA" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа  после ПУ шейф 2" />
+        <Signal Name="APS_SHKU17_AI_Res_3_flt" UUID="F83AE4EB41B5E4CB397B68A0C74EAF4D" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Tpusk_gaz_flt" UUID="1E723226467C5C62AC3DA6AC31F1CB81" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура пускового газа" />
+        <Signal Name="APS_SHKU17_AI_Ttopl_gaz_flt" UUID="DB4AEB0448003DD493098F9266B6A15E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура топливного газа" />
+        <Signal Name="APS_SHKU17_AI_Ppusk_gaz_flt" UUID="C3EBA54349A40F84D67458863BA06B67" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление пускового газа, МПа" />
+        <Signal Name="APS_SHKU17_AI_Ptopl_gaz_flt" UUID="34350CCE4CB7284C2F2B009B870D3F3F" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление топливного  газа, МПа" />
+        <Signal Name="APS_SHKU17_AI_Ctrl_24V_TI_2_flt" UUID="F644BF464D94AC8939E9EB9038EAA4E1" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Контроль 24 В ТИ" />
+        <Signal Name="APS_SHKU17_AI_Tin_KRP_nit1_flt" UUID="4FEAC68A47668217650294A27EA13A20" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура на входе в КРП  нитка 1" />
+        <Signal Name="APS_SHKU17_AI_Tin_KRP_nit2_flt" UUID="42C5798E4200694E91C925950A58BB57" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура на входе в КРП  нитка 2" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_out_KRP_flt" UUID="9061BD814DA5C49F3C2EE2BE6CA761C5" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа на выходе КРП" />
+        <Signal Name="APS_SHKU17_AI_Res_4_flt" UUID="4371BAB24A2D994B4936B1B78549BB5C" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Pvod_pozh_Col_flt" UUID="10C33C6842136ABDF69E819A4034C6B1" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление воды в пожарном коллекторе" />
+        <Signal Name="APS_SHKU17_AI_Lpozh_emk1_flt" UUID="9987580743DE354D8C66B8990A8A0901" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Уровень в пожарной емкости №1" />
+        <Signal Name="APS_SHKU17_AI_Lpozh_emk2_flt" UUID="ED7E5C8544506FA6163921BE6FB7EF05" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Уровень в пожарной емкости №2" />
+        <Signal Name="APS_SHKU17_AI_Res_5_flt" UUID="51C42D40443CC6B2F1236F9ECFD2EC98" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_6_flt" UUID="E119813446A88F0A2D7BAD9810A7AC8C" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_7_flt" UUID="BC34877C4306AD97DCFEA2B8AC12278F" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_8_flt" UUID="63EB30D4427C33ED84CE0490C3D94415" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_9_flt" UUID="D04DB2D746860FFE9227D9A41CFE33AA" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_10_flt" UUID="4A53FC354D39694B8951D784878203DD" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_11_flt" UUID="3A0981FF4DF4EA87E706D3BE80A74FD9" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_12_flt" UUID="FB24EAB349206AAC7EBEE4A5FEBA07A7" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Ctrl_24V_TI_3_flt" UUID="0375807F48A2627B82C76CB3D59675A4" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Контроль 24 В ТИ" />
+        <Signal Name="APS_SHKU17_AI_Res_13_flt" UUID="3D3F58AD4BD7CDF9FEAAEEA93F28A941" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Res_14_flt" UUID="20C5DEBC4DC11D92AE026AA7A75E7287" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Резерв" />
+        <Signal Name="APS_SHKU17_AI_Uosn_SHKU17_flt" UUID="FF0A50AD47398D208D22E0B130109044" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Напряжение основного питания ШКУ-17" />
+        <Signal Name="APS_SHKU17_AI_Ures_SHKU17_flt" UUID="3DA290F442A26688AE79538F7B487BA8" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Напряжение резервного питания ШКУ-17" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_do_KR30V_flt" UUID="5B1C1D334031107B886146B852F37F8A" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа до крана 30В" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_pos_KR30V_flt" UUID="962A672B487C13B4431EDBAC61CC2AFE" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа после крана 30" />
+        <Signal Name="APS_SHKU17_AI_Pos_APK1_flt" UUID="F2B5D43845DB6D3F4536B49130C6C028" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Положение АПК №1" />
+        <Signal Name="APS_SHKU17_AI_Pos_APK2_flt" UUID="50EB35F84D493C9099150DB154404C74" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Положение АПК №2" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_out_pos_KR44_flt" UUID="B3840659403A024A69FB53981388B582" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа на выходе  за краном 44" />
+        <Signal Name="APS_SHKU17_AI_Tgaz_out_gr2_flt" UUID="8704FB894688D5A58C6D5AB11D9C185E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Температура газа на выходе  группы 2" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_out_pos_KR44_flt" UUID="C4AB65E040D564A2B280968BCC6459E1" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа на выходе  за краном 44" />
+        <Signal Name="APS_SHKU17_AI_Pgaz_out_gr2_flt" UUID="828BFB09455DB608C4AE6582FC48CC2E" Type="BOOL" Usage="" Global="TRUE" Comment="Ошибка канала: Давление газа на выходе  группы 2" />
+        <Signal Name="APS_APS_SHKU17_KR30_non" UUID="DBC7A61D4BA9FFF6AE751B9F43157128" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR30V_non" UUID="F125627E4E15EBFE426CAD94E773434D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  30В  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR7_non" UUID="83692FE74805C82E943813B328BF5E1E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR7R_non" UUID="8AC1E639423BEFF69D942AAC61B9B101" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR8_non" UUID="9219F95540A9EA9C9502BDB4DA05E668" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR8s_non" UUID="19691A1449DB2BD84CFDEC8D802B7A74" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8’  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR8A_non" UUID="8B78098D4EA94FD6FFC351AFD2F6B7D1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR8As_non" UUID="0E49B42441210274249CF28398C7BA23" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А’  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR17_non" UUID="EE5EA1164825017D025E89BCC071B725" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  17  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR18_non" UUID="050F861642D238E44BFEB9B15637B85C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR18A_non" UUID="65883ED54CC539E00A14B9BE5FC87BC3" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR6_non" UUID="4D8564AD484424120D20A6834AFDAA25" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR6R_non" UUID="B4CA48754CB91E13D47C489C20A40E4A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR6As_non" UUID="A3DB251A491489A4D0AF668A2A34C79E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А’  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_non" UUID="E8DA04E744B192898699F59821F05F16" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR41_non" UUID="2FC98DDB4158901A052DEA80C922C38A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR42_non" UUID="E67E2FA748FBB535B120CA8EBE296DEA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  42  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR43_non" UUID="14755AD645748F79FD48979DB024AC8E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR44_non" UUID="640282D4457BBA1DCBCA63B4A49416C7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR45_non" UUID="45A1DA9949CFDB311689EB8F87751D18" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR46_non" UUID="A25EE7B544F5008D274F638A8228EA69" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  46  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR47_non" UUID="6CEF7F0C43865152D9C838B5DB20229D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR48_non" UUID="275F70EC4006503479805CA08AB30B54" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR49_non" UUID="292398D647CFE0ED98E827B9160ACD46" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRL1_non" UUID="513930344E9A1E0C4E2A4BAE869D80F9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_non" UUID="2D43BB5146EE7C03A38CF8808B865E11" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  СОК2  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_non" UUID="E92900544840BE420C16D38C8AF83B65" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3  не открылся" />
+        <Signal Name="APS_APS_SHU14_KR1_non" UUID="0C17EC744A1A8F3E9AC7E5B2BCF97412" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRD_non" UUID="5EB4CD73448353401E416DBA6FA08B89" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRE_non" UUID="F28926CB4E2E55B7356F9D8A71834A8C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_non" UUID="7B1453364CFC688E4AFFB28AD4CCE241" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_non" UUID="2B2D5FDD4ED0FA315105799CB605201B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_non" UUID="0F98A4874645F14B0D750A87330F6721" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_non" UUID="D866688A456422D6CB7C21B45C87059D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_non" UUID="40193FEF4B7F4EADC567EDB4FA007236" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3  не открылся" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_non" UUID="C6FC9FF049239707AD9DAE96D18B7A39" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR30_noff" UUID="8DC71CD4408B9DC54DEE7284CDCB1EB1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR30V_noff" UUID="01757D2741BBB15613C0A79DEA0D8A06" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  30В  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR7_noff" UUID="A399C3444FB2F7CC40FA14B06AC89507" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR7R_noff" UUID="CA494BF44D948A13A8595F8C3081A4AE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR8_noff" UUID="7309A6684CFB72A246E7EE96875AD2E0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR8s_noff" UUID="09F035EB42EE6BACB244A4B28AE680BB" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8’  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR8A_noff" UUID="2D24094042DE289F30F4B8BD838255BB" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR8As_noff" UUID="FC0B3A8E4113F0B45DB3848D249702CC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А’  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR17_noff" UUID="10B4E8A548D5E967EC3A3E8D54CD68F1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  17  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR18_noff" UUID="09964A1D40397D3297BC249B744F37CB" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR18A_noff" UUID="14CB2E6E41F0C52EB64179B5C5D85C10" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR6_noff" UUID="D50B4C9E4EF7FB8AB4AE24B860332BB1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR6R_noff" UUID="D23DF0854B9A8D959106E69838788B76" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR6As_noff" UUID="029CF2204080B04E2ECF2EB4933A1B0B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А’  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_noff" UUID="F480BBFC46DFF9B35553FBAD8824B418" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR41_noff" UUID="4CFC78084B024BFA2A1A87A8E1C22620" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR42_noff" UUID="0041DAA64EECABF980A6A1A53BDE2336" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  42  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR43_noff" UUID="88E1F8474602A01FDE2190817F9825F1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR44_noff" UUID="3D356BE84EB8E726A921B89F9A3CA127" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR45_noff" UUID="49B8BE964EB1A23EE92C6ABABF857E5C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR46_noff" UUID="CE3FE4B94BC75D9C231DD39FD826D093" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  46  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR47_noff" UUID="C82206F143B7F781043BF4BF20659E4E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR48_noff" UUID="CB6A1F6C4ABFAA5121528E90FD314926" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR49_noff" UUID="0661320B4CEE5E07651CB5810D5FBE4A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRL1_noff" UUID="594450C647A4F9F0ECDFA0A01D7B2729" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_noff" UUID="E46705EE4BE6D3C60B687D8B538DB92E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  СОК2  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_noff" UUID="B2A350294C6369184ED923BD9D318067" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KR1_noff" UUID="FBE7FF5E4E18C919BCCE12A326DCA7F0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRD_noff" UUID="9CD0F780460BF80D9CFC46A95CA43A4F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRE_noff" UUID="71372BBC48926C134287AEA87AFBE4C7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_noff" UUID="397EFCE54FBDD2EB2D595CA3549AB0C1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_noff" UUID="AD58F88446C32C96DEBE88BF37F136D8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_noff" UUID="5ECDCDD34FF6266B00437483D074AC71" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_noff" UUID="4337E1E54DB2FBB9FC6632ADD955299C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_noff" UUID="67157C2545F601738DA7A7AF27E4DC12" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3  не закрылся" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_noff" UUID="0521F4334DE08A94613ABD8FD9AF4245" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR30_nstart" UUID="6ACF68D44923E4F93616BBA78C49028B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR30V_nstart" UUID="E1E783CC4B458AA3CBCF4DA31D3F0B74" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  30В  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR7_nstart" UUID="E0B9CE7D43D8219564D9C39D0DE61E35" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR7R_nstart" UUID="D4F2A10D4474E1EFB8638B801A537DF9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR8_nstart" UUID="12EF37CA43AD9074BC0E26A0B64B2565" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR8s_nstart" UUID="2AE808D044AD4F5EA3C7DBA7E5ACEDAC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8’  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR8A_nstart" UUID="ED5C7DEA4CE21F343B53AE9AEE18DEC9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR8As_nstart" UUID="3579E1354EABC641CF2166BE53D782B2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А’  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR17_nstart" UUID="C056D8254351FA38972BE5B4EB0F4235" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  17  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR18_nstart" UUID="8BD9DAAD4D8A1E5A9118BE8ADF6DB0F8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR18A_nstart" UUID="88242D72459F46A72A56E0A2E26925BA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR6_nstart" UUID="8B296C2948C59B0E16F714B8FF31E610" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR6R_nstart" UUID="7A2DE9D3468B3DD91C0F4D98B96EE836" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR6As_nstart" UUID="DA5AF6CD47839B26A932AC9A533F7544" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А’  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_nstart" UUID="F8A964C0466974BE27FB6CA992189F7B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR41_nstart" UUID="A72D545C4742AD57193D33A9091AE4EC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR42_nstart" UUID="06F9F4804EF5AAFBCE589BB0B4C67D61" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  42  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR43_nstart" UUID="D1EC4FB647C1600CF0FA119E5D161F93" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR44_nstart" UUID="486AD8074358DDFBDDC6359E2A6C14A5" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR45_nstart" UUID="0953BF804C2D47C6F4BC088E9A7C8AB7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR46_nstart" UUID="CAE70C7B4D73D1C07844DB9FD40B42FF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  46  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR47_nstart" UUID="2969CDCE4E696F7B4213B5B075CD210B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR48_nstart" UUID="604E840F4DFF0B72D93FA28DFACAB6A0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR49_nstart" UUID="86FFF6D94116CBAB920708A0FEE33007" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRL1_nstart" UUID="802A8F414C4B2EF32700659395BDC049" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_nstart" UUID="DF023C2C40811AC9664775A74CD5BE01" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  СОК2  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_nstart" UUID="0EAFBAE5411E110C74DAD99A03D2699D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KR1_nstart" UUID="B87839054F108DCD19DBC7BC6E9200D9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRD_nstart" UUID="2E081F644C89B8E0F6281CB03694FCB0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRE_nstart" UUID="4C18FD3D4054D6F63A4DCBA461987FCC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_nstart" UUID="B93DF7E644C0C9F71DEDF781DA4DEB20" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_nstart" UUID="CA3AAF454B7F109C9700DAADA6F6DD1F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_nstart" UUID="635235AB4DAD966D232494A266127974" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_nstart" UUID="893A4323439CF5620CFD1E903600F76A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_nstart" UUID="A7D119EB4DAC40C102E31DA9967F8688" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3  не стронулся" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_nstart" UUID="E66E95EB4B12511F83C5C38FFB6B4650" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR30_selfon" UUID="F079E34F40307BA6DD95D1AC5EEF1DB7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR30V_selfon" UUID="36A939F64D80790421E66EA7DFAD3C2C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  30В  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR7_selfon" UUID="160748E64DF10EDE70C755948EA8932B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR7R_selfon" UUID="4B6200B6442DABD99D025FB9674D5886" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR8_selfon" UUID="E9CA5736424E297058137B83CCBA81AD" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR8s_selfon" UUID="0C1B51F7435CCC21544DCBBA60F0EE74" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8’  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR8A_selfon" UUID="415CCF5C40C6B9DF71051590BCBBEE51" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR8As_selfon" UUID="42FF77AA4C28BE2B7AD38D8FC8D02D97" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А’  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR17_selfon" UUID="171A1A834EB6BAE3911B3E9F4A156922" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  17  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR18_selfon" UUID="7081764E4118BF800112B28B4486C686" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR18A_selfon" UUID="11B7DA1B45B0F8C92BAF1D85595070F7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR6_selfon" UUID="14E118674C7558448D26ACB919FF6E83" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR6R_selfon" UUID="1611CB464B370ACAAB32B2A09ACDB859" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR6As_selfon" UUID="14505EAB48849F126CE38D9038546A32" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А’  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_selfon" UUID="D9F85E524C5843E9A75EBD92A15FDA17" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR41_selfon" UUID="BD381E8B4F0B9CF4F18E80BC49D1EA4E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR42_selfon" UUID="42F94ECB464751127A91729B9B1339C7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  42  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR43_selfon" UUID="31D202944E1A830B943DA78144F6005B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR44_selfon" UUID="CD494CE64A781B8D8E3E3A9C67A1149C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR45_selfon" UUID="3E1E7027483FD627328016858B4EF202" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR46_selfon" UUID="DDA0926C41C5E779B13B0599FF5D7FBB" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  46  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR47_selfon" UUID="0BC4F6044B468FC51F603193281AC9FC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR48_selfon" UUID="10EF51A14D8FA55BF639D2A48E43F1AA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR49_selfon" UUID="410A65034AA6832472E6F090B17E180C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRL1_selfon" UUID="5140D93E4BE9DD0305CF99AC77D0C7E0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_selfon" UUID="BB2F8353427CE6F5EFC3C0B63FB7AA94" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  СОК2  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_selfon" UUID="F9D2197B4403B5D28F7A7FA2C69739F4" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KR1_selfon" UUID="0ADCC355406D87AAC9413BBE2AC3BAEF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRD_selfon" UUID="1B4563514EB012E0BC976BB0D292A70F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRE_selfon" UUID="C73D26CC4BFD42DFCBC96EA79B2510D2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_selfon" UUID="2322BED646F73BD2420A1CB25BABECF4" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_selfon" UUID="958A72224253DFBBF6EF48A60F6399C2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_selfon" UUID="A509DB0241F3AA63CBF186A7E48B400E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_selfon" UUID="8645ED094C2E7EB78CACD487D19C5035" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_selfon" UUID="3382977044E9547306D1B3A0C14F0B19" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_selfon" UUID="5F8780D04E52965F0F39D782AAD02E6D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR30_selfoff" UUID="CC56204A487729AD85FCCA8E423A4959" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR30V_selfoff" UUID="9ED72B0F45693BEBB91324A40A2D963D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  30В  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR7_selfoff" UUID="254AA08D479DAB7302909180166C0085" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR7R_selfoff" UUID="52EE96454C37A3951EE0BB8C26A26B3D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR8_selfoff" UUID="EB4973B642FD34DD201A63AD44CE327C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR8s_selfoff" UUID="E547426D47F22CBE79E2DAA5EC6E32B1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8’  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR8A_selfoff" UUID="19CDDF6B49CA920F058AE58C98B30A88" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR8As_selfoff" UUID="778D177A4E4C0258B60DF1B3FB106ABC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А’  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR17_selfoff" UUID="8B82B6EE462B48AB5B986B905C7C529D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  17  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR18_selfoff" UUID="6702930545E602E9DE20879D328BDFE2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR18A_selfoff" UUID="900944B3493D099618197EBCB3FB493E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR6_selfoff" UUID="F2656B0442F29EE88E690EB72361E00E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR6R_selfoff" UUID="94D6395940E86E81A1FB1D9F7A5F1552" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR6As_selfoff" UUID="61F2B6BF42462580CDF6FCA35102533D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А’  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_selfoff" UUID="18D4AFBC4D2A08043248B6B5C5FAC210" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR41_selfoff" UUID="70205D7240FBEB9B6C4C378A9FE78256" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR42_selfoff" UUID="A5EAA1B54F7114EE45960A96CF60DFD6" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  42  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR43_selfoff" UUID="7B17FDA0480CD4577C9B66AB73121BAE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR44_selfoff" UUID="21F11C3D41815D0AC87559BA2B304BAE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR45_selfoff" UUID="31984E1146DDB006FD6F459392FDE3D8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR46_selfoff" UUID="B134200D46DB48EFDCEC79B2AF3FE6FC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  46  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR47_selfoff" UUID="31F4479741D42072A737CB80CF0C6D3F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR48_selfoff" UUID="B989CAC54442C6B7B6F2C599B12818FE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR49_selfoff" UUID="F3D1A9AA4D4B8A83203B65A846C190D2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRL1_selfoff" UUID="BCBAECAB402197A79BCAE288842E6558" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_selfoff" UUID="C947BC1043954ACEC7520D9C04E1B424" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  СОК2  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_selfoff" UUID="9E1E90FE424CA1DBACEECEA941A4AC96" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KR1_selfoff" UUID="B238FA9F428843403B4993A2F4984DA0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRD_selfoff" UUID="F1CC33314BF044624C1F19B3721CA207" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRE_selfoff" UUID="5B8868F24B38AAD424488790A2E58129" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_selfoff" UUID="433DBA50430CBBC0DEE16B9C28392C7A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_selfoff" UUID="7FAE3984404E9BC3DEDB85A0F5924943" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_selfoff" UUID="024C7495455CF238B19B9F9B3F0FF508" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_selfoff" UUID="494F94C549DFDE02B3252D951E4F6268" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_selfoff" UUID="46FAFD514F878B41F0E540ADF6BA1398" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_selfoff" UUID="AC0707B54AE287460B47888FBE6D4241" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR30_flt" UUID="AC9915044029C1650E7AAA9E4DDDEA26" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR30V_flt" UUID="2359BF954CDB72AE0A5B7D8E22DE17F1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  30В  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR7_flt" UUID="AE7DB559473E10A30CE3479DC14D45A9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR7R_flt" UUID="5BEA26F5428D92D975D4C5A03D0D6EC8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR8_flt" UUID="513044054FCA00E15DDA15A7B6A9BB5C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR8s_flt" UUID="048849F94050C74B4D7C6684BAFE7166" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8’  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR8A_flt" UUID="2989AC5449FF92DDB8C7FD9EFA12A110" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR8As_flt" UUID="A3FD419542513A8A5CCBF5983DE4D964" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А’  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR17_flt" UUID="34DA52E54F68318959AF05AE977D9370" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  17  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR18_flt" UUID="A94F67E04067B4687DA1548ED9E12442" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR18A_flt" UUID="ABE6F2424AD9D3B56ED17DA1A56F550A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR6_flt" UUID="285954C847DCEEF46B96F39FDE4AD42A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR6R_flt" UUID="30CA76CB4A86D463C471929206FA1023" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR6As_flt" UUID="A70E9D8D40C077EF69E14DA8F40B8B8B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А’  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_flt" UUID="368EB867440CAFA05D8EE88255DAD96B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR41_flt" UUID="7D334A6146D72C92C16BB9BD46730BE0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR42_flt" UUID="2DECD3834B599DC5D6599F9351F3D7A9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  42  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR43_flt" UUID="CB9F55184F5F6A9293BBB7B3E3204F47" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR44_flt" UUID="F3C8438644D329C2E9ED2293C2C882F8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR45_flt" UUID="751D5DCE4E53CCFC5576398522B15F52" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR46_flt" UUID="751EE08B4CCEB58933B8BF8218C96D5E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  46  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR47_flt" UUID="DE71625543E3F1E85CACF6899898DFB1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR48_flt" UUID="0C272EE34EEA5D4E280447949874116C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR49_flt" UUID="4B9D38E545843023D93ED28A35339724" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRL1_flt" UUID="5D7A197847AD46FEEEB3089E03CC06B9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_flt" UUID="A1D7375C4C2C97345DF6489CDFE4B5F7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  СОК2  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_flt" UUID="2F6F16D74F07E7A5482F448491205EB2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KR1_flt" UUID="86C03B954F770EAD9EE4559203F55F4C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRD_flt" UUID="BCC1865847CCBD591294EBB76EB2D41D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRE_flt" UUID="736CAACC42A730F67DD4B9BAA85C14DB" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_flt" UUID="05776D484C72F1F3DC70769DDB185DB5" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_flt" UUID="4F4A0F45430FC150D7B8ED90C9ACC6AA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_flt" UUID="FAB1C56A493B8D6BBB2721BF3300B5FF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_flt" UUID="7D403C344E2E8BEF0308AB9314FF8A8F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_flt" UUID="1F33A95F488907C9DBC448BF2A92D65D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_flt" UUID="5A631BCC4791A3E02B284F873D413124" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR30_ncon" UUID="5D2AE6E142608813C486308707D95CE3" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR30V_ncon" UUID="63439CA3441B1FB992D52DB069324FEA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  30В  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR7_ncon" UUID="EAC43A3042E744A389EF2F8D39433605" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR7R_ncon" UUID="66A134D54473C7EF8E0FA89617863B8F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR8_ncon" UUID="815DEDDC463DE5B7271FFDA240A690C4" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR8s_ncon" UUID="BF0EB68B402B807FEF6A2983B30F2F2F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8’  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR8A_ncon" UUID="C9F471664E8D154421D2E8AE2082BB0B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR8As_ncon" UUID="E3525B7D4CE68C0B35974383E35A33D0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А’  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR17_ncon" UUID="2227CCAF4487B312A46BBEB9A202D17D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  17  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR18_ncon" UUID="98D3CC2F4F22951DF902EE9C995034F9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR18A_ncon" UUID="975BC41C4BD416CAB4A234A4482AC4C1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR6_ncon" UUID="156BF20841925CC3AF0D47A94AB9838C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR6R_ncon" UUID="D99CBD9945C99F167BE1DB8635530582" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR6As_ncon" UUID="7CCB64C0429B577D3AF56FA2D1D1069B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А’  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_ncon" UUID="93B8F5C54177497FD7078DB84C5F0251" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR41_ncon" UUID="109FA5EF474C4867F5F85E955AEA383F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR42_ncon" UUID="AFBEC10049037E1CE6D89A8A69051A32" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  42  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR43_ncon" UUID="42EEC2AF43340A3DF6001D87DE9B862C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR44_ncon" UUID="08B054624C39031B6467CA92CD1928D5" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR45_ncon" UUID="F70CECD9475C4475142667B8878FAEC1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR46_ncon" UUID="20540DEE41FAE55B0801F39D874D05C8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  46  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR47_ncon" UUID="A13EF200427CC9F6CD5887984EDA6FFF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR48_ncon" UUID="E451E69C4A74CDB58F5894880FC410B6" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR49_ncon" UUID="518C1E7246FC7E3A84B019A6FE014D45" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRL1_ncon" UUID="61BCFC1C42C882510D5A0B9792698AF2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_ncon" UUID="0643215D43F63DA26D3DCC9BC835016C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  СОК2  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_ncon" UUID="295531AB48B0DA3A0D22CD95083E1772" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KR1_ncon" UUID="BAE84EE348DB79541DECAC8D20EE1486" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRD_ncon" UUID="EDBC9B6446AB8AEAED119BAEE7F5A2FE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRE_ncon" UUID="99FDBF4847A9E10F77075BB74A6E6053" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_ncon" UUID="8AE93A6042CB016C2FAD6584EB91A104" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_ncon" UUID="493FC8074E5E190E0946608FF07B60AD" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_ncon" UUID="DE0B3FAA43931E486FB5F9A946E90EE7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_ncon" UUID="26EA3F8940B7891B4077708EA54B5C49" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_ncon" UUID="13566778464AE415056AC0AEB9D2B400" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_ncon" UUID="70CEFD9E4113E6DD48E68D811973835A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR30_ncoff" UUID="A5DCD8BD48716CB5615D4087ABEBF407" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR30V_ncoff" UUID="A7B717774D7D36291F650F8D816EA192" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  30В  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR7_ncoff" UUID="4A433CE3415CEBF0840C8DBCB55AF1A9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR7R_ncoff" UUID="BDAE5F4A41D2E4CB67E77AA3272EE9B5" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR8_ncoff" UUID="1A08F2F24AC4479AA302C3BFAF1A0883" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR8s_ncoff" UUID="C7D9055F4DAD71F0D30528A9732A19A1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8’  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR8A_ncoff" UUID="D16A336944BFF25953F862A8E09338EC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR8As_ncoff" UUID="FF0C479244ABB060CE76A89A9BEF156F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А’  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR17_ncoff" UUID="45C25CD447F2D62F74EE63A2BCC01085" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  17  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR18_ncoff" UUID="22B523DC44DC928708E14EBC59587855" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR18A_ncoff" UUID="8BDC7D1545D1BF7F5C532EB851289A0F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR6_ncoff" UUID="2053724F4C22D8FECC0747BD334E0AB6" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR6R_ncoff" UUID="B954066B4909A23E5DCC1D84CBA2D224" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR6As_ncoff" UUID="27A12E4740526B7F4D1A2097F912398D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А’  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_ncoff" UUID="0C20F1B5467F9244A00148B65BFAAC98" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR41_ncoff" UUID="0E926654496B54B27A27FF84A44CFE1C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR42_ncoff" UUID="7670CE364645FCF900FB3482B2E149C2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  42  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR43_ncoff" UUID="FEADCB9A4D89BEBE3412AC82079BF08D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR44_ncoff" UUID="0D72588F46924CE212A7E68C19DBAB41" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR45_ncoff" UUID="DA74C8F54BEB3FBD088A54BA555ED710" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR46_ncoff" UUID="A86F43CF4AA3E93ADF42A5B98B845C9F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  46  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR47_ncoff" UUID="E677ACC047C9431E693C0F9C64727FE0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR48_ncoff" UUID="F6B788D4401AE3D9C911938BA404B871" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR49_ncoff" UUID="AC0707FB44C61165E2350B90636A1EF9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRL1_ncoff" UUID="D8DD4ACE405B4A960F03BF87CBB5387E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_ncoff" UUID="39F32B3745F4DE4F687E91B36A49718E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран  СОК2  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_ncoff" UUID="B570B716465B5A8E7E78B1AE78BA3F3F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KR1_ncoff" UUID="823BB25A4433C414CE6E48A190400E5A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRD_ncoff" UUID="5C874AB142F1526B7355BA8C3AECBE45" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRE_ncoff" UUID="2DB582DB4526AB8F1A493B99C6724005" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_ncoff" UUID="3ABF0816406A695EB2CD39B2FC9CB526" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_ncoff" UUID="C25C223342CC0D14077FA7A72936A89C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_ncoff" UUID="A85D62924676002797B311A6C16ECFB8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_ncoff" UUID="80CE1CCE4879A329640002B7DF0EF4AF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_ncoff" UUID="10FC4D284FDFFBF55F87409F29648D91" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_ncoff" UUID="034F6D9E478119862B2D75BA28C59D90" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR30_general" UUID="47E771704465B8C63FF0CA9AA55A173B" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30V_general" UUID="433DE5394DDA555078D89992A7A1ED94" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR7_general" UUID="F1496A7A497AA71C1D1C6C807F6489C4" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR7R_general" UUID="AFEC6112424AB538C85E9FB7452E4320" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 7Р. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR8_general" UUID="339FF87149CC8F8DDD9ABC953E6568FF" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 8. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR8s_general" UUID="60851C9844545E56FDC3D9AE7202097D" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 8’. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR8A_general" UUID="099E05F5461775CDEF22CFB5C3E17882" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 8А. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR8As_general" UUID="6FFF85914F35F49448D56CB2562C5B85" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 8А’. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR17_general" UUID="CBDD94B34DBF326B5FFC93A5C55B6448" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран  17. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR18_general" UUID="BB12B9884505AC16592C38A26D17E9E5" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 18. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR18A_general" UUID="F9E2B91D47C2809E546D27A6D6719A8E" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 18А. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR6_general" UUID="6F61A2134AE8B0AD55017C912D713311" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 6. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR6R_general" UUID="B0F471DC4B31FB548F6450BBB9C2F384" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 6Р. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR6As_general" UUID="D3B08FC3477DC871701203961157CB91" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 6А’. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR6AR_general" UUID="9A1ACBF4446F046B1136FC8EA81902E3" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 6АР. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR41_general" UUID="FB08A68A4AD735F2606BE99904AA06B0" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 41. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR42_general" UUID="E2DA6F2949A05155A70FBCB6C0531C08" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран  42. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR43_general" UUID="E561E992409DC75C8CD2BBA918C18616" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 43. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR44_general" UUID="68EEFDFB44939D70AA0CC4A3CEAFDD05" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 44. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR45_general" UUID="5BE3348146F6F493B0FAD0878F0F47CE" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 45. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR46_general" UUID="426C6C5041FE0D8E911ABC93B5E8E4CE" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран  46. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR47_general" UUID="1FD8E8A44476402DF26FDE9E36E39BE7" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR48_general" UUID="B5839B06461692EB06B6FC894EA9CF0A" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR49_general" UUID="F1AEC74B4FA68727DE88D3BF7483B86D" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRL1_general" UUID="E6F29FC8400304193CC10DBDEA15995A" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRSOK2_general" UUID="6E9DF55A44574B4A11C1DCAD6A5DA96D" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRSOK3_general" UUID="BF6D4D844C2DBE172071BF9861B9F010" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KR1_general" UUID="032335E94104BA18882BA29E65C5A358" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран 1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRD_general" UUID="B8845086414E1D5F4E0366AE9EB9BAAD" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран Д. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRE_general" UUID="0BF847BD4601CFF4880C86A64000DB66" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран Е. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRU1_2_general" UUID="F62C80AA4226CB453C43ADA2962774F9" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран Ю-1-2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRUOK1_general" UUID="2A3A92F14A168EEB120622910C69F3F1" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран ЮОК-1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRUOK2_general" UUID="69099E6D4ED25CAC8A459D881EB55D3E" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран ЮОК-2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRS1_2_general" UUID="0B54440548376F720E8EEB8FCF335A0E" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRS2_3_general" UUID="A18C889A49DD08E5D2E97FB8BE38C32C" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHU14_KRUOK3_general" UUID="9AD87C4547404F37014676AD04B85379" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_general" UUID="6B10A3234C68377B97502B9438EAFE31" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_general" UUID="7233DCE94779726D7C0C3388A71B8866" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_DI_Ala_ispr_pit_preobr" UUID="F9BD8AD248169DBEB243178734790202" Type="BOOL" Usage="" Global="TRUE" Comment="Сигнализация исправности питания преобразователей" />
+        <Signal Name="APS_SHKU17_DI_Res_1" UUID="D1ED8F19434F0B50C02DB58AF68F9358" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_2" UUID="A4B2F4234BBAFEE4139636B34A13A135" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_3" UUID="9CB90AD44198627E9E931B8F904A9B27" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_4" UUID="D634901C4E7A5DE6304B87ADA8AA6AA4" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_5" UUID="BA35FD094A4E09C1BB75AFA650ACFDB7" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_6" UUID="DC917ED24CB2C55AB572DC9CFA334648" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_7" UUID="A150867D4B19207D945BD59A8D350C2E" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_8" UUID="326015794A8FC4972B54BA954723AF9C" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_9" UUID="AB0646E841C700A4A90295A785BB8277" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_10" UUID="90462A174F988936DAE9EA844629E62B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_UZOin_BS1_off" UUID="7A66106D428B3AE07E8A5E83BC06ACC6" Type="BOOL" Usage="" Global="TRUE" Comment="Входное УЗО БС-1 отключено" />
+        <Signal Name="APS_SHKU17_DI_UZOin_BS1_on" UUID="80F57B8A483DDE03EB05988B1D71BAB8" Type="BOOL" Usage="" Global="TRUE" Comment="Входное УЗО БС-1 включено" />
+        <Signal Name="APS_SHKU17_DI_Dver_in_opened" UUID="5F2CD7CF498BD07A725DB4B8CF40F8DB" Type="BOOL" Usage="" Global="TRUE" Comment="Входная дверь БС-1 открыта" />
+        <Signal Name="APS_SHKU17_DI_Dver_in_closed" UUID="236931AD475DEDAC2AFFBFA273BC1021" Type="BOOL" Usage="" Global="TRUE" Comment="Входная дверь БС-1 закрыта" />
+        <Signal Name="APS_SHKU17_DI_Hinc_in_BS1" UUID="E50CE0004DC6E67AC041E1B96FE67399" Type="BOOL" Usage="" Global="TRUE" Comment="Повышенная влажность в БС-1" />
+        <Signal Name="APS_SHKU17_DI_APK1_opened" UUID="F321EBC441C144AAF4F4A2AA7CEEEBB8" Type="BOOL" Usage="" Global="TRUE" Comment="АПК1 открыт" />
+        <Signal Name="APS_SHKU17_DI_APK1_closed" UUID="F3B935D34C8DC271B0C1D895374D7077" Type="BOOL" Usage="" Global="TRUE" Comment="АПК1 закрыт" />
+        <Signal Name="APS_SHKU17_DI_APK1_obogr_on" UUID="8612225244863424706EA190B53A750E" Type="BOOL" Usage="" Global="TRUE" Comment="АПК1 обогрев включен" />
+        <Signal Name="APS_SHKU17_DI_APK2_opened" UUID="1B486F554B33D46BA826A097E6762FA1" Type="BOOL" Usage="" Global="TRUE" Comment="АПК2 открыт" />
+        <Signal Name="APS_SHKU17_DI_APK2_closed" UUID="E63F0E4A4224A33F9F57DA899FE7BBB0" Type="BOOL" Usage="" Global="TRUE" Comment="АПК2 закрыт" />
+        <Signal Name="APS_SHKU17_DI_APK2_obogr_on" UUID="7047A32F4D9C1D502790789AC31E9072" Type="BOOL" Usage="" Global="TRUE" Comment="АПК2 обогрев включен" />
+        <Signal Name="APS_SHKU17_DI_Res_11" UUID="932E463648D511FB3E20C295CD428761" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Pgaz_out_gr2" UUID="EF205C4F447F8868E6161EB7E9FC5004" Type="BOOL" Usage="" Global="TRUE" Comment="Давление газа на выходе группы 2" />
+        <Signal Name="APS_SHKU17_DI_Pgaz_out_KR44" UUID="950364C34A9896B53DF9E6809FD4E8B7" Type="BOOL" Usage="" Global="TRUE" Comment="Давление газа за краном 44" />
+        <Signal Name="APS_SHKU17_DI_Res_12" UUID="6C6CB1EC434CA7383082B5985DCCB970" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Avar_TG_KC1" UUID="C0E1E5294D26F4C4306743AE37CC988B" Type="BOOL" Usage="" Global="TRUE" Comment="Авария теплогенератора КЦ-1" />
+        <Signal Name="APS_SHKU17_DI_Avar_TEN_PGA10" UUID="EA991D294351D2EFF1DFE1A9B6F65731" Type="BOOL" Usage="" Global="TRUE" Comment="Авария подогревателя ПГА-10" />
+        <Signal Name="APS_SHKU17_DI_Tgaz_out_TEN_hi" UUID="79C93E6D4AFB09BB21805180B566864B" Type="BOOL" Usage="" Global="TRUE" Comment="Температура газа на выходе из подогреватель высокая" />
+        <Signal Name="APS_SHKU17_DI_Call_in_Tcex1" UUID="A2BE0125446B63004FC25BA4DAB0396B" Type="BOOL" Usage="" Global="TRUE" Comment="Вызов в цех №1" />
+        <Signal Name="APS_SHKU17_DI_Res_13" UUID="3B33D9EB47A00ED71C5DD69E11A78B9A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Ctrl_24V_TS1" UUID="D2BC121345066C861F4DF1BACCFD1ECB" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль 24 В ТС" />
+        <Signal Name="APS_SHKU17_DI_Pozh_in_GN_KC1" UUID="87C6B9A145B24FD5A57624B80D013244" Type="BOOL" Usage="" Global="TRUE" Comment="Пожар в ГН КЦ 1" />
+        <Signal Name="APS_SHKU17_DI_Pozh_in_MB_KC1" UUID="FDCAC7C346C00B70C26BF990DBB685F2" Type="BOOL" Usage="" Global="TRUE" Comment="Пожар в маслоблоке КЦ 1" />
+        <Signal Name="APS_SHKU17_DI_Zagaz_in_GN_KC1_10p" UUID="BB5A181B455BFD9C67CC5AAF6A51F5E0" Type="BOOL" Usage="" Global="TRUE" Comment="Загазованность в ГН КЦ 1 10%" />
+        <Signal Name="APS_SHKU17_DI_Zagaz_in_GN_KC1_20p" UUID="F38CCAC34BA24D17F39E818CFC5AC12E" Type="BOOL" Usage="" Global="TRUE" Comment="Загазованность в ГН КЦ 1 20%" />
+        <Signal Name="APS_SHKU17_DI_Zagaz_in_PR_KC1_10p" UUID="C3FCECE84C6BCE8FC55BA4842ADBBF1A" Type="BOOL" Usage="" Global="TRUE" Comment="Загазованность в пункте редуцирования КЦ 1 10%" />
+        <Signal Name="APS_SHKU17_DI_Zagaz_in_PR_KC1_20p" UUID="4356C12F43297D33EEB43397516A797E" Type="BOOL" Usage="" Global="TRUE" Comment="Загазованность в пункте редуцирования КЦ 1 20%" />
+        <Signal Name="APS_SHKU17_DI_Zagaz_in_KRP_prib_10p" UUID="A354C98B4322F75B04B98D97DD921AFC" Type="BOOL" Usage="" Global="TRUE" Comment="Загазованность в КРП приборная 10%" />
+        <Signal Name="APS_SHKU17_DI_Zagaz_in_KRP_prib_20p" UUID="B9DC611B485610C984491A8437269806" Type="BOOL" Usage="" Global="TRUE" Comment="Загазованность в КРП приборная  20%" />
+        <Signal Name="APS_SHKU17_DI_Zagaz_in_KRP_reg_10p" UUID="262482C24F211133DF6CEE8AF40972B4" Type="BOOL" Usage="" Global="TRUE" Comment="Загазованность в КРП регуляторная 10%" />
+        <Signal Name="APS_SHKU17_DI_Zagaz_in_KRP_reg_20p" UUID="C0B8C4674679FE3C2DFBCAB581171A89" Type="BOOL" Usage="" Global="TRUE" Comment="Загазованность в КРП регуляторная  20%" />
+        <Signal Name="APS_SHKU17_DI_Neispr_Sys_PO_KZ" UUID="CE0FB4854DFB70D4509914B7A579441A" Type="BOOL" Usage="" Global="TRUE" Comment="Неисправность системы ПО и КЗ" />
+        <Signal Name="APS_SHKU17_DI_Res_14" UUID="635FF5A64AC9A4274C1DF1BCEB42415A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_15" UUID="3FA72A6D4DAAD804CEB74BA959C737AA" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_16" UUID="E6373D4D439B919A26738A94E62A4B7B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_17" UUID="A0CF6F65441808E4D8E678B78CF11877" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_18" UUID="F15C799140CB024933DBEA96BC7232C2" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_19" UUID="1AF9CB2E431116BD6960FF9DF3EFC0DD" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_20" UUID="C4C18C134C7E874B2E9CCDBD47447787" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Uots_AVV_gr1" UUID="3E9874034C52828EFCF58F897539C318" Type="BOOL" Usage="" Global="TRUE" Comment="Отсутствие напряжения в схеме аварийно-вытяжной вентиляции. Группа 1" />
+        <Signal Name="APS_SHKU17_DI_Uots_Vent_prit1" UUID="8C3B7EDC417DB0A67D5975AC25A592ED" Type="BOOL" Usage="" Global="TRUE" Comment="Отсутствие напряжения в схеме  приточного вентилятора 1" />
+        <Signal Name="APS_SHKU17_DI_Uots_Vent_prit2" UUID="420FF0A04E563E27F0E4279F5CB0094E" Type="BOOL" Usage="" Global="TRUE" Comment="Отсутствие напряжения в схеме  приточного вентилятора 2" />
+        <Signal Name="APS_SHKU17_DI_Uots_AVV_gr2" UUID="CD86E75540F992C14C4E97B5E203C737" Type="BOOL" Usage="" Global="TRUE" Comment="Отсутствие напряжения в схеме аварийно-вытяжной вентиляции. Группа 2" />
+        <Signal Name="APS_SHKU17_DI_Uots_Vent_prit3" UUID="0065D3DD436F9BF434F313AD774F7CC4" Type="BOOL" Usage="" Global="TRUE" Comment="Отсутствие напряжения в схеме  приточного вентилятора 3" />
+        <Signal Name="APS_SHKU17_DI_Uots_Vent_prit4" UUID="EF8C279041D7C27DB5B6DDA8BB5CB67C" Type="BOOL" Usage="" Global="TRUE" Comment="Отсутствие напряжения в схеме  приточного вентилятора 4" />
+        <Signal Name="APS_SHKU17_DI_Osvesh_perim_KC1_on" UUID="82526E5D481316A0FA83819186C103E5" Type="BOOL" Usage="" Global="TRUE" Comment="Периметральное освещение КЦ-1 включено" />
+        <Signal Name="APS_SHKU17_DI_Res_21" UUID="89DC9BCC4CA62FBD5EBDD0B6F17F27BF" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_22" UUID="74C2578C46155708A1C551921FDECDF0" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_23" UUID="3309477A4ED06FFE7EC96CB570EC36E6" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_24" UUID="2C2E4A4941A934DF7EC224A9A2C05FB8" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_25" UUID="70BB94534281FA526B0DE294D792750E" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_26" UUID="8E6E71DB43D1CA6F32DC83B159CBF02B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Ctrl_24V_TS2" UUID="79F9960545D816FEA24417B47A1DB369" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль 24 В ТС" />
+        <Signal Name="APS_SHKU17_DI_GPA1_Ala_Horn_on" UUID="1749AE484F23AC13588F75BD84286772" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №1 Включить звуковую сигнализацию" />
+        <Signal Name="APS_SHKU17_DI_GPA2_Ala_Horn_on" UUID="DD0400034DB38A1B2C85EB87B43F20B1" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №2 Включить звуковую сигнализацию" />
+        <Signal Name="APS_SHKU17_DI_GPA3_Ala_Horn_on" UUID="3D6F26F34A7A623694C51EB6E99B8F11" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №3 Включить звуковую сигнализацию" />
+        <Signal Name="APS_SHKU17_DI_GPA4_Ala_Horn_on" UUID="FE06CEAD44D9D84A3EBC84BE1D92C8B4" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №4 Включить звуковую сигнализацию" />
+        <Signal Name="APS_SHKU17_DI_GPA5_Ala_Horn_on" UUID="5D10B58247CFE0D27A91518930CAF2C5" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №5 Включить звуковую сигнализацию" />
+        <Signal Name="APS_SHKU17_DI_GPA6_Ala_Horn_on" UUID="A01F768A48BB5E7C55D036A281FF6917" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №6 Включить звуковую сигнализацию" />
+        <Signal Name="APS_SHKU17_DI_GPA1_Stop_in_gr" UUID="66C1D8004ED19A78B4483EA3B192E777" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №1 Останов в группе" />
+        <Signal Name="APS_SHKU17_DI_GPA2_Stop_in_gr" UUID="4FB291CC490ED29486B5B1A1F43D2256" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №2 Останов в группе" />
+        <Signal Name="APS_SHKU17_DI_GPA3_Stop_in_gr" UUID="D5413CA14F6B6F3D31F37F9EB761E38E" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №3 Останов в группе" />
+        <Signal Name="APS_SHKU17_DI_GPA4_Stop_in_gr" UUID="8B346CF2416DD180A153D2A18780DDC3" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №4 Останов в группе" />
+        <Signal Name="APS_SHKU17_DI_GPA5_Stop_in_gr" UUID="1031520E4C58F51DFF85BEA7E2562C61" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №5 Останов в группе" />
+        <Signal Name="APS_SHKU17_DI_GPA6_Stop_in_gr" UUID="50C1B36C4EB41529DEF186842B173A15" Type="BOOL" Usage="" Global="TRUE" Comment="ГПА №6 Останов в группе" />
+        <Signal Name="APS_SHKU17_DI_Res_27" UUID="BA2EC2D045ADCFFC7270508494E772E8" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_28" UUID="F6505F2C4AF84CE51784B6AD9CA241EA" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_29" UUID="41574E2242EC0EBCA165D392B5ED9755" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_30" UUID="02731EDA4E8E52586EFA73A133C14A6F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_31" UUID="999C9C114DA3A44CB5586DB579E695D1" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_32" UUID="DF32B3BF4F73406EEB7AD6B4EF05CC67" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_33" UUID="B5FF5FB7433F25F5B3DDACB2CBCAA956" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_34" UUID="EFE104864B9F68975E421ABDF684B486" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_35" UUID="DC62D4134B66DDD2D9F02EB6D1F56437" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_36" UUID="4CADD4F8499FC504EFD7FE8BE37ECC66" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_37" UUID="6FAB86E449D9E497CF914A9188C76D1A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_38" UUID="56B60213400C5C0334BAF38C3478E566" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_39" UUID="4DCF101E43B56268394E428CC049D34F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_40" UUID="7D8075EF42BB75C95535C2A27AFF90C2" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_41" UUID="4C8D45EB48C35769356028B2992E66E6" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_42" UUID="5C65EC904FE1B56F94EE54AD06A5EF27" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_43" UUID="C52031CC44AB1E79856717AF11CB2C05" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_44" UUID="0EB2123845A3B00665DA18918A8B1555" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_45" UUID="F3AB4114432F406E62107EB04B3B577D" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_46" UUID="DAFCAB1E46B62D18D5E03F97426C0AD6" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_AVR_PN_srab" UUID="5C0D6F044F368F87A17C9C849DFB461B" Type="BOOL" Usage="" Global="TRUE" Comment="Сработало АВР в пожарных насосах" />
+        <Signal Name="APS_SHKU17_DI_PN1_Kl_KVR_Auto" UUID="040571724830630E9933CEA63E302668" Type="BOOL" Usage="" Global="TRUE" Comment="Пожарный насос №1. Ключ КВР в положении «Автомат»" />
+        <Signal Name="APS_SHKU17_DI_PN1_Kl_KVR_Dist" UUID="0F1AE79A4FC6E649F6B728864F814F4B" Type="BOOL" Usage="" Global="TRUE" Comment="Пожарный насос №1. Ключ КВР в положении «Дистанционный»" />
+        <Signal Name="APS_SHKU17_DI_PN2_Kl_KVR_Auto" UUID="00F5C8374433B0DBC298158D48F38234" Type="BOOL" Usage="" Global="TRUE" Comment="Пожарный насос №2. Ключ КВР в положении «Автомат»" />
+        <Signal Name="APS_SHKU17_DI_PN2_Kl_KVR_Dist" UUID="75B80C1340A949BFE83ECEA68CC31CA7" Type="BOOL" Usage="" Global="TRUE" Comment="Пожарный насос №2. Ключ КВР в положении «Дистанционный»" />
+        <Signal Name="APS_SHKU17_DI_PN3_Kl_KVR_Auto" UUID="9E2E89454CD419D8EF5681B0EE397E56" Type="BOOL" Usage="" Global="TRUE" Comment="Пожарный насос №3. Ключ КВР в положении «Автомат»" />
+        <Signal Name="APS_SHKU17_DI_XPN1_Kl_KVR_Dist" UUID="3504CE604DD58F7F1AE4DD86B68DF5F2" Type="BOOL" Usage="" Global="TRUE" Comment="Хоз.питьевой  насос №1. Ключ КВР в положении «Дистанционный»" />
+        <Signal Name="APS_SHKU17_DI_XPN2_Kl_KVR_Dist" UUID="4292293E456CF977206B73BC4008A54E" Type="BOOL" Usage="" Global="TRUE" Comment="Хоз.питьевой  насос №2. Ключ КВР в положении «Дистанционный»" />
+        <Signal Name="APS_SHKU17_DI_XPN3_Kl_KVR_Dist" UUID="D7DA9E4F470FFA3E42F479BDA2E7EF8B" Type="BOOL" Usage="" Global="TRUE" Comment="Хоз.питьевой  насос №3. Ключ КВР в положении «Дистанционный»" />
+        <Signal Name="APS_SHKU17_DI_NC1_Kl_KVR_Auto" UUID="FB82EB9645B1FF1B3C3337BA7CF239A6" Type="BOOL" Usage="" Global="TRUE" Comment="Насос циркуляции  №1. Ключ КВР в положении «Автомат»." />
+        <Signal Name="APS_SHKU17_DI_NC2_Kl_KVR_Auto" UUID="607BB77C4D13B1771621C7B942B1C6F0" Type="BOOL" Usage="" Global="TRUE" Comment="Насос циркуляции  №2. Ключ КВР в положении «Автомат»." />
+        <Signal Name="APS_SHKU17_DI_NC3_Kl_KVR_Auto" UUID="7B9E195A4FDF304382C6E5AE5F3EC68B" Type="BOOL" Usage="" Global="TRUE" Comment="Насос циркуляции  №3. Ключ КВР в положении «Автомат»." />
+        <Signal Name="APS_SHKU17_DI_Uots_DN" UUID="511C4F624907CC498E72C4878E4C588C" Type="BOOL" Usage="" Global="TRUE" Comment="Отсутствие напряжения в схеме дренажных насосов" />
+        <Signal Name="APS_SHKU17_DI_Lavar_DN" UUID="3CE0DEFD437C6E7BC4FC2DAEAC38DCD3" Type="BOOL" Usage="" Global="TRUE" Comment="Аварийный уровень в приямке дренажного насоса" />
+        <Signal Name="APS_SHKU17_DI_PN1_on" UUID="D78432D84FC5CAD7F7A6C9A39CCEE30E" Type="BOOL" Usage="" Global="TRUE" Comment="Пожарный  насос №1  включен" />
+        <Signal Name="APS_SHKU17_DI_PN2_on" UUID="7592F4F9475A230024E689AE52E63924" Type="BOOL" Usage="" Global="TRUE" Comment="Пожарный  насос №2  включен" />
+        <Signal Name="APS_SHKU17_DI_PN3_on" UUID="59A11DAF43B9C4F6FC307FAF2155EB09" Type="BOOL" Usage="" Global="TRUE" Comment="Пожарный  насос №3  включен" />
+        <Signal Name="APS_SHKU17_DI_NC1_on" UUID="E6B5A0F94DEDEEC8E261B4A8C370C3BF" Type="BOOL" Usage="" Global="TRUE" Comment="Насос циркуляции  №1  включен" />
+        <Signal Name="APS_SHKU17_DI_NC2_on" UUID="370C072C453DFA105C6190A021C9C0F1" Type="BOOL" Usage="" Global="TRUE" Comment="Насос циркуляции  №2  включен" />
+        <Signal Name="APS_SHKU17_DI_NC3_on" UUID="42FF3A974AB2C9552BA01C8BD4A0FFF5" Type="BOOL" Usage="" Global="TRUE" Comment="Насос циркуляции  №3  включен" />
+        <Signal Name="APS_SHKU17_DI_XPN1_on" UUID="24EABD24451119F9F21966AA630F3A12" Type="BOOL" Usage="" Global="TRUE" Comment="Хоз. питьевой насос №1 включен" />
+        <Signal Name="APS_SHKU17_DI_XPN2_on" UUID="0E5CE8F7491D95D3A6B52F8E388C5EC7" Type="BOOL" Usage="" Global="TRUE" Comment="Хоз. питьевой насос №2 включен" />
+        <Signal Name="APS_SHKU17_DI_XPN3_on" UUID="2975990D4898077937A3398BF82F26C7" Type="BOOL" Usage="" Global="TRUE" Comment="Хоз. питьевой насос №3 включен" />
+        <Signal Name="APS_SHKU17_DI_DN1_on" UUID="BD9572474C5880BFD02F4B88DA42EB98" Type="BOOL" Usage="" Global="TRUE" Comment="Дренажный насос №1 включен" />
+        <Signal Name="APS_SHKU17_DI_DN2_on" UUID="8E5FD4C04AE5D974C2B5DBA09A9E40E5" Type="BOOL" Usage="" Global="TRUE" Comment="Дренажный насос №2 включен" />
+        <Signal Name="APS_SHKU17_DI_Z1_closed" UUID="49B7E0B14F13B18081452AA79E152CF7" Type="BOOL" Usage="" Global="TRUE" Comment="Задвижка №1 закрыта" />
+        <Signal Name="APS_SHKU17_DI_Z1_opened" UUID="744428184649E6BF990113BDF06B31E9" Type="BOOL" Usage="" Global="TRUE" Comment="Задвижка №1 открыта" />
+        <Signal Name="APS_SHKU17_DI_Z2_closed" UUID="FD2916244F0E9771D6C9289F1834A1E0" Type="BOOL" Usage="" Global="TRUE" Comment="Задвижка №2 закрыта" />
+        <Signal Name="APS_SHKU17_DI_Z2_opened" UUID="AD87847846A365212B620D8E746FDBA7" Type="BOOL" Usage="" Global="TRUE" Comment="Задвижка №2 открыта" />
+        <Signal Name="APS_SHKU17_DI_Res_47" UUID="61F14C0F44BBEB769FFA538292B3C4C6" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_48" UUID="B3BEB6A54CA5644BB692A7817E174478" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Ctrl_24V_TS3" UUID="836785CC4B472C76CB2CE3B83C9E9643" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль 24 В ТС" />
+        <Signal Name="APS_SHKU17_DI_Ctrl_osn_220_alter" UUID="28A4889A43B0882F95A907AEF2C41407" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль основного питания ~220 В" />
+        <Signal Name="APS_SHKU17_DI_Ctrl_res_220_const" UUID="7779F10F4E98C9E04ACA78816F33C6EC" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль резервного питания 220 В пост." />
+        <Signal Name="APS_SHKU17_DI_Avt_pit_on" UUID="D32D390F4DE4BCC2D1BCE9B704BDDD45" Type="BOOL" Usage="" Global="TRUE" Comment="Автоматы питания включены" />
+        <Signal Name="APS_SHKU17_DI_Dveri_opened" UUID="B7AA2A8449AA669456C05FBC47C5FEEC" Type="BOOL" Usage="" Global="TRUE" Comment="Двери ШКУ-17 открыты" />
+        <Signal Name="APS_SHKU17_DI_Ctrl_ispr_razr" UUID="9E5F419242F28476CEE434A021F1AD6C" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль исправности разрядников" />
+        <Signal Name="APS_SHKU17_DI_Ispr_osn_IP24Vvn" UUID="08EBCD9B4D9B67EF691E4DA144C7D3EA" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В внутр. цепей" />
+        <Signal Name="APS_SHKU17_DI_Ispr_res_IP24Vvn" UUID="926B747A4D916653ED0389AC087AD403" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В внутр. цепей" />
+        <Signal Name="APS_SHKU17_DI_Ispr_osn_IP24V_AI" UUID="26F70796441E3179F76DFE8BE28603EB" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В AI" />
+        <Signal Name="APS_SHKU17_DI_Ispr_res_IP24V_AI" UUID="462562AA448043FAE4A9BA96EA71982D" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В AI" />
+        <Signal Name="APS_SHKU17_DI_Ispr_osn_IP24V_DI" UUID="D80AB76D4E06C74029440B9741B00F35" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В DI" />
+        <Signal Name="APS_SHKU17_DI_Ispr_res_IP24V_DI" UUID="2A83B01C4E5F93CBACDA879B27F29132" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В DI" />
+        <Signal Name="APS_SHKU17_DI_Ispr_osn_IP24V_DO" UUID="527FFFE1409FEE941698CDA47CF0BBC8" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В DO" />
+        <Signal Name="APS_SHKU17_DI_Ispr_res_IP24V_DO" UUID="DC522F02496782C6BD2C7898ACDBBFF9" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В DO" />
+        <Signal Name="APS_SHKU17_DI_Ispr_osn_IP24V_BEAO" UUID="093649664257A4ECC222AFBD55ED35B4" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В БЭАО" />
+        <Signal Name="APS_SHKU17_DI_Ispr_res_IP24V_BEAO" UUID="C92F8B7A44E7D864311A8584C433E70C" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В БЭАО" />
+        <Signal Name="APS_SHKU17_DI_Res_49" UUID="F282A28A43445A582B2B50AD66E2AE0E" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_EAO_KC_PU" UUID="7315B2574BB5D51C2BB07386A8FA45CD" Type="BOOL" Usage="" Global="TRUE" Comment="ЭАО КЦ с ПУ" />
+        <Signal Name="APS_SHKU17_DI_EAO_KC_PU_kcd" UUID="8683DF1445D948CF01DDAEB65D251DA1" Type="BOOL" Usage="" Global="TRUE" Comment="ЭАО КЦ с ПУ.КЦД" />
+        <Signal Name="APS_SHKU17_DI_AObs_KC_PU" UUID="D5333BC1417DDB75FECFD4B1D4E77144" Type="BOOL" Usage="" Global="TRUE" Comment="АО КЦ бс с ПУ" />
+        <Signal Name="APS_SHKU17_DI_AObs_KC_PU_kcd" UUID="A46E33F2436A6326DAE0278EE0ED8731" Type="BOOL" Usage="" Global="TRUE" Comment="АО КЦ бс с ПУ.КЦД" />
+        <Signal Name="APS_SHKU17_DI_AOss_KC_PU" UUID="9655877143AA6909C8C6DCA81DBCDE3B" Type="BOOL" Usage="" Global="TRUE" Comment="АО КЦ сс с ПУ" />
+        <Signal Name="APS_SHKU17_DI_AOss_KC_PU_kcd" UUID="80A43DB6401D5FAF0B55E99D36026F2D" Type="BOOL" Usage="" Global="TRUE" Comment="АО КЦ сс с ПУ.КЦД" />
+        <Signal Name="APS_SHKU17_DI_EAO_KC_PEAO" UUID="8E6087E1434FF3265CEC71BCE6F2C2B1" Type="BOOL" Usage="" Global="TRUE" Comment="ЭАО КЦ с ПЭАО" />
+        <Signal Name="APS_SHKU17_DI_EAO_KC_PEAO_kcd" UUID="3A3071644D0B6FB43BB85A9CBDA4E879" Type="BOOL" Usage="" Global="TRUE" Comment="ЭАО КЦ с ПЭАО.КЦД" />
+        <Signal Name="APS_SHKU17_DI_Ctrl_pit_KR" UUID="5575EA064DFEA97908CD1D91997E0C38" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль питания кранов" />
+        <Signal Name="APS_SHKU17_DI_BEAO_ready" UUID="163A566F45A4FF42DF424DBD2BAB559E" Type="BOOL" Usage="" Global="TRUE" Comment="Готовность БЭАО" />
+        <Signal Name="APS_SHKU17_DI_PU_ready" UUID="40C9B3A44389DA7E962B7582B7E7CAC6" Type="BOOL" Usage="" Global="TRUE" Comment="Готовность ПУ" />
+        <Signal Name="APS_SHKU17_DI_Kvitir_PU" UUID="6A5D69E144E0D8BED5322EB7F4626041" Type="BOOL" Usage="" Global="TRUE" Comment="Съем звука (ПУ)" />
+        <Signal Name="APS_SHKU17_DI_RU_KR" UUID="8DF8E3EF40714DB2AA2C52B14A3D8BB1" Type="BOOL" Usage="" Global="TRUE" Comment="РУ кранами" />
+        <Signal Name="APS_SHKU17_DI_Res_50" UUID="5F287F844EE8075B3B98A4BF5A9CAAA6" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_51" UUID="D860E4534FF43F22A88653A3C3085AFA" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_52" UUID="65D9A1714EB3F623F15328A36E2A70ED" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Neispr_pit_SHARM" UUID="F8AA51B84A83E1CA4F130CB4DFBFFFD8" Type="BOOL" Usage="" Global="TRUE" Comment="Неисправность питания шкафа АРМ" />
+        <Signal Name="APS_SHKU17_DI_Work_AKB_SHARM" UUID="8156B6B840A07CA8EAD5E997791A8FEA" Type="BOOL" Usage="" Global="TRUE" Comment="Работа от АКБ шкафа АРМ" />
+        <Signal Name="APS_SHKU17_DI_Neispr_pit_US" UUID="009AD3594B0B579F9797969582E87F0D" Type="BOOL" Usage="" Global="TRUE" Comment="Неисправность питания устройства серверного" />
+        <Signal Name="APS_SHKU17_DI_Work_AKB_US" UUID="2E87C879434E1790630BE9B2800B9D67" Type="BOOL" Usage="" Global="TRUE" Comment="Работа от АКБ устройства серверного" />
+        <Signal Name="APS_SHKU17_DI_Neispr_osn_pit_SHSU" UUID="75954B984976B8ECACB734A4133477E0" Type="BOOL" Usage="" Global="TRUE" Comment="Неисправность основного питания шкафа сетевого оборудования" />
+        <Signal Name="APS_SHKU17_DI_Neispr_res_pit_SHSU" UUID="924FF99D46C15C79118F5F8ABDB2682A" Type="BOOL" Usage="" Global="TRUE" Comment="Неисправность резервного питания шкафа сетевого оборудования" />
+        <Signal Name="APS_SHKU17_DI_Res_53" UUID="14C742CC4E17357C97A0FFA2961FB41F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_54" UUID="613F9B1C46CD414EA673CC8DFD158168" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_55" UUID="900B034C43A04F87ED0618AEFFC915C5" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_56" UUID="ABE13B944C6ECC26BCE2C7ADDAA5CBD8" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_57" UUID="933231604BBBF428D0AFF2885F633D8B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_58" UUID="4B621B1D475C459E31EC8590D0B59DF4" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_59" UUID="40F16B3047E58906D38442815CFEFC08" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_60" UUID="9A28179E4AF605E2BFC357B7297189DD" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_61" UUID="736D110C4B47432A7332FF9D2059C1D0" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_62" UUID="CF6E69F0434768A6EC178092D048F68C" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_KR30_OFF" UUID="9F080F08443A666E2865C0A058CDB7F4" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR30_ON" UUID="FC14618646DBCA43C406FD808C5A3BC3" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR30_IM" UUID="F4754E654A4CC15D1B34E4BCB5382BC8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR30_VK" UUID="1892DBDD4AC88B84C091F9B4294540F2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR30V_OFF" UUID="6891B989435F09CB9F522EB4B0E9E69E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30В. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR30V_ON" UUID="04F0310E4134B59CAB8B2BBC85869C34" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30В. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR30V_IM" UUID="975CE9C64C52FF87955BE89334A7309D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30В. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR30V_VK" UUID="BEF25E2E46FCB1D92758558446772067" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 30В. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR7_OFF" UUID="3A4A017243A22C5C424AAB853268815A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR7_ON" UUID="BA4D5E5A4B81488A2692B0A4DFC8A885" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR7_IM" UUID="684C71EC465732C3A4865A91C999CF48" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR7_VK" UUID="747B8EF34376A3B655212688EA23EEC2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR7R_OFF" UUID="AAC57E2848E2AF0235F6758239A10012" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR7R_ON" UUID="9073A91B4D245EF94AA1A2B13E228EE5" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR7R_IM" UUID="3FE1C8D347015B8FE3B9EB98B70EFF05" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR7R_VK" UUID="5C9D57E54D35B71413E833ABB80FBB84" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 7Р. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR8_OFF" UUID="C9DE37DD4C6F43EC917238AEC62143E1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR8_ON" UUID="E9BF0BEF42A38B377B4C868A4E44F479" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR8_IM" UUID="FB71D44841628F7BB43E48BAB26BE2B2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR8_VK" UUID="9D6B1D114C545EAE7895A3BF4ABD793E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR8s_OFF" UUID="1DBF30A648769D169C75879BA7A42222" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8&apos;. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR8s_ON" UUID="C1B4FECD4C9D456EEE702897C546277F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8&apos;. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR8s_IM" UUID="F11DB64D445477865877C9B1F1B9B43D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8&apos;. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR8s_VK" UUID="034BCD764016B2D839922AA3F37B4B75" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8&apos;. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR8A_OFF" UUID="447F15D74317E05001112F819E1B9336" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR8A_ON" UUID="18596F464E36760A4AB0B48B8E750C5F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR8A_IM" UUID="A8E280CA46948B1462613093B39671A5" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR8A_VK" UUID="39A4DBF94BDC2D5594F24BBB51005A6A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR8As_OFF" UUID="2C1700A14AEC78792461CEA8249DB6C2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А&apos;. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR8As_ON" UUID="FB0FF8B54FEE9BB2DC0E7DB7E212C851" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А&apos;. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR8As_IM" UUID="C76D242C4E1480E81DD42C9468E07F7E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А&apos;. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR8As_VK" UUID="E56931C74CB6EAFBB1C108BCC8148924" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 8А&apos;. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR17_OFF" UUID="0D6E51EF4A0854B4E558AB87A96925B0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 17. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR17_ON" UUID="0488615343A5A2C8DE68B59595405FA7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 17. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR17_IM" UUID="AF7E8E584DB25854888F93B0C96770C0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 17. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR17_VK" UUID="67F75CBB431D3C4DDDC951B5F5B4408A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 17. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR18_OFF" UUID="0F0C29F443E93EEECC034198C4673A0B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR18_ON" UUID="D8F261F34DBE1FBA5FA502A3196A7BA4" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR18_IM" UUID="920DD3774684F3401830A1A50DB2427C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR18_VK" UUID="F5375A23493CB18D07CB6295616BBF16" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR18A_OFF" UUID="CDD158C34876C2F56C06D5ADC4921807" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR18A_ON" UUID="A0EB2B414009BA0D07BE1989B57BFE88" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR18A_IM" UUID="BE4FAFD2485C055B50424DA352E180FF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR18A_VK" UUID="D89055FC472375F5A19C44B50FF86B48" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 18А. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR6_OFF" UUID="F52B62D8431C8DB6E2E64AB6D4474854" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR6_ON" UUID="EE6CFB494D95FFF96BEEDDAAAD0EA0D6" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR6_IM" UUID="29F207E94F5AF62E38BE19AD2D0F12DF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR6_VK" UUID="A1090A08495050350A110898EE0D911F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR6R_OFF" UUID="037904E64AB48FDB72D60FA5F8A78FDE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR6R_ON" UUID="A7BD5B3449BC23E58BDAEAA0458313D0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR6R_IM" UUID="B8EA55C947A065119717AC937CBC6D61" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR6R_VK" UUID="5B60BF7C4BE6C4AAB5DC98AE32B104CB" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6Р. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR6As_OFF" UUID="C55E35AB400A4930D0C4E6991899D537" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А&apos;. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR6As_ON" UUID="4AB4CA0A4AD5A1A8179D86BA4BCE6E0E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А&apos;. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR6As_IM" UUID="E394BF1246E4112C3A1BB2BA88DABC2C" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А&apos;. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR6As_VK" UUID="48F098AC4BC8DAE097FB1888BBE15C83" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6А&apos;. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR6AR_OFF" UUID="72B362724DC49ABA2DB398B5157809E5" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR6AR_ON" UUID="FDC7C023472A2A405A7D31A7F37AC164" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR6AR_IM" UUID="D7EC5F524D885D2120FEB3A2E3BC37AA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR6AR_VK" UUID="05FC246C45119033E91F2AA2C96A86C7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 6АР. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_Res_63" UUID="797BD856498A2825CB9A6C905676AD37" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_64" UUID="1FA90C1D48CC24177FC1549B4C7F8849" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_65" UUID="8238AB1C4A8A1F8779A42D885D67EB4A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_66" UUID="674AD34D48FE56369287E5B0D4440338" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_KR41_OFF" UUID="84ADB107478AC834ED450881D4CE7C97" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR41_ON" UUID="219E483B46C573CEC22E11B74F057517" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR41_IM" UUID="D7CC3F644F1FC2251A59B69507B90914" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR41_VK" UUID="76DCD69B4E91F4F4F5F4C4B197821607" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 41. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR42_OFF" UUID="3AB66FBD477DCFE55BADAB87CFBA6EFF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 42. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR42_ON" UUID="7DCB6E504107FA3D3F3979BF8303D67E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 42. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR42_IM" UUID="5D8831A24BAD7D51505013BCE267694B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 42. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR42_VK" UUID="A4592C9740D3EED011AF9DB395FAFBFD" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 42. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR43_OFF" UUID="8BAF76CC42F45D9416C8EEADEA399783" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR43_ON" UUID="B0B880264E5F7D004B6F41A2F7626B1F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR43_IM" UUID="2147C0E149CD6DBEB67D7893E3B7A0A3" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR43_VK" UUID="603F2956422C538DC8B87789F47F2672" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 43. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR44_OFF" UUID="9A4F43A243179BF6E016228017FD5132" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR44_ON" UUID="8CC22726416E84D5E2714AA5BD5267A9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR44_IM" UUID="A960293D4409D27ACFBC3D9D1DB6BD7D" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR44_VK" UUID="A6C9A8AC4CFCAFC9B39F5EB620EE73E6" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 44. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_Res_67" UUID="F509418C4B42F0D3D0506AA620E02565" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_68" UUID="3DBFCD4C48344256682951A357622119" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_69" UUID="AD92EA38445F3F700C5D8FAA642B5917" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_70" UUID="9FC71A3C4BF0B63627BB109E3E084F6F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_71" UUID="6E1CE64E48509FA9DC710D98D65175B4" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_72" UUID="FC5237A24CE1345CFE5B5BB5E0CB7A4C" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_73" UUID="275395D7448166E0CEAAFBB99009E707" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_74" UUID="1B1B3A9C4FD6EF120B663BBBE2C58989" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_75" UUID="44C16C4145DC18A4F905E59D367D2B7A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_76" UUID="D68A014F4844606912318EB7A8FB03E6" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_77" UUID="A8A26F734F0605A3A994FF9187E6E6F2" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_78" UUID="CC5EB9DC4E7A779F2D3A86B3C6168288" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_79" UUID="548F7A8F4EBB408BBB0EF49BFD3E18C2" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_80" UUID="9E4CB8EB4D3D5FA0BCBD68B458874F7D" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_81" UUID="FC45B9CF495B5016305EF3BDF352422A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_82" UUID="B7F77214498F8ABECF671E87EC56270E" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_KR45_OFF" UUID="4AD8911C4E042CA5E6B5E890B67F7090" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR45_ON" UUID="D79936F941886E8EBDA3B3A7B088B255" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR45_IM" UUID="FF694D674F03283A0EDA528974B48860" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR45_VK" UUID="4F2325E84FEEF1B65B7442976C2DCC90" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 45. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR46_OFF" UUID="7A54DAE344ACC9924ECCF29B18EA2992" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 46. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR46_ON" UUID="FE5A4FDA4FE73E2072F147BD12EF29CE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 46. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR46_IM" UUID="D2C3B20F4801585331F235B35E2B10AE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 46. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR46_VK" UUID="F00987CD42B63DA467393DB2E9C3824A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 46. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR47_OFF" UUID="D8CBEA73468767ADF62C16B9BC625D22" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR47_ON" UUID="E8ACEEA34239755E3DE41E9F3E481236" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR47_IM" UUID="3CEBFDBD4286A82531C7B2B7252E849E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR47_VK" UUID="CC45AEE647DEEB077315248AACAC0D72" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 47. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR48_OFF" UUID="722B31C6479158F4A78CE183709B3765" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR48_ON" UUID="0BC360EC46801116D5B4DFA22C112F26" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR48_IM" UUID="0126E5A8465BA5DA3E23CBAB72AC93D1" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR48_VK" UUID="E0926A9D4501B788D048B39C4FB3F17F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 48. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR49_OFF" UUID="FB1162C54C0003D686F280ABFF01C7A7" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR49_ON" UUID="A9D8F9A14A7E159D74633BBDA48721AF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR49_IM" UUID="2FFB08D84235DDCC12FAB5A00782B8B0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR49_VK" UUID="903217EA4C3B0AC600D2D29238732585" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 49. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_Res_83" UUID="95DA816940B989F4AADC29BB9B218808" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_84" UUID="423078C6400905D2F185DBB29857DFDE" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_85" UUID="91F558FF48E4AEBD8DECA6B76F26A9E3" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_86" UUID="78AFFCE94C77DC3A33475C8CED898D22" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_87" UUID="81A4BC6E452EFD1C335479A41CF8AE36" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_88" UUID="6B019A724A55205BE85F58995D677F2D" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_89" UUID="7446DA5F42A84BACD40E938D0428DF5B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_90" UUID="EB3456014AFF80000E880C93EE2CEF74" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_91" UUID="B96007A142D48D7AD2C164BFFEE905C1" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_92" UUID="EA24E68E4FBD22700DE8DABB12DE1566" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_93" UUID="4843E4964F19A35F174C6998C759C0A5" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_Res_94" UUID="FC6E3EA5437FF0D3E9413DB5ED3BE34B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_AOS_RUN" UUID="9AA5995046E619E41E5A789FCC3ACF38" Type="BOOL" Usage="" Global="TRUE" Comment="Выполняется АО со стравливанием" />
+        <Signal Name="APS_AOS_OUT_DONE" UUID="9F14917C447600FC6804C2B36A041541" Type="BOOL" Usage="" Global="TRUE" Comment="АО со стравливанием завершен корректно" />
+        <Signal Name="APS_AOS_OUT_DONE_INCORRECT" UUID="C5E7C67E4A597BE8C0E8619ACB980C53" Type="BOOL" Usage="" Global="TRUE" Comment="АО со стравливанием завершен некорректно" />
+        <Signal Name="APS_MD_OVER_PG_1" UUID="4441CB71430EF475B312139ABDA2857B" Type="BOOL" Usage="" Global="TRUE" Comment="Превышение давления газа на выходе за краном 44" />
+        <Signal Name="APS_MD_OVER_PG_2" UUID="BE32F7CB448DB11234FFD48B54E94088" Type="BOOL" Usage="" Global="TRUE" Comment="Превышение давления газа на выходе группы 2" />
+        <Signal Name="APS_AO_GPA_GR1_KR6_ON" UUID="9F7D10544D73DF78D002278892E40E5C" Type="BOOL" Usage="" Global="TRUE" Comment="Открытие крана 6 по АО ГПА группы 1 КЦ-1" />
+        <Signal Name="APS_AO_GPA_GR2_KR6As_ON" UUID="C8A7937746BA98299F8BA6AF86B21673" Type="BOOL" Usage="" Global="TRUE" Comment="Открытие крана 6а&apos; по АО ГПА группы 2 КЦ-1" />
+        <Signal Name="APS_SHU14_DI_Res_1" UUID="4A844250474C2FB7015AA19737B4EE87" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_2" UUID="DAC3A7924399E59E01743BB2FABA38B4" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_3" UUID="1E7A3E0C41E3194FA8F7E4830AE99011" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_4" UUID="9F3E9A894224DF59055F86836369AF93" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_5" UUID="5A9495F44AE5CD15655BC2827C51A39F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_6" UUID="7085197A45B3907382947D948DDBC1C0" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_7" UUID="58A6F53A4EED2B0D1F241BAD8D2ECFFE" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_8" UUID="BCBEA32C488CB25D2D67868B681AC902" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_9" UUID="749EDDBF4B1F63FBBB3F47A4E273B82A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_10" UUID="159F92634660F10D32CADBA2A8147033" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_SACL_OU_pt1" UUID="7A5A52294454C4DB6BFF97B2B71260BC" Type="BOOL" Usage="" Global="TRUE" Comment="САЦ-Л. Очистное устройство прошло точку 1" />
+        <Signal Name="APS_SHU14_DI_SACL_OU_pt2" UUID="28BEA98C4681A51338E9E9B9761F0B14" Type="BOOL" Usage="" Global="TRUE" Comment="САЦ-Л. Очистное устройство прошло точку 2" />
+        <Signal Name="APS_SHU14_DI_SACL_OU_in_CamPr" UUID="A77C8C9B47535CB9F30FC49DD205EDDA" Type="BOOL" Usage="" Global="TRUE" Comment="САЦ-Л. Очистное устройство в камере приема" />
+        <Signal Name="APS_SHU14_DI_SAC3_OU_pt1" UUID="1C3289114F1E69760DF98288EA60CD5C" Type="BOOL" Usage="" Global="TRUE" Comment="САЦ-З. Очистное устройство прошло точку 1" />
+        <Signal Name="APS_SHU14_DI_SAC3_OU_pt2" UUID="5EF0BDC74FDE56E732A646A1066DCDBC" Type="BOOL" Usage="" Global="TRUE" Comment="САЦ-З. Очистное устройство прошло точку 2" />
+        <Signal Name="APS_SHU14_DI_SAC3_OU_in_CamPr" UUID="7808162E43879F2477FBBF86DC053B8A" Type="BOOL" Usage="" Global="TRUE" Comment="САЦ-З. Очистное устройство в камере приема" />
+        <Signal Name="APS_SHU14_DI_Res_11" UUID="25DF1EEA4BC0965E0627D7BB71A8D15B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_12" UUID="8826D4CE48191564E84B3AA6E19DE68D" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_13" UUID="963094C64F60449DA803C79FA405B646" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_14" UUID="A3ED30FE45D76F2791CBFF8866911B7C" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_15" UUID="140F81DD49E22F17516DF8ABE6E9E07A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_16" UUID="C1AB875745D0F446F7CDE4AFCCA88855" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_17" UUID="3DA50E044F1504C5078C5490FC21B14F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_18" UUID="E30485594FB27585EF38EDB042BACB9C" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_19" UUID="A3ECE4F649552C35D463B5A3DFB4018A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_20" UUID="CEACD83C4098E01E85FBB19DF0BC782F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_21" UUID="30FBD0E24830B486F5620CB4E1EF8278" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_22" UUID="68560ADB4C8A005C9A3BC48FD3B52784" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_23" UUID="7F0735904B0A81D2E137B8BAA5EC88A9" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_24" UUID="25CB800C441C4DC17ABFFCAE3A4F42E6" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_25" UUID="307382D949828B44500D819417278E6B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_26" UUID="D7856E994D04AA9DAF4344B1D0BC80B5" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Ctrl_osn_pit_Ualter" UUID="256DCA50472337BBC8B02CB187EA12E7" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль основного питания ~220 В" />
+        <Signal Name="APS_SHU14_DI_Ctr_res_pit_Uconst" UUID="5F98B1EA4F416EC71DE7D5835566CAB1" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль резервного питания 220 В пост." />
+        <Signal Name="APS_SHU14_DI_AP_on" UUID="F161C73B438F743F939FEBB1241B22D8" Type="BOOL" Usage="" Global="TRUE" Comment="Автоматы питания включены" />
+        <Signal Name="APS_SHU14_DI_Dveri_opened" UUID="095804FA44C1153A94CADCB6293315CA" Type="BOOL" Usage="" Global="TRUE" Comment="Двери ШУ-14 открыты" />
+        <Signal Name="APS_SHU14_DI_Ctrl_ispr_razr" UUID="102459FD4F6D9EB43E5DED83D6BED242" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль исправности разрядников" />
+        <Signal Name="APS_SHU14_DI_Ispr_osn_IP24Vvn" UUID="669089C64C838E08D840648051AB4734" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В внутр. цепей" />
+        <Signal Name="APS_SHU14_DI_Ispr_res_IP24Vvn" UUID="88A57E3A48B7D8D7D6855CB13BA1B743" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В внутр. цепей" />
+        <Signal Name="APS_SHU14_DI_Ispr_osn_IP24V_DI" UUID="1DF803EB49815181EA777592EC15F601" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В DI" />
+        <Signal Name="APS_SHU14_DI_Ispr_res_IP24V_DI" UUID="F59BF18B4F659A0138CB409A360E0D80" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В DI" />
+        <Signal Name="APS_SHU14_DI_Ispr_osn_IP24V_DO" UUID="1662A4114921C74348473385FE06A938" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В DO" />
+        <Signal Name="APS_SHU14_DI_Ispr_res_IP24V_DO" UUID="CC40E2A344E248E110E349BD76725FE8" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В DO" />
+        <Signal Name="APS_SHU14_DI_Ispr_osn_IP24V_BEAO" UUID="BD9AF601435F1B320E5C99AE4DE3E47C" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность осн. ИП =24 В БЭАО" />
+        <Signal Name="APS_SHU14_DI_Ispr_res_IP24V_BEAO" UUID="F6D3F9BB4EEA15BBF6E84DA7B6A38D7D" Type="BOOL" Usage="" Global="TRUE" Comment="Исправность рез. ИП =24 В БЭАО" />
+        <Signal Name="APS_SHU14_DI_Ctrl_pit_KR_220const" UUID="D3DA85FF4C933A9464D0B389660B6681" Type="BOOL" Usage="" Global="TRUE" Comment="Контроль питания кранов =220 В" />
+        <Signal Name="APS_SHU14_DI_EAO_KC_SHKU17" UUID="DEDD103A4CDF966BB9ECE6943B2CB07A" Type="BOOL" Usage="" Global="TRUE" Comment="ЭАО КЦ от ШКУ-17" />
+        <Signal Name="APS_SHU14_DI_Res_27" UUID="EF4148394D2D48BB793F96BEC54CEC4D" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_EAO_KC_SHKU17_kcd" UUID="3B4FD1184922A26F1C3655A65C6249D6" Type="BOOL" Usage="" Global="TRUE" Comment="ЭАО КЦ от ШКУ-17.КЦД" />
+        <Signal Name="APS_SHU14_DI_BEAO_ready" UUID="0EC91A9A4D986BA5FB908EAD369163D0" Type="BOOL" Usage="" Global="TRUE" Comment="Готовность БЭАО" />
+        <Signal Name="APS_SHU14_DI_RU_KR" UUID="31E6A13A4546B8D9613D5CB93A6583A7" Type="BOOL" Usage="" Global="TRUE" Comment="РУ кранами" />
+        <Signal Name="APS_SHU14_DI_Res_28" UUID="42DBA6FD4C8F3051E0EC13A999D33F2C" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_29" UUID="75A4EC5A4CDEB349C6588D92B31E1942" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_30" UUID="50891C4F40DA5BAC5E297DB8FB12CAF5" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_31" UUID="AFF4550B43E5EC2CF8296ABC9EEE84F3" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_32" UUID="AB915E83408D1EE9C9F1DAACD2B09870" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_33" UUID="0D3306BC41D7198B76A5D4B14AE93130" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_34" UUID="E0541A48420A26B3D574A3874C7E575F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_35" UUID="AA10022240996976F915A9BCCDA47184" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_36" UUID="87198E8F47CD178ED9516DA619B8282A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_37" UUID="24F2C5B64236B9D6C51BAAA3918D41E0" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_38" UUID="FD3338614F8D2F92F5E0CBBF451991F3" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_39" UUID="E9350E77467248169C835CA6C131EE2F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_40" UUID="2D5A3C6B45597FCF9D7A10AACC788141" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_KRL1_OFF" UUID="6CAE2712492628CDBADE36B0BA96D05E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRL1_ON" UUID="1357D0F8498B3F517329679EC868F9E6" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRL1_IM" UUID="0BC9BEDB49583E30AAC4BCAE16E4C5A0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRL1_VK" UUID="FAC0AD9243D2891033FD2396DEA497D8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Л1. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRSOK2_OFF" UUID="22261EF24E99A4667125498E397AC74A" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК2. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRSOK2_ON" UUID="067887B44293B532663A6EB7DCB3B7D4" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК2. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRSOK2_IM" UUID="3DB44D7A4B5662C19960919943D60898" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК2. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRSOK2_VK" UUID="7D8BD33E425071B457294AA32E1FB7CC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК2. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRSOK3_OFF" UUID="CEDBE3254F6379D7A1EA14B7E67F4624" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRSOK3_ON" UUID="C1FA76F54331F6C874C8F68F91B632BA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRSOK3_IM" UUID="F5E9A484448F27DE35FC8BB1741CEB5E" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRSOK3_VK" UUID="70FBD5B54692F8C05650CAB7C0CC3C4B" Type="BOOL" Usage="" Global="TRUE" Comment="Кран СОК3. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KR1_OFF" UUID="40DC56E44EF37CFCC2C94AB3AF7A24BD" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KR1_ON" UUID="B6781A9D496666DF1FD3F4B63FC54D65" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1. Открыт" />
+        <Signal Name="APS_SHU14_DI_KR1_IM" UUID="2ABEAA294CD33884D05819A3E1F61957" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KR1_VK" UUID="A670537F4635C09802D0119F3C903A08" Type="BOOL" Usage="" Global="TRUE" Comment="Кран 1. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRD_OFF" UUID="7EA2507142F671489BA7E38820D4B2D2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRD_ON" UUID="264029BD434FEDB1A0A036BC1BC42025" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRD_IM" UUID="424F0B49412352890B2D599964695EEA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRD_VK" UUID="23ED331741F811EA9163C0A04C6A4C15" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Д. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRE_OFF" UUID="97A6E60D438D8CA7742417B7C5265094" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRE_ON" UUID="8554F8104BD9384D8481E8833FA4D6D0" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRE_IM" UUID="C1585ED5414AEA0DFADE3CB166985206" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRE_VK" UUID="5F5FF77440D13E334AAB3192A67FC204" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Е. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_Res_41" UUID="405C173E42CBF8C58142469E0D36E993" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_42" UUID="634A64E74CBB2C3655A87498647F4BCD" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_43" UUID="FF3EC54F4BDEFBF25545EBB2F80EFD1D" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_44" UUID="76C604F244A875AF164EF288A112616A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_45" UUID="3F1A61414CDBD1BBC62C9DA44CBEA1BA" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_46" UUID="3C13C2DA4CC49804687FD39D732D237F" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_47" UUID="5F2BCB9246D6BC24D0F3769710CEC402" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_48" UUID="A508D3D545339B8C4DE2ACB3F7611CE5" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_KRU1_2_OFF" UUID="991E6494411A93013C34DFA5A7DBB111" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRU1_2_ON" UUID="8520687A42A5E832986BD29D2AB570C6" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRU1_2_IM" UUID="773C978944D1635540927B938C6568C2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRU1_2_VK" UUID="899B6F834C96C56E60FCA6A55C148DB8" Type="BOOL" Usage="" Global="TRUE" Comment="Кран Ю-1-2. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRUOK1_OFF" UUID="38D2953E4D40718D9EFD0887937406F3" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRUOK1_ON" UUID="F4839F444FEBEF8F5E2E909DFCA34880" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRUOK1_IM" UUID="98B6B90E452FAEEF17F54497478DCFA9" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRUOK1_VK" UUID="7903BE624C605D4A9D7C5DAD513417BA" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-1. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRUOK2_OFF" UUID="828ED78E46B7D57E5281A69467E0A8FC" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRUOK2_ON" UUID="AE80ABF649C6E96E8A1AEF85C709968F" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRUOK2_IM" UUID="7196743A45C06B5E00ADE99E0EB151FE" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRUOK2_VK" UUID="5559927843E3AEA6C52D8EB9F40ABC53" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-2. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRS1_2_OFF" UUID="B3D0C3EF4FC4A8C4AEE89198B6A81698" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRS1_2_ON" UUID="3FC00B1C49D8094DB27C5B8EAF01F665" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRS1_2_IM" UUID="B987394C458D29AE2E9CCBBF99E003BF" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRS1_2_VK" UUID="742282814C114469114C09BEF3EAEFF3" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-1-2. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRS2_3_OFF" UUID="D508C1704836EAEC4AC89CA99E2EB6BD" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRS2_3_ON" UUID="85849A644E63CECFC88949B4776C45B2" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRS2_3_IM" UUID="A322B45E4F2C85626D3A0A95047C3A32" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRS2_3_VK" UUID="03FA4D084B53546C4C939099AE1ED8E3" Type="BOOL" Usage="" Global="TRUE" Comment="Кран С-2-3. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_KRUOK3_OFF" UUID="EF9FEDB843A7A6C49A69959129318B97" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3. Закрыт" />
+        <Signal Name="APS_SHU14_DI_KRUOK3_ON" UUID="F38F9C9F4D3530F72C0365BEBBAE9625" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3. Открыт" />
+        <Signal Name="APS_SHU14_DI_KRUOK3_IM" UUID="6453AB9E46D75179FE711CA5CCBC9617" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3. Контроль цепи ИМ" />
+        <Signal Name="APS_SHU14_DI_KRUOK3_VK" UUID="2BDA375E402B58FE3BA696B602A6F552" Type="BOOL" Usage="" Global="TRUE" Comment="Кран ЮОК-3. Контроль цепи ВК" />
+        <Signal Name="APS_SHU14_DI_Res_49" UUID="D980B9F4453DEF2D270931A4CED3B46A" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_50" UUID="F543F5CF4A2115ABAAB363A141B33E08" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_51" UUID="491F14C54D4DC6E26D6A0EA2FDD6E4DC" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_52" UUID="DFAE81D14F43003B6E994BBCD53E1B19" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_53" UUID="40B725504957B424C6341A8FFE862BE1" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_54" UUID="72073BF24C6438418C2EA3B3895FA59D" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_55" UUID="369871B3444F59A6A7FF77933F937558" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHU14_DI_Res_56" UUID="D4C725FB4BD77A5717627B9F493BC822" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_PRU_Link" UUID="194469CC40D33404BA633DA2D377DF3E" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ17. Отсутствие связи с ПРУ" />
+    </InterfaceList>
+</SubAppType>

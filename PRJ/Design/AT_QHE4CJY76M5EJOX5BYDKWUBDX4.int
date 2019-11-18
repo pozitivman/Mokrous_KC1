@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SubAppType v. 1.3 >
+<SubAppType Name="MAIN_KC" Kind="APPLICATION.ST.CONSOLE" Args="" Comment="" UUID="BCD81A324F743A20457847B9C4AC7A94">
+    <InterfaceList>
+        <Signal Name="@PID" UUID="DB65A6D0437C00D0222520933DD2319E" Type="STRING" Usage="output" />
+        <Signal Name="@STATE" UUID="17E7FE844BFB4F403A300E8706052EBC" Type="STRING" Usage="output" />
+        <Signal Name="@COMMAND" UUID="F07649574D17530DAE3C9F842124FE1D" Type="STRING" />
+        <Signal Name="@COMMAND_VALUE" UUID="5D2B87AB44039686766A29B722A46D51" Type="STRING" />
+        <Signal Name="@MESSAGE" UUID="87A71D4B4FB27A73D3951BAFA337556D" Type="STRING" Usage="output" />
+        <Signal Name="@MESSAGE_FRAMEWORK" UUID="981AE36D4853D773B6D8318F546C5B0A" Type="STRING" Usage="output" />
+        <Signal Name="@EVENT" UUID="276446264EBFFE0F663D339AFFB3F233" Type="STRING" />
+        <Signal Name="@RESERVED" UUID="102B810649FEE074B6DC0A9945B92748" Type="BOOL" />
+        <Signal Name="@RESERVE" UUID="CDE5C2514501A8052E7DA9AF41701589" Type="BOOL" />
+        <Signal Name="@LICENSE" UUID="B604D1A849DB8D37FAE43BA7D8A1D9E8" Type="STRING" Usage="output" />
+        <Signal Name="Deblock_old" UUID="84CA9D954A766496E718B898AF78F95A" Type="BOOL" Global="TRUE" Comment="Кнопка &quot;Деблокировка&quot;" />
+        <Signal Name="FirstscanMAIN_KC" UUID="6C0C8AA64C5CEDD8AFAB5BB7E7B0F0F9" Type="BOOL" InitialValue="TRUE" Global="TRUE" Comment="Признак запуска приложения" />
+        <Signal Name="cycleTimeMAIN_KC" UUID="3CB34FF04B027B4E45235CB09AB613AC" Type="LREAL" Global="TRUE" Comment="Время периодичности запуска" />
+        <Signal Name="cycleTimeMAIN_KC_dur" UUID="DE4DF99841BCBB7F949FA6ACF8584473" Type="LREAL" Global="TRUE" Comment="Время выполнения приложения" />
+        <Signal Name="SHKU17_AO_Ctrl_APK1" UUID="D247427A4B17A8635E745B8FACC58D89" Type="REAL" Global="TRUE" Comment="Аналоговый выход (логика): Управление АПК1" />
+        <Signal Name="SHKU17_AO_Ctrl_APK2" UUID="1D0BB4524FC9523B83D2A1AD38CF7BE3" Type="REAL" Global="TRUE" Comment="Аналоговый выход (логика): Управление АПК2" />
+        <Signal Name="SHKU17_PID_1_DA" UUID="D533BCBF4F3C534602814AA44046D224" Type="BOOL" Global="TRUE" Comment="0 - автомат, 1 - ручное регулирование" />
+        <Signal Name="HMI_SHKU17_APK_1_DA" UUID="0EC76F054949CD79471502ACCB034D66" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. 0 - автомат, 1 - дист" />
+        <Signal Name="SHKU17_PID_1_X0" UUID="550128C74848A7FCD5B41A8FA925684D" Type="REAL" Global="TRUE" Comment="Задание положения АПК1 в ручном режиме (0-100%)" />
+        <Signal Name="SHKU17_PID_1_SP" UUID="BFD012B14887FA67AD174DBC5EE6284E" Type="REAL" InitialValue="55" Global="TRUE" Storage="retain" Comment="Уставка" />
+        <Signal Name="SHKU17_PID_1_XD" UUID="EB8C771747D7DFC9BCCA82AAA6EC1F33" Type="REAL" InitialValue="2" Global="TRUE" Storage="retain" Comment="Зона нечувствительности" />
+        <Signal Name="SHKU17_PID_1_KP" UUID="6E6ADFF645DC5B82711C98BDF71FCC67" Type="REAL" InitialValue="1" Global="TRUE" Storage="retain" Comment="Пропорциональная составляющая" />
+        <Signal Name="SHKU17_PID_1_TR" UUID="05007E0B465AACD861ED309BB977A141" Type="REAL" InitialValue="1" Global="TRUE" Storage="retain" Comment="Интегральная составляющая" />
+        <Signal Name="SHKU17_PID_1_TD" UUID="B2EF4476414DEF6BE286298243B84EBB" Type="REAL" InitialValue="1" Global="TRUE" Storage="retain" Comment="Дифференциальная составляющая" />
+        <Signal Name="HMI_SHKU17_APK1_state" UUID="E05F7E8C43890527E43B868F85B59F79" Type="WORD" Global="TRUE" Comment="ШКУ 17. АПК №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_PID_2_DA" UUID="C6C469B5470401BF5CF8B8BF5527141B" Type="BOOL" Global="TRUE" Comment="0 - автомат, 1 - ручное регулирование" />
+        <Signal Name="HMI_SHKU17_APK_2_DA" UUID="E9CA702A492504B42A5DC59D473ECECE" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. 0 - автомат, 1 - дист" />
+        <Signal Name="SHKU17_PID_2_X0" UUID="30FBBC7048A0EDF17C2617B93883418F" Type="REAL" Global="TRUE" Comment="Задание положения АПК2 в ручном режиме (0-100%)" />
+        <Signal Name="SHKU17_PID_2_SP" UUID="C89FB0DF40A80FCBDF7C6C937837CB3D" Type="REAL" InitialValue="55" Global="TRUE" Storage="retain" Comment="Уставка" />
+        <Signal Name="SHKU17_PID_2_XD" UUID="F2A3E9C14494F489699E39B8A6F960A6" Type="REAL" InitialValue="2" Global="TRUE" Storage="retain" Comment="Зона нечувствительности" />
+        <Signal Name="SHKU17_PID_2_KP" UUID="07ABF8EE45910215733CCDB07695E6E1" Type="REAL" InitialValue="1" Global="TRUE" Storage="retain" Comment="Пропорциональная составляющая" />
+        <Signal Name="SHKU17_PID_2_TR" UUID="253FFE1B4B27EB2E8749BAB9395EFE92" Type="REAL" InitialValue="1" Global="TRUE" Storage="retain" Comment="Интегральная составляющая" />
+        <Signal Name="SHKU17_PID_2_TD" UUID="22A997C7495BB4CF70474B890F8A01D3" Type="REAL" InitialValue="1" Global="TRUE" Storage="retain" Comment="Дифференциальная составляющая" />
+        <Signal Name="HMI_SHKU17_APK2_state" UUID="35B564284CB90BE2E3F14383F3C8CA31" Type="WORD" Global="TRUE" Comment="ШКУ 17. АПК №2. Состояние для SCADA" />
+        <Signal Name="btn_RU_KC" UUID="4EEAA9C44675C31FE9631E8AE5A965D0" Type="BOOL" Global="TRUE" Comment="Команда оператора: ручной/автомат режим управления" />
+        <Signal Name="MD_KC_RU" UUID="176AC421416CC8D93591118A6E2AB7E1" Type="BOOL" Global="TRUE" Comment="Автоматический режим управления КЦ (1 - авт., 0 - ручн.)" />
+        <Signal Name="MD_EAO" UUID="1D14166F49111398061A1D9C9966416E" Type="BOOL" Global="TRUE" Comment="Режим КЦ: экстренный останов" />
+        <Signal Name="MD_AOB" UUID="31E58CB640339C8E47C5A18A6508D907" Type="BOOL" Global="TRUE" Comment="Режим КЦ: аварийный останов со стравливанием" />
+        <Signal Name="MD_AOS" UUID="8C41334B436AE822E2DCFEB2D8D40FE0" Type="BOOL" Global="TRUE" Comment="Режим КЦ: аварийный останов без стравливания" />
+        <Signal Name="MD_NO" UUID="877644DB41B3E67C4698148AD0A0106B" Type="BOOL" Global="TRUE" Comment="Режим КЦ: нормальный останов" />
+        <Signal Name="MD_KOL" UUID="D6F516054397A18516BDD9832BEA4B92" Type="BOOL" Global="TRUE" Comment="Режим КЦ: кольцо" />
+        <Signal Name="MD_MAG" UUID="2D7B9CA74D443C418208D885E48FC85A" Type="BOOL" Global="TRUE" Comment="Режим КЦ: магистраль" />
+        <Signal Name="MD_STOP_net" UUID="EB11E0864A76A2D043A3EEBB1D59EE65" Type="BOOL" Global="TRUE" Comment="Нет режимов НО, АО, ЕАО" />
+        <Signal Name="MD_STOP" UUID="BB7167F049D4E295F1E6D3801B174346" Type="BOOL" Global="TRUE" Comment="Режим КЦ: остановлен" />
+        <Signal Name="MD_Undefined" UUID="1D16DDFE4494298E16F38DA6E6669CCA" Type="BOOL" Global="TRUE" Comment="Режим КЦ: неопределено" />
+        <Signal Name="btn_NO" UUID="A9A5B6A34835428C1B976A90717DE013" Type="BOOL" Global="TRUE" Comment="Команда оператора: заполнение контура газом" />
+        <Signal Name="btn_AOB" UUID="FC79B5D54381BF55C56815A059EA42DE" Type="BOOL" Global="TRUE" Comment="Команда оператора: АОбс" />
+        <Signal Name="btn_AOB_accept" UUID="5C869E0340F6B3286CEA5790AB329E67" Type="BOOL" Global="TRUE" Comment="Команда оператора: Подтверждение АОбс" />
+        <Signal Name="btn_AOB_not_accept" UUID="58DFE0D84F414965336B9AA546B13FE0" Type="BOOL" Global="TRUE" Comment="Команда оператора: Подтверждение Сброс АОбс" />
+        <Signal Name="AOB_wait_accept" UUID="589794C84BCDF702C99C84BF7501F31E" Type="BOOL" Global="TRUE" Comment="АОБ: ожидание подтверждения" />
+        <Signal Name="AOB_TIMER_1" UUID="9199D1B747433882CD7E648BA23CA835" Type="LREAL" Global="TRUE" Comment="АОБ: таймер 1" />
+        <Signal Name="AOB_TIMER_2" UUID="40817B9249BB50BE280597A0B3C82E0B" Type="LREAL" Global="TRUE" Comment="АОБ: таймер 2" />
+        <Signal Name="AOB_RUN" UUID="176738CB4A2B18864471BB9646A077EB" Type="BOOL" Global="TRUE" Comment="АОБ: выполняется АОбс" />
+        <Signal Name="ALG_AOB_OUT_DONE" UUID="ADD095F74B12ADA4B1904F9440E8B379" Type="BOOL" Global="TRUE" Comment="АОБ: АОбс завершен корректно" />
+        <Signal Name="ALG_AOB_OUT_DONE_INCORRECT" UUID="6A7DAE814CDAA24F8F6A1BA65B15B428" Type="BOOL" Global="TRUE" Comment="АОБ: АОбс завершен некорректно" />
+        <Signal Name="btn_AOS" UUID="978EFF6D4EB9B68723612BAB56393EF5" Type="BOOL" Global="TRUE" Comment="Команда оператора: АО КЦ СС" />
+        <Signal Name="btn_AOS_accept" UUID="14CD526B494A7FDFE5DBD19A39DFB4DF" Type="BOOL" Global="TRUE" Comment="Команда оператора: подтверждение АО КЦ СС" />
+        <Signal Name="btn_AOS_not_accept" UUID="327E20FE40A8E4923868E7BD8D8BCBEB" Type="BOOL" Global="TRUE" Comment="Команда оператора: отмена АО КЦ СС" />
+        <Signal Name="AOS_wait_accept" UUID="8E1B6B214F7AEDE0F0B3D796847354B7" Type="BOOL" Global="TRUE" Comment="АОС: ожидание подтверждения" />
+        <Signal Name="AOS_TIMER_1" UUID="357DF6024F5121ABB5BC5593213A6960" Type="LREAL" Global="TRUE" Comment="АОС: таймер 1" />
+        <Signal Name="AOS_TIMER_2" UUID="0381BA464BE002BE98196C9A9A3061C6" Type="LREAL" Global="TRUE" Comment="АОС: таймер 2" />
+        <Signal Name="AOS_TIMER_3" UUID="3344C4A14A0741CED735FDAF6E3440DE" Type="LREAL" Global="TRUE" Comment="АОС: таймер 3" />
+        <Signal Name="ALG_AOS_start" UUID="9F31821E4C976E95B7B198A6C4C0590F" Type="BOOL" Global="TRUE" Comment="АОС: запуск алгоритма АОС" />
+        <Signal Name="AOS_RUN" UUID="054F253F443599A5D7935081E6E4CFE2" Type="BOOL" Global="TRUE" Comment="АОС: выполняется АОсс" />
+        <Signal Name="ALG_AOS_OUT_DONE" UUID="02BFFDDC4851BE4287CD5A8EB8CE0B88" Type="BOOL" Global="TRUE" Comment="АОС: АОсс завершен корректно" />
+        <Signal Name="ALG_AOS_OUT_DONE_INCORRECT" UUID="C8EDF1C64CA8766B313084B852E3EC5E" Type="BOOL" Global="TRUE" Comment="АОС: АОсс завершен некорректно" />
+        <Signal Name="SHKU17_DI_EAO_KC_PU" UUID="694DACA949C5577A4E313E99FC269508" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: ЭАО КЦ с ПУ" />
+        <Signal Name="SHKU17_DI_EAO_KC_PEAO" UUID="34E502184D52CECAEF64D994BD050386" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: ЭАО КЦ с ПЭАО" />
+        <Signal Name="SHKU17_DI_AOss_KC_PU" UUID="58C1781749BB59F184861CB40FE35DC3" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: АО КЦ сс с ПУ" />
+        <Signal Name="SHKU17_DI_KR6_ON" UUID="85A3D66443E90F4F53C7F3820CF92D2C" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 6. Открыт" />
+        <Signal Name="SHKU17_DI_KR6As_ON" UUID="7F44923A4EFA25152823CEBB95089191" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 6А&apos;. Открыт" />
+        <Signal Name="SHKU17_DI_KR7_OFF" UUID="3B3DBB0B49EF93C6C663D997241BFC11" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 7. Закрыт" />
+        <Signal Name="SHKU17_DI_KR8_OFF" UUID="450358E54FA2E466EDF1FEAF8F37272D" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 8. Закрыт" />
+        <Signal Name="SHKU17_DI_KR8s_OFF" UUID="EE4A91BA4B485A7F01077E85E6AB2C9A" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 8&apos;. Закрыт" />
+        <Signal Name="SHKU17_DI_KR8A_OFF" UUID="627C6A7048F8FC3EF8E270992117BEC1" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 8А. Закрыт" />
+        <Signal Name="SHKU17_DI_KR8As_OFF" UUID="22C5CBCF478CD51A27111F9A75FA0CE2" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 8А&apos;. Закрыт" />
+        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR7_OFF" UUID="B6F358F4490B4339C42C7B812985390D" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 7 закрыть" />
+        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR8_OFF" UUID="A8ECFC4644A6505DE39335B1B7392908" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 8 закрыть" />
+        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR8s_OFF" UUID="CBCF0C1B483325FF5CA274A2FB97DCD8" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 8’ закрыть" />
+        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR8A_OFF" UUID="49791FA4411F30AE00696599B718410A" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 8А закрыть" />
+        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR8As_OFF" UUID="67F5E48A498FCFF093C3B3B39A715074" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 8А’ закрыть" />
+        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR17_ON" UUID="C5AB978B4EFC40A59615C5BAD4899A21" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран  17 открыть" />
+        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR18_ON" UUID="4950DCDC4F4A7371CBB802A34CD21356" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 18 открыть" />
+        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR18A_ON" UUID="A5C77611467C0BF05A1164AE3BF03B7F" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 18А открыть" />
+        <Signal Name="SHKU17_DI_KR17_ON" UUID="8536B41940560DA20D0D7A892BE491E1" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 17. Открыт" />
+        <Signal Name="SHKU17_DI_KR18_ON" UUID="72853D6F4934ECC02C9220931A3B3A15" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 18. Открыт" />
+        <Signal Name="SHKU17_DI_KR18A_ON" UUID="7C18CEF642E58A9FED8EEEB9C99A1BF6" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 18А. Открыт" />
+        <Signal Name="ALG_OVER_PG_OUT_SHKU17_DO_KR6_ON" UUID="B0E63F9D4F189EB3B5F4DAABA706071A" Type="BOOL" Global="TRUE" Comment="ПДГ: Дискретный выход (логика): Кран 6 открыть" />
+        <Signal Name="ALG_OVER_PG_OUT_SHKU17_DO_KR6As_ON" UUID="044129C2453EDC1E31DD57854C45D5CA" Type="BOOL" Global="TRUE" Comment="ПДГ: Дискретный выход (логика): Кран 6А’ открыть" />
+        <Signal Name="SHKU17_AI_Pgaz_out_pos_KR44" UUID="883753BE4F44798F83FDC2B5F2CBA96C" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Давление газа на выходе  за краном 44" />
+        <Signal Name="SHKU17_AI_Pgaz_out_gr2" UUID="9576546E4ABB624246433383C7818BAE" Type="REAL" Global="TRUE" Comment="Обработанный сигнал: Давление газа на выходе  группы 2" />
+        <Signal Name="HMI_SHKU17_AI_Pgaz_out_pos_KR44" UUID="7D74A7664CC8960BDB33DAA8D0F1D4D2" Type="REAL" Global="TRUE" Comment="Уставка: Давление газа на выходе  за краном 44" />
+        <Signal Name="HMI_SHKU17_AI_Pgaz_out_gr2" UUID="E358F64844576856E18F87A145BCC41A" Type="REAL" Global="TRUE" Comment="Уставка: Давление газа на выходе  группы 2" />
+        <Signal Name="SHKU17_DI_A2_107" UUID="4C5B66F14909E35F30345586625433B4" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: ГПА №1 Останов в группе" />
+        <Signal Name="SHKU17_DI_A2_108" UUID="E811B45240D7CAF0112C979F8156DD1E" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: ГПА №2 Останов в группе" />
+        <Signal Name="SHKU17_DI_A2_109" UUID="813E84C74C628F9EBD41358456F997EA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: ГПА №3 Останов в группе" />
+        <Signal Name="SHKU17_DI_A2_1010" UUID="9956D3DD48864212C04CD5A7B7192B07" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: ГПА №4 Останов в группе" />
+        <Signal Name="SHKU17_DI_A2_1011" UUID="F2793181422B0E126433F5BB2FC825CF" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: ГПА №5 Останов в группе" />
+        <Signal Name="SHKU17_DI_A2_1012" UUID="784EFE4C4DBF5BAB6AE31F854EA3F9AE" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: ГПА №6 Останов в группе" />
+        <Signal Name="MD_OVER_PG_1" UUID="B69ECC0E4A5C47BBB1C51F953C23C668" Type="BOOL" Global="TRUE" Comment="Флаг: Превышение давления газа на выходе за краном 44 " />
+        <Signal Name="MD_OVER_PG_2" UUID="0270287A407254DFADCB9C8B1EBCAE62" Type="BOOL" Global="TRUE" Comment="Флаг: Превышение давления газа на выходе группы 2" />
+        <Signal Name="AO_GPA_GR1_KR6_ON" UUID="36886AF14BC52B7ED2D281B2D498AFBB" Type="BOOL" Global="TRUE" Comment="Открытие крана 6 по АО ГПА группы 1 КЦ-1" />
+        <Signal Name="AO_GPA_GR2_KR6As_ON" UUID="DF99329B4D47B779192198AD2A43221C" Type="BOOL" Global="TRUE" Comment="Открытие крана 6а&apos; по АО ГПА группы 2 КЦ-1" />
+        <Signal Name="SHKU17_DI_GPA1_Stop_in_gr" UUID="33B18CB64D1726D604DC71BDC74586F7" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: ГПА №1 Останов в группе" />
+        <Signal Name="SHKU17_DI_GPA2_Stop_in_gr" UUID="400EAC78406AF92D138BF8BEF19CEA58" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: ГПА №2 Останов в группе" />
+        <Signal Name="SHKU17_DI_GPA3_Stop_in_gr" UUID="455A79CA4785F1E19DB311BFB8666E5D" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: ГПА №3 Останов в группе" />
+        <Signal Name="SHKU17_DI_GPA4_Stop_in_gr" UUID="CD975E8947982068D508289B11FD6AB4" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: ГПА №4 Останов в группе" />
+        <Signal Name="SHKU17_DI_GPA5_Stop_in_gr" UUID="917D6BF64746213060C18EAF6DC149E3" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: ГПА №5 Останов в группе" />
+        <Signal Name="SHKU17_DI_GPA6_Stop_in_gr" UUID="B10D45F34536D6BF07C114B48563B765" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: ГПА №6 Останов в группе" />
+    </InterfaceList>
+</SubAppType>

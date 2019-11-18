@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.MODBUS v. 1.0 >
+<Configuration>
+    <Wire Port="" ReservePort="" InverseRTS="TRUE" HardwareRTS="TRUE" RTSOffset="0" BaudRate="115200" CyclePeriod="100000" ConfigUpdatePeriod="2000000" FailoverTimeout="1000000" ResponseTimeout="25000" SymbolTimeout="5000" MinResponseTimeout="700" RetryDelay="1000" RetryCount="3">
+        <Device Address="1">
+            <Slot Address="1" ModuleType="21" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="FALSE" />
+            <Slot Address="2" ModuleType="21" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="FALSE" />
+            <Slot Address="3" ModuleType="21" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="FALSE" />
+        </Device>
+    </Wire>
+    <Crossconnect>
+        <Connection ItemName="SHU14_DO_A2_31" Device="1" Slot="1" Channel="1" Comment="16-ch digital output 0  ..  1 " UUID="417E59354EAE682035989AAD30A4DEEA" />
+        <Connection ItemName="SHU14_DO_A2_32" Device="1" Slot="1" Channel="2" Comment="16-ch digital output 0  ..  1 " UUID="A5B447724057C9BD454CF79B56046BB2" />
+        <Connection ItemName="SHU14_DO_A2_33" Device="1" Slot="1" Channel="3" Comment="16-ch digital output 0  ..  1 " UUID="E735B5DA4315A91C9144E49729D2389D" />
+        <Connection ItemName="SHU14_DO_A2_34" Device="1" Slot="1" Channel="4" Comment="16-ch digital output 0  ..  1 " UUID="B206D9BF4B3388564FF155B7EBE45F80" />
+        <Connection ItemName="SHU14_DO_A2_35" Device="1" Slot="1" Channel="5" Comment="16-ch digital output 0  ..  1 " UUID="C6D2D3BB422872F5249BC2A561C2C7B5" />
+        <Connection ItemName="SHU14_DO_A2_36" Device="1" Slot="1" Channel="6" Comment="16-ch digital output 0  ..  1 " UUID="F0321BD04A7C569AE2CBFAB7C5E4E6E4" />
+        <Connection ItemName="SHU14_DO_A2_37" Device="1" Slot="1" Channel="7" Comment="16-ch digital output 0  ..  1 " UUID="56D7CCA4424CC002DAC0D9B92C18FD85" />
+        <Connection ItemName="SHU14_DO_A2_38" Device="1" Slot="1" Channel="8" Comment="16-ch digital output 0  ..  1 " UUID="945AB6BF4E0517746F8A7FA117CBA694" />
+        <Connection ItemName="SHU14_DO_A2_39" Device="1" Slot="1" Channel="9" Comment="16-ch digital output 0  ..  1 " UUID="B7A15A3A430CF93311A5CAAE3D87C3D7" />
+        <Connection ItemName="SHU14_DO_A2_310" Device="1" Slot="1" Channel="10" Comment="16-ch digital output 0  ..  1 " UUID="2E09C2354AF86AE30FA57B84D10DC0F2" />
+        <Connection ItemName="SHU14_DO_A2_311" Device="1" Slot="1" Channel="11" Comment="16-ch digital output 0  ..  1 " UUID="124614214AAEE72B024CB0845FC20390" />
+        <Connection ItemName="SHU14_DO_A2_312" Device="1" Slot="1" Channel="12" Comment="16-ch digital output 0  ..  1 " UUID="854E2AA549C84CB9B6B56A8E5441FFEA" />
+        <Connection ItemName="SHU14_DO_A2_313" Device="1" Slot="1" Channel="13" Comment="16-ch digital output 0  ..  1 " UUID="3296F63B4F1045675D0E31B6B31266C0" />
+        <Connection ItemName="SHU14_DO_A2_314" Device="1" Slot="1" Channel="14" Comment="16-ch digital output 0  ..  1 " UUID="1F7165CA4F80C288EE15CD9C8FA0D0B5" />
+        <Connection ItemName="SHU14_DO_A2_315" Device="1" Slot="1" Channel="15" Comment="16-ch digital output 0  ..  1 " UUID="53ED55C84C3B89DAE8D1EA81BC3DC4D4" />
+        <Connection ItemName="SHU14_DO_A2_316" Device="1" Slot="1" Channel="16" Comment="16-ch digital output 0  ..  1 " UUID="AD1D2CAB48DC951A6041D5B3811B93D7" />
+        <Connection ItemName="SHU14_DO_A2_41" Device="1" Slot="2" Channel="1" Comment="16-ch digital output 0  ..  1 " UUID="A670E10E49CE6620C9009E85D11160C3" />
+        <Connection ItemName="SHU14_DO_A2_42" Device="1" Slot="2" Channel="2" Comment="16-ch digital output 0  ..  1 " UUID="E37CD9704090C77138844F96FEE58296" />
+        <Connection ItemName="SHU14_DO_A2_43" Device="1" Slot="2" Channel="3" Comment="16-ch digital output 0  ..  1 " UUID="4F24B888419201237D843E8A97489D90" />
+        <Connection ItemName="SHU14_DO_A2_44" Device="1" Slot="2" Channel="4" Comment="16-ch digital output 0  ..  1 " UUID="47A1372949B9B508392FEAAB292357C2" />
+        <Connection ItemName="SHU14_DO_A2_45" Device="1" Slot="2" Channel="5" Comment="16-ch digital output 0  ..  1 " UUID="CD271410498C7F73189828A95300BB81" />
+        <Connection ItemName="SHU14_DO_A2_46" Device="1" Slot="2" Channel="6" Comment="16-ch digital output 0  ..  1 " UUID="1CAB9713463C3321252B999E87A0C165" />
+        <Connection ItemName="SHU14_DO_A2_47" Device="1" Slot="2" Channel="7" Comment="16-ch digital output 0  ..  1 " UUID="DAF371344CB46F26BB0461B6E38CC4BE" />
+        <Connection ItemName="SHU14_DO_A2_48" Device="1" Slot="2" Channel="8" Comment="16-ch digital output 0  ..  1 " UUID="9046763F416D747D38476FA167FFB62C" />
+        <Connection ItemName="SHU14_DO_A2_49" Device="1" Slot="2" Channel="9" Comment="16-ch digital output 0  ..  1 " UUID="E171BAF8457871963615E1A245EAC895" />
+        <Connection ItemName="SHU14_DO_A2_410" Device="1" Slot="2" Channel="10" Comment="16-ch digital output 0  ..  1 " UUID="274237074207EDF84C43FC84136E2AE3" />
+        <Connection ItemName="SHU14_DO_A2_411" Device="1" Slot="2" Channel="11" Comment="16-ch digital output 0  ..  1 " UUID="453282FA4B050C89AEAADC9C272AFA1D" />
+        <Connection ItemName="SHU14_DO_A2_412" Device="1" Slot="2" Channel="12" Comment="16-ch digital output 0  ..  1 " UUID="1945310041FBDD5472DBDB9F466B529F" />
+        <Connection ItemName="SHU14_DO_A2_413" Device="1" Slot="2" Channel="13" Comment="16-ch digital output 0  ..  1 " UUID="992529C242E74634457374916241C77C" />
+        <Connection ItemName="SHU14_DO_A2_414" Device="1" Slot="2" Channel="14" Comment="16-ch digital output 0  ..  1 " UUID="6E9CC1DE4CC919BAEDEAB59839E30E8B" />
+        <Connection ItemName="SHU14_DO_A2_415" Device="1" Slot="2" Channel="15" Comment="16-ch digital output 0  ..  1 " UUID="35997DF9475C3EAD99530384C62183AF" />
+        <Connection ItemName="SHU14_DO_A2_416" Device="1" Slot="2" Channel="16" Comment="16-ch digital output 0  ..  1 " UUID="BE1A24A14BDB908632772384385BEA75" />
+        <Connection ItemName="SHU14_DO_A2_51" Device="1" Slot="3" Channel="1" Comment="16-ch digital output 0  ..  1 " UUID="7D2A16724BE90E76A2FAA4B0C9BC9D48" />
+        <Connection ItemName="SHU14_DO_A2_52" Device="1" Slot="3" Channel="2" Comment="16-ch digital output 0  ..  1 " UUID="D24A8991452C63FD75E933B853347C28" />
+        <Connection ItemName="SHU14_DO_A2_53" Device="1" Slot="3" Channel="3" Comment="16-ch digital output 0  ..  1 " UUID="1B10BFE044546DEC8EDE5A8F5C5F571A" />
+        <Connection ItemName="SHU14_DO_A2_54" Device="1" Slot="3" Channel="4" Comment="16-ch digital output 0  ..  1 " UUID="F24355F646C61F625FFFB9864F8B7C2C" />
+        <Connection ItemName="SHU14_DO_A2_55" Device="1" Slot="3" Channel="5" Comment="16-ch digital output 0  ..  1 " UUID="1786F47042790019A81BEFB66971BA35" />
+        <Connection ItemName="SHU14_DO_A2_56" Device="1" Slot="3" Channel="6" Comment="16-ch digital output 0  ..  1 " UUID="4AE73CA94E8906A388C22C88D674B7C9" />
+        <Connection ItemName="SHU14_DO_A2_57" Device="1" Slot="3" Channel="7" Comment="16-ch digital output 0  ..  1 " UUID="AB01285B494C119A1F563ABB4BBAC1CE" />
+        <Connection ItemName="SHU14_DO_A2_58" Device="1" Slot="3" Channel="8" Comment="16-ch digital output 0  ..  1 " UUID="2669712646913B3514C55685537D27DF" />
+        <Connection ItemName="SHU14_DO_A2_59" Device="1" Slot="3" Channel="9" Comment="16-ch digital output 0  ..  1 " UUID="3E2A8F744BA19EB75CDD1F9983462BEA" />
+        <Connection ItemName="SHU14_DO_A2_510" Device="1" Slot="3" Channel="10" Comment="16-ch digital output 0  ..  1 " UUID="26149F954675C017930CE7957A765CC7" />
+        <Connection ItemName="SHU14_DO_A2_511" Device="1" Slot="3" Channel="11" Comment="16-ch digital output 0  ..  1 " UUID="9A1B04024E48C43228C58A9B17DDAF28" />
+        <Connection ItemName="SHU14_DO_A2_512" Device="1" Slot="3" Channel="12" Comment="16-ch digital output 0  ..  1 " UUID="8EAB45E64785CFD2977D8B976181C367" />
+        <Connection ItemName="SHU14_DO_A2_513" Device="1" Slot="3" Channel="13" Comment="16-ch digital output 0  ..  1 " UUID="E2966F644A336E8A406D2491D8FED157" />
+        <Connection ItemName="SHU14_DO_A2_514" Device="1" Slot="3" Channel="14" Comment="16-ch digital output 0  ..  1 " UUID="1167DD8E4CD23F3C3136F293ADEC2E98" />
+        <Connection ItemName="SHU14_DO_A2_515" Device="1" Slot="3" Channel="15" Comment="16-ch digital output 0  ..  1 " UUID="83491EDC4355C01CA322FBA47081C82B" />
+        <Connection ItemName="SHU14_DO_A2_516" Device="1" Slot="3" Channel="16" Comment="16-ch digital output 0  ..  1 " UUID="1D822BE144229BE12F469C985EF74BAF" />
+        <Connection ItemName="SHU14_A2_3_flt" Device="1" Slot="1" Channel="status" Comment="16-ch digital output 0  ..  1 " UUID="321222F341CF381286B86CB6287DD1DF" />
+        <Connection ItemName="SHU14_A2_4_flt" Device="1" Slot="2" Channel="status" Comment="16-ch digital output 0  ..  1 " UUID="440BA4E44CB55F8BDF247D9BCB6C9361" />
+        <Connection ItemName="SHU14_A2_5_flt" Device="1" Slot="3" Channel="status" Comment="16-ch digital output 0  ..  1 " UUID="E88AB93A43A9E332DBF51EAFD135A406" />
+    </Crossconnect>
+</Configuration>
