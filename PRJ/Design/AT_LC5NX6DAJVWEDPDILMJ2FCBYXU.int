@@ -25,5 +25,7 @@
         <Signal Name="Link_GPA2" UUID="2FB75B54477F039CD51EC888574A06FA" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-2" />
         <Signal Name="Link_GPA3" UUID="21718BCE4EA0A2B647CFAF9B8FBC7BD7" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-3" />
         <Signal Name="Link_GPA4" UUID="30DEAC05486DDE308D876DA7B37AE66E" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-4" />
+        <Signal Name="Link_GPA5" UUID="31C5441D40788384DE9E0789ED70F3CA" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-5" />
+        <Signal Name="Link_GPA6" UUID="0BB108EE486DC8D63F8EC58CA617F00B" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-6" />
     </InterfaceList>
 </SubAppType>

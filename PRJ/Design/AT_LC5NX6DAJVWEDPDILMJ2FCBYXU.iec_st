@@ -38,7 +38,7 @@ AS_conf(
 	);
 	
 // расчет пид-контуров	
-sig_sel_21019(as_MStruct, as_test_reg);	
+//sig_sel_21019(as_MStruct, as_test_reg);	
 
 // логика ручного или автоматического регулирования
 if not krAPK1.DA then	
@@ -149,6 +149,12 @@ gpa[3].run	:= Link_GPA3.run;	//	агрегат в магистрали
 
 gpa[4].S	:= Link_GPA4.S;	// запас по помпажу
 gpa[4].run	:= Link_GPA4.run;	//	агрегат в магистрали
+
+gpa[5].S	:= Link_GPA4.S;	// запас по помпажу
+gpa[5].run	:= Link_GPA4.run;	//	агрегат в магистрали
+
+gpa[6].S	:= Link_GPA4.S;	// запас по помпажу
+gpa[6].run	:= Link_GPA4.run;	//	агрегат в магистрали
 
 
 //  -----//----

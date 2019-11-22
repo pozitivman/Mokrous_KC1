@@ -13,6 +13,23 @@
         <Signal Name="@RESERVE" UUID="373CED1A41F9DE3EDCBB7FA532C3E6CC" Type="BOOL" />
         <Signal Name="@LICENSE" UUID="B604D1A849DB8D37FAE43BA7D8A1D9E8" Type="STRING" Usage="output" />
         <Signal Name="@WINDOW" UUID="312A49A749C6B460848F96A7A4C7823F" Type="TWINDOW" ArraySize="32" InitialValue="[(BB31C56B403BBCBB789DA6897EBA93E0:=TRUE,B42191CC4597AC3EB8EAFB92D723118C:=1920,0D676125474662A65EF6399D51C17141:=1080,AD19379F4D61D4E9D6901EB6068FAB3B:=1)]" />
+        <Signal Name="Time_Logout" UUID="251921E44C6C6498C1BD859ADC412D54" Type="TIME" ArraySize="5" InitialValue="[T#1h,T#12h,T#1h]" Usage="" Storage="persistent" Comment="Время автоматического выхода из сеанса" />
+        <Signal Name="Etalon_CRC_Mnemo" UUID="1CC4382C4C6C96341CED87ADF9EB5C03" Type="UDINT" Usage="" Storage="persistent" Comment="Эталонная CRC мнемосхема" />
+        <Signal Name="Etalon_CRC_Alg" UUID="0BF8EDB44ECE299F2A407D9E2D544579" Type="UDINT" Usage="" Storage="persistent" Comment="Эталонная CRC алгоритм" />
+        <Signal Name="Etalon_CRC_Users" UUID="EC85FA484ECD6C159A0A06BEC2B8414A" Type="UDINT" Usage="" Storage="persistent" Comment="Эталонная CRC пользователи" />
+        <Signal Name="Cur_CRC_Mnemo" UUID="4E8D51B24BB4EEA97B0558BB774D32DD" Type="UDINT" Usage="" Comment="Текущая CRC мнемосхема" />
+        <Signal Name="Cur_CRC_Alg" UUID="161178C64FAE0DF24D03ABB2EC42C44B" Type="UDINT" Usage="" Comment="Текущая CRC алгоритм" />
+        <Signal Name="Cur_CRC_Users" UUID="CC260C384AF6B1C72DD525AEA00DFB89" Type="UDINT" Usage="" Comment="Текущая CRC пользователи" />
+        <Signal Name="Uncorrect_CRC_Mnemo" UUID="5F41DF1C4EC82702F2DA19A15B5B197B" Type="BOOL" Usage="" Comment="Не корректная CRC Mnemo" />
+        <Signal Name="Uncorrect_CRC_Alg" UUID="AEFF0DA045F60149D7003DA4366865F0" Type="BOOL" Usage="" Comment="Не корректная CRC Alg" />
+        <Signal Name="Uncorrect_CRC_Users" UUID="5606B8C342425356D96214B875B01757" Type="BOOL" Usage="" Comment="Не корректная CRC Users" />
+        <Signal Name="Etalon_CRC_PRJ" UUID="19AACB68441F000F845D6A859D44B3B3" Type="UDINT" Usage="" Storage="persistent" Comment="Эталонная CRC Project.prj" />
+        <Signal Name="Cur_CRC_PRJ" UUID="4E40F91D499C7062C89EDD9CB04DC397" Type="UDINT" Usage="" Comment="Текущая CRC Project.prj" />
+        <Signal Name="Uncorrect_CRC_PRJ" UUID="FB15F1D6479755E88AC84D8460EE4850" Type="BOOL" Usage="" Comment="Не корректная CRC Project.prj" />
+        <Signal Name="No_Valid_CRC_Mnemo" UUID="BAA96E7D4B3F48355616F5986C765DB6" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Mnemo" />
+        <Signal Name="No_Valid_CRC_Alg" UUID="A285E74B4F33DBA66105BD9A524AA8EC" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Alg" />
+        <Signal Name="No_Valid_CRC_Users" UUID="84E6DCC24CC33FD4292D419273ED647F" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Users" />
+        <Signal Name="No_Valid_CRC_PRJ" UUID="C5AE4C6B43E3A4E151E1BD8220EFC22F" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Project.prj" />
         <Signal Name="PATH_LOADER" UUID="B145C913497B022F3D5470814669C295" Type="STRING" ArraySize="10" Global="TRUE" Comment="Путь запущенного Loader.exe" />
         <Signal Name="Global_TV" UUID="B08A57C1485568D23B996BB069F03151" Type="26B66B4D4EE8F7BAC7367CAE287EFD5F" Usage="" Global="TRUE" Comment="Scada. Данные для телевизора" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
