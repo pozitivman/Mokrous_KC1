@@ -148,5 +148,6 @@
         <Signal Name="SHKU17_DO_A5_1014" UUID="722BDEC844AF2DD3775E98B2F94D3483" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
         <Signal Name="SHKU17_DO_A5_1015" UUID="5458409F4454ED5530A715AD1D601213" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
         <Signal Name="SHKU17_DO_A5_1016" UUID="88A0CEFB4080439ABA3E3BAAC181A3E6" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
+        <Signal Name="SHKU17_A5_status" UUID="1734F18F45A9018E1AB2DEA4C6A97052" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А5" />
     </InterfaceList>
 </SubAppType>

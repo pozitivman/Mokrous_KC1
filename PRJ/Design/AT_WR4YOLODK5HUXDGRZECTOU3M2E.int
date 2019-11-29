@@ -63,5 +63,6 @@
         <Signal Name="SHU14_A2_3_flt" UUID="321222F341CF381286B86CB6287DD1DF" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A2_3" />
         <Signal Name="SHU14_A2_4_flt" UUID="440BA4E44CB55F8BDF247D9BCB6C9361" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A2_4" />
         <Signal Name="SHU14_A2_5_flt" UUID="E88AB93A43A9E332DBF51EAFD135A406" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A2_5" />
+        <Signal Name="SHU14_A2_status" UUID="5BB4AA014338DF181C5298B0191172B1" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
     </InterfaceList>
 </SubAppType>

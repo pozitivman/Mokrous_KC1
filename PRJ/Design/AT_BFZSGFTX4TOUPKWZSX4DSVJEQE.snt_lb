@@ -148,5 +148,14 @@
         <Connection ItemName="SHKU17_A4_7_flt" Device="" Slot="5" Channel="status" UUID="C5BCFF324C787A4A4EA2B2B00C33527E" />
         <Connection ItemName="SHKU17_A4_8_flt" Device="" Slot="6" Channel="status" UUID="7F15B8544CEF943F74741F850FEE40F4" />
         <Connection ItemName="SHKU17_A4_9_flt" Device="" Slot="7" Channel="status" UUID="735B1E9943981E89F7713194EDBB3CE4" />
+        <Connection ItemName="SHKU17_A4_status[0]" Device="" Slot="info" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[0]" />
+        <Connection ItemName="SHKU17_A4_status[1]" Device="" Slot="1" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[1]" />
+        <Connection ItemName="SHKU17_A4_status[2]" Device="" Slot="2" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[2]" />
+        <Connection ItemName="SHKU17_A4_status[3]" Device="" Slot="3" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[3]" />
+        <Connection ItemName="SHKU17_A4_status[4]" Device="" Slot="4" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[4]" />
+        <Connection ItemName="SHKU17_A4_status[5]" Device="" Slot="5" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[5]" />
+        <Connection ItemName="SHKU17_A4_status[6]" Device="" Slot="6" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[6]" />
+        <Connection ItemName="SHKU17_A4_status[7]" Device="" Slot="7" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[7]" />
+        <Connection ItemName="SHKU17_A4_status[8]" Device="" Slot="8" Channel="status" UUID="8F7A18554E34759F1FC532A74A7DB60C[8]" />
     </Crossconnect>
 </Configuration>

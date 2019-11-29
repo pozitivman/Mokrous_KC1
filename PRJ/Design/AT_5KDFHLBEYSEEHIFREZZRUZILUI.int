@@ -214,5 +214,7 @@
         <Signal Name="SHKU17_A3_6_flt" UUID="E76A23AE452C5995C464DFB316477448" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A3_6" />
         <Signal Name="SHKU17_A3_7_flt" UUID="F553C3624569698C7621E9ADF98540FB" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A3_7" />
         <Signal Name="SHKU17_A3_8_flt" UUID="66483A894847B6D5FE55BCAA496DEBC4" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A3_8" />
+        <Signal Name="SHKU17_A2_status" UUID="E0D0DF6C47F5B289F65262B670771ED2" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А2" />
+        <Signal Name="SHKU17_A3_status" UUID="43A281F7484695252CE0ADB425F9A8E1" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А3" />
     </InterfaceList>
 </SubAppType>

@@ -3,7 +3,7 @@
 <Node Name="PLC_SHKU17_A6" Comment="ПЛК шкафа САУ КЦ-1 A6" Disabled="TRUE" Address="192.168.1.14" TimeSourcePriority="6" TimeResolution="2" NetworkTimeout="2000" PingInterval="300" RetryTimeout="100" AggregationInterval="10" LocalTimeout="2000" LocalPingInterval="300" LocalRetryTimeout="50" LocalAggregationInterval="4" UseSharedMem="FALSE" EventQueue="2000" StoreEventQueue="FALSE" StartState="Default" UUID="4DF856654CC028D5A2495CBD7D205821">
     <InterfaceList>
         <SubApp Name="AppDrv_SHKU17_A6" Type="A77E668643D3DF7D80AC999D14D321AF" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="03397E2E439978C5A9AA8D8EA869A8EA" />
-        <SubApp Name="AppMain_SHKU17_A6" Type="B5AB47464D4580383967BBB2D4399651" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="C5E877B84A5E486ACCD96E98F10CD6F8" />
         <SubApp Name="AppDrv_PRU" Type="6FD295994E932A99D86DEEA846C62B19" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="133658024B191388626C52B87F41B5CB" />
+        <SubApp Name="AppMain_SHKU17_A6" Type="B5AB47464D4580383967BBB2D4399651" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="C5E877B84A5E486ACCD96E98F10CD6F8" />
     </InterfaceList>
 </Node>

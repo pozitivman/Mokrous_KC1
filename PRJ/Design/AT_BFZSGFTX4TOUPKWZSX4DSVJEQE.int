@@ -148,5 +148,6 @@
         <Signal Name="SHKU17_DI_A4_1014" UUID="33DF7AE34D641E17DDDDAC98E2E47AEB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
         <Signal Name="SHKU17_DI_A4_1015" UUID="C228B2BC4D3538496470028DDCEB222D" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
         <Signal Name="SHKU17_DI_A4_1016" UUID="FF3A485247C96A5AFB7A63B7ED00AF0B" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_A4_status" UUID="8F7A18554E34759F1FC532A74A7DB60C" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А4" />
     </InterfaceList>
 </SubAppType>

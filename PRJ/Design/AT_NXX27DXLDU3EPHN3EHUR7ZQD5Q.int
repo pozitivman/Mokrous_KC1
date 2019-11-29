@@ -148,5 +148,6 @@
         <Signal Name="SHU14_DI_A1_1014" UUID="F055B8614F39291C69C3EFBFAEB8C91E" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
         <Signal Name="SHU14_DI_A1_1015" UUID="8BACB6084D4DA59852E4F5AB8B966F0A" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
         <Signal Name="SHU14_DI_A1_1016" UUID="4E3A0DA64A61C54742FE8A984D0152C3" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHU14_A1_status" UUID="CFA530614CF575EC0373BFB69EFEFA50" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
     </InterfaceList>
 </SubAppType>

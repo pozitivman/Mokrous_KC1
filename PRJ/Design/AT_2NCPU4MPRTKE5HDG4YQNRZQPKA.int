@@ -52,5 +52,6 @@
         <Signal Name="SHKU17_AI_A1_102" UUID="30824348435AC4EB8CC7E7A23FC5CCA2" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Уровень в пожарной емкости №1" />
         <Signal Name="SHKU17_AI_A1_103" UUID="4D832A6B402F0AEEF3B1CA8A460FEF60" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Уровень в пожарной емкости №2" />
         <Signal Name="SHKU17_AI_A1_104" UUID="452DFF1E4F60624C2F2910826EF3160E" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_A1_status" UUID="276C480041784377E721C59E557C76E9" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А1" />
     </InterfaceList>
 </SubAppType>

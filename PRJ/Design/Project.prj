@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="4CA9BCCC4E0357E8D69613B81B44E99F" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="53B519834144648D03E95F9193579393" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
         <Signal Name="Global_TV" UUID="B08A57C1485568D23B996BB069F03151" Type="26B66B4D4EE8F7BAC7367CAE287EFD5F" Global="TRUE" Comment="Scada. Данные для телевизора" />
         <Signal Name="Global_PRU" UUID="5CA346F84ED8B42055AD1B866DDC325D" Type="276E10E74011327F462F5EABFCC2FAE9" Global="TRUE" Comment="Данные для ПРУ с ПЛК А1" />
         <Signal Name="PRU_Link" UUID="DD472C334C6C376AA71888B9C43CF535" Type="WORD" Global="TRUE" Comment="Статус связи с ПРУ" />
+        <Signal Name="SHKU17_A1_status" UUID="276C480041784377E721C59E557C76E9" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А1" />
+        <Signal Name="SHKU17_A2_status" UUID="E0D0DF6C47F5B289F65262B670771ED2" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А2" />
+        <Signal Name="SHKU17_A3_status" UUID="43A281F7484695252CE0ADB425F9A8E1" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А3" />
+        <Signal Name="SHKU17_A4_status" UUID="8F7A18554E34759F1FC532A74A7DB60C" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А4" />
+        <Signal Name="SHKU17_A5_status" UUID="1734F18F45A9018E1AB2DEA4C6A97052" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А5" />
+        <Signal Name="SHKU17_A6_status" UUID="FFB24144429F258BE50D889DF8ACB31F" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А6" />
+        <Signal Name="SHU14_A1_status" UUID="CFA530614CF575EC0373BFB69EFEFA50" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
+        <Signal Name="SHU14_A2_status" UUID="5BB4AA014338DF181C5298B0191172B1" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
         <Signal Name="APS_PRU_Link" UUID="194469CC40D33404BA633DA2D377DF3E" Type="BOOL" Global="TRUE" Comment="ШКУ17. Отсутствие связи с ПРУ" />
         <Signal Name="Deblock_old" UUID="84CA9D954A766496E718B898AF78F95A" Type="BOOL" Global="TRUE" Comment="Кнопка &quot;Деблокировка&quot;" />
         <Signal Name="Kvitir_old" UUID="10B542DE4B4F8C116659AABB15052C8C" Type="BOOL" Global="TRUE" Comment="Кнопка &quot;Квитирование&quot;" />

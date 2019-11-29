@@ -148,5 +148,14 @@
         <Connection ItemName="SHU14_A1_7_flt" Device="" Slot="5" Channel="status" UUID="3634728D48D66EF7B826CBA67EBB907D" />
         <Connection ItemName="SHU14_A1_8_flt" Device="" Slot="6" Channel="status" UUID="1C3D590D449E5E06A349029D58943C26" />
         <Connection ItemName="SHU14_A1_9_flt" Device="" Slot="7" Channel="status" UUID="3E5A56524F507718A71569A2ED29C25F" />
+        <Connection ItemName="SHU14_A1_status[0]" Device="" Slot="info" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[0]" />
+        <Connection ItemName="SHU14_A1_status[1]" Device="" Slot="1" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[1]" />
+        <Connection ItemName="SHU14_A1_status[2]" Device="" Slot="2" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[2]" />
+        <Connection ItemName="SHU14_A1_status[3]" Device="" Slot="3" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[3]" />
+        <Connection ItemName="SHU14_A1_status[4]" Device="" Slot="4" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[4]" />
+        <Connection ItemName="SHU14_A1_status[5]" Device="" Slot="5" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[5]" />
+        <Connection ItemName="SHU14_A1_status[6]" Device="" Slot="6" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[6]" />
+        <Connection ItemName="SHU14_A1_status[7]" Device="" Slot="7" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[7]" />
+        <Connection ItemName="SHU14_A1_status[8]" Device="" Slot="8" Channel="status" UUID="CFA530614CF575EC0373BFB69EFEFA50[8]" />
     </Crossconnect>
 </Configuration>

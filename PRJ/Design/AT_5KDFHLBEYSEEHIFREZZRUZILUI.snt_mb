@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Driver.Sonet.MODBUS v. 1.0 >
 <Configuration>
-    <Wire Port="" ReservePort="" InverseRTS="TRUE" HardwareRTS="TRUE" RTSOffset="0" BaudRate="115200" CyclePeriod="100000" ConfigUpdatePeriod="2000000" FailoverTimeout="1000000" ResponseTimeout="25000" SymbolTimeout="5000" MinResponseTimeout="700" RetryDelay="1000" RetryCount="3">
+    <Wire Port="" ReservePort="" InverseRTS="TRUE" HardwareRTS="TRUE" RTSReleaseOffset="0" BaudRate="115200" CyclePeriod="100000" ConfigUpdatePeriod="2000000" FailoverTimeout="1000000" ResponseTimeout="25000" SymbolTimeout="5000" MinResponseTimeout="700" RetryDelay="1000" RetryCount="3">
         <Device Address="1">
-            <Slot Address="1" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
-            <Slot Address="2" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
-            <Slot Address="3" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="1" ModuleType="68" ChannelCount="4" Min="4" Max="20" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="2" ModuleType="68" ChannelCount="4" Min="4" Max="20" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="3" ModuleType="68" ChannelCount="4" Min="4" Max="20" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
             <Slot Address="4" ModuleType="33" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="TRUE" />
             <Slot Address="5" ModuleType="33" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="TRUE" />
             <Slot Address="6" ModuleType="33" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="TRUE" />
@@ -224,5 +224,7 @@
         <Connection ItemName="SHKU17_A3_6_flt" Device="2" Slot="4" Channel="status" Comment="16-ch digital input 0  ..  1 " UUID="E76A23AE452C5995C464DFB316477448" />
         <Connection ItemName="SHKU17_A3_7_flt" Device="2" Slot="5" Channel="status" Comment="16-ch digital input 0  ..  1 " UUID="F553C3624569698C7621E9ADF98540FB" />
         <Connection ItemName="SHKU17_A3_8_flt" Device="2" Slot="6" Channel="status" Comment="16-ch digital input 0  ..  1 " UUID="66483A894847B6D5FE55BCAA496DEBC4" />
+        <Connection ItemName="SHKU17_A2_status[0]" Device="1" Slot="info" Channel="status" UUID="E0D0DF6C47F5B289F65262B670771ED2[0]" />
+        <Connection ItemName="SHKU17_A3_status[0]" Device="2" Slot="info" Channel="status" UUID="43A281F7484695252CE0ADB425F9A8E1[0]" />
     </Crossconnect>
 </Configuration>

@@ -27,5 +27,6 @@
         <Signal Name="SHKU17_AO_A6_53" UUID="30ED2F724E94E0FB488C0D94C94850C5" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Резерв" />
         <Signal Name="SHKU17_AO_A6_54" UUID="C121544F4807B0CF2C789AA4714E574B" Type="DINT" Global="TRUE" Comment="Аналоговый выход (модуль): Резерв" />
         <Signal Name="SHKU17_AI_A6_44" UUID="53ACD4494F0E6C8BB68C4F8E649424EA" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Давление газа на выходе  группы 2" />
+        <Signal Name="SHKU17_A6_status" UUID="FFB24144429F258BE50D889DF8ACB31F" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А6" />
     </InterfaceList>
 </SubAppType>

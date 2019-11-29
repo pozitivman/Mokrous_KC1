@@ -33,6 +33,23 @@
         <Signal Name="PATH_LOADER" UUID="B145C913497B022F3D5470814669C295" Type="STRING" ArraySize="10" Global="TRUE" Comment="Путь запущенного Loader.exe" />
         <Signal Name="Global_TV" UUID="B08A57C1485568D23B996BB069F03151" Type="26B66B4D4EE8F7BAC7367CAE287EFD5F" Usage="" Global="TRUE" Comment="Scada. Данные для телевизора" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
+        <Signal Name="krAPK1" UUID="4F35E7D9418A3B8D3F735897509E6041" Type="635099BE48C9258F4BA926BFCBAA0549" Usage="" Global="TRUE" Comment="Антипомпажный клапан АПК1. СКАДА" />
+        <Signal Name="krAPK2" UUID="2ABF212645B0DC301AAEED89D7DD8AE4" Type="635099BE48C9258F4BA926BFCBAA0549" Usage="" Global="TRUE" Comment="Антипомпажный клапан АПК2. СКАДА" />
+        <Signal Name="Link_GPA1" UUID="B5104EE44512B13A740D8AB09D6DB429" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-1" />
+        <Signal Name="Link_GPA2" UUID="2FB75B54477F039CD51EC888574A06FA" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-2" />
+        <Signal Name="Link_GPA3" UUID="21718BCE4EA0A2B647CFAF9B8FBC7BD7" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-3" />
+        <Signal Name="Link_GPA4" UUID="30DEAC05486DDE308D876DA7B37AE66E" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-4" />
+        <Signal Name="Link_GPA5" UUID="31C5441D40788384DE9E0789ED70F3CA" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-5" />
+        <Signal Name="Link_GPA6" UUID="0BB108EE486DC8D63F8EC58CA617F00B" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-6" />
+        <Signal Name="SHKU17_A1_status" UUID="276C480041784377E721C59E557C76E9" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А1" />
+        <Signal Name="SHKU17_A2_status" UUID="E0D0DF6C47F5B289F65262B670771ED2" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А2" />
+        <Signal Name="SHKU17_A3_status" UUID="43A281F7484695252CE0ADB425F9A8E1" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А3" />
+        <Signal Name="SHKU17_A4_status" UUID="8F7A18554E34759F1FC532A74A7DB60C" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А4" />
+        <Signal Name="SHKU17_A5_status" UUID="1734F18F45A9018E1AB2DEA4C6A97052" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А5" />
+        <Signal Name="SHKU17_A6_status" UUID="FFB24144429F258BE50D889DF8ACB31F" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А6" />
+        <Signal Name="SHU14_A1_status" UUID="CFA530614CF575EC0373BFB69EFEFA50" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
+        <Signal Name="SHU14_A2_status" UUID="5BB4AA014338DF181C5298B0191172B1" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
+        <Signal Name="PRU_Link" UUID="DD472C334C6C376AA71888B9C43CF535" Type="WORD" Usage="" Global="TRUE" Comment="Статус связи с ПРУ" />
         <Signal Name="SHKU17_DI_Ala_ispr_pit_preobr" UUID="C9B4C23846FA3D29170B1D99851C1319" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Сигнализация исправности питания преобразователей" />
         <Signal Name="SHKU17_DI_Res_1" UUID="308FF8FC4AD6AB5E2A17F7A4D1D5A8EA" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
         <Signal Name="SHKU17_DI_Res_2" UUID="C645F6C64B9A7B42B65A34ABDF326AE6" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />

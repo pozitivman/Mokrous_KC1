@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Driver.Sonet.MODBUS v. 1.0 >
 <Configuration>
-    <Wire Port="" ReservePort="" InverseRTS="TRUE" HardwareRTS="TRUE" RTSOffset="0" BaudRate="115200" CyclePeriod="100000" ConfigUpdatePeriod="2000000" FailoverTimeout="1000000" ResponseTimeout="25000" SymbolTimeout="5000" MinResponseTimeout="700" RetryDelay="1000" RetryCount="3">
+    <Wire Port="" ReservePort="" InverseRTS="TRUE" HardwareRTS="TRUE" RTSReleaseOffset="0" BaudRate="115200" CyclePeriod="100000" ConfigUpdatePeriod="2000000" FailoverTimeout="1000000" ResponseTimeout="25000" SymbolTimeout="5000" MinResponseTimeout="700" RetryDelay="1000" RetryCount="3">
         <Device Address="1">
             <Slot Address="1" ModuleType="21" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="FALSE" />
             <Slot Address="2" ModuleType="21" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="FALSE" />
@@ -150,5 +150,6 @@
         <Connection ItemName="SHKU17_A5_7_flt" Device="1" Slot="5" Channel="status" Comment="16-ch digital output 0  ..  1 " UUID="2F7E24CC4BFA7ACF27294997B18373E9" />
         <Connection ItemName="SHKU17_A5_8_flt" Device="1" Slot="6" Channel="status" Comment="16-ch digital output 0  ..  1 " UUID="77F2B56348415508C291838B1B24A28B" />
         <Connection ItemName="SHKU17_A5_9_flt" Device="1" Slot="7" Channel="status" Comment="16-ch digital output 0  ..  1 " UUID="7AD4C5E24BD5DF9B55E9E7B47686E622" />
+        <Connection ItemName="SHKU17_A5_status[0]" Device="1" Slot="info" Channel="status" UUID="1734F18F45A9018E1AB2DEA4C6A97052[0]" />
     </Crossconnect>
 </Configuration>
