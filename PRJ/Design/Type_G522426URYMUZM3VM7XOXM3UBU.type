@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TUstProtect" Kind="Struct" Comment="Уставки по защитам" UUID="1D15729C4A82C82FC6620FA28E510DD8">
+    <Fields>
+        <Field Name="Tkr8a_lo" Type="REAL" UUID="DF7FC6B643F69B7B5530D281F20E14B3" Comment="Нижняя предупредительная граница уставки по температуре газа за краном 8а" />
+        <Field Name="Tkr8a_hi" Type="REAL" UUID="BEFA0E7748E06AEF1002AB947A27EC51" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 8а" />
+        <Field Name="Tkr8_lo" Type="REAL" UUID="C75034B743E2F28F3D1988B6572F8D36" Comment="Нижняя предупредительная граница уставки по температуре газа за краном 8" />
+        <Field Name="Tkr8_hi" Type="REAL" UUID="AB5C66FB40F8E69104876E8BD0EDB795" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 8" />
+        <Field Name="Tkr44_lo" Type="REAL" UUID="4C5265C24ED9105CBA5C1BB8E05E5B7C" Comment="Нижняя предупредительная граница уставки по температуре газа за краном 44" />
+        <Field Name="Tkr44_hi" Type="REAL" UUID="916E5B894540F81776FF15897D8EB251" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 44" />
+        <Field Name="Tgr2_lo" Type="REAL" UUID="9B5C64F744E491BB065532AF8F527C95" Comment="Нижняя предупредительная граница уставки по температуре газа на выходе группы 2" />
+        <Field Name="Tgr2_hi" Type="REAL" UUID="CF155CA1447EC76375AD5C9B6D3B6D43" Comment="Верхняя предупредительная граница уставки по температуре газа на выходе группы 2" />
+        <Field Name="Tkr8s_lo" Type="REAL" UUID="D866505C41DC34DC5FBE9C997C02A2EF" Comment="Нижняя предупредительная граница уставки по температуре газа за краном 8&apos;" />
+        <Field Name="Tkr8s_hi" Type="REAL" UUID="F88C198B41DDBF47C277AA8A1B7EEF61" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 8&apos;" />
+        <Field Name="Tkr8as_lo" Type="REAL" UUID="C219A2B643A412BEFDB5449CE27AF351" Comment="Нижняя предупредительная граница уставки по температуре газа за краном 8a&apos;" />
+        <Field Name="Tkr8as_hi" Type="REAL" UUID="394D003C4D95ECFAE847BEA8AEAB2E3B" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 8a&apos;" />
+    </Fields>
+</Type>
