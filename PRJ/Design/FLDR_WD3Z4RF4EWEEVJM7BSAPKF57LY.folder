@@ -3,6 +3,7 @@
 <Folder Name="Scada">
     <Items>
         <Item Name="Type_H5EHDC2QQVRUXJPN7SQ34EYB64.type" />
+        <Item Name="Type_TEL5RRSGJRCEPMMGDUTSDYSUGY.type" />
         <Item Name="Type_TV.type" />
     </Items>
 </Folder>

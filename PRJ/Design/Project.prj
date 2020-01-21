@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="53B519834144648D03E95F9193579393" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="B0CBAE4F4C6362F81E8C5790381E5523" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
+        <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
         <Signal Name="Global_TV" UUID="B08A57C1485568D23B996BB069F03151" Type="26B66B4D4EE8F7BAC7367CAE287EFD5F" Global="TRUE" Comment="Scada. Данные для телевизора" />
         <Signal Name="Global_PRU" UUID="5CA346F84ED8B42055AD1B866DDC325D" Type="276E10E74011327F462F5EABFCC2FAE9" Global="TRUE" Comment="Данные для ПРУ с ПЛК А1" />
+        <Signal Name="Global_Ust" UUID="968F4AA14411518F9414AAB473B8BE0F" Type="1D15729C4A82C82FC6620FA28E510DD8" InitialValue="(DF7FC6B643F69B7B5530D281F20E14B3:=55,BEFA0E7748E06AEF1002AB947A27EC51:=60,C75034B743E2F28F3D1988B6572F8D36:=55,AB5C66FB40F8E69104876E8BD0EDB795:=60,4C5265C24ED9105CBA5C1BB8E05E5B7C:=55,916E5B894540F81776FF15897D8EB251:=60,9B5C64F744E491BB065532AF8F527C95:=55,CF155CA1447EC76375AD5C9B6D3B6D43:=60,D866505C41DC34DC5FBE9C997C02A2EF:=55,F88C198B41DDBF47C277AA8A1B7EEF61:=60,C219A2B643A412BEFDB5449CE27AF351:=55,394D003C4D95ECFAE847BEA8AEAB2E3B:=60)" Global="TRUE" Storage="persistent" Comment="Уставки алгоритмов защиты КЦ" />
         <Signal Name="PRU_Link" UUID="DD472C334C6C376AA71888B9C43CF535" Type="WORD" Global="TRUE" Comment="Статус связи с ПРУ" />
         <Signal Name="SHKU17_A1_status" UUID="276C480041784377E721C59E557C76E9" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А1" />
         <Signal Name="SHKU17_A2_status" UUID="E0D0DF6C47F5B289F65262B670771ED2" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А2" />
@@ -3650,6 +3652,21 @@
         <Signal Name="APS_SHU14_DI_Res_54" UUID="72073BF24C6438418C2EA3B3895FA59D" Type="BOOL" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHU14_DI_Res_55" UUID="369871B3444F59A6A7FF77933F937558" Type="BOOL" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHU14_DI_Res_56" UUID="D4C725FB4BD77A5717627B9F493BC822" Type="BOOL" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_PPU_FIRE" UUID="24A19E87432025BEE65C98B834F067DA" Type="BOOL" Global="TRUE" Comment="АПС: Проверка предпусковых условий: Пожар" />
+        <Signal Name="APS_PPU_ZAG" UUID="8280602D439E737AD7505CB836D89C18" Type="BOOL" Global="TRUE" Comment="АПС: Проверка предпусковых условий: Загазованность 20%" />
+        <Signal Name="APS_PPU_RDY_TO_START" UUID="891613B44E1D73AD2A3516878ED8672C" Type="BOOL" Global="TRUE" Comment="АПС: Проверка предпусковых условий: Готовность к пуску" />
+        <Signal Name="APS_Tg2KC_hi" UUID="31438EFF462E9F4EFE032A84F7816FE5" Type="BOOL" Global="TRUE" Comment="АПС: Аварийно высокая температура газа на выходе КЦ" />
+        <Signal Name="APS_Pg2KC_hi" UUID="FB3A710D4385951663337E857FB10F99" Type="BOOL" Global="TRUE" Comment="АПС: Аварийно высокое давление газа на выходе КЦ" />
+        <Signal Name="APS_SAU_UP_flt" UUID="699C1FB5469696D0A95947B3ED830660" Type="BOOL" Global="TRUE" Comment="АПС: Отказ САУ УП" />
+        <Signal Name="APS_SAU_KC_flt" UUID="053EEADB450D34B323D53D9147DC949A" Type="BOOL" Global="TRUE" Comment="АПС: Отказ САУ КЦ" />
+        <Signal Name="APS_dP1KR30_hi" UUID="64A361C843B71707E10F5A8A6229CEA6" Type="BOOL" Global="TRUE" Comment="АПС: Высокий перепад давления на кр30" />
+        <Signal Name="APS_dP1KR30B_hi" UUID="07F244E44ACB4FF7A5DDA3B8AECE9E63" Type="BOOL" Global="TRUE" Comment="АПС: Высокий перепад давления на кр30б" />
+        <Signal Name="Tg_hi2KC" UUID="1D51357441BB7C180E87829A554DF538" Type="BOOL" Global="TRUE" Comment="Высокая температура газа на выходе КЦ" />
+        <Signal Name="Tg_ala_hi2KC" UUID="18175A194DBBFECAA69AF29D689A1AE0" Type="BOOL" Global="TRUE" Comment="Аварийно высокая температура газа на выходе КЦ" />
+        <Signal Name="AOB_ASUTP_CMD" UUID="0B042DB741E13D622076D0BBE190370B" Type="BOOL" Global="TRUE" Comment="Команда АОБ от АСУТП" />
+        <Signal Name="APS_Tg_hi2KC" UUID="BC376EF54729A6A10DED9B90EF1D6FDD" Type="BOOL" Global="TRUE" Comment="АПС: Высокая температура газа на выходе КЦ" />
+        <Signal Name="APS_Tg_ala_hi2KC" UUID="1D3871004876147CB48E74B8A0933FC6" Type="BOOL" Global="TRUE" Comment="АПС: Аварийно высокая температура газа на выходе КЦ" />
+        <Signal Name="APS_AOB_ASUTP_CMD" UUID="099B2CC641E07A72D7D35BB5A773CE76" Type="BOOL" Global="TRUE" Comment="АПС: Команда АОБ от АСУТП" />
     </Globals>
     <Connections />
 </Project>
