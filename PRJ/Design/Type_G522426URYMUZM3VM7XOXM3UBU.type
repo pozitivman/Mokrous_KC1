@@ -14,5 +14,13 @@
         <Field Name="Tkr8s_hi" Type="REAL" UUID="F88C198B41DDBF47C277AA8A1B7EEF61" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 8&apos;" />
         <Field Name="Tkr8as_lo" Type="REAL" UUID="C219A2B643A412BEFDB5449CE27AF351" Comment="Нижняя предупредительная граница уставки по температуре газа за краном 8a&apos;" />
         <Field Name="Tkr8as_hi" Type="REAL" UUID="394D003C4D95ECFAE847BEA8AEAB2E3B" Comment="Верхняя предупредительная граница уставки по температуре газа за краном 8a&apos;" />
+        <Field Name="P2kr30_lo" Type="REAL" UUID="C1AE126D498581146F3EC58B76C8165E" Comment="Нижняя предупредительная граница уставки по давлению газа за краном 30" />
+        <Field Name="P2kr30_hi" Type="REAL" UUID="621CF85E4F273D11353D9893363E5C86" Comment="Верхняя предупредительная граница уставки по давлению газа за краном 30" />
+        <Field Name="P1kr30V_lo" Type="REAL" UUID="028B8B4F423D9CB7F61CCA8EAAF41D88" Comment="Нижняя предупредительная граница уставки по давлению газа до крана 30в" />
+        <Field Name="P1kr30V_hi" Type="REAL" UUID="5BED7D31479A4FCE4B607C9149BFB270" Comment="Верхняя предупредительная граница уставки по давлению газа до крана 30в" />
+        <Field Name="P2kr44_lo" Type="REAL" UUID="1321208E411212F86E66C2AC0B82C3E5" Comment="Нижняя предупредительная граница уставки по давлению газа за краном 44" />
+        <Field Name="P2kr44_hi" Type="REAL" UUID="01FA3C3C41A456506663DD905F4B5029" Comment="Верхняя предупредительная граница уставки по давлению газа за краном 44" />
+        <Field Name="P2gr2_lo" Type="REAL" UUID="AA1212BF4859AF71AF92FBB78979AF82" Comment="Нижняя предупредительная граница уставки по давлению газа на выходе группы 2" />
+        <Field Name="P2gr2_hi" Type="REAL" UUID="AC88796E4FA1585AB99DADBFB610A72B" Comment="Верхняя предупредительная граница уставки по давлению газа на выходе группы 2" />
     </Fields>
 </Type>

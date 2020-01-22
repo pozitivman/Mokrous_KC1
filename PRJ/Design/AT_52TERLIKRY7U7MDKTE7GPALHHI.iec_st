@@ -214,7 +214,6 @@ cycleTime_MAIN_sys := clock_MAIN_cur - clock_MAIN_prev;]]></ST>
             <FunctionBlock UUID="3CCFBABB4D0D6396AC67048DBF1A20E4" Name="block_ALG">
                 <Variables>
                     <Variable UUID="62383D2D4E844FBF8F49ACBC035D38C6" Name="IMIT_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
-                    <Variable UUID="B32B85EF44B5C438FDEA228B850F2193" Name="arg" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="10" Array="TRUE" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//////////////////////////////////////////////////////////////////////////////////////////
 //При имитации переводим краны в начальное состояние: КЦ Ремонт
@@ -241,11 +240,11 @@ IMIT_prev := IMIT;
 
 //Загазованность CH4 20% на двух и более ГПА
 arg[0] := Link_GPA1.Zag_20p;
-arg[1] := Link_GPA1.Zag_20p;
-arg[2] := Link_GPA1.Zag_20p;
-arg[3] := Link_GPA1.Zag_20p;
-arg[4] := Link_GPA1.Zag_20p;
-arg[5] := Link_GPA1.Zag_20p;
+arg[1] := Link_GPA2.Zag_20p;
+arg[2] := Link_GPA3.Zag_20p;
+arg[3] := Link_GPA4.Zag_20p;
+arg[4] := Link_GPA5.Zag_20p;
+arg[5] := Link_GPA6.Zag_20p;
 MD.PPU_ZAG := func_GE2(6, arg);
 
 
@@ -254,8 +253,8 @@ MD.PPU_FIRE := Link_GPA1.Fire or Link_GPA2.Fire or Link_GPA3.Fire or Link_GPA4.F
 
 
 //Есть готовность к пуску КЦ
-MD.PPU_RDY_TO_START := not (APS_PPU_FIRE or APS_PPU_ZAG or APS_Tg2KC_hi or APS_SAU_UP_flt or APS_SAU_KC_flt or APS_dP1KR30_hi or APS_dP1KR30B_hi) or 
-						SHKU17_DI_KR6_ON or SHKU17_DI_KR6As_ON or SHKU17_DI_KR6R_ON or SHKU17_DI_KR6AR_ON or MD.GPA_RDY or MD.KC_OFF;
+MD.PPU_RDY_TO_START := not (APS_PPU_FIRE and APS_PPU_ZAG and Tg_ala_hi2KC and Pg_ala_hi2KC and APS_SAU_UP_flt and APS_SAU_KC_flt and APS_dP1KR30_hi and APS_dP1KR30B_hi) and 
+						SHKU17_DI_KR6_ON and SHKU17_DI_KR6As_ON and SHKU17_DI_KR6R_ON and SHKU17_DI_KR6AR_ON and MD.GPA_RDY or MD.KC_OFF;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -331,27 +330,54 @@ TO_FW_prev := SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF 
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //Защита по превышению температуры технологического газа на выходе КЦ
+Tg_hi2KC := ((((SHKU17_AI_Tgaz_pos_KR8A > Global_Ust.Tkr8a_lo and SHKU17_AI_Tgaz_pos_KR8A <= Global_Ust.Tkr8a_hi) or 
+			(SHKU17_AI_Tgaz_pos_KR8 > Global_Ust.Tkr8_lo and SHKU17_AI_Tgaz_pos_KR8 <= Global_Ust.Tkr8_hi)) and MD.KC_MAG) or
+
+			(((SHKU17_AI_Tgaz_pos_KR8As > Global_Ust.Tkr8as_lo and SHKU17_AI_Tgaz_pos_KR8As <= Global_Ust.Tkr8as_hi) or 
+			(SHKU17_AI_Tgaz_pos_KR8s > Global_Ust.Tkr8s_lo and SHKU17_AI_Tgaz_pos_KR8s <= Global_Ust.Tkr8s_hi)) and MD.KC_MAG_REV)) and
+
+			((SHKU17_AI_Tgaz_out_pos_KR44 > Global_Ust.Tkr44_lo and SHKU17_AI_Tgaz_out_pos_KR44 <= Global_Ust.Tkr44_hi) or 
+			(SHKU17_AI_Tgaz_out_gr2 > Global_Ust.Tgr2_lo and SHKU17_AI_Tgaz_out_gr2 <= Global_Ust.Tgr2_hi));  
 
 
+Tg_ala_hi2KC := ((((SHKU17_AI_Tgaz_pos_KR8A > Global_Ust.Tkr8a_hi) or (SHKU17_AI_Tgaz_pos_KR8 > Global_Ust.Tkr8_hi)) and MD.KC_MAG) or
+
+				(((SHKU17_AI_Tgaz_pos_KR8As > Global_Ust.Tkr8as_hi) or (SHKU17_AI_Tgaz_pos_KR8s > Global_Ust.Tkr8s_hi)) and MD.KC_MAG_REV)) and
+
+				((SHKU17_AI_Tgaz_out_pos_KR44 > Global_Ust.Tkr44_hi) or (SHKU17_AI_Tgaz_out_gr2 > Global_Ust.Tgr2_hi));  
+
+AOB_ASUTP_CMD := APS_Tg_ala_hi2KC; //Выдаем команду на АОБ  
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
+//////////////////////////////////////////////////////////////////////////////////////////
+//Защита по превышению давления технологического газа на выходе КЦ
+Pg_hi2KC := (((SHKU17_AI_Pgaz_pos_KR30V > Global_Ust.P2kr30_lo and SHKU17_AI_Pgaz_pos_KR30V <= Global_Ust.P2kr30_hi) and MD.KC_MAG) or 
+			((SHKU17_AI_Pgaz_do_KR30V > Global_Ust.P1kr30V_lo and SHKU17_AI_Pgaz_do_KR30V <= Global_Ust.P1kr30V_hi) and MD.KC_MAG_REV)) and 
+			((SHKU17_AI_Pgaz_out_pos_KR44 > Global_Ust.P2kr44_lo and SHKU17_AI_Pgaz_out_pos_KR44 <= Global_Ust.P2kr44_hi) or 
+			(SHKU17_AI_Pgaz_out_gr2 > Global_Ust.P2gr2_lo and SHKU17_AI_Pgaz_out_gr2 <= Global_Ust.P2gr2_hi));
 
 
+Pg_ala_hi2KC := (((SHKU17_AI_Pgaz_pos_KR30V > Global_Ust.P2kr30_hi) and MD.KC_MAG) or ((SHKU17_AI_Pgaz_do_KR30V > Global_Ust.P1kr30V_hi) and MD.KC_MAG_REV)) and 
+				((SHKU17_AI_Pgaz_out_pos_KR44 > Global_Ust.P2kr44_hi) or (SHKU17_AI_Pgaz_out_gr2 > Global_Ust.P2gr2_hi));
 
 
+OPG_KR_ON := APS_Pg_ala_hi2KC; //Выдаем команду на открытие кранов 6, 6а, 6ар, 6р
+//////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////////]]></ST>
+
+]]></ST>
             </FunctionBlock>
             <Function UUID="5617DF744661F236FE4C9BA67FE735DC" Name="func_GE2" Comment="Больше либо равно 2" ResultTypeUUID="EC797BDD4541F500AD80A78F1F991834">
                 <Variables>
                     <Variable UUID="C0B4A0544B405C232F9A2B804E2B09F6" Name="numArgs" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="input" />
-                    <Variable UUID="1638A44B468E3C0184D582A9A3E4035B" Name="arg" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="10" Array="TRUE" Usage="input" />
+                    <Variable UUID="1638A44B468E3C0184D582A9A3E4035B" Name="check_arg" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="10" Array="TRUE" Usage="input" />
                     <Variable UUID="C0F1994E4DF7FAB459AD65A956A65803" Name="i" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
                     <Variable UUID="F42052CA414C7DD5F8AB97BE5DF79696" Name="cnt" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[cnt := 0;
 for i := 0 to numArgs - 1  do
-	if (arg[i]) then cnt := cnt + 1; else cnt := cnt - 1; end_if;  
+	if (check_arg[i]) then cnt := cnt + 1; end_if;  
 end_for;
 
 func_GE2 := cnt >= 2;]]></ST>
@@ -1579,6 +1605,23 @@ AE_577(APS_SHKU17_KR46_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_S
 AE_578(APS_SHKU17_KR47_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR47_general);
 AE_579(APS_SHKU17_KR48_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_general);
 AE_580(APS_SHKU17_KR49_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_general);
+
+//АПС по режимам, уставкам, алгоритмам
+AE_581(Tg_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Tg_hi2KC); //превышение температуры технологического газа на выходе КЦ
+AE_582(Tg_ala_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_Tg_ala_hi2KC); //аварийное превышение температуры технологического газа на выходе КЦ
+AE_583(AOB_ASUTP_CMD, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_ASUTP_CMD); //команда на АОБ
+AE_584(Pg_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Pg_hi2KC); //превышение давления технологического газа на выходе КЦ
+AE_585(Pg_ala_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_Pg_ala_hi2KC); //аварийное превышение давления технологического газа на выходе КЦ
+AE_586(OPG_KR_ON, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_OPG_KR_ON); //команда на открытие кранов 6, 6а, 6ар, 6р
+AE_587(MD.PPU_FIRE, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_FIRE); //ППУ Пожар на КЦ
+AE_588(MD.PPU_ZAG, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_ZAG); //ППУ Загазованность CH4 20% на двух и более ГПА
+AE_589(MD.PPU_RDY_TO_START, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_RDY_TO_START); //Есть готовность к пуску КЦ
+AE_590(dP1KR30_hi, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_dP1KR30_hi); //Высокий dP на кране 30
+AE_591(dP1KR30B_hi, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_dP1KR30B_hi); //Высокий dP на кране 30в
+//AE_592(, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SAU_UP_flt);
+//AE_593(, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SAU_KC_flt);
+//AE_594(, T#100ms, Deblock, Kvitir, DO_sound_PS, );
+//AE_595(, T#100ms, Deblock, Kvitir, DO_sound_PS, );
 
 
 //Выходы АПС
