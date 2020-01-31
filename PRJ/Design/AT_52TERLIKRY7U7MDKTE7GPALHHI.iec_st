@@ -210,12 +210,226 @@ cycleTime_MAIN_sys := clock_MAIN_cur - clock_MAIN_prev;]]></ST>
     </DataTypes>
     <FBLibrary>
         <Folder Name="ALG" Comment="" Data="" UUID="33EC8C67445C5BBFD6754EA6329C07C8">
-            <Folder Name="Drums" Comment="" Data="" UUID="F69A90E2471616198DAD9780FA135839" />
+            <Folder Name="Drums" Comment="" Data="" UUID="F69A90E2471616198DAD9780FA135839">
+                <FunctionBlock UUID="4A0A032D4EBF673D4014CE8C2AE2DA26" Name="drum_AOB">
+                    <Variables>
+                        <Variable UUID="709FDEC844BD717FA725828F3E28FE55" Name="MD_KC_AOB_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[drumAOB.start := MD.KC_AOB and not MD_KC_AOB_prev;
+MD_KC_AOB_prev := MD.KC_AOB;
+
+// Пуск drum
+if drumAOB.start and not drumAOB.run then
+	drumAOB.run := BOOL#1;
+	drumAOB.step := INT#0;
+end_if;
+
+// Останов drum извне
+if MD.EAO_KC or MD.KC_AOS or FirstScan_MAIN then
+	drumAOB.run := BOOL#0;
+	drumAOB.step_prev := INT#-1;
+	drumAOB.step := INT#-1;
+	AOB_to_DO := BOOL#0;
+	AOB_KR7_OFF := BOOL#0;
+	AOB_KR8_OFF := BOOL#0;
+	AOB_KR8A_OFF := BOOL#0;
+	AOB_KR8s_OFF := BOOL#0;
+	AOB_KR8As_OFF := BOOL#0;
+	AOB_KR6_ON := BOOL#0;
+	AOB_KR6As_ON := BOOL#0;
+	AOB_KR6R_ON := BOOL#0;
+	AOB_KR6AR_ON := BOOL#0;
+end_if;
+
+// Тело drum
+case drumAOB.step of
+0:	if drumAOB.step_prev <> INT#0 then
+		drumAOB.TMR_COM := LREAL#300;
+		drumAOB.step_prev := drumAOB.step;
+	end_if;
+	AOB_to_DO := BOOL#1; (*АОбс в другие подсистемы и на физические линии*)
+	AOB_KR7_OFF := BOOL#1;
+	AOB_KR8_OFF := BOOL#1;
+	AOB_KR8A_OFF := BOOL#1;
+	AOB_KR8s_OFF := BOOL#1;
+	AOB_KR8As_OFF := BOOL#1;
+	AOB_KR6_ON := BOOL#1;
+	AOB_KR6As_ON := BOOL#1;
+	AOB_KR6R_ON := BOOL#1;
+	AOB_KR6AR_ON := BOOL#1;
+	drumAOB.TMR_COM := drumAOB.TMR_COM - cycleTime_MAIN;
+	if (SHKU17_DI_KR7_OFF and not SHKU17_DI_KR7_ON) and (SHKU17_DI_KR8_OFF and not SHKU17_DI_KR8_ON) and (SHKU17_DI_KR8A_OFF and not SHKU17_DI_KR8A_ON) and
+		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON) and 
+		(SHKU17_DI_KR6_ON and not SHKU17_DI_KR6_OFF) and (SHKU17_DI_KR6As_ON and not SHKU17_DI_KR6As_OFF) and 
+		(SHKU17_DI_KR6R_ON and not SHKU17_DI_KR6R_OFF) and (SHKU17_DI_KR6AR_ON and not SHKU17_DI_KR6AR_OFF) then
+		drumAOB.step := INT#1;
+	end_if;
+	if drumAOB.TMR_COM <= LREAL#0 then drumAOB.step := INT#2; end_if;
+
+1:	drumAOB.done_ok := BOOL#1;
+	drumAOB.step_prev := drumAOB.step;
+	drumAOB.step := INT#3;
+
+2:	drumAOB.done_flt := BOOL#1;
+	drumAOB.step_prev := drumAOB.step;
+	drumAOB.step := INT#3;
+
+3:	if drumAOB.step_prev <> INT#3 then
+		AOB_to_DO := BOOL#0;
+		AOB_KR7_OFF := BOOL#0;
+		AOB_KR8_OFF := BOOL#0;
+		AOB_KR8A_OFF := BOOL#0;
+		AOB_KR8s_OFF := BOOL#0;
+		AOB_KR8As_OFF := BOOL#0;
+		AOB_KR6_ON := BOOL#0;
+		AOB_KR6As_ON := BOOL#0;
+		AOB_KR6R_ON := BOOL#0;
+		AOB_KR6AR_ON := BOOL#0;
+		drumAOB.step_prev := drumAOB.step;
+	end_if;
+	if Deblock and not drumAOB.start then
+		drumAOB.step := INT#-1;
+		drumAOB.step_prev := INT#-1;
+		drumAOB.run := BOOL#0;
+		drumAOB.done_ok := BOOL#0;
+		drumAOB.done_flt := BOOL#0;
+	end_if;		
+end_case;
+
+//if Global_BTN.AOB_MG_cut_accept or Global_BTN.AOB_MG_cut_not_accept then
+//	Need_accept.AOB_MG_cut := BOOL#0;
+//end_if;
+
+// Выходы
+Link_GPA1.Command_AOB	:= AOB_to_DO;
+Link_GPA2.Command_AOB	:= AOB_to_DO;
+Link_GPA3.Command_AOB	:= AOB_to_DO;
+Link_GPA4.Command_AOB	:= AOB_to_DO;
+Link_GPA5.Command_AOB	:= AOB_to_DO;
+Link_GPA6.Command_AOB	:= AOB_to_DO;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="57F7D72C476AA3B953A485866CE8AA4A" Name="drum_AOS">
+                    <Variables>
+                        <Variable UUID="6CBA13354E5C29BFE1727C9F511F79FC" Name="MD_KC_AOS_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[drumAOS.start := MD.KC_AOS and not MD_KC_AOS_prev;
+MD_KC_AOS_prev := MD.KC_AOS;
+
+// Пуск drum
+if drumAOS.start and not drumAOS.run then
+	drumAOS.run := BOOL#1;
+	drumAOS.step := INT#0;
+end_if;
+
+// Останов drum извне
+if MD.EAO_KC or FirstScan_MAIN then
+	drumAOS.run := BOOL#0;
+	drumAOS.step_prev := INT#-1;
+	drumAOS.step := INT#-1;
+	AOS_to_DO := BOOL#0;
+	AOS_KR7_OFF := BOOL#0;
+	AOS_KR8_OFF := BOOL#0;
+	AOS_KR8A_OFF := BOOL#0;
+	AOS_KR8s_OFF := BOOL#0;
+	AOS_KR8As_OFF := BOOL#0;
+	AOS_KR6_ON := BOOL#0;
+	AOS_KR6As_ON := BOOL#0;
+	AOS_KR6R_ON := BOOL#0;
+	AOS_KR6AR_ON := BOOL#0;
+	AOS_KR17_ON := BOOL#0;
+	AOS_KR18_ON := BOOL#0;
+	AOS_KR18A_ON := BOOL#0;
+end_if;
+
+
+case drumAOS.step of
+0:	if drumAOS.step_prev <> INT#0 then
+		drumAOS.TMR_COM := LREAL#300;
+		drumAOS.TMR_OR := LREAL#180;
+		drumAOS.step_prev := drumAOS.step;
+	end_if;
+	AOS_to_DO := BOOL#1; (*АОсс в другие подсистемы и на физические линии*)
+	AOB_KR7_OFF := BOOL#1;
+	AOB_KR8_OFF := BOOL#1;
+	AOB_KR8A_OFF := BOOL#1;
+	AOB_KR8s_OFF := BOOL#1;
+	AOB_KR8As_OFF := BOOL#1;
+	AOB_KR6_ON := BOOL#1;
+	AOB_KR6As_ON := BOOL#1;
+	AOB_KR6R_ON := BOOL#1;
+	AOB_KR6AR_ON := BOOL#1;
+	drumAOS.TMR_COM := drumAOS.TMR_COM - cycleTime_MAIN;
+	drumAOS.TMR_OR := drumAOS.TMR_OR - cycleTime_MAIN;	
+	if ((SHKU17_DI_KR7_OFF and not SHKU17_DI_KR7_ON) and (SHKU17_DI_KR8_OFF and not SHKU17_DI_KR8_ON) and (SHKU17_DI_KR8A_OFF and not SHKU17_DI_KR8A_ON) and
+		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON) and 
+		(SHKU17_DI_KR6_ON and not SHKU17_DI_KR6_OFF) and (SHKU17_DI_KR6As_ON and not SHKU17_DI_KR6As_OFF) and 
+		(SHKU17_DI_KR6R_ON and not SHKU17_DI_KR6R_OFF) and (SHKU17_DI_KR6AR_ON and not SHKU17_DI_KR6AR_OFF)) or drumAOS.TMR_OR <= LREAL#0 then
+		drumAOS.step := INT#1;
+	end_if;
+	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.step := INT#2; end_if;
+
+
+1:	if drumAOS.step_prev <> INT#1 then
+		AOB_KR7_OFF := BOOL#0;
+		AOB_KR8_OFF := BOOL#0;
+		AOB_KR8A_OFF := BOOL#0;
+		AOB_KR8s_OFF := BOOL#0;
+		AOB_KR8As_OFF := BOOL#0;
+		AOB_KR6_ON := BOOL#0;
+		AOB_KR6As_ON := BOOL#0;
+		AOB_KR6R_ON := BOOL#0;
+		AOB_KR6AR_ON := BOOL#0;
+		drumAOS.step_prev := drumAOS.step;
+	end_if;
+	AOS_KR17_ON := BOOL#1;
+	AOS_KR18_ON := BOOL#1;
+	AOS_KR18A_ON := BOOL#1;	
+	drumAOS.TMR_COM := drumAOS.TMR_COM - cycleTime_MAIN;
+	if (SHKU17_DI_KR17_ON and not SHKU17_DI_KR17_OFF) and (SHKU17_DI_KR18_ON and not SHKU17_DI_KR18_OFF) and (SHKU17_DI_KR18A_ON and not SHKU17_DI_KR18A_OFF) then
+		drumAOS.step := INT#2;
+	end_if;
+	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.step := INT#3; end_if;
+
+
+2:	drumAOS.done_ok := BOOL#1;
+	drumAOS.step_prev := drumAOS.step;
+	drumAOS.step := INT#4;
+
+
+3:	drumAOS.done_flt := BOOL#1;
+	drumAOS.step_prev := drumAOS.step;
+	drumAOS.step := INT#4;
+
+
+4:	if drumAOS.step_prev <> INT#4 then
+		AOB_to_DO := BOOL#0;
+		AOS_KR17_ON := BOOL#0;
+		AOS_KR18_ON := BOOL#0;
+		AOS_KR18A_ON := BOOL#0;	
+		drumAOS.step_prev := drumAOS.step;
+	end_if;
+	if Deblock and not drumAOS.start then
+		drumAOS.step := INT#-1;
+		drumAOS.step_prev := INT#-1;
+		drumAOS.run := BOOL#0;
+		drumAOS.done_ok := BOOL#0;
+		drumAOS.done_flt := BOOL#0;
+	end_if;		
+end_case;]]></ST>
+                </FunctionBlock>
+            </Folder>
             <FunctionBlock UUID="3CCFBABB4D0D6396AC67048DBF1A20E4" Name="block_ALG">
                 <Variables>
                     <Variable UUID="62383D2D4E844FBF8F49ACBC035D38C6" Name="IMIT_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="BB351DA94F0897FFD113C39B1C74CC1B" Name="fb_AOB" Type="drum_AOB" TypeUUID="4A0A032D4EBF673D4014CE8C2AE2DA26" Usage="internal" />
+                    <Variable UUID="C890A6A5455EEA97D1A5CFA0D317519A" Name="fb_AOS" Type="drum_AOS" TypeUUID="57F7D72C476AA3B953A485866CE8AA4A" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//////////////////////////////////////////////////////////////////////////////////////////
+//Выполнение подпрограм АОБ, АОС
+fb_AOB();
+fb_AOS();
+
+//////////////////////////////////////////////////////////////////////////////////////////
 //При имитации переводим краны в начальное состояние: КЦ Ремонт
 if IMIT and not IMIT_prev then
 	SHKU17_DI_KR7_OFF := bool#1;
@@ -1618,10 +1832,14 @@ AE_588(MD.PPU_ZAG, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_ZAG); //ППУ
 AE_589(MD.PPU_RDY_TO_START, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_RDY_TO_START); //Есть готовность к пуску КЦ
 AE_590(dP1KR30_hi, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_dP1KR30_hi); //Высокий dP на кране 30
 AE_591(dP1KR30B_hi, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_dP1KR30B_hi); //Высокий dP на кране 30в
-//AE_592(, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SAU_UP_flt);
-//AE_593(, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SAU_KC_flt);
-//AE_594(, T#100ms, Deblock, Kvitir, DO_sound_PS, );
-//AE_595(, T#100ms, Deblock, Kvitir, DO_sound_PS, );
+AE_592(MD.KC_AOB, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_MD_KC_AOB); //АПС: Выполняется АО без стравливания
+AE_593(MD.KC_AOS, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_MD_KC_AOS); //АПС: Выполняется АО со стравливанием
+AE_594(Global_BTN.AOB, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Global_BTN_AOB); //АПС: Команда с АРМ АО без стравливания
+AE_595(Global_BTN.AOS, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Global_BTN_AOS); //АПС: Команда с АРМ АО со стравливанием
+AE_596(drumAOB.done_ok, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_DONE); //АПС: АОбс завершен корректно
+AE_597(drumAOB.done_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_DONE_INCORRECT); //АПС: АОбс завершен некорректно
+AE_598(drumAOS.done_ok, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_DONE); //АПС: АОсс завершен корректно
+AE_599(drumAOS.done_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_DONE_INCORRECT); //АПС: АОсс завершен некорректно
 
 
 //Выходы АПС
@@ -1805,6 +2023,14 @@ VLV_init := KR;]]></ST>
                     <Variable UUID="5ABB4F8748469A897785E7B08DF4F1DF" Name="KR8_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     <Variable UUID="9ED7F427433BFE36AA9A62824F925562" Name="KR8A_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     <Variable UUID="5C2DDFCE4705C0C982C0C48B2758F707" Name="KR30V_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="A6EF4B604D8E5C02B9A659BCA4F054F0" Name="KR6_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="70E499A64D0A9DCA721A7C99265231E5" Name="KR6As_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="885003D543ECE7CF6F3CB7B441AC16CF" Name="KR6R_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="19C692D04C11B1283EC0F690C5556A08" Name="KR6AR_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="C909E68A473BBC2F2A8E85A5D1F85B1F" Name="KR7_OFF_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="C542C65D45CF35FB9CB9EBB1BDD9A603" Name="KR17_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="B871BAFD47AE12B6DB948DAE665DE20A" Name="KR18_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="B1E835E24B3B6FE1B9AEDB9213AE9CEE" Name="KR18A_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//Кран 17 закрыть
 if (MD_REV_KR17_OFF) and not KR17_OFF_prev then
@@ -1812,6 +2038,13 @@ if (MD_REV_KR17_OFF) and not KR17_OFF_prev then
 	CMD_SHKU17_KR17_aOnOff := false;
 end_if;
 KR17_OFF_prev := MD_REV_KR17_OFF;
+
+//Кран 17 открыть
+if (AOS_KR17_ON) and not KR17_ON_prev then
+	HMI_SHKU17_KR17_DA := false;
+	CMD_SHKU17_KR17_aOnOff := true;
+end_if;
+KR17_ON_prev := AOS_KR17_ON;
 
 
 //Кран 18 закрыть
@@ -1821,6 +2054,13 @@ if (MD_REV_KR18_OFF) and not KR18_OFF_prev then
 end_if;
 KR18_OFF_prev := MD_REV_KR18_OFF;
 
+//Кран 18 открыть
+if (AOS_KR18_ON) and not KR18_ON_prev then
+	HMI_SHKU17_KR18_DA := false;
+	CMD_SHKU17_KR18_aOnOff := true;
+end_if;
+KR18_ON_prev := AOS_KR18_ON;
+
 
 //Кран 18a закрыть
 if (MD_REV_KR18A_OFF) and not KR18A_OFF_prev then
@@ -1829,13 +2069,20 @@ if (MD_REV_KR18A_OFF) and not KR18A_OFF_prev then
 end_if;
 KR18A_OFF_prev := MD_REV_KR18A_OFF;
 
+//Кран 18a открыть
+if (AOS_KR18A_ON) and not KR18A_ON_prev then
+	HMI_SHKU17_KR18A_DA := false;
+	CMD_SHKU17_KR18A_aOnOff := true;
+end_if;
+KR18A_ON_prev := AOS_KR18A_ON;
+
 
 //Кран 8 закрыть
-if (MD_REV_KR8_OFF) and not KR8_OFF_prev then
+if (MD_REV_KR8_OFF or AOB_KR8_OFF or AOS_KR8_OFF) and not KR8_OFF_prev then
 	HMI_SHKU17_KR8_DA := false;
 	CMD_SHKU17_KR8_aOnOff := false;
 end_if;
-KR8_OFF_prev := MD_REV_KR8_OFF;
+KR8_OFF_prev := MD_REV_KR8_OFF or AOB_KR8_OFF or AOS_KR8_OFF;
 
 //Кран 8 открыть
 if (MD_REV_KR8_ON) and not KR8_ON_prev then
@@ -1846,11 +2093,11 @@ KR8_ON_prev := MD_REV_KR8_ON;
 
 
 //Кран 8a закрыть
-if (MD_REV_KR8A_OFF) and not KR8A_OFF_prev then
+if (MD_REV_KR8A_OFF or AOB_KR8A_OFF or AOS_KR8A_OFF) and not KR8A_OFF_prev then
 	HMI_SHKU17_KR8A_DA := false;
 	CMD_SHKU17_KR8A_aOnOff := false;
 end_if;
-KR8A_OFF_prev := MD_REV_KR8A_OFF;
+KR8A_OFF_prev := MD_REV_KR8A_OFF or AOB_KR8A_OFF or AOS_KR8A_OFF;
 
 //Кран 8a открыть
 if (MD_REV_KR8A_ON) and not KR8A_ON_prev then
@@ -1882,6 +2129,13 @@ if (MD_REV_KR7_ON) and not KR7_ON_prev then
 end_if;
 KR7_ON_prev := MD_REV_KR7_ON;
 
+//Кран 7 закрыть
+if (AOB_KR7_OFF or AOS_KR7_OFF) and not KR7_OFF_prev then
+	HMI_SHKU17_KR7_DA := false;
+	CMD_SHKU17_KR7_aOnOff := false;
+end_if;
+KR7_OFF_prev := AOB_KR7_OFF or AOS_KR7_OFF;
+
 
 //Кран 8' открыть
 if (MD_REV_KR8s_ON) and not KR8s_ON_prev then
@@ -1891,11 +2145,11 @@ end_if;
 KR8s_ON_prev := MD_REV_KR8s_ON;
 
 //Кран 8' закрыть
-if (MD_REV_KR8s_OFF) and not KR8s_OFF_prev then
+if (MD_REV_KR8s_OFF or AOB_KR8s_OFF or AOS_KR8s_OFF) and not KR8s_OFF_prev then
 	HMI_SHKU17_KR8s_DA := false;
 	CMD_SHKU17_KR8s_aOnOff := false;
 end_if;
-KR8s_OFF_prev := MD_REV_KR8s_OFF;
+KR8s_OFF_prev := MD_REV_KR8s_OFF or AOB_KR8s_OFF or AOS_KR8s_OFF;
 
 
 //Кран 8a' открыть
@@ -1906,11 +2160,11 @@ end_if;
 KR8As_ON_prev := MD_REV_KR8As_ON;
 
 //Кран 8a' закрыть
-if (MD_REV_KR8As_OFF) and not KR8As_OFF_prev then
+if (MD_REV_KR8As_OFF or AOB_KR8As_OFF or AOS_KR8As_OFF) and not KR8As_OFF_prev then
 	HMI_SHKU17_KR8As_DA := false;
 	CMD_SHKU17_KR8As_aOnOff := false;
 end_if;
-KR8As_OFF_prev := MD_REV_KR8As_OFF;
+KR8As_OFF_prev := MD_REV_KR8As_OFF or AOB_KR8As_OFF or AOS_KR8As_OFF;
 
 
 //Кран 30 открыть
@@ -1928,13 +2182,36 @@ end_if;
 KR30_OFF_prev := MD_REV_KR30_OFF;
 
 
+//Кран 6 открыть
+if (OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON) and not KR6_ON_prev then
+	HMI_SHKU17_KR6_DA := false;
+	CMD_SHKU17_KR6_aOnOff := true;
+end_if;
+KR6_ON_prev := OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON;
 
 
+//Кран 6a' открыть
+if (OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON) and not KR6As_ON_prev then
+	HMI_SHKU17_KR6As_DA := false;
+	CMD_SHKU17_KR6As_aOnOff := true;
+end_if;
+KR6As_ON_prev := OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON;
 
 
+//Кран 6р открыть
+if (OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON) and not KR6R_ON_prev then
+	HMI_SHKU17_KR6R_DA := false;
+	CMD_SHKU17_KR6R_aOnOff := true;
+end_if;
+KR6R_ON_prev := OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON;
 
 
-]]></ST>
+//Кран 6ар открыть
+if (OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON) and not KR6AR_ON_prev then
+	HMI_SHKU17_KR6AR_DA := false;
+	CMD_SHKU17_KR6AR_aOnOff := true;
+end_if;
+KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON;]]></ST>
             </FunctionBlock>
             <FunctionBlock UUID="C5E1C2D54AF74909AFB82A98431D9D80" Name="fb_IM">
                 <Variables>
@@ -3469,7 +3746,39 @@ if MD.EAO_KC then
 		delay := LREAL#0;
 		temp_status_string := 'Нажмите Сброс';
 	end_if;
-end_if; //to do: добавить состояния кранов, при котором ЭАО завершен 
+end_if; //to do: добавить состояния кранов, при котором ЭАО завершен
+
+
+// Аварийный останов без стравливания
+MD.KC_AOB := not (MD.EAO_KC or MD.KC_AOS) and (Global_BTN.AOB or SHKU17_DI_AObs_KC_PU or APS_AOB_ASUTP_CMD or drumAOB.run);
+if MD.KC_AOB then
+	temp_mode_string := 'АО без стравливания';
+	if drumAOB.step = INT#0 then
+		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumAOB.TMR_COM, UINT#0) + ' сек.';
+	end_if;
+	if drumAOB.done_ok then
+		temp_status_string := 'Алгоритм АО КЦ-1 БС завершён$n$nНажмите Сброс';
+	end_if;
+	if drumAOB.done_flt then
+		temp_status_string := 'Алгоритм АО КЦ-1 БС завершён некорректно$n$nНажмите Сброс';
+	end_if;
+end_if;
+
+
+// Аварийный останов со стравливанием
+MD.KC_AOS := not MD.EAO_KC and (Global_BTN.AOS or SHKU17_DI_AOss_KC_PU or drumAOS.run);
+if MD.KC_AOS then
+	temp_mode_string := 'АО со стравливанием';
+	if (drumAOS.step = INT#0) or (drumAOS.step = INT#1) then
+		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumAOS.TMR_COM, UINT#0) + ' сек.';
+	end_if;
+	if drumAOS.done_ok then
+		temp_status_string := 'Алгоритм АО КЦ-1 СС завершён$n$nНажмите Сброс';
+	end_if;
+	if drumAOS.done_flt then
+		temp_status_string := 'Алгоритм АО КЦ-1 СС завершён некорректно$n$nНажмите Сброс';
+	end_if;
+end_if;  
 
 
 //Режим Кольцо

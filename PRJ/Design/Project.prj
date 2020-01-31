@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="9CB2C16F4932FE66A122BB9365DB069B" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="D23F970E4407C5BD3B2B6BA558C3002A" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
@@ -23,6 +23,8 @@
         <Signal Name="DO_sound_AS" UUID="06E8EC0C4B1D426CD0799885F9C844D5" Type="BOOL" Global="TRUE" Comment="Включение звуковой сигнализации АС" />
         <Signal Name="DO_sound_PS" UUID="91EF99D440F55561FFA76D9BD418EA59" Type="BOOL" Global="TRUE" Comment="Включение звуковой сигнализации ПС" />
         <Signal Name="NO_sound_TS" UUID="C767C63B4240F5C204DDFEB7B245AD85" Type="BOOL" Global="TRUE" Comment="Заглушка для технологических сообщений" />
+        <Signal Name="AOS_TO_DO" UUID="2A7989624389343D670696AA1337FAB6" Type="BOOL" Global="TRUE" Comment="Сигнал АОС в другие ПЛК, подсистемы" />
+        <Signal Name="AOB_TO_DO" UUID="A602427E4B6133E629EE0894D1638B40" Type="BOOL" Global="TRUE" Comment="Сигнал АОБ в другие ПЛК, подсистемы" />
         <Signal Name="PATH_LOADER" UUID="B145C913497B022F3D5470814669C295" Type="STRING" ArraySize="10" Global="TRUE" Comment="Путь запущенного Loader.exe" />
         <Signal Name="USER_NAME_NOW" UUID="6C7B06AE455CF2F2E501F2ADA0B63BAB" Type="STRING" ArraySize="10" Global="TRUE" Comment="Текущий пользователь" />
         <Signal Name="MakeReport" UUID="C664E4DF46AF2DCEB4688DA1D34BC5F6" Type="BOOL" Global="TRUE" Comment="Составить документ 1" />
@@ -2717,54 +2719,6 @@
         <Signal Name="SHKU_PRIMA_DI_PTR_hot" UUID="0128E61B4BD3AF27A78F5FB112DDA5C1" Type="BOOL" Global="TRUE" Comment="Конг-Прима-10. Перегрев ПТР" />
         <Signal Name="SHKU_PRIMA_DI_crit_pollution" UUID="1541DD174110374A41B2A4A143505539" Type="BOOL" Global="TRUE" Comment="Конг-Прима-10. Критическое загрязнение" />
         <Signal Name="SHKU_PRIMA_DI_termreg_off" UUID="018B4C664351C9541ABCE4A6B0E33974" Type="BOOL" Global="TRUE" Comment="Конг-Прима-10. Отсутствие терморегулирования" />
-        <Signal Name="btn_RU_KC" UUID="4EEAA9C44675C31FE9631E8AE5A965D0" Type="BOOL" Global="TRUE" Comment="Команда оператора: ручной/автомат режим управления" />
-        <Signal Name="MD_KC_RU" UUID="176AC421416CC8D93591118A6E2AB7E1" Type="BOOL" Global="TRUE" Comment="Автоматический режим управления КЦ (1 - авт., 0 - ручн.)" />
-        <Signal Name="MD_EAO" UUID="1D14166F49111398061A1D9C9966416E" Type="BOOL" Global="TRUE" Comment="Режим КЦ: экстренный останов" />
-        <Signal Name="MD_AOB" UUID="31E58CB640339C8E47C5A18A6508D907" Type="BOOL" Global="TRUE" Comment="Режим КЦ: аварийный останов со стравливанием" />
-        <Signal Name="MD_AOS" UUID="8C41334B436AE822E2DCFEB2D8D40FE0" Type="BOOL" Global="TRUE" Comment="Режим КЦ: аварийный останов без стравливания" />
-        <Signal Name="MD_NO" UUID="877644DB41B3E67C4698148AD0A0106B" Type="BOOL" Global="TRUE" Comment="Режим КЦ: нормальный останов" />
-        <Signal Name="MD_KOL" UUID="D6F516054397A18516BDD9832BEA4B92" Type="BOOL" Global="TRUE" Comment="Режим КЦ: кольцо" />
-        <Signal Name="MD_MAG" UUID="2D7B9CA74D443C418208D885E48FC85A" Type="BOOL" Global="TRUE" Comment="Режим КЦ: магистраль" />
-        <Signal Name="MD_STOP_net" UUID="EB11E0864A76A2D043A3EEBB1D59EE65" Type="BOOL" Global="TRUE" Comment="Нет режимов НО, АО, ЕАО" />
-        <Signal Name="MD_STOP" UUID="BB7167F049D4E295F1E6D3801B174346" Type="BOOL" Global="TRUE" Comment="Режим КЦ: остановлен" />
-        <Signal Name="MD_Undefined" UUID="1D16DDFE4494298E16F38DA6E6669CCA" Type="BOOL" Global="TRUE" Comment="Режим КЦ: неопределено" />
-        <Signal Name="btn_NO" UUID="A9A5B6A34835428C1B976A90717DE013" Type="BOOL" Global="TRUE" Comment="Команда оператора: заполнение контура газом" />
-        <Signal Name="btn_AOB" UUID="FC79B5D54381BF55C56815A059EA42DE" Type="BOOL" Global="TRUE" Comment="Команда оператора: АОбс" />
-        <Signal Name="btn_AOB_accept" UUID="5C869E0340F6B3286CEA5790AB329E67" Type="BOOL" Global="TRUE" Comment="Команда оператора: Подтверждение АОбс" />
-        <Signal Name="btn_AOB_not_accept" UUID="58DFE0D84F414965336B9AA546B13FE0" Type="BOOL" Global="TRUE" Comment="Команда оператора: Подтверждение Сброс АОбс" />
-        <Signal Name="AOB_wait_accept" UUID="589794C84BCDF702C99C84BF7501F31E" Type="BOOL" Global="TRUE" Comment="АОБ: ожидание подтверждения" />
-        <Signal Name="AOB_TIMER_1" UUID="9199D1B747433882CD7E648BA23CA835" Type="LREAL" Global="TRUE" Comment="АОБ: таймер 1" />
-        <Signal Name="AOB_TIMER_2" UUID="40817B9249BB50BE280597A0B3C82E0B" Type="LREAL" Global="TRUE" Comment="АОБ: таймер 2" />
-        <Signal Name="AOB_RUN" UUID="176738CB4A2B18864471BB9646A077EB" Type="BOOL" Global="TRUE" Comment="АОБ: выполняется АОбс" />
-        <Signal Name="ALG_AOB_OUT_DONE" UUID="ADD095F74B12ADA4B1904F9440E8B379" Type="BOOL" Global="TRUE" Comment="АОБ: АОбс завершен корректно" />
-        <Signal Name="ALG_AOB_OUT_DONE_INCORRECT" UUID="6A7DAE814CDAA24F8F6A1BA65B15B428" Type="BOOL" Global="TRUE" Comment="АОБ: АОбс завершен некорректно" />
-        <Signal Name="btn_AOS" UUID="978EFF6D4EB9B68723612BAB56393EF5" Type="BOOL" Global="TRUE" Comment="Команда оператора: АО КЦ СС" />
-        <Signal Name="btn_AOS_accept" UUID="14CD526B494A7FDFE5DBD19A39DFB4DF" Type="BOOL" Global="TRUE" Comment="Команда оператора: подтверждение АО КЦ СС" />
-        <Signal Name="btn_AOS_not_accept" UUID="327E20FE40A8E4923868E7BD8D8BCBEB" Type="BOOL" Global="TRUE" Comment="Команда оператора: отмена АО КЦ СС" />
-        <Signal Name="AOS_wait_accept" UUID="8E1B6B214F7AEDE0F0B3D796847354B7" Type="BOOL" Global="TRUE" Comment="АОС: ожидание подтверждения" />
-        <Signal Name="AOS_TIMER_1" UUID="357DF6024F5121ABB5BC5593213A6960" Type="LREAL" Global="TRUE" Comment="АОС: таймер 1" />
-        <Signal Name="AOS_TIMER_2" UUID="0381BA464BE002BE98196C9A9A3061C6" Type="LREAL" Global="TRUE" Comment="АОС: таймер 2" />
-        <Signal Name="AOS_TIMER_3" UUID="3344C4A14A0741CED735FDAF6E3440DE" Type="LREAL" Global="TRUE" Comment="АОС: таймер 3" />
-        <Signal Name="ALG_AOS_start" UUID="9F31821E4C976E95B7B198A6C4C0590F" Type="BOOL" Global="TRUE" Comment="АОС: запуск алгоритма АОС" />
-        <Signal Name="AOS_RUN" UUID="054F253F443599A5D7935081E6E4CFE2" Type="BOOL" Global="TRUE" Comment="АОС: выполняется АОсс" />
-        <Signal Name="ALG_AOS_OUT_DONE" UUID="02BFFDDC4851BE4287CD5A8EB8CE0B88" Type="BOOL" Global="TRUE" Comment="АОС: АОсс завершен корректно" />
-        <Signal Name="ALG_AOS_OUT_DONE_INCORRECT" UUID="C8EDF1C64CA8766B313084B852E3EC5E" Type="BOOL" Global="TRUE" Comment="АОС: АОсс завершен некорректно" />
-        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR7_OFF" UUID="B6F358F4490B4339C42C7B812985390D" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 7 закрыть" />
-        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR8_OFF" UUID="A8ECFC4644A6505DE39335B1B7392908" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 8 закрыть" />
-        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR8s_OFF" UUID="CBCF0C1B483325FF5CA274A2FB97DCD8" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 8’ закрыть" />
-        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR8A_OFF" UUID="49791FA4411F30AE00696599B718410A" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 8А закрыть" />
-        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR8As_OFF" UUID="67F5E48A498FCFF093C3B3B39A715074" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 8А’ закрыть" />
-        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR17_ON" UUID="C5AB978B4EFC40A59615C5BAD4899A21" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран  17 открыть" />
-        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR18_ON" UUID="4950DCDC4F4A7371CBB802A34CD21356" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 18 открыть" />
-        <Signal Name="ALG_AOS_OUT_SHKU17_DO_KR18A_ON" UUID="A5C77611467C0BF05A1164AE3BF03B7F" Type="BOOL" Global="TRUE" Comment="AOС: Дискретный выход (логика): Кран 18А открыть" />
-        <Signal Name="MD_OVER_PG_1" UUID="B69ECC0E4A5C47BBB1C51F953C23C668" Type="BOOL" Global="TRUE" Comment="Флаг: Превышение давления газа на выходе за краном 44 " />
-        <Signal Name="MD_OVER_PG_2" UUID="0270287A407254DFADCB9C8B1EBCAE62" Type="BOOL" Global="TRUE" Comment="Флаг: Превышение давления газа на выходе группы 2" />
-        <Signal Name="ALG_OVER_PG_OUT_SHKU17_DO_KR6_ON" UUID="B0E63F9D4F189EB3B5F4DAABA706071A" Type="BOOL" Global="TRUE" Comment="ПДГ: Дискретный выход (логика): Кран 6 открыть" />
-        <Signal Name="ALG_OVER_PG_OUT_SHKU17_DO_KR6As_ON" UUID="044129C2453EDC1E31DD57854C45D5CA" Type="BOOL" Global="TRUE" Comment="ПДГ: Дискретный выход (логика): Кран 6А’ открыть" />
-        <Signal Name="HMI_SHKU17_AI_Pgaz_out_pos_KR44" UUID="7D74A7664CC8960BDB33DAA8D0F1D4D2" Type="REAL" Global="TRUE" Comment="Уставка: Давление газа на выходе  за краном 44" />
-        <Signal Name="HMI_SHKU17_AI_Pgaz_out_gr2" UUID="E358F64844576856E18F87A145BCC41A" Type="REAL" Global="TRUE" Comment="Уставка: Давление газа на выходе  группы 2" />
-        <Signal Name="AO_GPA_GR1_KR6_ON" UUID="36886AF14BC52B7ED2D281B2D498AFBB" Type="BOOL" Global="TRUE" Comment="Открытие крана 6 по АО ГПА группы 1 КЦ-1" />
-        <Signal Name="AO_GPA_GR2_KR6As_ON" UUID="DF99329B4D47B779192198AD2A43221C" Type="BOOL" Global="TRUE" Comment="Открытие крана 6а&apos; по АО ГПА группы 2 КЦ-1" />
         <Signal Name="Wish_main_loop" UUID="F668427E48BA3AD33814B891A72AD097" Type="INT" Global="TRUE" />
         <Signal Name="krAPK1" UUID="4F35E7D9418A3B8D3F735897509E6041" Type="635099BE48C9258F4BA926BFCBAA0549" Global="TRUE" Comment="Антипомпажный клапан АПК1. СКАДА" />
         <Signal Name="krAPK2" UUID="2ABF212645B0DC301AAEED89D7DD8AE4" Type="635099BE48C9258F4BA926BFCBAA0549" Global="TRUE" Comment="Антипомпажный клапан АПК2. СКАДА" />
@@ -3517,13 +3471,8 @@
         <Signal Name="APS_SHKU17_DI_Res_92" UUID="EA24E68E4FBD22700DE8DABB12DE1566" Type="BOOL" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHKU17_DI_Res_93" UUID="4843E4964F19A35F174C6998C759C0A5" Type="BOOL" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHKU17_DI_Res_94" UUID="FC6E3EA5437FF0D3E9413DB5ED3BE34B" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_AOS_RUN" UUID="9AA5995046E619E41E5A789FCC3ACF38" Type="BOOL" Global="TRUE" Comment="Выполняется АО со стравливанием" />
         <Signal Name="APS_AOS_OUT_DONE" UUID="9F14917C447600FC6804C2B36A041541" Type="BOOL" Global="TRUE" Comment="АО со стравливанием завершен корректно" />
         <Signal Name="APS_AOS_OUT_DONE_INCORRECT" UUID="C5E7C67E4A597BE8C0E8619ACB980C53" Type="BOOL" Global="TRUE" Comment="АО со стравливанием завершен некорректно" />
-        <Signal Name="APS_MD_OVER_PG_1" UUID="4441CB71430EF475B312139ABDA2857B" Type="BOOL" Global="TRUE" Comment="Превышение давления газа на выходе за краном 44" />
-        <Signal Name="APS_MD_OVER_PG_2" UUID="BE32F7CB448DB11234FFD48B54E94088" Type="BOOL" Global="TRUE" Comment="Превышение давления газа на выходе группы 2" />
-        <Signal Name="APS_AO_GPA_GR1_KR6_ON" UUID="9F7D10544D73DF78D002278892E40E5C" Type="BOOL" Global="TRUE" Comment="Открытие крана 6 по АО ГПА группы 1 КЦ-1" />
-        <Signal Name="APS_AO_GPA_GR2_KR6As_ON" UUID="C8A7937746BA98299F8BA6AF86B21673" Type="BOOL" Global="TRUE" Comment="Открытие крана 6а&apos; по АО ГПА группы 2 КЦ-1" />
         <Signal Name="APS_SHU14_DI_Res_1" UUID="4A844250474C2FB7015AA19737B4EE87" Type="BOOL" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHU14_DI_Res_2" UUID="DAC3A7924399E59E01743BB2FABA38B4" Type="BOOL" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHU14_DI_Res_3" UUID="1E7A3E0C41E3194FA8F7E4830AE99011" Type="BOOL" Global="TRUE" Comment="Резерв" />
@@ -3673,6 +3622,14 @@
         <Signal Name="APS_dP1KR30B_hi" UUID="07F244E44ACB4FF7A5DDA3B8AECE9E63" Type="BOOL" Global="TRUE" Comment="АПС: Высокий перепад давления на кр30б" />
         <Signal Name="APS_SAU_UP_flt" UUID="699C1FB5469696D0A95947B3ED830660" Type="BOOL" Global="TRUE" Comment="АПС: Отказ САУ УП" />
         <Signal Name="APS_SAU_KC_flt" UUID="053EEADB450D34B323D53D9147DC949A" Type="BOOL" Global="TRUE" Comment="АПС: Отказ САУ КЦ" />
+        <Signal Name="APS_MD_KC_AOB" UUID="B8F25A784D15FF6F6D87DFB1F289B70B" Type="BOOL" Global="TRUE" Comment="АПС: Выполняется АО без стравливания" />
+        <Signal Name="APS_MD_KC_AOS" UUID="1E2D88A34ABC87CC55A112BFAF733711" Type="BOOL" Global="TRUE" Comment="АПС: Выполняется АО со стравливанием" />
+        <Signal Name="APS_Global_BTN_AOB" UUID="B9D3D84D4A2349B0954781AF4AEBFDAF" Type="BOOL" Global="TRUE" Comment="АПС: Команда с АРМ АО без стравливания" />
+        <Signal Name="APS_Global_BTN_AOS" UUID="74E54C5848FF4A0FE71D0C88AD4B7FF0" Type="BOOL" Global="TRUE" Comment="АПС: Команда с АРМ АО со стравливанием" />
+        <Signal Name="APS_AOB_DONE" UUID="6C79D9244F7D6E9BF8573A8316C56393" Type="BOOL" Global="TRUE" Comment="АПС: АОбс завершен корректно" />
+        <Signal Name="APS_AOB_DONE_INCORRECT" UUID="9587C91443B2D97B07439A823558AA49" Type="BOOL" Global="TRUE" Comment="АПС: АОбс завершен некорректно" />
+        <Signal Name="APS_AOS_DONE" UUID="093EED974FF25EC1DDA2E3A5F70CF8B4" Type="BOOL" Global="TRUE" Comment="АПС: АОсс завершен корректно" />
+        <Signal Name="APS_AOS_DONE_INCORRECT" UUID="69B09A7C40F5BCEF58F6FC85E6F52270" Type="BOOL" Global="TRUE" Comment="АПС: АОсс завершен некорректно" />
     </Globals>
     <Connections />
 </Project>

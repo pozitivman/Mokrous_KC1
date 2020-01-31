@@ -760,13 +760,6 @@
         <Signal Name="APS_SHKU17_DI_Res_92" UUID="EA24E68E4FBD22700DE8DABB12DE1566" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHKU17_DI_Res_93" UUID="4843E4964F19A35F174C6998C759C0A5" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHKU17_DI_Res_94" UUID="FC6E3EA5437FF0D3E9413DB5ED3BE34B" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_AOS_RUN" UUID="9AA5995046E619E41E5A789FCC3ACF38" Type="BOOL" Usage="" Global="TRUE" Comment="Выполняется АО со стравливанием" />
-        <Signal Name="APS_AOS_OUT_DONE" UUID="9F14917C447600FC6804C2B36A041541" Type="BOOL" Usage="" Global="TRUE" Comment="АО со стравливанием завершен корректно" />
-        <Signal Name="APS_AOS_OUT_DONE_INCORRECT" UUID="C5E7C67E4A597BE8C0E8619ACB980C53" Type="BOOL" Usage="" Global="TRUE" Comment="АО со стравливанием завершен некорректно" />
-        <Signal Name="APS_MD_OVER_PG_1" UUID="4441CB71430EF475B312139ABDA2857B" Type="BOOL" Usage="" Global="TRUE" Comment="Превышение давления газа на выходе за краном 44" />
-        <Signal Name="APS_MD_OVER_PG_2" UUID="BE32F7CB448DB11234FFD48B54E94088" Type="BOOL" Usage="" Global="TRUE" Comment="Превышение давления газа на выходе группы 2" />
-        <Signal Name="APS_AO_GPA_GR1_KR6_ON" UUID="9F7D10544D73DF78D002278892E40E5C" Type="BOOL" Usage="" Global="TRUE" Comment="Открытие крана 6 по АО ГПА группы 1 КЦ-1" />
-        <Signal Name="APS_AO_GPA_GR2_KR6As_ON" UUID="C8A7937746BA98299F8BA6AF86B21673" Type="BOOL" Usage="" Global="TRUE" Comment="Открытие крана 6а&apos; по АО ГПА группы 2 КЦ-1" />
         <Signal Name="APS_SHU14_DI_Res_1" UUID="4A844250474C2FB7015AA19737B4EE87" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHU14_DI_Res_2" UUID="DAC3A7924399E59E01743BB2FABA38B4" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHU14_DI_Res_3" UUID="1E7A3E0C41E3194FA8F7E4830AE99011" Type="BOOL" Usage="" Global="TRUE" Comment="Резерв" />
@@ -909,5 +902,13 @@
         <Signal Name="APS_dP1KR30B_hi" UUID="07F244E44ACB4FF7A5DDA3B8AECE9E63" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Высокий перепад давления на кр30б" />
         <Signal Name="APS_SAU_UP_flt" UUID="699C1FB5469696D0A95947B3ED830660" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Отказ САУ УП" />
         <Signal Name="APS_SAU_KC_flt" UUID="053EEADB450D34B323D53D9147DC949A" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Отказ САУ КЦ" />
+        <Signal Name="APS_MD_KC_AOB" UUID="B8F25A784D15FF6F6D87DFB1F289B70B" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется АО без стравливания" />
+        <Signal Name="APS_MD_KC_AOS" UUID="1E2D88A34ABC87CC55A112BFAF733711" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется АО со стравливанием" />
+        <Signal Name="APS_Global_BTN_AOB" UUID="B9D3D84D4A2349B0954781AF4AEBFDAF" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда с АРМ АО без стравливания" />
+        <Signal Name="APS_Global_BTN_AOS" UUID="74E54C5848FF4A0FE71D0C88AD4B7FF0" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда с АРМ АО со стравливанием" />
+        <Signal Name="APS_AOB_DONE" UUID="6C79D9244F7D6E9BF8573A8316C56393" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОбс завершен корректно" />
+        <Signal Name="APS_AOB_DONE_INCORRECT" UUID="9587C91443B2D97B07439A823558AA49" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОбс завершен некорректно" />
+        <Signal Name="APS_AOS_DONE" UUID="093EED974FF25EC1DDA2E3A5F70CF8B4" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОсс завершен корректно" />
+        <Signal Name="APS_AOS_DONE_INCORRECT" UUID="69B09A7C40F5BCEF58F6FC85E6F52270" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОсс завершен некорректно" />
     </InterfaceList>
 </SubAppType>

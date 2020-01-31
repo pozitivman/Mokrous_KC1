@@ -1572,32 +1572,5 @@
         <Signal Name="APS_SHU14_KRUOK3_general" UUID="F93039334F8458A81061ED8573DFC515" Type="BOOL" Usage="" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_Z1_general" UUID="45D2A2CC42FDE429FAE0C89EF7A875AE" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_Z2_general" UUID="8591E6DF4B1ABB2969FEB49A97F5356A" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Общая ошибка ИМ&quot;" />
-        <Signal Name="btn_RU_KC" UUID="4EEAA9C44675C31FE9631E8AE5A965D0" Type="BOOL" Global="TRUE" Comment="Команда оператора: ручной/автомат режим управления" />
-        <Signal Name="MD_KC_RU" UUID="176AC421416CC8D93591118A6E2AB7E1" Type="BOOL" Global="TRUE" Comment="Автоматический режим управления КЦ (1 - авт., 0 - ручн.)" />
-        <Signal Name="MD_EAO" UUID="1D14166F49111398061A1D9C9966416E" Type="BOOL" Global="TRUE" Comment="Режим КЦ: экстренный останов" />
-        <Signal Name="MD_AOB" UUID="31E58CB640339C8E47C5A18A6508D907" Type="BOOL" Global="TRUE" Comment="Режим КЦ: аварийный останов со стравливанием" />
-        <Signal Name="MD_AOS" UUID="8C41334B436AE822E2DCFEB2D8D40FE0" Type="BOOL" Global="TRUE" Comment="Режим КЦ: аварийный останов без стравливания" />
-        <Signal Name="MD_NO" UUID="877644DB41B3E67C4698148AD0A0106B" Type="BOOL" Global="TRUE" Comment="Режим КЦ: нормальный останов" />
-        <Signal Name="MD_KOL" UUID="D6F516054397A18516BDD9832BEA4B92" Type="BOOL" Global="TRUE" Comment="Режим КЦ: кольцо" />
-        <Signal Name="MD_MAG" UUID="2D7B9CA74D443C418208D885E48FC85A" Type="BOOL" Global="TRUE" Comment="Режим КЦ: магистраль" />
-        <Signal Name="MD_STOP_net" UUID="EB11E0864A76A2D043A3EEBB1D59EE65" Type="BOOL" Global="TRUE" Comment="Нет режимов НО, АО, ЕАО" />
-        <Signal Name="MD_STOP" UUID="BB7167F049D4E295F1E6D3801B174346" Type="BOOL" Global="TRUE" Comment="Режим КЦ: остановлен" />
-        <Signal Name="MD_Undefined" UUID="1D16DDFE4494298E16F38DA6E6669CCA" Type="BOOL" Global="TRUE" Comment="Режим КЦ: неопределено" />
-        <Signal Name="btn_NO" UUID="A9A5B6A34835428C1B976A90717DE013" Type="BOOL" Global="TRUE" Comment="Команда оператора: заполнение контура газом" />
-        <Signal Name="btn_AOB" UUID="FC79B5D54381BF55C56815A059EA42DE" Type="BOOL" Global="TRUE" Comment="Команда оператора: АОбс" />
-        <Signal Name="btn_AOB_accept" UUID="5C869E0340F6B3286CEA5790AB329E67" Type="BOOL" Global="TRUE" Comment="Команда оператора: Подтверждение АОбс" />
-        <Signal Name="btn_AOB_not_accept" UUID="58DFE0D84F414965336B9AA546B13FE0" Type="BOOL" Global="TRUE" Comment="Команда оператора: Подтверждение Сброс АОбс" />
-        <Signal Name="AOB_wait_accept" UUID="589794C84BCDF702C99C84BF7501F31E" Type="BOOL" Global="TRUE" Comment="АОБ: ожидание подтверждения" />
-        <Signal Name="AOB_TIMER_1" UUID="9199D1B747433882CD7E648BA23CA835" Type="LREAL" Global="TRUE" Comment="АОБ: таймер 1" />
-        <Signal Name="AOB_TIMER_2" UUID="40817B9249BB50BE280597A0B3C82E0B" Type="LREAL" Global="TRUE" Comment="АОБ: таймер 2" />
-        <Signal Name="AOB_RUN" UUID="176738CB4A2B18864471BB9646A077EB" Type="BOOL" Global="TRUE" Comment="АОБ: выполняется АОбс" />
-        <Signal Name="btn_AOS" UUID="978EFF6D4EB9B68723612BAB56393EF5" Type="BOOL" Global="TRUE" Comment="Команда оператора: АО КЦ СС" />
-        <Signal Name="btn_AOS_accept" UUID="14CD526B494A7FDFE5DBD19A39DFB4DF" Type="BOOL" Global="TRUE" Comment="Команда оператора: подтверждение АО КЦ СС" />
-        <Signal Name="btn_AOS_not_accept" UUID="327E20FE40A8E4923868E7BD8D8BCBEB" Type="BOOL" Global="TRUE" Comment="Команда оператора: отмена АО КЦ СС" />
-        <Signal Name="AOS_wait_accept" UUID="8E1B6B214F7AEDE0F0B3D796847354B7" Type="BOOL" Global="TRUE" Comment="АОС: ожидание подтверждения" />
-        <Signal Name="AOS_TIMER_1" UUID="357DF6024F5121ABB5BC5593213A6960" Type="LREAL" Global="TRUE" Comment="АОС: таймер 1" />
-        <Signal Name="AOS_TIMER_2" UUID="0381BA464BE002BE98196C9A9A3061C6" Type="LREAL" Global="TRUE" Comment="АОС: таймер 2" />
-        <Signal Name="AOS_TIMER_3" UUID="3344C4A14A0741CED735FDAF6E3440DE" Type="LREAL" Global="TRUE" Comment="АОС: таймер 3" />
-        <Signal Name="AOS_RUN" UUID="054F253F443599A5D7935081E6E4CFE2" Type="BOOL" Global="TRUE" Comment="АОС: выполняется АОсс" />
     </InterfaceList>
 </SubAppType>
