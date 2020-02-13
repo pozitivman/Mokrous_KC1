@@ -429,6 +429,7 @@ end_case;]]></ST>
 fb_AOB();
 fb_AOS();
 
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //При имитации переводим краны в начальное состояние: КЦ Ремонт
 if IMIT and not IMIT_prev then
@@ -437,6 +438,7 @@ if IMIT and not IMIT_prev then
 	SHKU17_DI_KR8A_OFF := bool#1;
 	SHKU17_DI_KR8s_OFF := bool#1;
 	SHKU17_DI_KR8As_OFF := bool#1;
+	SHKU17_DI_KR7R_OFF := bool#1;
 
 	SHKU17_DI_KR17_ON := bool#1;
 	CMD_SHKU17_KR17_aOnOff := bool#1;
@@ -444,6 +446,19 @@ if IMIT and not IMIT_prev then
 	CMD_SHKU17_KR18_aOnOff := bool#1;
 	SHKU17_DI_KR18A_ON := bool#1;
 	CMD_SHKU17_KR18A_aOnOff := bool#1;
+	SHKU17_DI_KR30_ON := bool#1;
+	CMD_SHKU17_KR30_aOnOff := bool#1;
+	SHKU17_DI_KR30V_ON := bool#1;
+	CMD_SHKU17_KR30V_aOnOff := bool#1;
+	SHKU17_DI_KR6_ON := bool#1;
+	CMD_SHKU17_KR6_aOnOff := bool#1;
+	SHKU17_DI_KR6R_ON := bool#1;
+	CMD_SHKU17_KR6R_aOnOff := bool#1;
+	SHKU17_DI_KR6As_ON := bool#1;
+	CMD_SHKU17_KR6As_aOnOff := bool#1;
+	SHKU17_DI_KR6AR_ON := bool#1;
+	CMD_SHKU17_KR6AR_aOnOff := bool#1;
+
 end_if;
 IMIT_prev := IMIT;
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -474,12 +489,9 @@ MD.PPU_RDY_TO_START := not (APS_PPU_FIRE and APS_PPU_ZAG and Tg_ala_hi2KC and Pg
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //Выбор режима работы и управления КЦ: MD.KC_REV = 1 - Реверсивный
-if MD.KC_AUTO and (MD.KC_OFF or MD.KC_KOL) and Global_BTN.KC_REV and not set_block_alg_MD_REV then
-	MD.KC_REV			:= bool#1;
+if MD.KC_AUTO and MD.KC_KOL and Global_BTN.KC_REV and not set_block_alg_MD_REV then
+	MD.KC_REV		:= bool#1;
 	set_block_alg_MD_REV:= bool#1;
-	MD_REV_KR17_OFF	:= bool#1;
-	MD_REV_KR18_OFF	:= bool#1;
-	MD_REV_KR18A_OFF:= bool#1;
 	MD_REV_KR8_OFF	:= bool#1;
 	MD_REV_KR8A_OFF	:= bool#1;
 	MD_REV_KR30V_OFF:= bool#1;
@@ -489,12 +501,9 @@ if MD.KC_AUTO and (MD.KC_OFF or MD.KC_KOL) and Global_BTN.KC_REV and not set_blo
 	MD_REV_KR30_ON	:= bool#1;
 end_if;
 
-if SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
-	SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON and not TO_REV_prev then
+if SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
+	SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON then
 	set_block_alg_MD_REV:= bool#0;
-	MD_REV_KR17_OFF	:= bool#0;
-	MD_REV_KR18_OFF	:= bool#0;
-	MD_REV_KR18A_OFF:= bool#0;
 	MD_REV_KR8_OFF	:= bool#0;
 	MD_REV_KR8A_OFF	:= bool#0;
 	MD_REV_KR30V_OFF:= bool#0;
@@ -503,17 +512,14 @@ if SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and SHKU17_
 	MD_REV_KR8As_ON	:= bool#0;
 	MD_REV_KR30_ON	:= bool#0;
 end_if;
-TO_REV_prev := SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
+TO_REV_prev := SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
 			SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON;				 
 
 
 //Выбор режима работы и управления КЦ: MD.KC_REV = 0 - Основной
-if MD.KC_AUTO and (MD.KC_OFF or MD.KC_KOL) and Global_BTN.KC_FW and not set_block_alg_MD_REV then
+if MD.KC_AUTO and MD.KC_KOL and Global_BTN.KC_FW and not set_block_alg_MD_REV then
 	MD.KC_REV			:= bool#0;
 	set_block_alg_MD_REV:= bool#1;
-	MD_REV_KR17_OFF	:= bool#1;
-	MD_REV_KR18_OFF	:= bool#1;
-	MD_REV_KR18A_OFF:= bool#1;
 	MD_REV_KR8s_OFF	:= bool#1;
 	MD_REV_KR8As_OFF:= bool#1;
 	MD_REV_KR30_OFF	:= bool#1;
@@ -523,12 +529,9 @@ if MD.KC_AUTO and (MD.KC_OFF or MD.KC_KOL) and Global_BTN.KC_FW and not set_bloc
 	MD_REV_KR30V_ON	:= bool#1;
 end_if;
 
-if SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
+if SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
 	SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR30V_ON and not TO_FW_prev then	 
 	set_block_alg_MD_REV:= bool#0;
-	MD_REV_KR17_OFF	:= bool#0;
-	MD_REV_KR18_OFF	:= bool#0;
-	MD_REV_KR18A_OFF:= bool#0;
 	MD_REV_KR8s_OFF	:= bool#0;
 	MD_REV_KR8As_OFF:= bool#0;
 	MD_REV_KR30_OFF	:= bool#0;
@@ -537,7 +540,7 @@ if SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and SHKU17_
 	MD_REV_KR8A_ON	:= bool#0;
 	MD_REV_KR30V_ON	:= bool#0;
 end_if;
-TO_FW_prev := SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
+TO_FW_prev := SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
 			SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR30V_ON;
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2031,13 +2034,14 @@ VLV_init := KR;]]></ST>
                     <Variable UUID="C542C65D45CF35FB9CB9EBB1BDD9A603" Name="KR17_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     <Variable UUID="B871BAFD47AE12B6DB948DAE665DE20A" Name="KR18_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     <Variable UUID="B1E835E24B3B6FE1B9AEDB9213AE9CEE" Name="KR18A_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="45B72823448F5A8F840810985C232456" Name="dummy" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//Кран 17 закрыть
-if (MD_REV_KR17_OFF) and not KR17_OFF_prev then
+if (dummy) and not KR17_OFF_prev then
 	HMI_SHKU17_KR17_DA := false;
 	CMD_SHKU17_KR17_aOnOff := false;
 end_if;
-KR17_OFF_prev := MD_REV_KR17_OFF;
+KR17_OFF_prev := dummy;
 
 //Кран 17 открыть
 if (AOS_KR17_ON) and not KR17_ON_prev then
@@ -2048,11 +2052,11 @@ KR17_ON_prev := AOS_KR17_ON;
 
 
 //Кран 18 закрыть
-if (MD_REV_KR18_OFF) and not KR18_OFF_prev then
+if (dummy) and not KR18_OFF_prev then
 	HMI_SHKU17_KR18_DA := false;
 	CMD_SHKU17_KR18_aOnOff := false;
 end_if;
-KR18_OFF_prev := MD_REV_KR18_OFF;
+KR18_OFF_prev := dummy;
 
 //Кран 18 открыть
 if (AOS_KR18_ON) and not KR18_ON_prev then
@@ -2063,11 +2067,11 @@ KR18_ON_prev := AOS_KR18_ON;
 
 
 //Кран 18a закрыть
-if (MD_REV_KR18A_OFF) and not KR18A_OFF_prev then
+if (dummy) and not KR18A_OFF_prev then
 	HMI_SHKU17_KR18A_DA := false;
 	CMD_SHKU17_KR18A_aOnOff := false;
 end_if;
-KR18A_OFF_prev := MD_REV_KR18A_OFF;
+KR18A_OFF_prev := dummy;
 
 //Кран 18a открыть
 if (AOS_KR18A_ON) and not KR18A_ON_prev then
@@ -2387,8 +2391,8 @@ CMD_VLV();
 cfg_SHKU17_KR30(SEN_SHKU17_KR30,HMI_SHKU17_KR30_DA,HMI_SHKU17_KR30_rOn,HMI_SHKU17_KR30_rOff,CMD_SHKU17_KR30_rOnOff, CMD_SHKU17_KR30_aOnOff, HMI_SHKU17_KR30_rep, SHKU17_DI_KR30_ON, SHKU17_DI_KR30_OFF, true, true, APS_SHKU17_KR30_non, APS_SHKU17_KR30_noff, APS_SHKU17_KR30_nstart, APS_SHKU17_KR30_selfon, APS_SHKU17_KR30_selfoff, APS_SHKU17_KR30_flt, APS_SHKU17_KR30_ncon, APS_SHKU17_KR30_ncoff, SHKU17_KR30_state, APS_SHKU17_KR30_general);
 cfg_SHKU17_KR30V(SEN_SHKU17_KR30V,HMI_SHKU17_KR30V_DA,HMI_SHKU17_KR30V_rOn,HMI_SHKU17_KR30V_rOff,CMD_SHKU17_KR30V_rOnOff, CMD_SHKU17_KR30V_aOnOff, HMI_SHKU17_KR30V_rep, SHKU17_DI_KR30V_ON, SHKU17_DI_KR30V_OFF, true, true, APS_SHKU17_KR30V_non, APS_SHKU17_KR30V_noff, APS_SHKU17_KR30V_nstart, APS_SHKU17_KR30V_selfon, APS_SHKU17_KR30V_selfoff, APS_SHKU17_KR30V_flt, APS_SHKU17_KR30V_ncon, APS_SHKU17_KR30V_ncoff, SHKU17_KR30V_state, APS_SHKU17_KR30V_general);
 cfg_SHKU17_KR7(SEN_SHKU17_KR7,HMI_SHKU17_KR7_DA,HMI_SHKU17_KR7_rOn,HMI_SHKU17_KR7_rOff,CMD_SHKU17_KR7_rOnOff, CMD_SHKU17_KR7_aOnOff, HMI_SHKU17_KR7_rep, SHKU17_DI_KR7_ON, SHKU17_DI_KR7_OFF, true, true, APS_SHKU17_KR7_non, APS_SHKU17_KR7_noff, APS_SHKU17_KR7_nstart, APS_SHKU17_KR7_selfon, APS_SHKU17_KR7_selfoff, APS_SHKU17_KR7_flt, APS_SHKU17_KR7_ncon, APS_SHKU17_KR7_ncoff, SHKU17_KR7_state, APS_SHKU17_KR7_general);
-cfg_SHKU17_KR7R(SEN_SHKU17_KR7R,HMI_SHKU17_KR7R_DA,HMI_SHKU17_KR7R_rOn,HMI_SHKU17_KR7R_rOff,CMD_SHKU17_KR7R_rOnOff, CMD_SHKU17_KR7R_aOnOff, HMI_SHKU17_KR7R_rep, SHKU17_DI_KR7R_ON, SHKU17_DI_KR7R_OFF, true, SHKU17_DI_KR7R_VK, APS_SHKU17_KR7R_non, APS_SHKU17_KR7R_noff, APS_SHKU17_KR7R_nstart, APS_SHKU17_KR7R_selfon, APS_SHKU17_KR7R_selfoff, APS_SHKU17_KR7R_flt, APS_SHKU17_KR7R_ncon, APS_SHKU17_KR7R_ncoff, SHKU17_KR7R_state, APS_SHKU17_KR7R_general);
-cfg_SHKU17_KR8(SEN_SHKU17_KR8,HMI_SHKU17_KR8_DA,HMI_SHKU17_KR8_rOn,HMI_SHKU17_KR8_rOff,CMD_SHKU17_KR8_rOnOff, CMD_SHKU17_KR8_aOnOff, HMI_SHKU17_KR8_rep, SHKU17_DI_KR8_ON, SHKU17_DI_KR8_OFF, SHKU17_DI_KR8_IM, true, APS_SHKU17_KR8_non, APS_SHKU17_KR8_noff, APS_SHKU17_KR8_nstart, APS_SHKU17_KR8_selfon, APS_SHKU17_KR8_selfoff, APS_SHKU17_KR8_flt, APS_SHKU17_KR8_ncon, APS_SHKU17_KR8_ncoff, SHKU17_KR8_state, APS_SHKU17_KR8_general);
+cfg_SHKU17_KR7R(SEN_SHKU17_KR7R,HMI_SHKU17_KR7R_DA,HMI_SHKU17_KR7R_rOn,HMI_SHKU17_KR7R_rOff,CMD_SHKU17_KR7R_rOnOff, CMD_SHKU17_KR7R_aOnOff, HMI_SHKU17_KR7R_rep, SHKU17_DI_KR7R_ON, SHKU17_DI_KR7R_OFF, true, true, APS_SHKU17_KR7R_non, APS_SHKU17_KR7R_noff, APS_SHKU17_KR7R_nstart, APS_SHKU17_KR7R_selfon, APS_SHKU17_KR7R_selfoff, APS_SHKU17_KR7R_flt, APS_SHKU17_KR7R_ncon, APS_SHKU17_KR7R_ncoff, SHKU17_KR7R_state, APS_SHKU17_KR7R_general);
+cfg_SHKU17_KR8(SEN_SHKU17_KR8,HMI_SHKU17_KR8_DA,HMI_SHKU17_KR8_rOn,HMI_SHKU17_KR8_rOff,CMD_SHKU17_KR8_rOnOff, CMD_SHKU17_KR8_aOnOff, HMI_SHKU17_KR8_rep, SHKU17_DI_KR8_ON, SHKU17_DI_KR8_OFF, true, true, APS_SHKU17_KR8_non, APS_SHKU17_KR8_noff, APS_SHKU17_KR8_nstart, APS_SHKU17_KR8_selfon, APS_SHKU17_KR8_selfoff, APS_SHKU17_KR8_flt, APS_SHKU17_KR8_ncon, APS_SHKU17_KR8_ncoff, SHKU17_KR8_state, APS_SHKU17_KR8_general);
 cfg_SHKU17_KR8s(SEN_SHKU17_KR8s,HMI_SHKU17_KR8s_DA,HMI_SHKU17_KR8s_rOn,HMI_SHKU17_KR8s_rOff,CMD_SHKU17_KR8s_rOnOff, CMD_SHKU17_KR8s_aOnOff, HMI_SHKU17_KR8s_rep, SHKU17_DI_KR8s_ON, SHKU17_DI_KR8s_OFF, true, true, APS_SHKU17_KR8s_non, APS_SHKU17_KR8s_noff, APS_SHKU17_KR8s_nstart, APS_SHKU17_KR8s_selfon, APS_SHKU17_KR8s_selfoff, APS_SHKU17_KR8s_flt, APS_SHKU17_KR8s_ncon, APS_SHKU17_KR8s_ncoff, SHKU17_KR8s_state, APS_SHKU17_KR8s_general);
 cfg_SHKU17_KR8A(SEN_SHKU17_KR8A,HMI_SHKU17_KR8A_DA,HMI_SHKU17_KR8A_rOn,HMI_SHKU17_KR8A_rOff,CMD_SHKU17_KR8A_rOnOff, CMD_SHKU17_KR8A_aOnOff, HMI_SHKU17_KR8A_rep, SHKU17_DI_KR8A_ON, SHKU17_DI_KR8A_OFF, true, true, APS_SHKU17_KR8A_non, APS_SHKU17_KR8A_noff, APS_SHKU17_KR8A_nstart, APS_SHKU17_KR8A_selfon, APS_SHKU17_KR8A_selfoff, APS_SHKU17_KR8A_flt, APS_SHKU17_KR8A_ncon, APS_SHKU17_KR8A_ncoff, SHKU17_KR8A_state, APS_SHKU17_KR8A_general);
 cfg_SHKU17_KR8As(SEN_SHKU17_KR8As,HMI_SHKU17_KR8As_DA,HMI_SHKU17_KR8As_rOn,HMI_SHKU17_KR8As_rOff,CMD_SHKU17_KR8As_rOnOff, CMD_SHKU17_KR8As_aOnOff, HMI_SHKU17_KR8As_rep, SHKU17_DI_KR8As_ON, SHKU17_DI_KR8As_OFF, true, true, APS_SHKU17_KR8As_non, APS_SHKU17_KR8As_noff, APS_SHKU17_KR8As_nstart, APS_SHKU17_KR8As_selfon, APS_SHKU17_KR8As_selfoff, APS_SHKU17_KR8As_flt, APS_SHKU17_KR8As_ncon, APS_SHKU17_KR8As_ncoff, SHKU17_KR8As_state, APS_SHKU17_KR8As_general);
@@ -3689,7 +3693,16 @@ cycleTime_AI_sys := clock_AI_cur - clock_AI_prev;]]></ST>
                     <Variable UUID="626E3FDC42A41562238E81ACD4FA92E5" Name="temp_status_string" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Usage="internal" />
                     <Variable UUID="37A35980432EC3E6CCD3E3A5C9814BB0" Name="delay" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Usage="internal" />
                     <Variable UUID="35DE1FE9412523385D210B9E916FC1FD" Name="USL1_MAG" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
-                    <Variable UUID="85DCB2E54EF77A30D818C2BAD972C1A9" Name="RS_KC_AUTO" Type="SR" TypeUUID="2E4DE4324E1F5E488B22EE9160EBE03C" Usage="internal" />
+                    <Variable UUID="85DCB2E54EF77A30D818C2BAD972C1A9" Name="RS_KC_AUTO" Type="RS" TypeUUID="53F400294BCD7C71EB041B90164F4F6F" Usage="internal" />
+                    <Variable UUID="20EC4242463AABD9C6CB9AAA9867184D" Name="rtrig_KC_REZ" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="17175B6D4AE8232790AFA69F8C7CCC2D" Name="rtrig_KC_REP" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="E68279A6440814138AEEDC9D024969F1" Name="rtrig_KC_KOL" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="A08162B94968485A42064CB20C81C507" Name="rtrig_KC_START" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="3E75583349CA9F1A9DF511B42D9A5ABA" Name="rtrig_KC_MAG" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="68A9500B477A2C7C3F1EB49C8FBE6C78" Name="rtrig_KC_MAG_REV" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="85252DC04FF837C1B0EC7F8705740D5E" Name="rtrig_KC_NO" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="1C50E8F9482AED593D3AD697204D56C0" Name="rtrig_KC_AUTO" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
+                    <Variable UUID="6AEC632E4EA7E5F9CC971986F1A3CDBD" Name="rtrig_KC_MAN" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//////////////////////////////////////////////////////////////////////////////////////////
 //Формирование внутренних состояний системы
@@ -3701,7 +3714,7 @@ MD.NO_ACTIV := not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB or MD.KC_KOL or MD.KC_MA
 MD.STOPS := MD.EAO_KC or MD.KC_NO or MD.KC_AOS or MD.KC_AOB;
 
 //Режимы АО КЦ
-MD.AO_KC := not MD.EAO_KC or MD.KC_AOS or MD.KC_AOB;
+MD.AO_KC := MD.EAO_KC or MD.KC_AOS or MD.KC_AOB;
 
 //ГПА Кольцо  
 MD.GPA_KOL := Link_GPA1.MD_K or Link_GPA2.MD_K or Link_GPA3.MD_K or Link_GPA4.MD_K or Link_GPA5.MD_K or Link_GPA6.MD_K;  
@@ -3720,7 +3733,7 @@ MD.GPA_START := (Link_GPA1.MD_APK or Link_GPA1.MD_APM) or (Link_GPA2.MD_APK or L
 MD.GPA_MAG := Link_GPA1.MD_M or Link_GPA2.MD_M or Link_GPA3.MD_M or Link_GPA4.MD_M or Link_GPA5.MD_M or Link_GPA6.MD_M;
 
 //Нет более приоритетных режимов
-MD.NOT_MORE_PRTY := not (MD.KC_MAG and MD.KC_MAG_REV and MD.KC_KOL and MD.KC_START and MD.KC_NO and MD.EAO_KC and MD.AO_KC);  
+MD.NOT_MORE_PRTY := not (MD.KC_MAG or MD.KC_MAG_REV or MD.KC_KOL or MD.KC_START or MD.KC_NO or MD.EAO_KC or MD.AO_KC);  
 
  
 //Режимы работы цеха 
@@ -3732,13 +3745,13 @@ temp_status_string := '';
 //Экстренный останов КЦ
 if (SHKU17_DI_EAO_KC_PU or SHKU17_DI_EAO_KC_PEAO) then
 	MD.EAO_KC	:= bool#1;
-	delay		:= lreal#300.0;
+	delay		:= lreal#1200.0;
 end_if;
 
 if Deblock and (delay <=lreal#0.0) then MD.EAO_KC := bool#0; end_if;
 
 if MD.EAO_KC then
-	temp_mode_string := 'КЦ-1 ЭО';
+	temp_mode_string := 'КЦ ЭО';
 	if delay > LREAL#0.5 THEN
 		delay := delay - cycleTime_MAIN;
 		temp_status_string := FORMAT_LREAL(delay, UINT#0) + ' сек.';
@@ -3757,10 +3770,10 @@ if MD.KC_AOB then
 		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumAOB.TMR_COM, UINT#0) + ' сек.';
 	end_if;
 	if drumAOB.done_ok then
-		temp_status_string := 'Алгоритм АО КЦ-1 БС завершён$n$nНажмите Сброс';
+		temp_status_string := 'Алгоритм АО КЦ БС завершён$n$nНажмите Сброс';
 	end_if;
 	if drumAOB.done_flt then
-		temp_status_string := 'Алгоритм АО КЦ-1 БС завершён некорректно$n$nНажмите Сброс';
+		temp_status_string := 'Алгоритм АО КЦ БС завершён некорректно$n$nНажмите Сброс';
 	end_if;
 end_if;
 
@@ -3773,93 +3786,96 @@ if MD.KC_AOS then
 		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumAOS.TMR_COM, UINT#0) + ' сек.';
 	end_if;
 	if drumAOS.done_ok then
-		temp_status_string := 'Алгоритм АО КЦ-1 СС завершён$n$nНажмите Сброс';
+		temp_status_string := 'Алгоритм АО КЦ СС завершён$n$nНажмите Сброс';
 	end_if;
 	if drumAOS.done_flt then
-		temp_status_string := 'Алгоритм АО КЦ-1 СС завершён некорректно$n$nНажмите Сброс';
+		temp_status_string := 'Алгоритм АО КЦ СС завершён некорректно$n$nНажмите Сброс';
 	end_if;
 end_if;  
 
 
 //Режим Кольцо
-MD.KC_KOL := (not (MD.GPA_START and MD.KC_NO and MD.AO_KC)) and (MD.GPA_KOL or MD.GPA_MAG) and 
-			(((SHKU17_DI_KR7_OFF or SHKU17_DI_KR8_OFF or SHKU17_DI_KR8A_OFF) and SHKU17_DI_KR6_ON and SHKU17_DI_KR6R_ON and SHKU17_DI_KR6As_ON and SHKU17_DI_KR6AR_ON and not MD.KC_MAG_REV) or 
-			((SHKU17_DI_KR7_OFF or SHKU17_DI_KR8s_OFF or SHKU17_DI_KR8As_OFF) and SHKU17_DI_KR6_ON and SHKU17_DI_KR6R_ON and SHKU17_DI_KR6As_ON and SHKU17_DI_KR6AR_ON and not MD.KC_MAG)); 
+MD.KC_KOL := not MD.KC_NO and not MD.AO_KC and MD.GPA_MAG and 
+			((SHKU17_DI_KR6_ON and SHKU17_DI_KR6R_ON and SHKU17_DI_KR6As_ON and SHKU17_DI_KR6AR_ON and 
+			SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and not MD.KC_MAG_REV) or 
+			(SHKU17_DI_KR6_ON and SHKU17_DI_KR6R_ON and SHKU17_DI_KR6As_ON and SHKU17_DI_KR6AR_ON and 
+			SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and not MD.KC_MAG)); 
 if MD.KC_KOL then
-	temp_mode_string := 'КЦ-1 Кольцо';
+	temp_mode_string := 'КЦ Кольцо';
 end_if;
+rtrig_KC_KOL(CLK:= MD.KC_KOL); if rtrig_KC_KOL.Q then CREATE_EVENT('Переход в режим - КЦ Кольцо', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
 
 //Режим Пуск КЦ
-MD.KC_START := MD.GPA_START and not (MD.GPA_MAG and MD.AO_KC and MD.KC_NO);
+MD.KC_START := MD.GPA_START and not (MD.GPA_MAG or MD.AO_KC or MD.KC_NO);
 if MD.KC_START then
-	temp_mode_string := 'КЦ-1 Пуск';
+	temp_mode_string := 'КЦ Пуск';
 end_if;
+rtrig_KC_START(CLK:= MD.KC_START); if rtrig_KC_START.Q then CREATE_EVENT('Переход в режим - КЦ Пуск', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
 
-//Режим КЦ отключен
-MD.KC_OFF := not (MD.GPA_KOL or MD.GPA_MAG or MD.GPA_START) and MD.NOT_MORE_PRTY and 
-			(SHKU17_DI_KR7_OFF and SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF);
-if MD.KC_OFF then
-	temp_mode_string := 'КЦ-1 Отключен';
+//Режим КЦ резерв
+MD.KC_REZ := MD.NOT_MORE_PRTY and SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and not MD.GPA_MAG;
+if MD.KC_REZ then
+	temp_mode_string := 'КЦ Резерв';
 end_if;
+rtrig_KC_REZ(CLK:= MD.KC_REZ); if rtrig_KC_REZ.Q then CREATE_EVENT('Переход в режим - КЦ Резерв', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;  
 
 
 //Режим КЦ Ремонт
-MD.KC_REP := MD.KC_OFF and SHKU17_DI_KR17_ON and SHKU17_DI_KR18_ON and SHKU17_DI_KR18A_ON;   
+MD.KC_REP := MD.NOT_MORE_PRTY and not MD.KC_REZ;   
 if MD.KC_REP then
-	temp_mode_string := 'КЦ-1 Ремонт';
+	temp_mode_string := 'КЦ Ремонт';
 end_if;
+rtrig_KC_REP(CLK:= MD.KC_REP); if rtrig_KC_REP.Q then CREATE_EVENT('Переход в режим - КЦ Ремонт', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
 
 //Режим КЦ Магистраль
-USL1_MAG := SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and MD.GPA_MAG and not(MD.AO_KC and MD.KC_NO and MD.GPA_START and MD.KC_KOL);
+USL1_MAG := SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and MD.GPA_MAG and not MD.AO_KC and not MD.KC_NO and not MD.KC_KOL;
 MD.KC_MAG := USL1_MAG and (SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR30V_ON and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF); 
 if MD.KC_MAG then
-	temp_mode_string := 'КЦ-1 Магистраль';
+	temp_mode_string := 'КЦ Магистраль';
 end_if;
+rtrig_KC_MAG(CLK:= MD.KC_MAG); if rtrig_KC_MAG.Q then CREATE_EVENT('Переход в режим - КЦ Магистраль', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
 
 //Режим КЦ Магистраль реверс
 MD.KC_MAG_REV := USL1_MAG and (SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON and SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF); 
 if MD.KC_MAG_REV then
-	temp_mode_string := 'КЦ-1 Магистраль-реверс';
+	temp_mode_string := 'КЦ Магистраль-реверс';
 end_if;
-
-
-//Режим Состояние КЦ не определено
-MD.KC_UNDEF := MD.NOT_MORE_PRTY and not MD.KC_OFF;  
-if MD.KC_UNDEF then
-	temp_mode_string := 'КЦ-1 Состояние не определено';
-end_if;
+rtrig_KC_MAG_REV(CLK:= MD.KC_MAG_REV); if rtrig_KC_MAG_REV.Q then CREATE_EVENT('Переход в режим - КЦ Магистраль-реверс', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
 
 //Режим Нормальный останов КЦ
 MD.KC_NO := not MD.AO_KC and Global_BTN.NO;  
 if MD.KC_NO then
-	temp_mode_string := 'КЦ-1 Нормальный останов';
+	temp_mode_string := 'КЦ Нормальный останов';
 end_if;
+rtrig_KC_NO(CLK:= MD.KC_NO); if rtrig_KC_NO.Q then CREATE_EVENT('Переход в режим - КЦ НО', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
 
 //Режим Автоматический цеха
-RS_KC_AUTO(S1:= Global_BTN.KC_AUTO, R:= MD.EAO_KC or Global_BTN.KC_MAN, Q1 => MD.KC_AUTO);
+RS_KC_AUTO(S:= Global_BTN.KC_AUTO, R1:= MD.EAO_KC or Global_BTN.KC_MAN, Q1 => MD.KC_AUTO);
 if MD.KC_AUTO and not MD.EAO_KC then
 	temp_status_string := 'Режим Автоматический';
 end_if;
+rtrig_KC_AUTO(CLK:= MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_AUTO.Q then CREATE_EVENT('Переход в режим - КЦ Автоматический', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
+
 if not MD.KC_AUTO and not MD.EAO_KC then 
 	temp_status_string := 'Режим Ручной';
 end_if;
-
+rtrig_KC_MAN(CLK:= not MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_MAN.Q then CREATE_EVENT('Переход в режим - КЦ Ручной', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
 
 
 //Раскраска телевизора
-(*жёлтый*)			Global_TV.Color.0 := MD.KC_KOL or MD.KC_NO;
-(*красный*)			Global_TV.Color.1 := MD.KC_AOS or MD.KC_AOB;
+(*жёлтый*)			Global_TV.Color.0 := MD.KC_KOL or MD.KC_NO or MD.KC_REZ;
+(*красный*)			Global_TV.Color.1 := MD.KC_AOS or MD.KC_AOB or MD.EAO_KC;
 (*зелёный*)			Global_TV.Color.2 := MD.KC_START;
 (*тёмно-зелёный*)	(*Global_TV.Color.3 := MD.KC_UNDEF;*)
 (*коричневый*)		(*Global_TV.Color.4 := MD.KC_UNDEF;*)
-(*серый*)			Global_TV.Color.5 := MD.KC_OFF or MD.KC_REP or MD.KC_UNDEF;
+(*серый*)			Global_TV.Color.5 := MD.KC_REP or MD.KC_UNDEF;
 (*голубой*)			Global_TV.Color.6 := MD.KC_MAG or MD.KC_MAG_REV;
 
 ///////////////////////////////////////////////////////////////////////////////////////////

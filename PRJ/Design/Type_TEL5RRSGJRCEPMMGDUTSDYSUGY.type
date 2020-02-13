@@ -14,6 +14,7 @@
         <Field Name="KC_START" Type="BOOL" UUID="C6FC99114C6B6DF5F9C102B94BA109FB" Comment="КЦ Пуск" />
         <Field Name="KC_OFF" Type="BOOL" UUID="5330C7444C0B5CE0AC539BB14EF7CEA2" Comment="КЦ Отключен" />
         <Field Name="KC_REP" Type="BOOL" UUID="CDA18D8C485DCDB4D1D2D99FE397D2A6" Comment="КЦ Ремонт" />
+        <Field Name="KC_REZ" Type="BOOL" UUID="18689EE042A9C0F827F55DB30452DF2E" Comment="КЦ Резерв" />
         <Field Name="KC_REV" Type="BOOL" UUID="38AFC98242C5CF39E65FB6ACD30124E9" Comment="КЦ Режим Основной - 0/Реверсивный - 1" />
         <Field Name="KC_MAG" Type="BOOL" UUID="CA8558824F12CFD6602278B0594166E1" Comment="КЦ Магистраль" />
         <Field Name="KC_MAG_REV" Type="BOOL" UUID="E8537CA6445A8B92EB141C867A64F2BE" Comment="КЦ Магистраль Реверс" />
