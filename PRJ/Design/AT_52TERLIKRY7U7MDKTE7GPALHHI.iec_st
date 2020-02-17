@@ -423,6 +423,7 @@ end_case;]]></ST>
                     <Variable UUID="62383D2D4E844FBF8F49ACBC035D38C6" Name="IMIT_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     <Variable UUID="BB351DA94F0897FFD113C39B1C74CC1B" Name="fb_AOB" Type="drum_AOB" TypeUUID="4A0A032D4EBF673D4014CE8C2AE2DA26" Usage="internal" />
                     <Variable UUID="C890A6A5455EEA97D1A5CFA0D317519A" Name="fb_AOS" Type="drum_AOS" TypeUUID="57F7D72C476AA3B953A485866CE8AA4A" Usage="internal" />
+                    <Variable UUID="2B083C1C487B251D437C37ACB7C0019C" Name="ton_to_AOB_by_Pg_ala_hi2KC" Type="TON" TypeUUID="EAA43B6B4DCDCEA72AB748B4554FD2AD" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//////////////////////////////////////////////////////////////////////////////////////////
 //Выполнение подпрограм АОБ, АОС
@@ -502,7 +503,7 @@ if MD.KC_AUTO and MD.KC_KOL and Global_BTN.KC_REV and not set_block_alg_MD_REV t
 end_if;
 
 if SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
-	SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON then
+	SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON and set_block_alg_MD_REV then
 	set_block_alg_MD_REV:= bool#0;
 	MD_REV_KR8_OFF	:= bool#0;
 	MD_REV_KR8A_OFF	:= bool#0;
@@ -512,13 +513,15 @@ if SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
 	MD_REV_KR8As_ON	:= bool#0;
 	MD_REV_KR30_ON	:= bool#0;
 end_if;
+(*
 TO_REV_prev := SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
 			SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON;				 
+*)
 
 
 //Выбор режима работы и управления КЦ: MD.KC_REV = 0 - Основной
 if MD.KC_AUTO and MD.KC_KOL and Global_BTN.KC_FW and not set_block_alg_MD_REV then
-	MD.KC_REV			:= bool#0;
+	MD.KC_REV		:= bool#0;
 	set_block_alg_MD_REV:= bool#1;
 	MD_REV_KR8s_OFF	:= bool#1;
 	MD_REV_KR8As_OFF:= bool#1;
@@ -530,7 +533,7 @@ if MD.KC_AUTO and MD.KC_KOL and Global_BTN.KC_FW and not set_block_alg_MD_REV th
 end_if;
 
 if SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
-	SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR30V_ON and not TO_FW_prev then	 
+	SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR30V_ON and set_block_alg_MD_REV then	 
 	set_block_alg_MD_REV:= bool#0;
 	MD_REV_KR8s_OFF	:= bool#0;
 	MD_REV_KR8As_OFF:= bool#0;
@@ -540,8 +543,10 @@ if SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
 	MD_REV_KR8A_ON	:= bool#0;
 	MD_REV_KR30V_ON	:= bool#0;
 end_if;
+(*
 TO_FW_prev := SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
 			SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR30V_ON;
+*)
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -562,8 +567,6 @@ Tg_ala_hi2KC := ((((SHKU17_AI_Tgaz_pos_KR8A > Global_Ust.Tkr8a_hi) or (SHKU17_AI
 				(((SHKU17_AI_Tgaz_pos_KR8As > Global_Ust.Tkr8as_hi) or (SHKU17_AI_Tgaz_pos_KR8s > Global_Ust.Tkr8s_hi)) and MD.KC_MAG_REV)) and
 
 				((SHKU17_AI_Tgaz_out_pos_KR44 > Global_Ust.Tkr44_hi) or (SHKU17_AI_Tgaz_out_gr2 > Global_Ust.Tgr2_hi));  
-
-AOB_ASUTP_CMD := APS_Tg_ala_hi2KC; //Выдаем команду на АОБ  
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -580,9 +583,12 @@ Pg_ala_hi2KC := (((SHKU17_AI_Pgaz_pos_KR30V > Global_Ust.P2kr30_hi) and MD.KC_MA
 
 
 OPG_KR_ON := APS_Pg_ala_hi2KC; //Выдаем команду на открытие кранов 6, 6а, 6ар, 6р
+ton_to_AOB_by_Pg_ala_hi2KC(IN:= Pg_ala_hi2KC, PT:= T#10m);
+Pg_ala_hi2KC_delay := ton_to_AOB_by_Pg_ala_hi2KC.Q;
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
+//Выдаем команду по срабатыванию АПС
+AOB_ASUTP_CMD := APS_Tg_ala_hi2KC or APS_Pg_ala_hi2KC_delay; //Выдаем команду на АОБ 
 ]]></ST>
             </FunctionBlock>
             <Function UUID="5617DF744661F236FE4C9BA67FE735DC" Name="func_GE2" Comment="Больше либо равно 2" ResultTypeUUID="EC797BDD4541F500AD80A78F1F991834">
@@ -1824,25 +1830,26 @@ AE_579(APS_SHKU17_KR48_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_S
 AE_580(APS_SHKU17_KR49_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_general);
 
 //АПС по режимам, уставкам, алгоритмам
-AE_581(Tg_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Tg_hi2KC); //превышение температуры технологического газа на выходе КЦ
-AE_582(Tg_ala_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_Tg_ala_hi2KC); //аварийное превышение температуры технологического газа на выходе КЦ
-AE_583(AOB_ASUTP_CMD, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_ASUTP_CMD); //команда на АОБ
-AE_584(Pg_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Pg_hi2KC); //превышение давления технологического газа на выходе КЦ
-AE_585(Pg_ala_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_Pg_ala_hi2KC); //аварийное превышение давления технологического газа на выходе КЦ
-AE_586(OPG_KR_ON, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_OPG_KR_ON); //команда на открытие кранов 6, 6а, 6ар, 6р
-AE_587(MD.PPU_FIRE, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_FIRE); //ППУ Пожар на КЦ
-AE_588(MD.PPU_ZAG, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_ZAG); //ППУ Загазованность CH4 20% на двух и более ГПА
-AE_589(MD.PPU_RDY_TO_START, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_RDY_TO_START); //Есть готовность к пуску КЦ
-AE_590(dP1KR30_hi, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_dP1KR30_hi); //Высокий dP на кране 30
-AE_591(dP1KR30B_hi, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_dP1KR30B_hi); //Высокий dP на кране 30в
-AE_592(MD.KC_AOB, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_MD_KC_AOB); //АПС: Выполняется АО без стравливания
-AE_593(MD.KC_AOS, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_MD_KC_AOS); //АПС: Выполняется АО со стравливанием
-AE_594(Global_BTN.AOB, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Global_BTN_AOB); //АПС: Команда с АРМ АО без стравливания
-AE_595(Global_BTN.AOS, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Global_BTN_AOS); //АПС: Команда с АРМ АО со стравливанием
-AE_596(drumAOB.done_ok, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_DONE); //АПС: АОбс завершен корректно
-AE_597(drumAOB.done_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_DONE_INCORRECT); //АПС: АОбс завершен некорректно
-AE_598(drumAOS.done_ok, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_DONE); //АПС: АОсс завершен корректно
-AE_599(drumAOS.done_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_DONE_INCORRECT); //АПС: АОсс завершен некорректно
+AE_581(Tg_hi2KC, T#10000ms, Deblock, Kvitir, DO_sound_PS, APS_Tg_hi2KC); //превышение температуры технологического газа на выходе КЦ
+AE_582(Tg_ala_hi2KC, T#10000ms, Deblock, Kvitir, DO_sound_AS, APS_Tg_ala_hi2KC); //аварийное превышение температуры технологического газа на выходе КЦ
+AE_583(AOB_ASUTP_CMD, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_AOB_ASUTP_CMD); //команда на АОБ
+AE_584(Pg_hi2KC, T#10000ms, Deblock, Kvitir, DO_sound_PS, APS_Pg_hi2KC); //превышение давления технологического газа на выходе КЦ
+AE_585(Pg_ala_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Pg_ala_hi2KC); //аварийное превышение давления технологического газа на выходе КЦ
+AE_586(Pg_ala_hi2KC_delay, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_Pg_ala_hi2KC_delay); //аварийное превышение давления технологического газа на выходе КЦ через 10 минут
+AE_587(OPG_KR_ON, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_OPG_KR_ON); //команда на открытие кранов 6, 6а, 6ар, 6р
+AE_588(MD.PPU_FIRE, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_FIRE); //ППУ Пожар на КЦ
+AE_589(MD.PPU_ZAG, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_ZAG); //ППУ Загазованность CH4 20% на двух и более ГПА
+AE_590(MD.PPU_RDY_TO_START, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_PPU_RDY_TO_START); //Есть готовность к пуску КЦ
+AE_591(dP1KR30_hi, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_dP1KR30_hi); //Высокий dP на кране 30
+AE_592(dP1KR30B_hi, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_dP1KR30B_hi); //Высокий dP на кране 30в
+AE_593(MD.KC_AOB, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_MD_KC_AOB); //АПС: Выполняется АО без стравливания
+AE_594(MD.KC_AOS, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_MD_KC_AOS); //АПС: Выполняется АО со стравливанием
+AE_595(Global_BTN.AOB, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Global_BTN_AOB); //АПС: Команда с АРМ АО без стравливания
+AE_596(Global_BTN.AOS, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Global_BTN_AOS); //АПС: Команда с АРМ АО со стравливанием
+AE_597(drumAOB.done_ok, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_DONE); //АПС: АОбс завершен корректно
+AE_598(drumAOB.done_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_DONE_INCORRECT); //АПС: АОбс завершен некорректно
+AE_599(drumAOS.done_ok, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_DONE); //АПС: АОсс завершен корректно
+AE_600(drumAOS.done_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_DONE_INCORRECT); //АПС: АОсс завершен некорректно
 
 
 //Выходы АПС
@@ -2246,6 +2253,8 @@ KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON;]]></ST>
                     <Variable UUID="DB9778124839857248E613A8F83747D7" Name="SEN_SHKU17_KR47" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
                     <Variable UUID="22C6C351468F664D2DF34C84B5253271" Name="SEN_SHKU17_KR48" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
                     <Variable UUID="11D3E1914E8197B2B7413BAD6F64CD0C" Name="SEN_SHKU17_KR49" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="1617349B4167DC3BDD9D80B3E7146323" Name="SEN_SHKU17_Z1" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="6ED100324675DBD2A52963897800CEFF" Name="SEN_SHKU17_Z2" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
                     <Variable UUID="9865BE57411E06A51CB390934CCF6A34" Name="cfg_SHKU17_KR30" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
                     <Variable UUID="A274071242DF6614DB93F9800463D193" Name="cfg_SHKU17_KR30V" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
                     <Variable UUID="5B2AC2EB4DF4204E918BE58816AF89E4" Name="cfg_SHKU17_KR7" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
@@ -2270,6 +2279,8 @@ KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON;]]></ST>
                     <Variable UUID="90699D0D4C14094F360DE6A986698D50" Name="cfg_SHKU17_KR47" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
                     <Variable UUID="ECA8B0D54D8C003EF407849E4A11CCC5" Name="cfg_SHKU17_KR48" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
                     <Variable UUID="96EC716B4653A2BD23B77FBB0B404E24" Name="cfg_SHKU17_KR49" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
+                    <Variable UUID="D2CB2D5B4EA38D291539E4882CD424AB" Name="cfg_SHKU17_Z1" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
+                    <Variable UUID="360591DD4B21BF95BA4D33B3FD88F2CF" Name="cfg_SHKU17_Z2" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
                     <Variable UUID="A7C8A84E4BED80E8393530AD3E28D1D4" Name="vlv_SHKU17_KR30" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
                     <Variable UUID="5AA58C634AFC4146E881CEA9C12D15E7" Name="vlv_SHKU17_KR30V" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
                     <Variable UUID="6829F8DA4266B528CB4F089F6D1CD460" Name="vlv_SHKU17_KR7" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
@@ -2294,6 +2305,8 @@ KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON;]]></ST>
                     <Variable UUID="6939603844C8832E603B76BB577EB5BF" Name="vlv_SHKU17_KR47" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
                     <Variable UUID="03B9EFCB4BF8AEFD233FB8AA75A0A125" Name="vlv_SHKU17_KR48" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
                     <Variable UUID="3D9980614F5A336526145380E6C6BCDC" Name="vlv_SHKU17_KR49" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="D467C521439B1D4365E443B76381FFFE" Name="vlv_SHKU17_Z1" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="2D6F381D41BF9D30B13620BD1F3379D7" Name="vlv_SHKU17_Z2" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
                     <Variable UUID="8648456E460512396CEFC7ABC989D9AF" Name="imit_SHKU17_KR30" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                     <Variable UUID="456689AA44B5049B47EC7E860FA50EB0" Name="imit_SHKU17_KR30V" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                     <Variable UUID="6659AD5E49D744E49158658625F12DD1" Name="imit_SHKU17_KR7" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
@@ -2318,6 +2331,8 @@ KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON;]]></ST>
                     <Variable UUID="7C1E2CF246A212835A102993C2101DD5" Name="imit_SHKU17_KR47" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                     <Variable UUID="20C4E7F143A791F63F8B86B49A2A6EBB" Name="imit_SHKU17_KR48" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                     <Variable UUID="4B27B4064F448088377AC79DAB651D6B" Name="imit_SHKU17_KR49" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="684C9B974503FBB8C1D4E78181CBFFB8" Name="imit_SHKU17_Z1" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="F201C7BA43FD01C8DD07C4BE0724BB75" Name="imit_SHKU17_Z2" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                     <Variable UUID="7993A3A64231D1DA78BE62A9123E54E5" Name="nas_SHKU17_PN1" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
                     <Variable UUID="E7A754AC4085DDC3BF92DDB2CEAFCCEF" Name="nas_SHKU17_PN2" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
                     <Variable UUID="8E5A644C4D8668264975D58C5F682525" Name="nas_SHKU17_PN3" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
@@ -2329,21 +2344,11 @@ KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON;]]></ST>
                     <Variable UUID="55D1611E4A683052FC62CE990CD54034" Name="nas_SHKU17_NC3" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
                     <Variable UUID="65C947654D29B1535457CC92E23FD698" Name="nas_SHKU17_DN1" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
                     <Variable UUID="A7A1C6E8447A826CD78E7F82A257253A" Name="nas_SHKU17_DN2" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
-                    <Variable UUID="D98140B4485B7DE2F1C88DBA05EA39EF" Name="vlv_Z1" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
-                    <Variable UUID="5280AF5E4B95A64D1E0FA5B6338EBDAC" Name="vlv_Z2" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
                     <Variable UUID="447E77E6480752DB7C6C9C9E4879E626" Name="im_Obogr_APK1" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
                     <Variable UUID="B30E2FDB43046907C56D39B1F16817C5" Name="im_Obogr_APK2" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
-                    <Variable UUID="AC8455E2439814AF80FBD396DD910178" Name="Dummy" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
-                    <Variable UUID="1617349B4167DC3BDD9D80B3E7146323" Name="SEN_SHKU17_Z1" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
-                    <Variable UUID="6ED100324675DBD2A52963897800CEFF" Name="SEN_SHKU17_Z2" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
-                    <Variable UUID="D2CB2D5B4EA38D291539E4882CD424AB" Name="cfg_SHKU17_Z1" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
-                    <Variable UUID="360591DD4B21BF95BA4D33B3FD88F2CF" Name="cfg_SHKU17_Z2" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
-                    <Variable UUID="D467C521439B1D4365E443B76381FFFE" Name="vlv_SHKU17_Z1" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
-                    <Variable UUID="2D6F381D41BF9D30B13620BD1F3379D7" Name="vlv_SHKU17_Z2" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
-                    <Variable UUID="684C9B974503FBB8C1D4E78181CBFFB8" Name="imit_SHKU17_Z1" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
-                    <Variable UUID="F201C7BA43FD01C8DD07C4BE0724BB75" Name="imit_SHKU17_Z2" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                     <Variable UUID="D08F0EC94045E65EB178E5A3A9B7E9A0" Name="obg_SHKU17_APK1_obogr" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
                     <Variable UUID="D76B812346C5EB34DC0937AFE04F9195" Name="obg_SHKU17_APK2_obogr" Type="IM_ctrl" TypeUUID="232B7C9143F13A6D4049F38DADFC5E40" Usage="internal" />
+                    <Variable UUID="AC8455E2439814AF80FBD396DD910178" Name="Dummy" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[clock_VLV_cur := CLOCK();
 IF FirstScan_MAIN THEN clock_VLV_prev := clock_VLV_cur; END_IF;
@@ -3857,12 +3862,12 @@ rtrig_KC_NO(CLK:= MD.KC_NO); if rtrig_KC_NO.Q then CREATE_EVENT('Переход 
 
 //Режим Автоматический цеха
 RS_KC_AUTO(S:= Global_BTN.KC_AUTO, R1:= MD.EAO_KC or Global_BTN.KC_MAN, Q1 => MD.KC_AUTO);
-if MD.KC_AUTO and not MD.EAO_KC then
+if MD.KC_AUTO and not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB) then
 	temp_status_string := 'Режим Автоматический';
 end_if;
 rtrig_KC_AUTO(CLK:= MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_AUTO.Q then CREATE_EVENT('Переход в режим - КЦ Автоматический', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
-if not MD.KC_AUTO and not MD.EAO_KC then 
+if not MD.KC_AUTO and not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB) then 
 	temp_status_string := 'Режим Ручной';
 end_if;
 rtrig_KC_MAN(CLK:= not MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_MAN.Q then CREATE_EVENT('Переход в режим - КЦ Ручной', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;

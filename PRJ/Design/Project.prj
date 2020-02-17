@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="D23F970E4407C5BD3B2B6BA558C3002A" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="4FC09CB849D68C1469AD0EBB7A3FCA9B" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
@@ -3607,6 +3607,7 @@
         <Signal Name="Tg_ala_hi2KC" UUID="18175A194DBBFECAA69AF29D689A1AE0" Type="BOOL" Global="TRUE" Comment="Аварийно высокая температура газа на выходе КЦ" />
         <Signal Name="Pg_hi2KC" UUID="5660C3FF4AE6BF4EAF6EA5974DED4BE2" Type="BOOL" Global="TRUE" Comment="Высокое давление газа на выходе КЦ" />
         <Signal Name="Pg_ala_hi2KC" UUID="20FAFD45403FB0F71EC1098E71654D59" Type="BOOL" Global="TRUE" Comment="Аварийно высокое давление газа на выходе КЦ" />
+        <Signal Name="Pg_ala_hi2KC_delay" UUID="7CF02C474AA89A0DDA3E3EBF80D252E3" Type="BOOL" Global="TRUE" Comment="Аварийно высокое давление газа на выходе КЦ с задержкой" />
         <Signal Name="OPG_KR_ON" UUID="94189A64495FB32907E3E9B698046B8B" Type="BOOL" Global="TRUE" Comment="Команда на открытие кранов 6 6а 6ар 6р от АСУТП" />
         <Signal Name="AOB_ASUTP_CMD" UUID="0B042DB741E13D622076D0BBE190370B" Type="BOOL" Global="TRUE" Comment="Команда АОБ от АСУТП" />
         <Signal Name="APS_Tg_hi2KC" UUID="BC376EF54729A6A10DED9B90EF1D6FDD" Type="BOOL" Global="TRUE" Comment="АПС: Высокая температура газа на выходе КЦ" />
@@ -3614,6 +3615,7 @@
         <Signal Name="APS_AOB_ASUTP_CMD" UUID="099B2CC641E07A72D7D35BB5A773CE76" Type="BOOL" Global="TRUE" Comment="АПС: Команда АОБ от АСУТП" />
         <Signal Name="APS_Pg_hi2KC" UUID="DB42B689476C458EFA4D578761BB8CC6" Type="BOOL" Global="TRUE" Comment="АПС: Высокое давление газа на выходе КЦ" />
         <Signal Name="APS_Pg_ala_hi2KC" UUID="DA9E34EE4444C7C46A199DA0988C6D90" Type="BOOL" Global="TRUE" Comment="АПС: Аварийно высокое давление газа на выходе КЦ" />
+        <Signal Name="APS_Pg_ala_hi2KC_delay" UUID="C9F2420F4C6B777230E9FEB9FBA4AC76" Type="BOOL" Global="TRUE" Comment="АПС: Аварийно высокое давление газа на выходе КЦ с задержкой" />
         <Signal Name="APS_OPG_KR_ON" UUID="C1B471BD42DFB89EE066A9B569EF3481" Type="BOOL" Global="TRUE" Comment="АПС: Команда на открытие кранов 6 6а 6ар 6р от АСУТП" />
         <Signal Name="APS_PPU_FIRE" UUID="24A19E87432025BEE65C98B834F067DA" Type="BOOL" Global="TRUE" Comment="АПС: Проверка предпусковых условий: Пожар" />
         <Signal Name="APS_PPU_ZAG" UUID="8280602D439E737AD7505CB836D89C18" Type="BOOL" Global="TRUE" Comment="АПС: Проверка предпусковых условий: Загазованность 20%" />

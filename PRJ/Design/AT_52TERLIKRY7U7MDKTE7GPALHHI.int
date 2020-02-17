@@ -85,6 +85,7 @@
         <Signal Name="AOS_KR17_ON" UUID="598B8D6F4F2B852BEE1ADE8AE69875BF" Type="BOOL" Usage="" />
         <Signal Name="AOS_KR18_ON" UUID="5A8826304B5AD8E835E1539746CCD21D" Type="BOOL" Usage="" />
         <Signal Name="AOS_KR18A_ON" UUID="564606C64C00C0DB2216A0960EB3E870" Type="BOOL" Usage="" />
+        <Signal Name="AOB_by_TON_Pg_ala_hi2KC" UUID="234A15D24359E3DE6B81ECB1D04901E8" Type="BOOL" Usage="" />
         <Signal Name="______________IO______________" UUID="5452534D4DE772F3E7D405ADD8FB5A61" Type="BOOL" Usage="" />
         <Signal Name="SHKU17_AI_A1_31" UUID="B1FAA8FF4FA3358B449220ABD8B86B86" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура наружного воздуха" />
         <Signal Name="SHKU17_AI_A1_32" UUID="18C63D9E447CEDD25C2B6CAE1B8384CD" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура грунта" />
@@ -2622,6 +2623,7 @@
         <Signal Name="Tg_ala_hi2KC" UUID="18175A194DBBFECAA69AF29D689A1AE0" Type="BOOL" Usage="" Global="TRUE" Comment="Аварийно высокая температура газа на выходе КЦ" />
         <Signal Name="Pg_hi2KC" UUID="5660C3FF4AE6BF4EAF6EA5974DED4BE2" Type="BOOL" Usage="" Global="TRUE" Comment="Высокое давление газа на выходе КЦ" />
         <Signal Name="Pg_ala_hi2KC" UUID="20FAFD45403FB0F71EC1098E71654D59" Type="BOOL" Usage="" Global="TRUE" Comment="Аварийно высокое давление газа на выходе КЦ" />
+        <Signal Name="Pg_ala_hi2KC_delay" UUID="7CF02C474AA89A0DDA3E3EBF80D252E3" Type="BOOL" Usage="" Global="TRUE" Comment="Аварийно высокое давление газа на выходе КЦ с задержкой" />
         <Signal Name="OPG_KR_ON" UUID="94189A64495FB32907E3E9B698046B8B" Type="BOOL" Usage="" Global="TRUE" Comment="Команда на открытие кранов 6 6а 6ар 6р от АСУТП" />
         <Signal Name="AOB_ASUTP_CMD" UUID="0B042DB741E13D622076D0BBE190370B" Type="BOOL" Usage="" Global="TRUE" Comment="Команда АОБ от АСУТП" />
         <Signal Name="APS_Tg_hi2KC" UUID="BC376EF54729A6A10DED9B90EF1D6FDD" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Высокая температура газа на выходе КЦ" />
@@ -2629,6 +2631,7 @@
         <Signal Name="APS_AOB_ASUTP_CMD" UUID="099B2CC641E07A72D7D35BB5A773CE76" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда АОБ от АСУТП" />
         <Signal Name="APS_Pg_hi2KC" UUID="DB42B689476C458EFA4D578761BB8CC6" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Высокое давление газа на выходе КЦ" />
         <Signal Name="APS_Pg_ala_hi2KC" UUID="DA9E34EE4444C7C46A199DA0988C6D90" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Аварийно высокое давление газа на выходе КЦ" />
+        <Signal Name="APS_Pg_ala_hi2KC_delay" UUID="C9F2420F4C6B777230E9FEB9FBA4AC76" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Аварийно высокое давление газа на выходе КЦ с задержкой" />
         <Signal Name="APS_OPG_KR_ON" UUID="C1B471BD42DFB89EE066A9B569EF3481" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда на открытие кранов 6 6а 6ар 6р от АСУТП" />
         <Signal Name="APS_PPU_FIRE" UUID="24A19E87432025BEE65C98B834F067DA" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Проверка предпусковых условий: Пожар" />
         <Signal Name="APS_PPU_ZAG" UUID="8280602D439E737AD7505CB836D89C18" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Проверка предпусковых условий: Загазованность 20%" />
