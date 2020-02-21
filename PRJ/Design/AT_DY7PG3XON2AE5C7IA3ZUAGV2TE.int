@@ -911,5 +911,10 @@
         <Signal Name="APS_AOB_DONE_INCORRECT" UUID="9587C91443B2D97B07439A823558AA49" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОбс завершен некорректно" />
         <Signal Name="APS_AOS_DONE" UUID="093EED974FF25EC1DDA2E3A5F70CF8B4" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОсс завершен корректно" />
         <Signal Name="APS_AOS_DONE_INCORRECT" UUID="69B09A7C40F5BCEF58F6FC85E6F52270" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОсс завершен некорректно" />
+        <Signal Name="APS_GR1_KOL" UUID="7CCB5E9B487D72F11B3B339E5344EF04" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 1 Кольцо" />
+        <Signal Name="APS_GR2_KOL" UUID="EFE1BCCF4E895680349F40949C702E66" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: ГРуппа 2 Кольцо" />
+        <Signal Name="APS_GR1_MAG" UUID="983568904A10C1AD6D708C9DD224503E" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 1 Магистраль" />
+        <Signal Name="APS_GR2_MAG" UUID="E6FB6C2843E3BA885C45DE995F80EAC7" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 2 Магистраль" />
+        <Signal Name="APS_KC_EAO" UUID="032D85214B9AA8BBF4790C869F3D23A3" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется ЭАО" />
     </InterfaceList>
 </SubAppType>

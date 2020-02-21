@@ -11,6 +11,7 @@
         <SubApp Name="AppMain_SHU14_A1" Type="F2D867224FC0B0F7FB0299A9857A77DE" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="DCF8B30B48BE39EF5A1D3DB9037A81AF" />
         <SubApp Name="AppAS36_1" Type="0761B2C44387D66CC5224899C62127A8" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="48C548714C332401A869BE8BC07AD2A7" />
         <SubApp Name="AppDrv_PRU" Type="6FD295994E932A99D86DEEA846C62B19" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="4F2285E04246A21E4C4EE2AACCA6B9E7" />
+        <SubApp Name="AppDrv_AUX_SAU" Type="0A4D67B8469CB69FF3730E94B27126F4" Disabled="TRUE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="4F2285E04246A21E4C4EE2AACCA6B9E7" />
         <SubApp Name="Mnemo" Type="13D6559441DFF69C9FB93FB723DA9420" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="79A3CDA14EF1D54DF15F6CBDFE0D71C0" />
     </InterfaceList>
 </Node>

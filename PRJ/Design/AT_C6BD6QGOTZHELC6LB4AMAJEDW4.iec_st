@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="518024D04FBADE014785E8BC80A722E1" Name="main_SRV_REZ" Period="100" PutDataAtEndOfCycle="false">
+    <Variables />
+    <ST><![CDATA[]]></ST>
+    <DataTypes />
+</Program>

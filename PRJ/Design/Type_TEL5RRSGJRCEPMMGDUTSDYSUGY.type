@@ -30,5 +30,10 @@
         <Field Name="PPU_FIRE" Type="BOOL" UUID="5AD4FC674F804171F09411ACEB169869" Comment="Проверка предпусковых условий: Пожар" />
         <Field Name="PPU_ZAG" Type="BOOL" UUID="3C3C13D74FF0CA5453F27E8A8C7FF02C" Comment="Проверка предпусковых условий: Загазованность 20%" />
         <Field Name="PPU_RDY_TO_START" Type="BOOL" UUID="55A9B9E6476540DDF14CFEB39A9E3B87" Comment="Проверка предпусковых условий: Готовность к пуску" />
+        <Field Name="INT_KC_MAG" Type="BOOL" UUID="68F62E9D49079E925661D8A1DC20BDC6" Comment="Вспомогательный флаг: КЦ МАгистраль" />
+        <Field Name="INT_GR1_WORK" Type="BOOL" UUID="399B3FE749569ED96CEF6E931B3ACC1C" Comment="Вспомогательный флаг: Группа 1 в работе" />
+        <Field Name="INT_GR2_WORK" Type="BOOL" UUID="9FBF5DA0415D8ADFFA00B8B2D13F3240" Comment="Вспомогательный флаг: Группа 2 в работе" />
+        <Field Name="INT_MAG1" Type="BOOL" UUID="718285774BDD2B6D8E6484B0DA5B1FA7" Comment="Вспомогательный флаг: Магистраль 1" />
+        <Field Name="INT_MAG2" Type="BOOL" UUID="5D8C52084A679DAF85F8C891DDAB3EDF" Comment="Вспомогательный флаг: Магистраль 2" />
     </Fields>
 </Type>

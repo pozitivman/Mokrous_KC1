@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="4FC09CB849D68C1469AD0EBB7A3FCA9B" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="C63B64DC46D9CBE51E2C83A989B3006A" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
@@ -2056,6 +2056,8 @@
         <Signal Name="HMI_SHKU17_Z2_DA" UUID="5914921C46C93083EBD53EB190F95612" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. 0 - автомат, 1 - дист" />
         <Signal Name="HMI_SHKU17_Obogr_APK1_DA" UUID="A21BD4AE4D355E9162B9CABCD86AB5F4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Обогрев АПК-1. 0 - автомат, 1 - дист" />
         <Signal Name="HMI_SHKU17_Obogr_APK2_DA" UUID="7526C1154D56D9E9E758C99606721521" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Обогрев АПК-2. 0 - автомат, 1 - дист" />
+        <Signal Name="HMI_SHKU17_DN1_DA" UUID="3D7D38C84E5D2711D171418A9E26851A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. 0 - автомат, 1 - дист" />
+        <Signal Name="HMI_SHKU17_DN2_DA" UUID="C1824985458126AC75F067954C54BA26" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. 0 - автомат, 1 - дист" />
         <Signal Name="HMI_SHKU17_KR30_rOn" UUID="EE08B93348F858532366398914C8ADD4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHKU17_KR30V_rOn" UUID="964E2A424EC877154954CE8FC4FF0002" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHKU17_KR7_rOn" UUID="BAD31E7B444A1125FE268A823EFF6EE5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. Кнопка &quot;Открыть&quot;" />
@@ -2092,19 +2094,21 @@
         <Signal Name="HMI_SHU14_KRS1_2_rOn" UUID="CEA5FE464F69782FD17692A5A0D6A723" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHU14_KRS2_3_rOn" UUID="AE7DD5F9406EE5DBFA43E08D0B7C4293" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHU14_KRUOK3_rOn" UUID="B65F79AD45CF658A4C4F0FA0FA147079" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN1_rOn" UUID="749243EF455A83C7B852449BCA41E8AB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN2_rOn" UUID="FB0C5CF04A890264126B609D8F0ABB72" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN3_rOn" UUID="109F452A450FADB4018650BDFB286AFD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN1_rOn" UUID="7744EF394AFD5AE8C02315A95862080A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN2_rOn" UUID="C8DD360C4E2902C4D4BEDAB473980039" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN3_rOn" UUID="90D5471C47B2ED121353BFA81B3AE022" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC1_rOn" UUID="F850ECD44DCF3F66F27A4D88B4EC78F7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC2_rOn" UUID="D49CB5794CAAF279AD5A6E98FDAA5BA4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC3_rOn" UUID="8F0C4A4B4FCF46E8B5EA7F9945D248FB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_Z1_rOn" UUID="B0DBCA19464E1321DD90728EC6C72BD8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Кнопка &quot;Открыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_Z2_rOn" UUID="DD8A045A4018911FE0508A9DE5CF9848" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_PN1_rOn" UUID="749243EF455A83C7B852449BCA41E8AB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_PN2_rOn" UUID="FB0C5CF04A890264126B609D8F0ABB72" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_PN3_rOn" UUID="109F452A450FADB4018650BDFB286AFD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_XPN1_rOn" UUID="7744EF394AFD5AE8C02315A95862080A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_XPN2_rOn" UUID="C8DD360C4E2902C4D4BEDAB473980039" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_XPN3_rOn" UUID="90D5471C47B2ED121353BFA81B3AE022" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_NC1_rOn" UUID="F850ECD44DCF3F66F27A4D88B4EC78F7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_NC2_rOn" UUID="D49CB5794CAAF279AD5A6E98FDAA5BA4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_NC3_rOn" UUID="8F0C4A4B4FCF46E8B5EA7F9945D248FB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_Z1_rOn" UUID="B0DBCA19464E1321DD90728EC6C72BD8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_Z2_rOn" UUID="DD8A045A4018911FE0508A9DE5CF9848" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHKU17_Obogr_APK1_rOn" UUID="FB52DCE7452DFC6C2746A0B7B199DEE4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. Кнопка &quot;Обогрев включить&quot;" />
         <Signal Name="HMI_SHKU17_Obogr_APK2_rOn" UUID="CEDFDA0A4170AE2BC3CE1FA8A83106E6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. Кнопка &quot;Обогрев включить&quot;" />
+        <Signal Name="HMI_SHKU17_DN1_rOn" UUID="1EB12E4C4F34CEDF8B248386272D567B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_DN2_rOn" UUID="A5CE70BB40EB5A8C4EA2359FA0368208" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHKU17_KR30_rOff" UUID="396AF0C647CC09728AB0D9A00C665647" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHKU17_KR30V_rOff" UUID="A42188D7411DE60CE0F132A555072C88" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHKU17_KR7_rOff" UUID="5DAC02CA4DF4AEBDF916C1BDB8BF70BD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. Кнопка &quot;Закрыть&quot;" />
@@ -2141,20 +2145,22 @@
         <Signal Name="HMI_SHU14_KRS1_2_rOff" UUID="F72BA3FA46387FDDD64C98AFCA89D668" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHU14_KRS2_3_rOff" UUID="DEFD452E4E7EB58B73FB61A43AD17669" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHU14_KRUOK3_rOff" UUID="A22628B6458BB47E3792F691FD449388" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN1_rOff" UUID="280275ED440A1C7D228C63AB9FEE3E38" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN2_rOff" UUID="C199F9904EA4D14C4D0BE78C719B80B9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN3_rOff" UUID="B648F76743896F55994BA09FB3BA4C12" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN1_rOff" UUID="29F6339346581064621634942334AD59" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN2_rOff" UUID="485963D64A676CB2CC86D3A19BEB16E4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN3_rOff" UUID="05A3A2F5485AF1E787DA5BBA40F2620A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC1_rOff" UUID="B1A84C1845493DC432A51E9E7DB757C4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC2_rOff" UUID="944835C24C0F29A0C45900B0E58E5D5E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC3_rOff" UUID="E56CE0B94D4B03AFF64FA7932AA77570" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_Z1_rOff" UUID="1516D56048B3A88C8D768E81B5395113" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_DI_Z2_rOff" UUID="3D4A489E410B79523B6AF98947908247" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Кнопка &quot;Закрыть&quot;" />
-        <Signal Name="HMI_SHKU17_Perim_osv_KC1_rOff" UUID="CE853D574AA489F68BD06F8F769F8862" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Периметральное освещение КЦ 1 включить. Кнопка &quot;Отключить&quot;" />
+        <Signal Name="HMI_SHKU17_PN1_rOff" UUID="280275ED440A1C7D228C63AB9FEE3E38" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_PN2_rOff" UUID="C199F9904EA4D14C4D0BE78C719B80B9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_PN3_rOff" UUID="B648F76743896F55994BA09FB3BA4C12" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_XPN1_rOff" UUID="29F6339346581064621634942334AD59" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_XPN2_rOff" UUID="485963D64A676CB2CC86D3A19BEB16E4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_XPN3_rOff" UUID="05A3A2F5485AF1E787DA5BBA40F2620A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_NC1_rOff" UUID="B1A84C1845493DC432A51E9E7DB757C4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_NC2_rOff" UUID="944835C24C0F29A0C45900B0E58E5D5E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_NC3_rOff" UUID="E56CE0B94D4B03AFF64FA7932AA77570" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_Z1_rOff" UUID="1516D56048B3A88C8D768E81B5395113" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_Z2_rOff" UUID="3D4A489E410B79523B6AF98947908247" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_DN1_rOff" UUID="F13C28E444B30F0B327FEBB7EFEED6C5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_DN2_rOff" UUID="6C6CBD43457ACD0CB70514BBD021D225" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHKU17_Obogr_APK1_rOff" UUID="3DFB49124D828F846CBEC79DCA66AA15" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. Кнопка &quot;Обогрев отключить&quot;" />
         <Signal Name="HMI_SHKU17_Obogr_APK2_rOff" UUID="CCBCB04A4B2944B5DAFA6D9E0E44F813" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. Кнопка &quot;Обогрев отключить&quot;" />
+        <Signal Name="HMI_SHKU17_Perim_osv_KC1_rOff" UUID="CE853D574AA489F68BD06F8F769F8862" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Периметральное освещение КЦ 1 включить. Кнопка &quot;Отключить&quot;" />
         <Signal Name="HMI_SHKU17_KR30_rep" UUID="A18F594A4B9F9E5B22B239AA91E35BCF" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHKU17_KR30V_rep" UUID="20337A42488B68D72961799CE73A07EB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHKU17_KR7_rep" UUID="338331CF4CE779137F41F1A86BB9E82E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. Кнопка &quot;Повтор команды&quot;" />
@@ -2191,17 +2197,19 @@
         <Signal Name="HMI_SHU14_KRS1_2_rep" UUID="D39ACFEC419C12CFF55CB18863097A1D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHU14_KRS2_3_rep" UUID="2AF2BBA0480D694744408CA010088496" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHU14_KRUOK3_rep" UUID="50C7BE3044C4FD2178DA77B475E81628" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN1_rep" UUID="C7499E4341F7AD228135EABAD09BC615" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN2_rep" UUID="341AC1274EAD53810B19008C1BFB1200" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_PN3_rep" UUID="A0BC385C4BDF93D2A15E8AA1C0E41D43" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN1_rep" UUID="077FEF90405B2CAD78F3BEA5BC54C688" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN2_rep" UUID="47488FD14A4A02BB1D5ACEAF70529AEF" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_XPN3_rep" UUID="21B77C3B43420DA4684B66AAD67E7256" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC1_rep" UUID="B590C9054E75B9BED272C28009290EE9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC2_rep" UUID="7CE9345F4CCFDB78C044F7840BE6B8A6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_NC3_rep" UUID="0F8A5D85433E7C3AA3DA348373CD5E09" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_Z1_rep" UUID="A3CE9FB34D16CF299F5EB19AD9C03992" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Кнопка &quot;Повтор команды&quot;" />
-        <Signal Name="HMI_SHKU17_DI_Z2_rep" UUID="DF3DF759411D13594C8BA099E07A5E00" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_PN1_rep" UUID="C7499E4341F7AD228135EABAD09BC615" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_PN2_rep" UUID="341AC1274EAD53810B19008C1BFB1200" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_PN3_rep" UUID="A0BC385C4BDF93D2A15E8AA1C0E41D43" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_XPN1_rep" UUID="077FEF90405B2CAD78F3BEA5BC54C688" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_XPN2_rep" UUID="47488FD14A4A02BB1D5ACEAF70529AEF" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_XPN3_rep" UUID="21B77C3B43420DA4684B66AAD67E7256" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_NC1_rep" UUID="B590C9054E75B9BED272C28009290EE9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_NC2_rep" UUID="7CE9345F4CCFDB78C044F7840BE6B8A6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_NC3_rep" UUID="0F8A5D85433E7C3AA3DA348373CD5E09" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_DN1_rep" UUID="9BD5C15B4A79A55C843E708F1EF751B7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_DN2_rep" UUID="261E34B34E4328B4E2F8CC9BC6B6299B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_Z1_rep" UUID="A3CE9FB34D16CF299F5EB19AD9C03992" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_Z2_rep" UUID="DF3DF759411D13594C8BA099E07A5E00" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHKU17_Obogr_APK1_rep" UUID="2F658B964E7DD70358557D8D58419C3E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHKU17_Obogr_APK2_rep" UUID="E87C99504BE49D29B89D7881CD04B5DF" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="CMD_SHKU17_KR30_rOnOff" UUID="E4E842A9464EEC673A4DF684453987B0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. Команда в ДУ" />
@@ -2240,17 +2248,19 @@
         <Signal Name="CMD_SHU14_KRS1_2_rOnOff" UUID="50113DC2463C31810F28B6BC7AD5399A" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. Команда в ДУ" />
         <Signal Name="CMD_SHU14_KRS2_3_rOnOff" UUID="63D7242B48C61D204E6043BE71169715" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. Команда в ДУ" />
         <Signal Name="CMD_SHU14_KRUOK3_rOnOff" UUID="2862976446C3BF3A2165F3B837681B96" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_PN1_rOnOff" UUID="54FACC054E880109B17E528140430FD5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_PN2_rOnOff" UUID="748ECD5842F5C37B29BA71AE062F8FDE" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_PN3_rOnOff" UUID="6BD6AB6346B4DA60E5D364911BAE0A63" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_XPN1_rOnOff" UUID="59F8A50642A7E6850199C2B52FD32D76" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_XPN2_rOnOff" UUID="9677665649A3A2B1C8D347959E898FE6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_XPN3_rOnOff" UUID="E77BD892476DA63B9C0BD8B8A84CFB72" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_NC1_rOnOff" UUID="39BBA1E44D9AB35882330B94F0DFABD4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_NC2_rOnOff" UUID="3EBCF2174063F80C4785ED969CF4E5B3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_NC3_rOnOff" UUID="6044C7E4441D3CDA5D1AACBD47072AA5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_Z1_rOnOff" UUID="2361FA524AC3318991E818B23C251186" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Команда в ДУ" />
-        <Signal Name="CMD_SHKU17_DI_Z2_rOnOff" UUID="801E5745467C0F355AD1BD81B94C325D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_PN1_rOnOff" UUID="54FACC054E880109B17E528140430FD5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_PN2_rOnOff" UUID="748ECD5842F5C37B29BA71AE062F8FDE" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_PN3_rOnOff" UUID="6BD6AB6346B4DA60E5D364911BAE0A63" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_XPN1_rOnOff" UUID="59F8A50642A7E6850199C2B52FD32D76" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_XPN2_rOnOff" UUID="9677665649A3A2B1C8D347959E898FE6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_XPN3_rOnOff" UUID="E77BD892476DA63B9C0BD8B8A84CFB72" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_NC1_rOnOff" UUID="39BBA1E44D9AB35882330B94F0DFABD4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_NC2_rOnOff" UUID="3EBCF2174063F80C4785ED969CF4E5B3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_NC3_rOnOff" UUID="6044C7E4441D3CDA5D1AACBD47072AA5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_DN1_rOnOff" UUID="5F217C42461CA590BE2DCC83A5E71D89" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_DN2_rOnOff" UUID="14280D374F112D82AE71DD9869C23D65" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_Z1_rOnOff" UUID="2361FA524AC3318991E818B23C251186" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_Z2_rOnOff" UUID="801E5745467C0F355AD1BD81B94C325D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Команда в ДУ" />
         <Signal Name="CMD_SHKU17_Obogr_APK1_rOnOff" UUID="551857AB45B571A0E124EE832A2B7B66" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. Команда в ДУ" />
         <Signal Name="CMD_SHKU17_Obogr_APK2_rOnOff" UUID="AE26A018453CADB10E74868D26127D0C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. Команда в ДУ" />
         <Signal Name="CMD_SHKU17_KR30_aOnOff" UUID="1C0ACCE3494ACD32CD6482B0B5C76D24" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. Команда в автомате" />
@@ -2289,17 +2299,19 @@
         <Signal Name="CMD_SHU14_KRS1_2_aOnOff" UUID="8C817BEB468CE511A04727BD9DF80AB5" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. Команда в автомате" />
         <Signal Name="CMD_SHU14_KRS2_3_aOnOff" UUID="88D641DE429A6597F9D8A08BBEAC321D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. Команда в автомате" />
         <Signal Name="CMD_SHU14_KRUOK3_aOnOff" UUID="DEAE5D9B42198201A8B87D8F47645D3D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_PN1_aOnOff" UUID="D263F10148F1E122E1030DADD3F7055C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_PN2_aOnOff" UUID="CDFA9603491004E282FAE29F81A8569C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_PN3_aOnOff" UUID="4EBE836543931A51A141B297A99C1A29" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_XPN1_aOnOff" UUID="75C11F5243B27CF5A9C74B8A8097FE00" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_XPN2_aOnOff" UUID="BFE27E5E4F950FD0B5EA709262EAA1F0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_XPN3_aOnOff" UUID="B8E70CD240CCD81A93778E8C9B8F3B8F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_NC1_aOnOff" UUID="7E949D2B4698F7ADC7D69B87698D15AB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_NC2_aOnOff" UUID="E90EB55F46B29BFFA868EE9787F94E9D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_NC3_aOnOff" UUID="7CC5160648D6A49DFD59D9BBC1B5505A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_Z1_aOnOff" UUID="ACABB11948F328A2C366CE93C95180FA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Команда в автомате" />
-        <Signal Name="CMD_SHKU17_DI_Z2_aOnOff" UUID="674CD8004A32B0686FF7949B67A9016F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_PN1_aOnOff" UUID="D263F10148F1E122E1030DADD3F7055C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_PN2_aOnOff" UUID="CDFA9603491004E282FAE29F81A8569C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_PN3_aOnOff" UUID="4EBE836543931A51A141B297A99C1A29" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_XPN1_aOnOff" UUID="75C11F5243B27CF5A9C74B8A8097FE00" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_XPN2_aOnOff" UUID="BFE27E5E4F950FD0B5EA709262EAA1F0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_XPN3_aOnOff" UUID="B8E70CD240CCD81A93778E8C9B8F3B8F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_NC1_aOnOff" UUID="7E949D2B4698F7ADC7D69B87698D15AB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_NC2_aOnOff" UUID="E90EB55F46B29BFFA868EE9787F94E9D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_NC3_aOnOff" UUID="7CC5160648D6A49DFD59D9BBC1B5505A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_DN1_aOnOff" UUID="1E6159A94C982D824508DEBA061DC70E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_DN2_aOnOff" UUID="3443D9D54E36262F34568B915B356443" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_Z1_aOnOff" UUID="ACABB11948F328A2C366CE93C95180FA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_Z2_aOnOff" UUID="674CD8004A32B0686FF7949B67A9016F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Команда в автомате" />
         <Signal Name="CMD_SHKU17_Obogr_APK1_aOnOff" UUID="0A2483BB4F6900BE6BA57A9B5C88B5F6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. Команда в автомате" />
         <Signal Name="CMD_SHKU17_Obogr_APK2_aOnOff" UUID="D856EE8349DED15A222B7B86C1CB2817" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. Команда в автомате" />
         <Signal Name="APS_SHKU17_KR30_non" UUID="6BCA8BF044583E7E79A25F8043730CAB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;не открылся&quot;" />
@@ -2338,8 +2350,21 @@
         <Signal Name="APS_SHU14_KRS1_2_non" UUID="3D319F774DD76572321D04BEAEF29BFE" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_non" UUID="34879155400E03D5003E609067D89457" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_non" UUID="6568EE4C40BD284217B64B89F123D9C4" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_PN1_non" UUID="D685E0744B2419A1B226F89330A04206" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_PN2_non" UUID="A1343B5E4890C3AADA7806868B70EBDD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_PN3_non" UUID="75CF74DA4E5561EAF06AB3BD885171D4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_non" UUID="7AB0A7044B0E45333E95B8929F526183" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_non" UUID="20AA50894D075EED6308D18E55709FDC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_non" UUID="4C623F6448AAEA1DD1BDB49053AF072E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_NC1_non" UUID="316655894405024EC5CA10A7B5835DE0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_NC2_non" UUID="592691D74C022A07BA44429675E6A85D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_NC3_non" UUID="8E61DD4C4FF49F6986AD2A828926A81F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_DN1_non" UUID="C2773C7F49FF0ACDCDCF548571DAD2AA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_DN2_non" UUID="11BE59F0403E7D196FFA4ABF7E111D87" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHKU17_Z1_non" UUID="B75C31A54749E5E4A0B936B673F729C1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHKU17_Z2_non" UUID="8000FC1A4F9A627B4A510CAC8CBCD92D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_non" UUID="DAE7B44D4E01417C2CCB439205B665BE" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_non" UUID="963FCBE34AAAF34460F30483A633CB27" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHKU17_KR30_noff" UUID="CB3E80FF4978E417A3C68BB34FDEAF36" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHKU17_KR30V_noff" UUID="00C93AF04E93D56BEABBD59560A5F9E0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHKU17_KR7_noff" UUID="C9438D35472A800EB63A06BAC0044932" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;не закрылся&quot;" />
@@ -2376,8 +2401,21 @@
         <Signal Name="APS_SHU14_KRS1_2_noff" UUID="3D7C19B347D164F922971AB84A17052D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_noff" UUID="22417E3948DAE8805A8A3BBC79516B97" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_noff" UUID="C544D1AC4B2FBF943DE0A0AAAC47DC12" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_PN1_noff" UUID="995DFF0546FE0B866ACB17B9307139EB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_PN2_noff" UUID="3055D8B042FF0D91678DE4B660D8546E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_PN3_noff" UUID="D48E16C94A70D912E5A3AD8E615F9862" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_noff" UUID="5E2B52B9469AEF6453284AAA099945AB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_noff" UUID="F70A47C14D0E0F669EF472A9BA376219" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_noff" UUID="40FEBEAA49AF89C9CC20CFAFE77BD46E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_NC1_noff" UUID="116F21F345C7ACF0DACA1CA99E185594" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_NC2_noff" UUID="018858CA456D6534AB56D4A86B707D7E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_NC3_noff" UUID="B026D5B04EA30F8B5F0E1D91BB81AE90" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_DN1_noff" UUID="03858C2F46D10584195CF894152E1C6D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_DN2_noff" UUID="DC7B476A47BDA1DC40896081E869F86C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHKU17_Z1_noff" UUID="188595DA412AA121CC25E8BDC1BE8986" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHKU17_Z2_noff" UUID="99762A6E4EEA0DFD3B7A63B56E7AC92A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_noff" UUID="E13E6D19425F39C9861760AB5818647D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_noff" UUID="4184F0FA442BC21D8F930D84F5B52DD4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHKU17_KR30_nstart" UUID="B3C0215246927AD1CC0E0980C4EA79F9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHKU17_KR30V_nstart" UUID="2D6028EB4E59E6295899F488B5DFAD8A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHKU17_KR7_nstart" UUID="B1234AD246E32AEB713AC3BFE45DB1FC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;не стронулся&quot;" />
@@ -2414,8 +2452,21 @@
         <Signal Name="APS_SHU14_KRS1_2_nstart" UUID="FF26F7B543EF64F2434F6992BAE53D88" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_nstart" UUID="2E788DB94EECA45F8E78E6820D461204" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_nstart" UUID="E450C4A64A4877FFED5CA98BD3F9B8C6" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_PN1_nstart" UUID="5B475FA7418AF1901C2D698D7C032D2B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_PN2_nstart" UUID="11B213E74719EBC2019ADE8328636646" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_PN3_nstart" UUID="6351DAE1483AFFDED39683B0FF2E072A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_nstart" UUID="2278134E4CCDC4D6228100B98186474E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_nstart" UUID="CBA690CE4A9B9D6A267A5BBB141B1869" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_nstart" UUID="004CABA443D042AEAE23A39BCF78FC18" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_NC1_nstart" UUID="F2FED337461264EC6E5855BAAE2E2E36" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_NC2_nstart" UUID="580CFC0F4EB3EA7B5AD107A20A80A0C0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_NC3_nstart" UUID="6322389F40F185426D3828BEF1BB5794" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_DN1_nstart" UUID="200445104E0AEBFEF15DB0838CD39A0C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_DN2_nstart" UUID="D114A07349E3604255270281F421B541" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHKU17_Z1_nstart" UUID="313947AF46D987ADE40485BDF4DD1513" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHKU17_Z2_nstart" UUID="2EF93D624375C5BA723A1EB523A48BA6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_nstart" UUID="D7F2F4A94D64A8F7C95CCDADC5216C83" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_nstart" UUID="ED39770C4BC84D60ABF828918C264182" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHKU17_KR30_selfon" UUID="89D58595411CBC681C902FABBD044ADC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHKU17_KR30V_selfon" UUID="1973C95248A44FCA2C00C88E7F102D26" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHKU17_KR7_selfon" UUID="DA9FCB97484C0327A2640D8ADB5EEA05" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;Самопроизвольное открытие&quot;" />
@@ -2452,8 +2503,21 @@
         <Signal Name="APS_SHU14_KRS1_2_selfon" UUID="D33CB2A34748A17E8BE595807A74AEA0" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_selfon" UUID="7BDF0FF444C4FA880B746390D9229165" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_selfon" UUID="E6C4C34743D8521AC2E591AB4F2B1E42" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_PN1_selfon" UUID="E972F86D4C276565CCC6859FAB102BE9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_PN2_selfon" UUID="23722A49449A55D6DF1331A60A73F9CA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_PN3_selfon" UUID="30C9A0C84F6865042331EB8888BF43F0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_selfon" UUID="8C92A2FC4530D6095F98AA948494FAA3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_selfon" UUID="BE0C68F146221093068FEDAB5F2EE77D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_selfon" UUID="E85D332F43A05112A77696943CB4A74C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_NC1_selfon" UUID="05358C204F9AAFA8FAF56DB4D73260BC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_NC2_selfon" UUID="9FF95CD64C5714D75847BA98EA3F6086" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_NC3_selfon" UUID="F2F50C99443681B22B93A397E43EC178" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_DN1_selfon" UUID="67146EB946BD3C58BBC5A890A470BE14" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_DN2_selfon" UUID="3E4222FA450932DA144DB8AFE08D72B8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHKU17_Z1_selfon" UUID="7796693F4D560182447995B7F711009E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHKU17_Z2_selfon" UUID="30D80AE44112645DBA05998DA619892D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_selfon" UUID="B4829C434D615D0AE9D643947E78F440" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_selfon" UUID="E6D6938E458765FCEC3CAD8FDAB8FB50" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHKU17_KR30_selfoff" UUID="6C5FE407453BA8BF14B2899C9E2CC3DD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHKU17_KR30V_selfoff" UUID="4F3C4AFF449C41D15854208A3DBF58A2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHKU17_KR7_selfoff" UUID="E3F23EB74B74AE319F66C5B105BBAE8E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;Самопроизвольное закрытие&quot;" />
@@ -2490,8 +2554,21 @@
         <Signal Name="APS_SHU14_KRS1_2_selfoff" UUID="56324B604AE8A5FE59F2EDB7AA9E75EB" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_selfoff" UUID="265CB0C04A0AFD49E3AEE185BD8A04C1" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_selfoff" UUID="5BB74839442BF5D65B9539B7329ABBB7" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_PN1_selfoff" UUID="7B0C019B4E59EB5506643FA0FC9DB23A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_PN2_selfoff" UUID="98DF50AB4B756A0AF00E4CA36DC57DE6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_PN3_selfoff" UUID="AB15CECC4BDF378D87880AB6AD9949AB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_selfoff" UUID="DC6A661C44579EAB745C6F890FB2ED7B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_selfoff" UUID="EB11274849A0DBCA50E965929B3AB896" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_selfoff" UUID="4078D7E04F19B8D2E06A3CB34F26430E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_NC1_selfoff" UUID="C8606C11478CAD178F68B49C37A60FE9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_NC2_selfoff" UUID="CCF6C1FA42FBA3E7D0727DA98CECF166" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_NC3_selfoff" UUID="B2D4D2244C2392063C454694172BC43C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_DN1_selfoff" UUID="D8D4F71C4B5253BE947E6398561C4250" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_DN2_selfoff" UUID="71C69C774816622162EABF901BF71BA3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHKU17_Z1_selfoff" UUID="2868AF314C1802501DFFCCB01F71792C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHKU17_Z2_selfoff" UUID="59B8B43F44015E5C5FD5E1AA788F59B0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_selfoff" UUID="2FCCF7C84F270ACA4E9B2BB90EF05311" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_selfoff" UUID="EB1675A04A7EC06BD1CAC19D462EAF43" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHKU17_KR30_flt" UUID="270F780A4716E94AC290ABA7BBAC797A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHKU17_KR30V_flt" UUID="04619C634327727C5DC759865F02B7D7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHKU17_KR7_flt" UUID="8515E6E24226107337651AA4B213169B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;Ошибка концевиков&quot;" />
@@ -2528,8 +2605,21 @@
         <Signal Name="APS_SHU14_KRS1_2_flt" UUID="9C3D2CE641681F38B9B9A4BB8692747E" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_flt" UUID="53E95E864396D4BD633639800A163F88" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_flt" UUID="ED04DE1945B397ACE6C283BB3DDC7DBA" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_PN1_flt" UUID="4F2F60324920A8FBF9C309B1134EBA91" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_PN2_flt" UUID="40C77A7A4D3F87FE87EB708F441D68C6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_PN3_flt" UUID="6F7839D7480CE5567410B1BBA65769DC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_flt" UUID="E789CC9E4E41283375F772B6E1B23149" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_flt" UUID="E5D77D0E4D14F70E16B2E7A8920862A7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_flt" UUID="EA3D374D45A2876C45A61B92297D52A4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_NC1_flt" UUID="6AD5B85648D70A0EBE10629EAE3A85CC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_NC2_flt" UUID="E15D7B504F65E8ABFD42EF9D64E35332" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_NC3_flt" UUID="A7EC5C9A482E1DFF22532A858F5A5B17" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_DN1_flt" UUID="0D14F8E24B73368C9035158EF00B0641" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_DN2_flt" UUID="F18ADF2F40FF04B14FDEAF890EDBD633" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHKU17_Z1_flt" UUID="A5D302844C44183BC68C7FBE6C3A4F7F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHKU17_Z2_flt" UUID="41537AC449DCBF2C69FA468F2A5A26F9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_flt" UUID="FF9AC03C4334762B819731ABC37F317A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_flt" UUID="8AA9F01F4A809ED6B3ACA994AFB2B65E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHKU17_KR30_ncon" UUID="C092700946B80A1F2FC40F841AAC9223" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHKU17_KR30V_ncon" UUID="C4B3952A4F3E4C4BD7B109981197FAB4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHKU17_KR7_ncon" UUID="4E6347D947995F2EDF366BAB285DE986" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;Нет КЦУ открытия&quot;" />
@@ -2566,8 +2656,21 @@
         <Signal Name="APS_SHU14_KRS1_2_ncon" UUID="B4AE9A2C43DCCB972F6C7EB9AC0718CC" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_ncon" UUID="993183594C17E3DF85C78AA2F21BA066" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_ncon" UUID="EF9710A34603E9E4E64B20924AAABB23" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_PN1_ncon" UUID="1C3D0715439C342BF868969901E29763" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_PN2_ncon" UUID="DAB34A764D28442EB9372884295382E4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_PN3_ncon" UUID="F0BB0FDD45783FA989B140ADE8453527" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_ncon" UUID="10B392B048A5D97A3FB222854288F0B9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_ncon" UUID="35A5AFD0493D3BB32F8CA997E75E0803" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_ncon" UUID="026BD3DC46E12A182DD988A550D296D7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_NC1_ncon" UUID="CE43E52647445713C25F45A453221335" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_NC2_ncon" UUID="90C841EF4703BDEF72BC789197B3327F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_NC3_ncon" UUID="DDD759A44BD0539A9A63348DAFEF28A0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_DN1_ncon" UUID="9B7DEB0E433773F83432A1B6312200AD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_DN2_ncon" UUID="9631A95940DA8207F0E64AA5DA647FC2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHKU17_Z1_ncon" UUID="87EEA0CC4EED22FEAF6945AEAD17A9C4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHKU17_Z2_ncon" UUID="C9C25D8844FF7DFABBE511B6D86E9CAA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_ncon" UUID="C8A8C39C4954F82EF406E8AFAA27E697" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_ncon" UUID="4824B006428E06AC5AA7079D3C88D8C5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHKU17_KR30_ncoff" UUID="486FBD73430DF509E7078795EB82FC23" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHKU17_KR30V_ncoff" UUID="9B34C3BD46429919DC8A65B85C4D6BF9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHKU17_KR7_ncoff" UUID="6F7C471147A5D9670EDB9780C3D95E6D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;Нет КЦУ закрытия&quot;" />
@@ -2604,8 +2707,21 @@
         <Signal Name="APS_SHU14_KRS1_2_ncoff" UUID="D6B3A4A542019600267A3199A295E48D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_ncoff" UUID="5C7E584646CED55FDD6A4BBF99C134AA" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_ncoff" UUID="AD2EB39F40BE067090E39A8A2387F56D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_PN1_ncoff" UUID="B4899EA74FA52FEF932076A6BB5CD17F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_PN2_ncoff" UUID="09FFC52548DF68F3B98E389F41682196" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_PN3_ncoff" UUID="5896A15946FA86142FF1329A1EDB9445" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_ncoff" UUID="1578FCD844DD2F82AEBCDBBF87083A01" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_ncoff" UUID="89F9FEEE4D4B575C40F2CDB490FA9F31" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_ncoff" UUID="08B95524491287BE3AC7CF90A2D990AC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_NC1_ncoff" UUID="E729CD4D401512BE3E382E86DC8D796A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_NC2_ncoff" UUID="4795C3E94B413E6821CAD4A3E2607161" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_NC3_ncoff" UUID="E992BC7F4CEE1E4534B8F790DBEA302D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_DN1_ncoff" UUID="0B7608734A910EB2CEE6588092372697" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_DN2_ncoff" UUID="E7ED3A674BAF29CBF6B9BEB892BF8283" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHKU17_Z1_ncoff" UUID="FCBFB75B45E14159F7E55E99D02CACE4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHKU17_Z2_ncoff" UUID="36FD01CB4353640A94918689DC40F7CD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_ncoff" UUID="8EB45ABA473DCF1D3920DF88E05B96AC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_ncoff" UUID="4C2136974F15E36E48652E8916D81E6B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHKU17_KR30_general" UUID="4610EE0D4A799D39CF3636A08796B6B1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_KR30V_general" UUID="0E0DEC534EE0D8FAF471CA8FF18EAD0E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_KR7_general" UUID="0919515248B04935E526D9970EB5485B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;Общая ошибка ИМ&quot;" />
@@ -2642,8 +2758,21 @@
         <Signal Name="APS_SHU14_KRS1_2_general" UUID="003C44E74D710D2A968CAFAFAAC73BC0" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHU14_KRS2_3_general" UUID="E58F8BD74119B843373EA2986AB47C9D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHU14_KRUOK3_general" UUID="F93039334F8458A81061ED8573DFC515" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_PN1_general" UUID="19FB7D4D460FF3C86F5BDFAA52BC7FA4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_PN2_general" UUID="4C69B9FA4EBB5C4D0A17FAB3C6CB236E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_PN3_general" UUID="CF9F39EA43FB40B4AD5E2288EDE52A44" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_XPN1_general" UUID="B9455F684DBD065AA646FA844A247C68" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_XPN2_general" UUID="F821F6E14899E2486B75769E6A6B701E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_XPN3_general" UUID="66D0460C41AC7C5ABC1919B2059E2B12" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_NC1_general" UUID="F468C1104DF63E780619AEB57003C70E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_NC2_general" UUID="B039AF3E4DABAE39A65AA087ACC20298" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_NC3_general" UUID="8BCE4369447646E2113EEE976FCCC2F4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_DN1_general" UUID="345D555C40CB735C6E24F3BB573C65DB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_DN2_general" UUID="7AE567374F9CD1D093EDBEB69CFACE64" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_Z1_general" UUID="45D2A2CC42FDE429FAE0C89EF7A875AE" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_Z2_general" UUID="8591E6DF4B1ABB2969FEB49A97F5356A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK1_general" UUID="DC189D654ABC070A2A31E5BDE79336F1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_Obogr_APK2_general" UUID="6904F92C4059AD3418908F903FE7A5F4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="SHKU17_KR30_state" UUID="5D257C7945A1BA6108957793073761F1" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран 30. Состояние для SCADA" />
         <Signal Name="SHKU17_KR30V_state" UUID="42CE30A44754D93C3D9123B856BC7B41" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран  30В. Состояние для SCADA" />
         <Signal Name="SHKU17_KR7_state" UUID="232E354D445CD64F77771E96F9A4ECEA" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран 7. Состояние для SCADA" />
@@ -2680,23 +2809,23 @@
         <Signal Name="SHU14_KRS1_2_state" UUID="62C78E3E47A71B698005DF82F5CFE0F7" Type="WORD" Global="TRUE" Comment="ШУ14. Кран С-1-2. Состояние для SCADA" />
         <Signal Name="SHU14_KRS2_3_state" UUID="7E79738B43437473D4589F95859FAF1C" Type="WORD" Global="TRUE" Comment="ШУ14. Кран С-2-3. Состояние для SCADA" />
         <Signal Name="SHU14_KRUOK3_state" UUID="EF60A52F4801674B3467EBBB222E7839" Type="WORD" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_PN1_state" UUID="523330AF44E3524185CB79B5E71D6A7C" Type="WORD" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_PN2_state" UUID="956F907F48CB6338831985BBEA2C6464" Type="WORD" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_PN3_state" UUID="59AC44204CD1660A3D11209A7A718D83" Type="WORD" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_XPN1_state" UUID="E99770EA41EC5B962ED488A14BA9C521" Type="WORD" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_XPN2_state" UUID="19080F93408A428C7F7CEBB10B181C10" Type="WORD" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_XPN3_state" UUID="EAFB9805476DCD5CADB38A9B5D337A77" Type="WORD" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_NC1_state" UUID="7248231544C10384C654C9A71B4BE922" Type="WORD" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_NC2_state" UUID="D39E28964F32BAECCC515680EC5C8FB9" Type="WORD" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_NC3_state" UUID="33BEA6E84839E7938536C1BA9D4884F6" Type="WORD" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_Z1_state" UUID="A1E16E4A45F7A416493544AEF92DF71F" Type="WORD" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_Z2_state" UUID="6050E183491134EBF67C54A29AFDB128" Type="WORD" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_DN1_state" UUID="B3420A2C4ABE3BC9F12AD9BCFC84B29E" Type="WORD" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_DI_DN2_state" UUID="179220C44B7A3A517BC6F8BE73509A83" Type="WORD" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_Obogr_APK1_state" UUID="C2AA2112479E29022B31E59CA7FF8DB3" Type="WORD" Global="TRUE" Comment="ШКУ 17. Обогреватель АПК №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_Obogr_APK2_state" UUID="2E169FC24E7CBFE4336DBA97B1872FAA" Type="WORD" Global="TRUE" Comment="ШКУ 17. Обогреватель АПК №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_APK1_state" UUID="E05F7E8C43890527E43B868F85B59F79" Type="WORD" Global="TRUE" Comment="ШКУ 17. АПК №1. Состояние для SCADA" />
-        <Signal Name="HMI_SHKU17_APK2_state" UUID="35B564284CB90BE2E3F14383F3C8CA31" Type="WORD" Global="TRUE" Comment="ШКУ 17. АПК №2. Состояние для SCADA" />
+        <Signal Name="SHKU17_PN1_state" UUID="523330AF44E3524185CB79B5E71D6A7C" Type="WORD" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_PN2_state" UUID="956F907F48CB6338831985BBEA2C6464" Type="WORD" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. Состояние для SCADA" />
+        <Signal Name="SHKU17_PN3_state" UUID="59AC44204CD1660A3D11209A7A718D83" Type="WORD" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. Состояние для SCADA" />
+        <Signal Name="SHKU17_XPN1_state" UUID="E99770EA41EC5B962ED488A14BA9C521" Type="WORD" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_XPN2_state" UUID="19080F93408A428C7F7CEBB10B181C10" Type="WORD" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. Состояние для SCADA" />
+        <Signal Name="SHKU17_XPN3_state" UUID="EAFB9805476DCD5CADB38A9B5D337A77" Type="WORD" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. Состояние для SCADA" />
+        <Signal Name="SHKU17_NC1_state" UUID="7248231544C10384C654C9A71B4BE922" Type="WORD" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_NC2_state" UUID="D39E28964F32BAECCC515680EC5C8FB9" Type="WORD" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. Состояние для SCADA" />
+        <Signal Name="SHKU17_NC3_state" UUID="33BEA6E84839E7938536C1BA9D4884F6" Type="WORD" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. Состояние для SCADA" />
+        <Signal Name="SHKU17_Z1_state" UUID="A1E16E4A45F7A416493544AEF92DF71F" Type="WORD" Global="TRUE" Comment="ШКУ 17. Задвижка №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_Z2_state" UUID="6050E183491134EBF67C54A29AFDB128" Type="WORD" Global="TRUE" Comment="ШКУ 17. Задвижка №2. Состояние для SCADA" />
+        <Signal Name="SHKU17_DN1_state" UUID="B3420A2C4ABE3BC9F12AD9BCFC84B29E" Type="WORD" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_DN2_state" UUID="179220C44B7A3A517BC6F8BE73509A83" Type="WORD" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_Obogr_APK1_state" UUID="C2AA2112479E29022B31E59CA7FF8DB3" Type="WORD" Global="TRUE" Comment="ШКУ 17. Обогреватель АПК №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_Obogr_APK2_state" UUID="2E169FC24E7CBFE4336DBA97B1872FAA" Type="WORD" Global="TRUE" Comment="ШКУ 17. Обогреватель АПК №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_APK1_state" UUID="E05F7E8C43890527E43B868F85B59F79" Type="WORD" Global="TRUE" Comment="ШКУ 17. АПК №1. Состояние для SCADA" />
+        <Signal Name="SHKU17_APK2_state" UUID="35B564284CB90BE2E3F14383F3C8CA31" Type="WORD" Global="TRUE" Comment="ШКУ 17. АПК №2. Состояние для SCADA" />
         <Signal Name="SHKU17_PID_1_DA" UUID="D533BCBF4F3C534602814AA44046D224" Type="BOOL" Global="TRUE" Comment="0 - автомат, 1 - ручное регулирование" />
         <Signal Name="SHKU17_PID_1_X0" UUID="550128C74848A7FCD5B41A8FA925684D" Type="REAL" Global="TRUE" Comment="Задание положения АПК1 в ручном режиме (0-100%)" />
         <Signal Name="SHKU17_PID_1_SP" UUID="BFD012B14887FA67AD174DBC5EE6284E" Type="REAL" InitialValue="55" Global="TRUE" Storage="retain" Comment="Уставка" />
@@ -2877,6 +3006,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_non" UUID="D866688A456422D6CB7C21B45C87059D" Type="BOOL" Global="TRUE" Comment="Кран С-1-2  не открылся" />
         <Signal Name="APS_APS_SHU14_KRS2_3_non" UUID="40193FEF4B7F4EADC567EDB4FA007236" Type="BOOL" Global="TRUE" Comment="Кран С-2-3  не открылся" />
         <Signal Name="APS_APS_SHU14_KRUOK3_non" UUID="C6FC9FF049239707AD9DAE96D18B7A39" Type="BOOL" Global="TRUE" Comment="Кран ЮОК-3  не открылся" />
+        <Signal Name="APS_APS_SHKU17_PN1_non" UUID="5C4521804949873B6C4258A13AA6E666" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_non" UUID="F2F1FA804DB71293852EF3896B7FC67E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_non" UUID="99E95C044179C8FB3994F788A1726033" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_non" UUID="1EB0ACEF4F34EDB4ACC58BBF02AA5ED8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_non" UUID="FFD87A84468E6E4B8E5394AFF986B769" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_non" UUID="3519E717415D519048A2A39E3A81480D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_non" UUID="6C5E3B4C437164188E7D97AA4F80D2C5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_non" UUID="B90FD4A34E5280CB3944DDBFE570D49F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_non" UUID="B2F760664990CB6C231C4ABD0C72EEB7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_non" UUID="C48A06624DA39ED43BCE85AF9F11A4FD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_non" UUID="61C0921A4CEA042FA5FF41977F0D9742" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_non" UUID="885C0FE949B8D28D4D17508A6219D27C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_non" UUID="D73446EA40F14BE576B640A9644A4812" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_non" UUID="B3018C1D4B41EEF5710DA1AA8BC0D535" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_non" UUID="8EF73659472337344EAEF29ADDF7EC17" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30_noff" UUID="8DC71CD4408B9DC54DEE7284CDCB1EB1" Type="BOOL" Global="TRUE" Comment="Кран 30  не закрылся" />
         <Signal Name="APS_APS_SHKU17_KR30V_noff" UUID="01757D2741BBB15613C0A79DEA0D8A06" Type="BOOL" Global="TRUE" Comment="Кран  30В  не закрылся" />
         <Signal Name="APS_APS_SHKU17_KR7_noff" UUID="A399C3444FB2F7CC40FA14B06AC89507" Type="BOOL" Global="TRUE" Comment="Кран 7  не закрылся" />
@@ -2913,6 +3057,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_noff" UUID="4337E1E54DB2FBB9FC6632ADD955299C" Type="BOOL" Global="TRUE" Comment="Кран С-1-2  не закрылся" />
         <Signal Name="APS_APS_SHU14_KRS2_3_noff" UUID="67157C2545F601738DA7A7AF27E4DC12" Type="BOOL" Global="TRUE" Comment="Кран С-2-3  не закрылся" />
         <Signal Name="APS_APS_SHU14_KRUOK3_noff" UUID="0521F4334DE08A94613ABD8FD9AF4245" Type="BOOL" Global="TRUE" Comment="Кран ЮОК-3  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_PN1_noff" UUID="CB081DD546EEB78CEF755485231C5F1E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_noff" UUID="3D109FD44EDDD60F2293788BC5AD2B4E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_noff" UUID="738543B54B637730AC27F7A6E3C0A066" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_noff" UUID="76E8512247EA16EF9504A5AF671300FD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_noff" UUID="90A56B0D4F4F4603AE4A75B53D614A41" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_noff" UUID="0EA899AB48BC85DC12D865AFFD680104" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_noff" UUID="5F3812514D8F0B8E0DD819B2BAD5D228" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_noff" UUID="7372C1264067518C7C3D74B613B9EBED" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_noff" UUID="619E49644FE234B2641DC9BAF031A4E2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_noff" UUID="6D8C06634D050807A6AD958C453A989B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_noff" UUID="5C233BAF493ED251FA10349C4D9EC8AC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_noff" UUID="6C4DFA7E4CB54E1A538CC79FD63CF54E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_noff" UUID="74E4576A4CF44062C87124981590D9BA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_noff" UUID="C3D63DC84BEAF409DE6E0A977F7D6BEC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_noff" UUID="6DFD66A9450F2C49DFB6CB98C19EA54A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30_nstart" UUID="6ACF68D44923E4F93616BBA78C49028B" Type="BOOL" Global="TRUE" Comment="Кран 30  не стронулся" />
         <Signal Name="APS_APS_SHKU17_KR30V_nstart" UUID="E1E783CC4B458AA3CBCF4DA31D3F0B74" Type="BOOL" Global="TRUE" Comment="Кран  30В  не стронулся" />
         <Signal Name="APS_APS_SHKU17_KR7_nstart" UUID="E0B9CE7D43D8219564D9C39D0DE61E35" Type="BOOL" Global="TRUE" Comment="Кран 7  не стронулся" />
@@ -2949,6 +3108,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_nstart" UUID="893A4323439CF5620CFD1E903600F76A" Type="BOOL" Global="TRUE" Comment="Кран С-1-2  не стронулся" />
         <Signal Name="APS_APS_SHU14_KRS2_3_nstart" UUID="A7D119EB4DAC40C102E31DA9967F8688" Type="BOOL" Global="TRUE" Comment="Кран С-2-3  не стронулся" />
         <Signal Name="APS_APS_SHU14_KRUOK3_nstart" UUID="E66E95EB4B12511F83C5C38FFB6B4650" Type="BOOL" Global="TRUE" Comment="Кран ЮОК-3  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_PN1_nstart" UUID="90E3527C4891E9FDFBC11E9BF48E5BFB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_nstart" UUID="DC157E204AF6DC29EC4BC6ACF6E0F1DC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_nstart" UUID="64F48D014488D5B21D7EA8B43E7D1BF7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_nstart" UUID="BD4EF032449BF5CCA59B90B3FC576A9C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_nstart" UUID="E9B6D0CE4913B92FC445D49C8C16AFB3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_nstart" UUID="6EAD79F14D5243743EA60C9B34ECF441" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_nstart" UUID="419564064D72B8CEC860AFBE0C380AA1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_nstart" UUID="840E7D24467DB4DDA8046B8C43528693" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_nstart" UUID="26A4EE2F4707FDD8B9065995BF8D6F12" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_nstart" UUID="F81A0D544C44FC54D1565C86480128D2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_nstart" UUID="7CA6244140CE37870AD10DB135A3B9DB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_nstart" UUID="F3E35A16409DA7353148ABBFB4E0A48E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_nstart" UUID="CE4AC5404389902F0A3EC48665F6A0E2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_nstart" UUID="5420AA264F4358B5A42EA2B682522089" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_nstart" UUID="5B3EB6E1492CD2194D7BD386474D9E9A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30_selfon" UUID="F079E34F40307BA6DD95D1AC5EEF1DB7" Type="BOOL" Global="TRUE" Comment="Кран 30  Самопроизвольное открытие" />
         <Signal Name="APS_APS_SHKU17_KR30V_selfon" UUID="36A939F64D80790421E66EA7DFAD3C2C" Type="BOOL" Global="TRUE" Comment="Кран  30В  Самопроизвольное открытие" />
         <Signal Name="APS_APS_SHKU17_KR7_selfon" UUID="160748E64DF10EDE70C755948EA8932B" Type="BOOL" Global="TRUE" Comment="Кран 7  Самопроизвольное открытие" />
@@ -2985,6 +3159,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_selfon" UUID="8645ED094C2E7EB78CACD487D19C5035" Type="BOOL" Global="TRUE" Comment="Кран С-1-2  Самопроизвольное открытие" />
         <Signal Name="APS_APS_SHU14_KRS2_3_selfon" UUID="3382977044E9547306D1B3A0C14F0B19" Type="BOOL" Global="TRUE" Comment="Кран С-2-3  Самопроизвольное открытие" />
         <Signal Name="APS_APS_SHU14_KRUOK3_selfon" UUID="5F8780D04E52965F0F39D782AAD02E6D" Type="BOOL" Global="TRUE" Comment="Кран ЮОК-3  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_PN1_selfon" UUID="5A850D7F4B92C0669753CBBB2DEE4865" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_selfon" UUID="9451551441C52940DBBCAE905F715BF0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_selfon" UUID="177A888F4CF61B6A520487B39F587D6E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_selfon" UUID="2BF58F7040B72E668058178E66A4F4A1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_selfon" UUID="9744A30446EC0B7053DD23BABC0A52D8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_selfon" UUID="8B9D55D247ED261CA8B42792F5FA58B5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_selfon" UUID="675BEE4B44762C148B282A8A179C0124" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_selfon" UUID="95E8B46D47E40C7F1F0D1C81EA6D8A4E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_selfon" UUID="2BEEAEFA4B1B98E51628CB9175B004B4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_selfon" UUID="F364AAF5449A76C152F7189BAC31367D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_selfon" UUID="D09850DE47515AF1CDB2D7A742E861E2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_selfon" UUID="9DBCDC724E298783D6608E93C0AE2566" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_selfon" UUID="03CE7A4F422240E3656E60BD844D1DD6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_selfon" UUID="EAC5FEA240255EDA7A35A49D208934F3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_selfon" UUID="ED98053746C68A880670008E77B25666" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30_selfoff" UUID="CC56204A487729AD85FCCA8E423A4959" Type="BOOL" Global="TRUE" Comment="Кран 30  Самопроизвольное закрытие" />
         <Signal Name="APS_APS_SHKU17_KR30V_selfoff" UUID="9ED72B0F45693BEBB91324A40A2D963D" Type="BOOL" Global="TRUE" Comment="Кран  30В  Самопроизвольное закрытие" />
         <Signal Name="APS_APS_SHKU17_KR7_selfoff" UUID="254AA08D479DAB7302909180166C0085" Type="BOOL" Global="TRUE" Comment="Кран 7  Самопроизвольное закрытие" />
@@ -3021,6 +3210,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_selfoff" UUID="494F94C549DFDE02B3252D951E4F6268" Type="BOOL" Global="TRUE" Comment="Кран С-1-2  Самопроизвольное закрытие" />
         <Signal Name="APS_APS_SHU14_KRS2_3_selfoff" UUID="46FAFD514F878B41F0E540ADF6BA1398" Type="BOOL" Global="TRUE" Comment="Кран С-2-3  Самопроизвольное закрытие" />
         <Signal Name="APS_APS_SHU14_KRUOK3_selfoff" UUID="AC0707B54AE287460B47888FBE6D4241" Type="BOOL" Global="TRUE" Comment="Кран ЮОК-3  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_PN1_selfoff" UUID="B5CF869C4E5DDD809D19528B61F8D6C4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_selfoff" UUID="5D013974444D375FC73E4CA6E2DCFBDA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_selfoff" UUID="1BD0C9034298EC1A284EB9A92F230B0B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_selfoff" UUID="881E19C94933CB27344A699B5969DCFD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_selfoff" UUID="0FA5DE7A48281E97D32D02853C5879C5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_selfoff" UUID="6725F38348D4451245F2D88F9E4F5D8F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_selfoff" UUID="4589984B4C3A77B13BEAF49BE2118CC1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_selfoff" UUID="1D3D0A3C41B714A2E60F0593B146001E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_selfoff" UUID="080A0D1643F44C749CDB099DD05F8F98" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_selfoff" UUID="164E046D4D0EF1D1FB899A9500E489DC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_selfoff" UUID="6A42989D480DC95CAD4BA395FDF9C177" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_selfoff" UUID="93E70D14410853E682767BAAAAA2CED8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_selfoff" UUID="AE1648C9463DE8A0176E0097FFD9DD08" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_selfoff" UUID="028189AA4888B62334C28EA1ABDD33C2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_selfoff" UUID="8BCC6C9D4934387BC1ECF1A285A6EC53" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30_flt" UUID="AC9915044029C1650E7AAA9E4DDDEA26" Type="BOOL" Global="TRUE" Comment="Кран 30  Ошибка концевиков" />
         <Signal Name="APS_APS_SHKU17_KR30V_flt" UUID="2359BF954CDB72AE0A5B7D8E22DE17F1" Type="BOOL" Global="TRUE" Comment="Кран  30В  Ошибка концевиков" />
         <Signal Name="APS_APS_SHKU17_KR7_flt" UUID="AE7DB559473E10A30CE3479DC14D45A9" Type="BOOL" Global="TRUE" Comment="Кран 7  Ошибка концевиков" />
@@ -3057,6 +3261,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_flt" UUID="7D403C344E2E8BEF0308AB9314FF8A8F" Type="BOOL" Global="TRUE" Comment="Кран С-1-2  Ошибка концевиков" />
         <Signal Name="APS_APS_SHU14_KRS2_3_flt" UUID="1F33A95F488907C9DBC448BF2A92D65D" Type="BOOL" Global="TRUE" Comment="Кран С-2-3  Ошибка концевиков" />
         <Signal Name="APS_APS_SHU14_KRUOK3_flt" UUID="5A631BCC4791A3E02B284F873D413124" Type="BOOL" Global="TRUE" Comment="Кран ЮОК-3  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_PN1_flt" UUID="B3F077784BCCFFCDDE180CB1A5AF791A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_flt" UUID="B658F96747247C58BDF2969E124FF883" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_flt" UUID="B36A027849D33AF8A68D8F8A22674C1D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_flt" UUID="6FD1610E40210BFC4D92939D99744F15" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_flt" UUID="C233E0884189205DCC8C1E8CC3B71A56" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_flt" UUID="35865A0C41599B36117C23B06F5BD124" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_flt" UUID="75793B224B0039ED87D2E4BD99AA6776" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_flt" UUID="7C7F872B4CFD88BD6AB09E9EC3BC0C53" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_flt" UUID="DCFEAF6C48CB6DEFE580B4830DE0658D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_flt" UUID="B78517C749FB5F32259C75BBB31A6BB1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_flt" UUID="6371FD60479E545F9211C1BBB7FE7A10" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_flt" UUID="17D3468E44A712A12EE5419ED822B29D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_flt" UUID="A6F714794AF2561FD7804582D6C42FEF" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_flt" UUID="2C91FCAE44AD65D0510AD593D8FDE855" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_flt" UUID="F3D416C743FB6BE0E6DEC6A3AEECD4A5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30_ncon" UUID="5D2AE6E142608813C486308707D95CE3" Type="BOOL" Global="TRUE" Comment="Кран 30  Нет КЦУ открытия" />
         <Signal Name="APS_APS_SHKU17_KR30V_ncon" UUID="63439CA3441B1FB992D52DB069324FEA" Type="BOOL" Global="TRUE" Comment="Кран  30В  Нет КЦУ открытия" />
         <Signal Name="APS_APS_SHKU17_KR7_ncon" UUID="EAC43A3042E744A389EF2F8D39433605" Type="BOOL" Global="TRUE" Comment="Кран 7  Нет КЦУ открытия" />
@@ -3093,6 +3312,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_ncon" UUID="26EA3F8940B7891B4077708EA54B5C49" Type="BOOL" Global="TRUE" Comment="Кран С-1-2  Нет КЦУ открытия" />
         <Signal Name="APS_APS_SHU14_KRS2_3_ncon" UUID="13566778464AE415056AC0AEB9D2B400" Type="BOOL" Global="TRUE" Comment="Кран С-2-3  Нет КЦУ открытия" />
         <Signal Name="APS_APS_SHU14_KRUOK3_ncon" UUID="70CEFD9E4113E6DD48E68D811973835A" Type="BOOL" Global="TRUE" Comment="Кран ЮОК-3  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_PN1_ncon" UUID="B0332CB5478517BDD50E058B07086F64" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_ncon" UUID="D77C09BB4C0630F8A7D61E96DAC450BB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_ncon" UUID="504B30EF4738934BA18159BD2EA9089B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_ncon" UUID="56BB550A49084115B690D1BA086F8FBB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_ncon" UUID="4B622658448B45DA2C73B1BFAF54292E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_ncon" UUID="4C5F32AD44757B52502EDE85E9AFF1DD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_ncon" UUID="1B7361CD4FF39DA75C6B83A821A9FD15" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_ncon" UUID="91CFD65A4C5A3FABF7D3BE8846C115D0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_ncon" UUID="5A887AE34E76FCC504EE60ACDF9FB420" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_ncon" UUID="8FAD987E44989CCF9DF3DB851C564865" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_ncon" UUID="C1FBE58E4DC0EC622DE3448E2DBB40B8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_ncon" UUID="ED230CC440F4B8C34254B08DBBA87FAD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_ncon" UUID="4DFA1B9347CB202025E2B582D2B05E68" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_ncon" UUID="A9784C2D47B037C7C75C0E8456AC328E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_ncon" UUID="D24EA23C495A233BBBB0C69BD801699C" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30_ncoff" UUID="A5DCD8BD48716CB5615D4087ABEBF407" Type="BOOL" Global="TRUE" Comment="Кран 30  Нет КЦУ закрытия" />
         <Signal Name="APS_APS_SHKU17_KR30V_ncoff" UUID="A7B717774D7D36291F650F8D816EA192" Type="BOOL" Global="TRUE" Comment="Кран  30В  Нет КЦУ закрытия" />
         <Signal Name="APS_APS_SHKU17_KR7_ncoff" UUID="4A433CE3415CEBF0840C8DBCB55AF1A9" Type="BOOL" Global="TRUE" Comment="Кран 7  Нет КЦУ закрытия" />
@@ -3129,6 +3363,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_ncoff" UUID="80CE1CCE4879A329640002B7DF0EF4AF" Type="BOOL" Global="TRUE" Comment="Кран С-1-2  Нет КЦУ закрытия" />
         <Signal Name="APS_APS_SHU14_KRS2_3_ncoff" UUID="10FC4D284FDFFBF55F87409F29648D91" Type="BOOL" Global="TRUE" Comment="Кран С-2-3  Нет КЦУ закрытия" />
         <Signal Name="APS_APS_SHU14_KRUOK3_ncoff" UUID="034F6D9E478119862B2D75BA28C59D90" Type="BOOL" Global="TRUE" Comment="Кран ЮОК-3  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_PN1_ncoff" UUID="5322547847E1DBAD16464395BC8C86A7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_ncoff" UUID="4CF2980547F8EC203C484EADFB701FC6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_ncoff" UUID="BFD2916C4FE854DB759B5183D35C844A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_ncoff" UUID="523411764A35155167289DB03E08CD9E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_ncoff" UUID="D09310044491803AFCD0628D38E4DF50" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_ncoff" UUID="D7436030470697A76713CA868AC6D58A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_ncoff" UUID="DF003E514C5AF5516B20E784852A8AD0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_ncoff" UUID="A3B169FD4A10D67657CE65B4538DE72F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_ncoff" UUID="9DDC3EA547E82C9913BC43947756B115" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_ncoff" UUID="37910BFD4ED9FF13D9023F8524A99B69" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_ncoff" UUID="5758FF5B4AE3C47452FF5BA006D0581F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z1_ncoff" UUID="403B95754F5B814FA67580B61A0D0433" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_Z2_ncoff" UUID="3DB5352A468865B73FF13B85176EAB52" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_ncoff" UUID="6E8CB9154514EEE1B76EED838A382D4A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_ncoff" UUID="20B6654D4C161BE850E8789AFA672988" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30_general" UUID="47E771704465B8C63FF0CA9AA55A173B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHKU17_KR30V_general" UUID="433DE5394DDA555078D89992A7A1ED94" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран  30В. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHKU17_KR7_general" UUID="F1496A7A497AA71C1D1C6C807F6489C4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 7. АПС &quot;Общая ошибка ИМ&quot;" />
@@ -3165,8 +3414,21 @@
         <Signal Name="APS_APS_SHU14_KRS1_2_general" UUID="0B54440548376F720E8EEB8FCF335A0E" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-1-2. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHU14_KRS2_3_general" UUID="A18C889A49DD08E5D2E97FB8BE38C32C" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран С-2-3. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHU14_KRUOK3_general" UUID="9AD87C4547404F37014676AD04B85379" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран ЮОК-3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN1_general" UUID="5BD48C1B439735316EA308B26385014B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN2_general" UUID="B920A2084C0C7CD3916F689342C4C0A6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_PN3_general" UUID="3F9391C54831C333F2D69CA3423FFC45" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Пожарный насос №3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN1_general" UUID="571304D34307CF4085139FBC05415AB3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN2_general" UUID="AE59EB934952319FF9B4788E24783FF0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_XPN3_general" UUID="C98A8A314561C8D6F46893B5B08FD6AD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Хоз. питьевой насос №3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC1_general" UUID="23DAAC484B6D3BBB2A692196C757C586" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC2_general" UUID="1C6885D54D40EE9CC32D549BB3B5422A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_NC3_general" UUID="B1A9E45943552C8ADB3474A85CC693C7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Насос циркуляции №3. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN1_general" UUID="66A22DB64B48839493D3588066A2CD24" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_DN2_general" UUID="29FB0F2241C5B5C5DC38A39AD29938E7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Дренажный насос №2. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHKU17_Z1_general" UUID="6B10A3234C68377B97502B9438EAFE31" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 1. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHKU17_Z2_general" UUID="7233DCE94779726D7C0C3388A71B8866" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Задвижка 2. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK1_general" UUID="1B8A78A54AF8D3ECA684B085F41093EC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_Obogr_APK2_general" UUID="D74412BA47DCF3085A332EAC4AA351C8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_DI_Ala_ispr_pit_preobr" UUID="F9BD8AD248169DBEB243178734790202" Type="BOOL" Global="TRUE" Comment="Сигнализация исправности питания преобразователей" />
         <Signal Name="APS_SHKU17_DI_Res_1" UUID="D1ED8F19434F0B50C02DB58AF68F9358" Type="BOOL" Global="TRUE" Comment="Резерв" />
         <Signal Name="APS_SHKU17_DI_Res_2" UUID="A4B2F4234BBAFEE4139636B34A13A135" Type="BOOL" Global="TRUE" Comment="Резерв" />
@@ -3632,6 +3894,11 @@
         <Signal Name="APS_AOB_DONE_INCORRECT" UUID="9587C91443B2D97B07439A823558AA49" Type="BOOL" Global="TRUE" Comment="АПС: АОбс завершен некорректно" />
         <Signal Name="APS_AOS_DONE" UUID="093EED974FF25EC1DDA2E3A5F70CF8B4" Type="BOOL" Global="TRUE" Comment="АПС: АОсс завершен корректно" />
         <Signal Name="APS_AOS_DONE_INCORRECT" UUID="69B09A7C40F5BCEF58F6FC85E6F52270" Type="BOOL" Global="TRUE" Comment="АПС: АОсс завершен некорректно" />
+        <Signal Name="APS_GR1_KOL" UUID="7CCB5E9B487D72F11B3B339E5344EF04" Type="BOOL" Global="TRUE" Comment="АПС: Группа 1 Кольцо" />
+        <Signal Name="APS_GR2_KOL" UUID="EFE1BCCF4E895680349F40949C702E66" Type="BOOL" Global="TRUE" Comment="АПС: ГРуппа 2 Кольцо" />
+        <Signal Name="APS_GR1_MAG" UUID="983568904A10C1AD6D708C9DD224503E" Type="BOOL" Global="TRUE" Comment="АПС: Группа 1 Магистраль" />
+        <Signal Name="APS_GR2_MAG" UUID="E6FB6C2843E3BA885C45DE995F80EAC7" Type="BOOL" Global="TRUE" Comment="АПС: Группа 2 Магистраль" />
+        <Signal Name="APS_KC_EAO" UUID="032D85214B9AA8BBF4790C869F3D23A3" Type="BOOL" Global="TRUE" Comment="АПС: Выполняется ЭАО" />
     </Globals>
     <Connections />
 </Project>

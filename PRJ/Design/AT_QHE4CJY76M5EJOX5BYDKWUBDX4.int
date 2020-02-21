@@ -27,5 +27,17 @@
         <Signal Name="cycleTime_APS" UUID="C9F4FAD24942201241CD3B8198C55A25" Type="LREAL" Usage="" />
         <Signal Name="cycleTime_APS_sys" UUID="F280862D405B815AD8690BAC5AB4E4FF" Type="LREAL" Usage="" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
+        <Signal Name="SHKU17_A1_status" UUID="276C480041784377E721C59E557C76E9" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А1" />
+        <Signal Name="SHKU17_A2_status" UUID="E0D0DF6C47F5B289F65262B670771ED2" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А2" />
+        <Signal Name="SHKU17_A3_status" UUID="43A281F7484695252CE0ADB425F9A8E1" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А3" />
+        <Signal Name="SHKU17_A4_status" UUID="8F7A18554E34759F1FC532A74A7DB60C" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А4" />
+        <Signal Name="SHKU17_A5_status" UUID="1734F18F45A9018E1AB2DEA4C6A97052" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А5" />
+        <Signal Name="SHKU17_A6_status" UUID="FFB24144429F258BE50D889DF8ACB31F" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А6" />
+        <Signal Name="SHU14_A1_status" UUID="CFA530614CF575EC0373BFB69EFEFA50" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
+        <Signal Name="SHU14_A2_status" UUID="5BB4AA014338DF181C5298B0191172B1" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
+        <Signal Name="APS_PRU_Link" UUID="194469CC40D33404BA633DA2D377DF3E" Type="BOOL" Usage="" Global="TRUE" Comment="ШКУ17. Отсутствие связи с ПРУ" />
+        <Signal Name="DO_sound_AS" UUID="06E8EC0C4B1D426CD0799885F9C844D5" Type="BOOL" Usage="" Global="TRUE" Comment="Включение звуковой сигнализации АС" />
+        <Signal Name="DO_sound_PS" UUID="91EF99D440F55561FFA76D9BD418EA59" Type="BOOL" Usage="" Global="TRUE" Comment="Включение звуковой сигнализации ПС" />
+        <Signal Name="NO_sound_TS" UUID="C767C63B4240F5C204DDFEB7B245AD85" Type="BOOL" Usage="" Global="TRUE" Comment="Заглушка для технологических сообщений" />
     </InterfaceList>
 </SubAppType>

@@ -865,6 +865,11 @@ local signals = {
 ["APS_PPU_RDY_TO_START"]={["Comment"]="ППУ: Есть готовность к пуску КЦ", ["eval"]=function() local Tag = "APS_PPU_RDY_TO_START" local signal = Core[Tag] local text = "ППУ: Есть готовность к пуску КЦ" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
 ["APS_dP1KR30_hi"]={["Comment"]="Высокий dP на кране 30", ["eval"]=function() local Tag = "APS_dP1KR30_hi" local signal = Core[Tag] local text = "Высокий dP на кране 30" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
 ["APS_dP1KR30B_hi"]={["Comment"]="Высокий dP на кране 30в", ["eval"]=function() local Tag = "APS_dP1KR30B_hi" local signal = Core[Tag] local text = "Высокий dP на кране 30в" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
+["APS_GR1_KOL"]={["Comment"]="ГПА группа №1: Кольцо", ["eval"]=function() local Tag = "APS_GR1_KOL" local signal = Core[Tag] local text = "ГПА группа №1: Кольцо" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
+["APS_GR2_KOL"]={["Comment"]="ГПА группа №2: Кольцо", ["eval"]=function() local Tag = "APS_GR2_KOL" local signal = Core[Tag] local text = "ГПА группа №2: Кольцо" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
+["APS_GR1_MAG"]={["Comment"]="ГПА группа №1: Магистраль", ["eval"]=function() local Tag = "APS_GR1_MAG" local signal = Core[Tag] local text = "ГПА группа №1: Магистраль" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
+["APS_GR2_MAG"]={["Comment"]="ГПА группа №2: Магистраль", ["eval"]=function() local Tag = "APS_GR2_MAG" local signal = Core[Tag] local text = "ГПА группа №2: Магистраль" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
+["APS_KC_EAO"]={["Comment"]="Выполняется ЭАО КЦ с БЭАО", ["eval"]=function() local Tag = "APS_KC_EAO" local signal = Core[Tag] local text = "Выполняется ЭАО КЦ с БЭАО" Add_Event (Tag, signal, text, event.a, source.a) oldsignal[Tag] = signal end},
 
 --АПС системные
 ["APS_PRU_Link"]={["Comment"]="Отсутствует связь с РПКУ", ["eval"]=function() local Tag = "APS_PRU_Link" local signal = Core[Tag] local text = "Отсутствует связь с РПКУ" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
