@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="C63B64DC46D9CBE51E2C83A989B3006A" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="341B7B8A4F95F1B02B7C7B8B219F9962" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
+        <Signal Name="Need_accept" UUID="4053E26E41501F3317454EBF2465B505" Type="B6A616144C90D7D32B28C5A3EFBF3ECF" Global="TRUE" Comment="Подтверждение от оператора следующего действия" />
         <Signal Name="Global_TV" UUID="B08A57C1485568D23B996BB069F03151" Type="26B66B4D4EE8F7BAC7367CAE287EFD5F" Global="TRUE" Comment="Scada. Данные для телевизора" />
         <Signal Name="Global_PRU" UUID="5CA346F84ED8B42055AD1B866DDC325D" Type="276E10E74011327F462F5EABFCC2FAE9" Global="TRUE" Comment="Данные для ПРУ с ПЛК А1" />
         <Signal Name="Global_Ust" UUID="968F4AA14411518F9414AAB473B8BE0F" Type="1D15729C4A82C82FC6620FA28E510DD8" InitialValue="(DF7FC6B643F69B7B5530D281F20E14B3:=55,BEFA0E7748E06AEF1002AB947A27EC51:=60,C75034B743E2F28F3D1988B6572F8D36:=55,AB5C66FB40F8E69104876E8BD0EDB795:=60,4C5265C24ED9105CBA5C1BB8E05E5B7C:=55,916E5B894540F81776FF15897D8EB251:=60,9B5C64F744E491BB065532AF8F527C95:=55,CF155CA1447EC76375AD5C9B6D3B6D43:=60,D866505C41DC34DC5FBE9C997C02A2EF:=55,F88C198B41DDBF47C277AA8A1B7EEF61:=60,C219A2B643A412BEFDB5449CE27AF351:=55,394D003C4D95ECFAE847BEA8AEAB2E3B:=60,C1AE126D498581146F3EC58B76C8165E:=5.5,621CF85E4F273D11353D9893363E5C86:=5.59999990463257,028B8B4F423D9CB7F61CCA8EAAF41D88:=5.5,5BED7D31479A4FCE4B607C9149BFB270:=5.59999990463257,1321208E411212F86E66C2AC0B82C3E5:=5.5,01FA3C3C41A456506663DD905F4B5029:=5.59999990463257,AA1212BF4859AF71AF92FBB78979AF82:=5.5,AC88796E4FA1585AB99DADBFB610A72B:=5.59999990463257)" Global="TRUE" Storage="persistent" Comment="Уставки алгоритмов защиты КЦ" />
@@ -3899,6 +3900,18 @@
         <Signal Name="APS_GR1_MAG" UUID="983568904A10C1AD6D708C9DD224503E" Type="BOOL" Global="TRUE" Comment="АПС: Группа 1 Магистраль" />
         <Signal Name="APS_GR2_MAG" UUID="E6FB6C2843E3BA885C45DE995F80EAC7" Type="BOOL" Global="TRUE" Comment="АПС: Группа 2 Магистраль" />
         <Signal Name="APS_KC_EAO" UUID="032D85214B9AA8BBF4790C869F3D23A3" Type="BOOL" Global="TRUE" Comment="АПС: Выполняется ЭАО" />
+        <Signal Name="APS_AOB_kr30_open" UUID="6FBA42B347C860C8FED777AB3C528B29" Type="BOOL" Global="TRUE" Comment="АПС: Запрос на открытие крана 30 при АОБ" />
+        <Signal Name="APS_AOB_kr30v_open" UUID="AE688CD9471856AC9CF804B073486159" Type="BOOL" Global="TRUE" Comment="АПС: Запрос на открытие крана 30в при АОБ" />
+        <Signal Name="APS_AOS_kr30_open" UUID="C63098F443C19DC3FE12DBA813ABC609" Type="BOOL" Global="TRUE" Comment="АПС: Запрос на открытие крана 30 при АОС" />
+        <Signal Name="APS_AOS_kr30v_open" UUID="971E3BE3465FF23B4B2194A44C8BA18D" Type="BOOL" Global="TRUE" Comment="АПС: Запрос на открытие крана 30в при АОС" />
+        <Signal Name="APS_AOB_kr30_open_accept" UUID="D257179A4F9315D130FB058888BB454F" Type="BOOL" Global="TRUE" Comment="АПС: AOB_kr30_open_accept" />
+        <Signal Name="APS_AOB_kr30_open_not_accept" UUID="2F86E02B4031CF0E1E9B8080C413B911" Type="BOOL" Global="TRUE" Comment="АПС: AOB_kr30_open_not_accept" />
+        <Signal Name="APS_AOB_kr30v_open_accept" UUID="EA449DDD4039A83C90BB21B632A831D4" Type="BOOL" Global="TRUE" Comment="АПС: AOB_kr30v_open_accept" />
+        <Signal Name="APS_AOB_kr30v_open_not_accept" UUID="58DAC6FB46F927BA475054B788738AC3" Type="BOOL" Global="TRUE" Comment="АПС: AOB_kr30v_open_not_accept" />
+        <Signal Name="APS_AOS_kr30_open_accept" UUID="8C7907B444D033B022C7C3B2421E6FF9" Type="BOOL" Global="TRUE" Comment="АПС: AOS_kr30_open_accept" />
+        <Signal Name="APS_AOS_kr30_open_not_accept" UUID="43BEC32B4B865F13B42BC5B5167D6DB4" Type="BOOL" Global="TRUE" Comment="АПС: AOS_kr30_open_not_accept" />
+        <Signal Name="APS_AOS_kr30v_open_accept" UUID="7C061F9C46ADB4CEF8B0538D7E6A82A6" Type="BOOL" Global="TRUE" Comment="АПС: AOS_kr30v_open_accept" />
+        <Signal Name="APS_AOS_kr30v_open_not_accept" UUID="014153A343D7AEF57614E7A65840DD8F" Type="BOOL" Global="TRUE" Comment="АПС: AOS_kr30v_open_not_accept" />
     </Globals>
     <Connections />
 </Project>

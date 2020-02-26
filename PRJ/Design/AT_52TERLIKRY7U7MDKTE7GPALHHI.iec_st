@@ -214,6 +214,8 @@ cycleTime_MAIN_sys := clock_MAIN_cur - clock_MAIN_prev;]]></ST>
                 <FunctionBlock UUID="4A0A032D4EBF673D4014CE8C2AE2DA26" Name="drum_AOB">
                     <Variables>
                         <Variable UUID="709FDEC844BD717FA725828F3E28FE55" Name="MD_KC_AOB_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="2A912A0E4B69280AFF9051894AAE7C6F" Name="Need_accept_AOB_kr30_open_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                        <Variable UUID="175AF47F4A2B6916DDBC92ACBAD93593" Name="Need_accept_AOB_kr30v_open_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     </Variables>
                     <ST><![CDATA[drumAOB.start := MD.KC_AOB and not MD_KC_AOB_prev;
 MD_KC_AOB_prev := MD.KC_AOB;
@@ -230,15 +232,18 @@ if MD.EAO_KC or MD.KC_AOS or FirstScan_MAIN then
 	drumAOB.step_prev := INT#-1;
 	drumAOB.step := INT#-1;
 	AOB_to_DO := BOOL#0;
-	AOB_KR7_OFF := BOOL#0;
-	AOB_KR8_OFF := BOOL#0;
-	AOB_KR8A_OFF := BOOL#0;
-	AOB_KR8s_OFF := BOOL#0;
-	AOB_KR8As_OFF := BOOL#0;
 	AOB_KR6_ON := BOOL#0;
 	AOB_KR6As_ON := BOOL#0;
 	AOB_KR6R_ON := BOOL#0;
 	AOB_KR6AR_ON := BOOL#0;
+	AOB_KR7_OFF := BOOL#0;
+	AOB_KR7R_OFF := BOOL#0;
+	AOB_KR8_OFF := BOOL#0;
+	AOB_KR8A_OFF := BOOL#0;
+	AOB_KR8s_OFF := BOOL#0;
+	AOB_KR8As_OFF := BOOL#0;
+	Need_accept.AOB_kr30_open := BOOL#0;
+	Need_accept.AOB_kr30v_open := BOOL#0;
 end_if;
 
 // Тело drum
@@ -246,25 +251,41 @@ case drumAOB.step of
 0:	if drumAOB.step_prev <> INT#0 then
 		drumAOB.TMR_COM := LREAL#300;
 		drumAOB.step_prev := drumAOB.step;
+		TMR[0] := LREAL#0.0;
+		TMR[1] := LREAL#0.0;
 	end_if;
 	AOB_to_DO := BOOL#1; (*АОбс в другие подсистемы и на физические линии*)
-	AOB_KR7_OFF := BOOL#1;
-	AOB_KR8_OFF := BOOL#1;
-	AOB_KR8A_OFF := BOOL#1;
-	AOB_KR8s_OFF := BOOL#1;
-	AOB_KR8As_OFF := BOOL#1;
 	AOB_KR6_ON := BOOL#1;
 	AOB_KR6As_ON := BOOL#1;
 	AOB_KR6R_ON := BOOL#1;
 	AOB_KR6AR_ON := BOOL#1;
+	TMR[0] := TMR[0] + cycleTime_MAIN;
+	
+	if (TMR[0] >= LREAL#5.0) then // После задержки 5сек* выдаем команды на остальные краны
+		AOB_KR7_OFF := BOOL#1;
+		AOB_KR8_OFF := BOOL#1;
+		AOB_KR8A_OFF := BOOL#1;
+		AOB_KR8s_OFF := BOOL#1;
+		AOB_KR8As_OFF := BOOL#1;
+		TMR[1] := TMR[1] + cycleTime_MAIN; //Делаем выдержку 180сек*. Если не закроется кран 7, то выдаем команду на закрытие через резервный блок ЭПУУ
+		if (MD.PREV = INT#4) then
+			Need_accept.AOB_kr30_open := BOOL#1; 
+		end_if;
+		if (MD.PREV = INT#5) then
+			Need_accept.AOB_kr30v_open := BOOL#1; 
+		end_if;
+	end_if;
+	if (TMR[1] >= LREAL#180.0 and not SHKU17_DI_KR7_OFF) then
+		AOB_KR7R_OFF := BOOL#1; 
+	end_if;
 	drumAOB.TMR_COM := drumAOB.TMR_COM - cycleTime_MAIN;
+
 	if (SHKU17_DI_KR7_OFF and not SHKU17_DI_KR7_ON) and (SHKU17_DI_KR8_OFF and not SHKU17_DI_KR8_ON) and (SHKU17_DI_KR8A_OFF and not SHKU17_DI_KR8A_ON) and
-		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON) and 
-		(SHKU17_DI_KR6_ON and not SHKU17_DI_KR6_OFF) and (SHKU17_DI_KR6As_ON and not SHKU17_DI_KR6As_OFF) and 
-		(SHKU17_DI_KR6R_ON and not SHKU17_DI_KR6R_OFF) and (SHKU17_DI_KR6AR_ON and not SHKU17_DI_KR6AR_OFF) then
+		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON) then
 		drumAOB.step := INT#1;
 	end_if;
-	if drumAOB.TMR_COM <= LREAL#0 then drumAOB.step := INT#2; end_if;
+//	if drumAOB.TMR_COM <= LREAL#0 then drumAOB.step := INT#2; end_if; //Переход на шаг: Алгоритм завершен некорректно пока отменяем
+	if drumAOB.TMR_COM <= LREAL#0 then drumAOB.TMR_COM := LREAL#0; end_if;
 
 1:	drumAOB.done_ok := BOOL#1;
 	drumAOB.step_prev := drumAOB.step;
@@ -285,6 +306,8 @@ case drumAOB.step of
 		AOB_KR6As_ON := BOOL#0;
 		AOB_KR6R_ON := BOOL#0;
 		AOB_KR6AR_ON := BOOL#0;
+		Need_accept.AOB_kr30_open := BOOL#0;
+		Need_accept.AOB_kr30v_open := BOOL#0;
 		drumAOB.step_prev := drumAOB.step;
 	end_if;
 	if Deblock and not drumAOB.start then
@@ -296,9 +319,6 @@ case drumAOB.step of
 	end_if;		
 end_case;
 
-//if Global_BTN.AOB_MG_cut_accept or Global_BTN.AOB_MG_cut_not_accept then
-//	Need_accept.AOB_MG_cut := BOOL#0;
-//end_if;
 
 // Выходы
 Link_GPA1.Command_AOB	:= AOB_to_DO;
@@ -327,50 +347,67 @@ if MD.EAO_KC or FirstScan_MAIN then
 	drumAOS.step_prev := INT#-1;
 	drumAOS.step := INT#-1;
 	AOS_to_DO := BOOL#0;
-	AOS_KR7_OFF := BOOL#0;
-	AOS_KR8_OFF := BOOL#0;
-	AOS_KR8A_OFF := BOOL#0;
-	AOS_KR8s_OFF := BOOL#0;
-	AOS_KR8As_OFF := BOOL#0;
 	AOS_KR6_ON := BOOL#0;
 	AOS_KR6As_ON := BOOL#0;
 	AOS_KR6R_ON := BOOL#0;
 	AOS_KR6AR_ON := BOOL#0;
+	AOS_KR7_OFF := BOOL#0;
+	AOS_KR7R_OFF := BOOL#0;
+	AOS_KR8_OFF := BOOL#0;
+	AOS_KR8A_OFF := BOOL#0;
+	AOS_KR8s_OFF := BOOL#0;
+	AOS_KR8As_OFF := BOOL#0;
 	AOS_KR17_ON := BOOL#0;
 	AOS_KR18_ON := BOOL#0;
 	AOS_KR18A_ON := BOOL#0;
+	Need_accept.AOS_kr30_open := BOOL#0;
+	Need_accept.AOS_kr30v_open := BOOL#0;
 end_if;
 
 
 case drumAOS.step of
 0:	if drumAOS.step_prev <> INT#0 then
 		drumAOS.TMR_COM := LREAL#300;
-		drumAOS.TMR_OR := LREAL#180;
 		drumAOS.step_prev := drumAOS.step;
+		TMR[0] := LREAL#0.0;
+		TMR[1] := LREAL#0.0;
 	end_if;
 	AOS_to_DO := BOOL#1; (*АОсс в другие подсистемы и на физические линии*)
-	AOB_KR7_OFF := BOOL#1;
-	AOB_KR8_OFF := BOOL#1;
-	AOB_KR8A_OFF := BOOL#1;
-	AOB_KR8s_OFF := BOOL#1;
-	AOB_KR8As_OFF := BOOL#1;
-	AOB_KR6_ON := BOOL#1;
-	AOB_KR6As_ON := BOOL#1;
-	AOB_KR6R_ON := BOOL#1;
-	AOB_KR6AR_ON := BOOL#1;
+	AOS_KR6_ON := BOOL#1;
+	AOS_KR6As_ON := BOOL#1;
+	AOS_KR6R_ON := BOOL#1;
+	AOS_KR6AR_ON := BOOL#1;
+	TMR[0] := TMR[0] + cycleTime_MAIN;
+
+	if (TMR[0] >= LREAL#5.0) then // После задержки 5сек* выдаем команды на остальные краны
+		AOS_KR7_OFF := BOOL#1;
+		AOS_KR8_OFF := BOOL#1;
+		AOS_KR8A_OFF := BOOL#1;
+		AOS_KR8s_OFF := BOOL#1;
+		AOS_KR8As_OFF := BOOL#1;
+		TMR[1] := TMR[1] + cycleTime_MAIN; //Делаем выдержку 180сек*. Если не закроется кран 7, то выдаем команду на закрытие через резервный блок ЭПУУ
+		if (MD.PREV = INT#4) then
+			Need_accept.AOS_kr30_open := BOOL#1; 
+		end_if;
+		if (MD.PREV = INT#5) then
+			Need_accept.AOS_kr30v_open := BOOL#1; 
+		end_if;
+	end_if;
+	if (TMR[1] >= LREAL#180.0 and not SHKU17_DI_KR7_OFF) then
+		AOS_KR7R_OFF := BOOL#1; 
+	end_if;
 	drumAOS.TMR_COM := drumAOS.TMR_COM - cycleTime_MAIN;
-	drumAOS.TMR_OR := drumAOS.TMR_OR - cycleTime_MAIN;	
+
 	if ((SHKU17_DI_KR7_OFF and not SHKU17_DI_KR7_ON) and (SHKU17_DI_KR8_OFF and not SHKU17_DI_KR8_ON) and (SHKU17_DI_KR8A_OFF and not SHKU17_DI_KR8A_ON) and
-		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON) and 
-		(SHKU17_DI_KR6_ON and not SHKU17_DI_KR6_OFF) and (SHKU17_DI_KR6As_ON and not SHKU17_DI_KR6As_OFF) and 
-		(SHKU17_DI_KR6R_ON and not SHKU17_DI_KR6R_OFF) and (SHKU17_DI_KR6AR_ON and not SHKU17_DI_KR6AR_OFF)) or drumAOS.TMR_OR <= LREAL#0 then
+		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON)) or TMR[1] >= LREAL#180.0  then
 		drumAOS.step := INT#1;
 	end_if;
 	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.step := INT#2; end_if;
 
 
 1:	if drumAOS.step_prev <> INT#1 then
-		AOB_KR7_OFF := BOOL#0;
+		AOS_KR7_OFF := BOOL#0;
+		AOS_KR7R_OFF := BOOL#0;
 		AOB_KR8_OFF := BOOL#0;
 		AOB_KR8A_OFF := BOOL#0;
 		AOB_KR8s_OFF := BOOL#0;
@@ -388,7 +425,8 @@ case drumAOS.step of
 	if (SHKU17_DI_KR17_ON and not SHKU17_DI_KR17_OFF) and (SHKU17_DI_KR18_ON and not SHKU17_DI_KR18_OFF) and (SHKU17_DI_KR18A_ON and not SHKU17_DI_KR18A_OFF) then
 		drumAOS.step := INT#2;
 	end_if;
-	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.step := INT#3; end_if;
+//	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.step := INT#3; end_if; //Переход на шаг: Алгоритм завершен некорректно пока отменяем
+	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.TMR_COM := LREAL#0; end_if;
 
 
 2:	drumAOS.done_ok := BOOL#1;
@@ -402,10 +440,12 @@ case drumAOS.step of
 
 
 4:	if drumAOS.step_prev <> INT#4 then
-		AOB_to_DO := BOOL#0;
+		AOS_to_DO := BOOL#0;
 		AOS_KR17_ON := BOOL#0;
 		AOS_KR18_ON := BOOL#0;
-		AOS_KR18A_ON := BOOL#0;	
+		AOS_KR18A_ON := BOOL#0;
+		Need_accept.AOS_kr30_open := BOOL#0;
+		Need_accept.AOS_kr30v_open := BOOL#0;	
 		drumAOS.step_prev := drumAOS.step;
 	end_if;
 	if Deblock and not drumAOS.start then
@@ -513,10 +553,6 @@ if SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
 	MD_REV_KR8As_ON	:= bool#0;
 	MD_REV_KR30_ON	:= bool#0;
 end_if;
-(*
-TO_REV_prev := SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF and
-			SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON;				 
-*)
 
 
 //Выбор режима работы и управления КЦ: MD.KC_REV = 0 - Основной
@@ -543,10 +579,6 @@ if SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
 	MD_REV_KR8A_ON	:= bool#0;
 	MD_REV_KR30V_ON	:= bool#0;
 end_if;
-(*
-TO_FW_prev := SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF and
-			SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR30V_ON;
-*)
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1855,6 +1887,18 @@ AE_602(MD.INT_GR2_WORK and not MD.INT_MAG2, T#100ms, Deblock, Kvitir, DO_sound_P
 AE_603(MD.INT_MAG1, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_GR1_MAG); //АПС: Группа 1 Магистраль
 AE_604(MD.INT_MAG2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_GR2_MAG); //АПС: Группа 2 Магистраль
 AE_605(MD.EAO_KC, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_KC_EAO); //АПС: Выполняется ЭАО
+AE_606(Need_accept.AOB_kr30_open, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_kr30_open); //АПС: Запрос на открытие крана 30 при АОБ
+AE_607(Need_accept.AOB_kr30v_open, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_kr30v_open); //АПС: Запрос на открытие крана 30в при АОБ
+AE_608(Need_accept.AOS_kr30_open, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_kr30_open); //АПС: Запрос на открытие крана 30 при АОС
+AE_609(Need_accept.AOS_kr30v_open, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_kr30v_open); //АПС: Запрос на открытие крана 30в при АОС
+AE_610(Global_BTN.AOB_kr30_open_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_kr30_open_accept); //АПС: Подтверждение оператором открытия окна управления краном 30 при АОБ
+AE_611(Global_BTN.AOB_kr30_open_not_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_kr30_open_not_accept); //АПС: Отмена от оператора открытия окна управления краном 30 при АОБ
+AE_612(Global_BTN.AOB_kr30v_open_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_kr30v_open_accept); //АПС: Подтверждение оператором открытия окна управления краном 30в при АОБ
+AE_613(Global_BTN.AOB_kr30v_open_not_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOB_kr30v_open_not_accept); //АПС: Отмена от оператора открытия окна управления краном 30в при АОБ
+AE_614(Global_BTN.AOS_kr30_open_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_kr30_open_accept); //АПС: Подтверждение оператором открытия окна управления краном 30 при АОС
+AE_615(Global_BTN.AOS_kr30_open_not_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_kr30_open_not_accept); //АПС: Отмена от оператора открытия окна управления краном 30 при АОС
+AE_616(Global_BTN.AOS_kr30v_open_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_kr30v_open_accept); //АПС: Подтверждение оператором открытия окна управления краном 30в при АОС
+AE_617(Global_BTN.AOS_kr30v_open_not_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_kr30v_open_not_accept); //АПС: Отмена от оператора открытия окна управления краном 30в при АОС
 
 
 //Выходы АПС
@@ -2423,7 +2467,7 @@ IF FirstScan_MAIN THEN
 	SEN_SHKU17_KR30  := VLV_init(SEN_SHKU17_KR30, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
 	SEN_SHKU17_KR30V := VLV_init(SEN_SHKU17_KR30V, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
 	SEN_SHKU17_KR7   := VLV_init(SEN_SHKU17_KR7, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR7R  := VLV_init(SEN_SHKU17_KR7R, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+//	SEN_SHKU17_KR7R  := VLV_init(SEN_SHKU17_KR7R, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
 	SEN_SHKU17_KR8   := VLV_init(SEN_SHKU17_KR8, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
 	SEN_SHKU17_KR8s  := VLV_init(SEN_SHKU17_KR8s, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
 	SEN_SHKU17_KR8A  := VLV_init(SEN_SHKU17_KR8A, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
@@ -2473,7 +2517,7 @@ CMD_VLV();
 cfg_SHKU17_KR30(SEN_SHKU17_KR30,	HMI_SHKU17_KR30_DA,			HMI_SHKU17_KR30_rOn,		HMI_SHKU17_KR30_rOff,		CMD_SHKU17_KR30_rOnOff, 		CMD_SHKU17_KR30_aOnOff, 		HMI_SHKU17_KR30_rep, 		SHKU17_DI_KR30_ON, 			SHKU17_DI_KR30_OFF, 	true, true, APS_SHKU17_KR30_non, APS_SHKU17_KR30_noff, APS_SHKU17_KR30_nstart, APS_SHKU17_KR30_selfon, APS_SHKU17_KR30_selfoff, APS_SHKU17_KR30_flt, APS_SHKU17_KR30_ncon, APS_SHKU17_KR30_ncoff, SHKU17_KR30_state, APS_SHKU17_KR30_general);
 cfg_SHKU17_KR30V(SEN_SHKU17_KR30V,	HMI_SHKU17_KR30V_DA,		HMI_SHKU17_KR30V_rOn,		HMI_SHKU17_KR30V_rOff,		CMD_SHKU17_KR30V_rOnOff, 		CMD_SHKU17_KR30V_aOnOff, 		HMI_SHKU17_KR30V_rep, 		SHKU17_DI_KR30V_ON, 		SHKU17_DI_KR30V_OFF, 	true, true, APS_SHKU17_KR30V_non, APS_SHKU17_KR30V_noff, APS_SHKU17_KR30V_nstart, APS_SHKU17_KR30V_selfon, APS_SHKU17_KR30V_selfoff, APS_SHKU17_KR30V_flt, APS_SHKU17_KR30V_ncon, APS_SHKU17_KR30V_ncoff, SHKU17_KR30V_state, APS_SHKU17_KR30V_general);
 cfg_SHKU17_KR7(SEN_SHKU17_KR7,		HMI_SHKU17_KR7_DA,			HMI_SHKU17_KR7_rOn,			HMI_SHKU17_KR7_rOff,		CMD_SHKU17_KR7_rOnOff, 			CMD_SHKU17_KR7_aOnOff, 			HMI_SHKU17_KR7_rep, 		SHKU17_DI_KR7_ON, 			SHKU17_DI_KR7_OFF, 		true, true, APS_SHKU17_KR7_non, APS_SHKU17_KR7_noff, APS_SHKU17_KR7_nstart, APS_SHKU17_KR7_selfon, APS_SHKU17_KR7_selfoff, APS_SHKU17_KR7_flt, APS_SHKU17_KR7_ncon, APS_SHKU17_KR7_ncoff, SHKU17_KR7_state, APS_SHKU17_KR7_general);
-cfg_SHKU17_KR7R(SEN_SHKU17_KR7R,	HMI_SHKU17_KR7R_DA,			HMI_SHKU17_KR7R_rOn,		HMI_SHKU17_KR7R_rOff,		CMD_SHKU17_KR7R_rOnOff, 		CMD_SHKU17_KR7R_aOnOff, 		HMI_SHKU17_KR7R_rep, 		SHKU17_DI_KR7R_ON, 			SHKU17_DI_KR7R_OFF, 	true, true, APS_SHKU17_KR7R_non, APS_SHKU17_KR7R_noff, APS_SHKU17_KR7R_nstart, APS_SHKU17_KR7R_selfon, APS_SHKU17_KR7R_selfoff, APS_SHKU17_KR7R_flt, APS_SHKU17_KR7R_ncon, APS_SHKU17_KR7R_ncoff, SHKU17_KR7R_state, APS_SHKU17_KR7R_general);
+//cfg_SHKU17_KR7R(SEN_SHKU17_KR7R,	HMI_SHKU17_KR7R_DA,			HMI_SHKU17_KR7R_rOn,		HMI_SHKU17_KR7R_rOff,		CMD_SHKU17_KR7R_rOnOff, 		CMD_SHKU17_KR7R_aOnOff, 		HMI_SHKU17_KR7R_rep, 		SHKU17_DI_KR7R_ON, 			SHKU17_DI_KR7R_OFF, 	true, true, APS_SHKU17_KR7R_non, APS_SHKU17_KR7R_noff, APS_SHKU17_KR7R_nstart, APS_SHKU17_KR7R_selfon, APS_SHKU17_KR7R_selfoff, APS_SHKU17_KR7R_flt, APS_SHKU17_KR7R_ncon, APS_SHKU17_KR7R_ncoff, SHKU17_KR7R_state, APS_SHKU17_KR7R_general);
 cfg_SHKU17_KR8(SEN_SHKU17_KR8,		HMI_SHKU17_KR8_DA,			HMI_SHKU17_KR8_rOn,			HMI_SHKU17_KR8_rOff,		CMD_SHKU17_KR8_rOnOff, 			CMD_SHKU17_KR8_aOnOff, 			HMI_SHKU17_KR8_rep, 		SHKU17_DI_KR8_ON, 			SHKU17_DI_KR8_OFF, 		true, true, APS_SHKU17_KR8_non, APS_SHKU17_KR8_noff, APS_SHKU17_KR8_nstart, APS_SHKU17_KR8_selfon, APS_SHKU17_KR8_selfoff, APS_SHKU17_KR8_flt, APS_SHKU17_KR8_ncon, APS_SHKU17_KR8_ncoff, SHKU17_KR8_state, APS_SHKU17_KR8_general);
 cfg_SHKU17_KR8s(SEN_SHKU17_KR8s,	HMI_SHKU17_KR8s_DA,			HMI_SHKU17_KR8s_rOn,		HMI_SHKU17_KR8s_rOff,		CMD_SHKU17_KR8s_rOnOff, 		CMD_SHKU17_KR8s_aOnOff, 		HMI_SHKU17_KR8s_rep, 		SHKU17_DI_KR8s_ON, 			SHKU17_DI_KR8s_OFF, 	true, true, APS_SHKU17_KR8s_non, APS_SHKU17_KR8s_noff, APS_SHKU17_KR8s_nstart, APS_SHKU17_KR8s_selfon, APS_SHKU17_KR8s_selfoff, APS_SHKU17_KR8s_flt, APS_SHKU17_KR8s_ncon, APS_SHKU17_KR8s_ncoff, SHKU17_KR8s_state, APS_SHKU17_KR8s_general);
 cfg_SHKU17_KR8A(SEN_SHKU17_KR8A,	HMI_SHKU17_KR8A_DA,			HMI_SHKU17_KR8A_rOn,		HMI_SHKU17_KR8A_rOff,		CMD_SHKU17_KR8A_rOnOff, 		CMD_SHKU17_KR8A_aOnOff, 		HMI_SHKU17_KR8A_rep, 		SHKU17_DI_KR8A_ON, 			SHKU17_DI_KR8A_OFF, 	true, true, APS_SHKU17_KR8A_non, APS_SHKU17_KR8A_noff, APS_SHKU17_KR8A_nstart, APS_SHKU17_KR8A_selfon, APS_SHKU17_KR8A_selfoff, APS_SHKU17_KR8A_flt, APS_SHKU17_KR8A_ncon, APS_SHKU17_KR8A_ncoff, SHKU17_KR8A_state, APS_SHKU17_KR8A_general);
@@ -2517,7 +2561,7 @@ cfg_Obogr_APK2(SEN_Obogr_APK2,		HMI_SHKU17_Obogr_APK2_DA,	HMI_SHKU17_Obogr_APK2_
 vlv_SHKU17_KR30(SEN_SHKU17_KR30, cycleTime_VLV);
 vlv_SHKU17_KR30V(SEN_SHKU17_KR30V, cycleTime_VLV);
 vlv_SHKU17_KR7(SEN_SHKU17_KR7, cycleTime_VLV);
-vlv_SHKU17_KR7R(SEN_SHKU17_KR7R, cycleTime_VLV);
+//vlv_SHKU17_KR7R(SEN_SHKU17_KR7R, cycleTime_VLV);
 vlv_SHKU17_KR8(SEN_SHKU17_KR8, cycleTime_VLV);
 vlv_SHKU17_KR8s(SEN_SHKU17_KR8s, cycleTime_VLV);
 vlv_SHKU17_KR8A(SEN_SHKU17_KR8A, cycleTime_VLV);
@@ -2562,7 +2606,7 @@ vlv_SHKU17_DN2(SEN_SHKU17_DN2, cycleTime_VLV);
 SHKU17_DO_KR30_ON 		:= SEN_SHKU17_KR30.Outs.outon.0;
 SHKU17_DO_KR30V_ON 		:= SEN_SHKU17_KR30V.Outs.outon.0;
 SHKU17_DO_KR7_ON 		:= SEN_SHKU17_KR7.Outs.outon.0;
-SHKU17_DO_KR7R_ON 		:= SEN_SHKU17_KR7R.Outs.outon.0;
+//SHKU17_DO_KR7R_ON 		:= SEN_SHKU17_KR7R.Outs.outon.0;
 SHKU17_DO_KR8_ON 		:= SEN_SHKU17_KR8.Outs.outon.0;
 SHKU17_DO_KR8s_ON 		:= SEN_SHKU17_KR8s.Outs.outon.0;
 SHKU17_DO_KR8A_ON 		:= SEN_SHKU17_KR8A.Outs.outon.0;
@@ -2600,7 +2644,7 @@ SHKU17_DO_XPN3_on 		:= SEN_SHKU17_XPN3.Outs.outon.0;
 SHKU17_DO_KR30_OFF 		:= SEN_SHKU17_KR30.Outs.outoff.0;
 SHKU17_DO_KR30V_OFF 	:= SEN_SHKU17_KR30V.Outs.outoff.0;
 SHKU17_DO_KR7_OFF 		:= SEN_SHKU17_KR7.Outs.outoff.0;
-SHKU17_DO_KR7R_OFF 		:= SEN_SHKU17_KR7R.Outs.outoff.0;
+//SHKU17_DO_KR7R_OFF 		:= SEN_SHKU17_KR7R.Outs.outoff.0;
 SHKU17_DO_KR8_OFF 		:= SEN_SHKU17_KR8.Outs.outoff.0;
 SHKU17_DO_KR8s_OFF 		:= SEN_SHKU17_KR8s.Outs.outoff.0;
 SHKU17_DO_KR8A_OFF 		:= SEN_SHKU17_KR8A.Outs.outoff.0;
@@ -2630,7 +2674,7 @@ IF IMIT THEN
 	imit_SHKU17_KR30(SHKU17_DO_KR30_ON, SHKU17_DO_KR30_OFF, SHKU17_DI_KR30_ON, SHKU17_DI_KR30_OFF);
 	imit_SHKU17_KR30V(SHKU17_DO_KR30V_ON, SHKU17_DO_KR30V_OFF, SHKU17_DI_KR30V_ON, SHKU17_DI_KR30V_OFF);
 	imit_SHKU17_KR7(SHKU17_DO_KR7_ON, SHKU17_DO_KR7_OFF, SHKU17_DI_KR7_ON, SHKU17_DI_KR7_OFF);
-	imit_SHKU17_KR7R(SHKU17_DO_KR7R_ON, SHKU17_DO_KR7R_OFF, SHKU17_DI_KR7R_ON, SHKU17_DI_KR7R_OFF);
+//	imit_SHKU17_KR7R(SHKU17_DO_KR7R_ON, SHKU17_DO_KR7R_OFF, SHKU17_DI_KR7R_ON, SHKU17_DI_KR7R_OFF);
 	imit_SHKU17_KR8(SHKU17_DO_KR8_ON, SHKU17_DO_KR8_OFF, SHKU17_DI_KR8_ON, SHKU17_DI_KR8_OFF);
 	imit_SHKU17_KR8s(SHKU17_DO_KR8s_ON, SHKU17_DO_KR8s_OFF, SHKU17_DI_KR8s_ON, SHKU17_DI_KR8s_OFF);
 	imit_SHKU17_KR8A(SHKU17_DO_KR8A_ON, SHKU17_DO_KR8A_OFF, SHKU17_DI_KR8A_ON, SHKU17_DI_KR8A_OFF);
@@ -2673,7 +2717,7 @@ END_IF;
 SEN_SHKU17_KR30.Control.rep.0 := BOOL#0;
 SEN_SHKU17_KR30V.Control.rep.0 := BOOL#0;
 SEN_SHKU17_KR7.Control.rep.0 := BOOL#0;
-SEN_SHKU17_KR7R.Control.rep.0 := BOOL#0;
+//SEN_SHKU17_KR7R.Control.rep.0 := BOOL#0;
 SEN_SHKU17_KR8.Control.rep.0 := BOOL#0;
 SEN_SHKU17_KR8s.Control.rep.0 := BOOL#0;
 SEN_SHKU17_KR8A.Control.rep.0 := BOOL#0;
@@ -2716,7 +2760,7 @@ IF FirstScan_MAIN THEN
 	CMD_SHKU17_KR30_aOnOff 			:= SEN_SHKU17_KR30.Control.aOnOff.0;
 	CMD_SHKU17_KR30V_aOnOff 		:= SEN_SHKU17_KR30V.Control.aOnOff.0;
 	CMD_SHKU17_KR7_aOnOff 			:= SEN_SHKU17_KR7.Control.aOnOff.0;
-	CMD_SHKU17_KR7R_aOnOff 			:= SEN_SHKU17_KR7R.Control.aOnOff.0;
+//	CMD_SHKU17_KR7R_aOnOff 			:= SEN_SHKU17_KR7R.Control.aOnOff.0;
 	CMD_SHKU17_KR8_aOnOff 			:= SEN_SHKU17_KR8.Control.aOnOff.0;
 	CMD_SHKU17_KR8s_aOnOff 			:= SEN_SHKU17_KR8s.Control.aOnOff.0;
 	CMD_SHKU17_KR8A_aOnOff 			:= SEN_SHKU17_KR8A.Control.aOnOff.0;
@@ -3847,9 +3891,19 @@ cycleTime_AI_sys := clock_AI_cur - clock_AI_prev;]]></ST>
                     <Variable UUID="6AEC632E4EA7E5F9CC971986F1A3CDBD" Name="rtrig_KC_MAN" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
                     <Variable UUID="5887F7524E063A3AC7B663997143C6CE" Name="rtrig_KC_EAO" Type="R_TRIG" TypeUUID="D90E3B974D4D8C72877123B1A897EB52" Usage="internal" />
                     <Variable UUID="71C86CFD41ED8D7C94B8BC947D92EFF1" Name="KC_EAO_done_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="81D8FDEE457DA8885B699FBB5F9FBB53" Name="KC_EAO_start_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="A44BAC614E309239BE414996234151DB" Name="ftrig_EAO" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
+                    <Variable UUID="F6093A3F46E41A34E6FBB3A7D3162D6E" Name="ftrig_AOB" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
+                    <Variable UUID="6883AEAB460E1FDB20CE4CA8E0261F30" Name="ftrig_AOS" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
+                    <Variable UUID="FA4720014F2802FABA3BBFA9A5003DC7" Name="ftrig_KOL" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
+                    <Variable UUID="B93A7D7247A73FCEFF352FB6D1C05B57" Name="ftrig_REZ" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
+                    <Variable UUID="36247E544B2409264B1800BF9116AA41" Name="ftrig_REP" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
+                    <Variable UUID="F8669A78458B48D995F9F1A9C9730D81" Name="ftrig_MAG" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
+                    <Variable UUID="8B2EF00540BB99C3F7B78C9298537539" Name="ftrig_MAG_REV" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
+                    <Variable UUID="6C7DA981402B9AFF281F2F85BF62A3E5" Name="ftrig_NO" Type="F_TRIG" TypeUUID="F64DAE304009E1613B4AB4AF27532AEF" Usage="internal" />
                 </Variables>
-                <ST><![CDATA[//////////////////////////////////////////////////////////////////////////////////////////
-//Формирование внутренних состояний системы
+                <ST><![CDATA[//Формирование внутренних состояний системы
+//////////////////////////////////////////////////////////////////////////////////////////
 
 //Нет активных режимов
 MD.NO_ACTIV := not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB or MD.KC_KOL or MD.KC_MAG or MD.KC_MAG_REV);
@@ -3893,13 +3947,16 @@ MD.INT_KC_MAG := MD.INT_MAG1 or MD.INT_MAG2;
 //////////////////////////////////////////////////////////////////////////////////////////
 temp_mode_string := '';
 temp_status_string := '';
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Экстренный останов КЦ
-if (SHKU17_DI_EAO_KC_PU or SHKU17_DI_EAO_KC_PEAO) then
+//////////////////////////////////////////////////////////////////////////////////////////
+if (SHKU17_DI_EAO_KC_PU or SHKU17_DI_EAO_KC_PEAO) and not KC_EAO_start_prev then
 	MD.EAO_KC	:= bool#1;
 	delay		:= lreal#1200.0;
 end_if;
+KC_EAO_start_prev := SHKU17_DI_EAO_KC_PU or SHKU17_DI_EAO_KC_PEAO;
 
 if MD.EAO_KC and SHKU17_DI_KR6_ON and SHKU17_DI_KR6As_ON and SHKU17_DI_KR6R_ON and SHKU17_DI_KR6AR_ON and SHKU17_DI_KR7_OFF and SHKU17_DI_KR8_OFF and
 	SHKU17_DI_KR8A_OFF and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR17_ON and SHKU17_DI_KR18_ON and SHKU17_DI_KR18A_ON and not KC_EAO_done_prev then 
@@ -3925,10 +3982,14 @@ end_if;
 if Deblock and KC_EAO_done then
 	MD.EAO_KC 	:= bool#0;
 	KC_EAO_done := bool#0;
-end_if; 
+end_if;
+ftrig_EAO(CLK:= MD.EAO_KC);
+if ftrig_EAO.Q then MD.PREV := INT#9; end_if; 
+////////////////////////////////////////////////////////////////////////////////////////// 
 
 
 // Аварийный останов без стравливания
+//////////////////////////////////////////////////////////////////////////////////////////
 MD.KC_AOB := not (MD.EAO_KC or MD.KC_AOS) and (Global_BTN.AOB or SHKU17_DI_AObs_KC_PU or APS_AOB_ASUTP_CMD or drumAOB.run);
 if MD.KC_AOB then
 	temp_mode_string := 'АО без стравливания';
@@ -3942,9 +4003,13 @@ if MD.KC_AOB then
 		temp_status_string := 'Алгоритм АО КЦ БС завершён некорректно$n$nНажмите Сброс';
 	end_if;
 end_if;
+ftrig_AOB(CLK:= MD.KC_AOB);
+if ftrig_AOB.Q then MD.PREV := INT#8; end_if; 
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Аварийный останов со стравливанием
+//////////////////////////////////////////////////////////////////////////////////////////
 MD.KC_AOS := not MD.EAO_KC and (Global_BTN.AOS or SHKU17_DI_AOss_KC_PU or drumAOS.run);
 if MD.KC_AOS then
 	temp_mode_string := 'АО со стравливанием';
@@ -3957,10 +4022,13 @@ if MD.KC_AOS then
 	if drumAOS.done_flt then
 		temp_status_string := 'Алгоритм АО КЦ СС завершён некорректно$n$nНажмите Сброс';
 	end_if;
-end_if;  
-
+end_if; 
+ftrig_AOS(CLK:= MD.KC_AOS);
+if ftrig_AOS.Q then MD.PREV := INT#7; end_if;  
+//////////////////////////////////////////////////////////////////////////////////////////
 
 //Режим Кольцо
+//////////////////////////////////////////////////////////////////////////////////////////
 MD.KC_KOL := not MD.KC_NO and not MD.AO_KC and MD.GPA_MAG and 
 			((SHKU17_DI_KR6_ON and SHKU17_DI_KR6As_ON and 
 			SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and not MD.KC_MAG_REV and not MD.INT_KC_MAG) or 
@@ -3970,58 +4038,84 @@ if MD.KC_KOL then
 	temp_mode_string := 'КЦ Кольцо';
 end_if;
 rtrig_KC_KOL(CLK:= MD.KC_KOL); if rtrig_KC_KOL.Q then CREATE_EVENT('Переход в режим - КЦ Кольцо', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
+ftrig_KOL(CLK:= MD.KC_KOL);
+if ftrig_KOL.Q then MD.PREV := INT#3; end_if;  
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Режим Пуск КЦ
+//////////////////////////////////////////////////////////////////////////////////////////
 MD.KC_START := MD.GPA_START and not (MD.GPA_MAG or MD.AO_KC or MD.KC_NO);
 if MD.KC_START then
 	temp_mode_string := 'КЦ Пуск';
 end_if;
 rtrig_KC_START(CLK:= MD.KC_START); if rtrig_KC_START.Q then CREATE_EVENT('Переход в режим - КЦ Пуск', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Режим КЦ резерв
+//////////////////////////////////////////////////////////////////////////////////////////
 MD.KC_REZ := MD.NOT_MORE_PRTY and SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and not MD.GPA_MAG;
 if MD.KC_REZ then
 	temp_mode_string := 'КЦ Резерв';
 end_if;
-rtrig_KC_REZ(CLK:= MD.KC_REZ); if rtrig_KC_REZ.Q then CREATE_EVENT('Переход в режим - КЦ Резерв', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;  
+rtrig_KC_REZ(CLK:= MD.KC_REZ); if rtrig_KC_REZ.Q then CREATE_EVENT('Переход в режим - КЦ Резерв', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if; 
+ftrig_REZ(CLK:= MD.KC_REZ);
+if ftrig_REZ.Q then MD.PREV := INT#2; end_if; 
+////////////////////////////////////////////////////////////////////////////////////////// 
 
 
 //Режим КЦ Ремонт
+//////////////////////////////////////////////////////////////////////////////////////////
 MD.KC_REP := MD.NOT_MORE_PRTY and SHKU17_DI_KR17_ON and SHKU17_DI_KR18_ON and SHKU17_DI_KR18A_ON;   
 if MD.KC_REP then
 	temp_mode_string := 'КЦ Ремонт';
 end_if;
 rtrig_KC_REP(CLK:= MD.KC_REP); if rtrig_KC_REP.Q then CREATE_EVENT('Переход в режим - КЦ Ремонт', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
+ftrig_REP(CLK:= MD.KC_REP);
+if ftrig_REP.Q then MD.PREV := INT#1; end_if; 
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Режим КЦ Магистраль
+//////////////////////////////////////////////////////////////////////////////////////////
 USL1_MAG := SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and MD.GPA_MAG and not MD.AO_KC and not MD.KC_NO and not MD.KC_KOL and MD.INT_KC_MAG;
 MD.KC_MAG := USL1_MAG and (SHKU17_DI_KR7_ON and SHKU17_DI_KR8_ON and SHKU17_DI_KR8A_ON and SHKU17_DI_KR30V_ON and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF and SHKU17_DI_KR30_OFF); 
 if MD.KC_MAG then
 	temp_mode_string := 'КЦ Магистраль';
 end_if;
 rtrig_KC_MAG(CLK:= MD.KC_MAG); if rtrig_KC_MAG.Q then CREATE_EVENT('Переход в режим - КЦ Магистраль', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
+ftrig_MAG(CLK:= MD.KC_MAG);
+if ftrig_MAG.Q then MD.PREV := INT#4; end_if;
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Режим КЦ Магистраль реверс
+//////////////////////////////////////////////////////////////////////////////////////////
 MD.KC_MAG_REV := USL1_MAG and (SHKU17_DI_KR7_ON and SHKU17_DI_KR8s_ON and SHKU17_DI_KR8As_ON and SHKU17_DI_KR30_ON and SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR30V_OFF); 
 if MD.KC_MAG_REV then
 	temp_mode_string := 'КЦ Магистраль-реверс';
 end_if;
 rtrig_KC_MAG_REV(CLK:= MD.KC_MAG_REV); if rtrig_KC_MAG_REV.Q then CREATE_EVENT('Переход в режим - КЦ Магистраль-реверс', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
+ftrig_MAG_REV(CLK:= MD.KC_MAG_REV);
+if ftrig_MAG_REV.Q then MD.PREV := INT#5; end_if;
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Режим Нормальный останов КЦ
+//////////////////////////////////////////////////////////////////////////////////////////
 MD.KC_NO := not MD.AO_KC and Global_BTN.NO;  
 if MD.KC_NO then
 	temp_mode_string := 'КЦ Нормальный останов';
 end_if;
 rtrig_KC_NO(CLK:= MD.KC_NO); if rtrig_KC_NO.Q then CREATE_EVENT('Переход в режим - КЦ НО', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
+ftrig_NO(CLK:= MD.KC_NO);
+if ftrig_NO.Q then MD.PREV := INT#6; end_if;
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Режим Автоматический цеха
+//////////////////////////////////////////////////////////////////////////////////////////
 RS_KC_AUTO(S:= Global_BTN.KC_AUTO, R1:= MD.EAO_KC or Global_BTN.KC_MAN, Q1 => MD.KC_AUTO);
 if MD.KC_AUTO and not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB) then
 	temp_status_string := 'Режим Автоматический';
@@ -4034,6 +4128,7 @@ end_if;
 rtrig_KC_MAN(CLK:= not MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_MAN.Q then CREATE_EVENT('Переход в режим - КЦ Ручной', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 //////////////////////////////////////////////////////////////////////////////////////////
 
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //Раскраска телевизора
 (*жёлтый*)			Global_TV.Color.0 := MD.KC_KOL or MD.KC_NO or MD.KC_REZ;
@@ -4043,7 +4138,6 @@ rtrig_KC_MAN(CLK:= not MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_MAN.Q then CRE
 (*коричневый*)		(*Global_TV.Color.4 := MD.KC_UNDEF;*)
 (*серый*)			Global_TV.Color.5 := MD.KC_REP or MD.KC_UNDEF;
 (*голубой*)			Global_TV.Color.6 := MD.KC_MAG or MD.KC_MAG_REV;
-
 
 Global_TV.LG_System_mode_str := temp_mode_string;
 Global_TV.LG_System_status_str := temp_status_string;

@@ -2,6 +2,7 @@
 <!DOCTYPE Folder config v. 1.0 >
 <Folder Name="Scada">
     <Items>
+        <Item Name="Type_EDAMPRHKF6IUTJ7OWBON7EVAUI.type" />
         <Item Name="Type_H5EHDC2QQVRUXJPN7SQ34EYB64.type" />
         <Item Name="Type_TEL5RRSGJRCEPMMGDUTSDYSUGY.type" />
         <Item Name="Type_TV.type" />

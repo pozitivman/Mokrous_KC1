@@ -2,6 +2,7 @@
 <!DOCTYPE Type v. 1.0 >
 <Type Name="TGlobalState" Kind="Struct" UUID="26D9A9F246C72153DDCE3B89A90CB414">
     <Fields>
+        <Field Name="PREV" Type="INT" UUID="51F7DAC248B161308FD568AFE0519D6D" Comment="Предыдущий режим" />
         <Field Name="NO_ACTIV" Type="BOOL" UUID="B33618E44983198DD7BBA682112FB9D3" Comment="Нет активных режимов" />
         <Field Name="STOPS" Type="BOOL" UUID="66AD2D62444C582726F049ACB7E7EE64" Comment="Режимы останова" />
         <Field Name="AO_KC" Type="BOOL" UUID="0F240F304C1A769C07FE4AB5FC92CF99" Comment="Режимы АО КЦ" />

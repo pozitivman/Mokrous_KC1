@@ -916,5 +916,17 @@
         <Signal Name="APS_GR1_MAG" UUID="983568904A10C1AD6D708C9DD224503E" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 1 Магистраль" />
         <Signal Name="APS_GR2_MAG" UUID="E6FB6C2843E3BA885C45DE995F80EAC7" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 2 Магистраль" />
         <Signal Name="APS_KC_EAO" UUID="032D85214B9AA8BBF4790C869F3D23A3" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется ЭАО" />
+        <Signal Name="APS_AOB_kr30_open" UUID="6FBA42B347C860C8FED777AB3C528B29" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Запрос на открытие крана 30 при АОБ" />
+        <Signal Name="APS_AOB_kr30v_open" UUID="AE688CD9471856AC9CF804B073486159" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Запрос на открытие крана 30в при АОБ" />
+        <Signal Name="APS_AOS_kr30_open" UUID="C63098F443C19DC3FE12DBA813ABC609" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Запрос на открытие крана 30 при АОС" />
+        <Signal Name="APS_AOS_kr30v_open" UUID="971E3BE3465FF23B4B2194A44C8BA18D" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Запрос на открытие крана 30в при АОС" />
+        <Signal Name="APS_AOB_kr30_open_accept" UUID="D257179A4F9315D130FB058888BB454F" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOB_kr30_open_accept" />
+        <Signal Name="APS_AOB_kr30_open_not_accept" UUID="2F86E02B4031CF0E1E9B8080C413B911" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOB_kr30_open_not_accept" />
+        <Signal Name="APS_AOB_kr30v_open_accept" UUID="EA449DDD4039A83C90BB21B632A831D4" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOB_kr30v_open_accept" />
+        <Signal Name="APS_AOB_kr30v_open_not_accept" UUID="58DAC6FB46F927BA475054B788738AC3" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOB_kr30v_open_not_accept" />
+        <Signal Name="APS_AOS_kr30_open_accept" UUID="8C7907B444D033B022C7C3B2421E6FF9" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOS_kr30_open_accept" />
+        <Signal Name="APS_AOS_kr30_open_not_accept" UUID="43BEC32B4B865F13B42BC5B5167D6DB4" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOS_kr30_open_not_accept" />
+        <Signal Name="APS_AOS_kr30v_open_accept" UUID="7C061F9C46ADB4CEF8B0538D7E6A82A6" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOS_kr30v_open_accept" />
+        <Signal Name="APS_AOS_kr30v_open_not_accept" UUID="014153A343D7AEF57614E7A65840DD8F" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOS_kr30v_open_not_accept" />
     </InterfaceList>
 </SubAppType>

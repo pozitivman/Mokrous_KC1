@@ -33,6 +33,7 @@
         <Signal Name="PATH_LOADER" UUID="B145C913497B022F3D5470814669C295" Type="STRING" ArraySize="10" Global="TRUE" Comment="Путь запущенного Loader.exe" />
         <Signal Name="Global_TV" UUID="B08A57C1485568D23B996BB069F03151" Type="26B66B4D4EE8F7BAC7367CAE287EFD5F" Usage="" Global="TRUE" Comment="Scada. Данные для телевизора" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
+        <Signal Name="Need_accept" UUID="4053E26E41501F3317454EBF2465B505" Type="B6A616144C90D7D32B28C5A3EFBF3ECF" Usage="" Global="TRUE" Comment="Подтверждение от оператора следующего действия" />
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Usage="" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="krAPK1" UUID="4F35E7D9418A3B8D3F735897509E6041" Type="635099BE48C9258F4BA926BFCBAA0549" Usage="" Global="TRUE" Comment="Антипомпажный клапан АПК1. СКАДА" />
         <Signal Name="krAPK2" UUID="2ABF212645B0DC301AAEED89D7DD8AE4" Type="635099BE48C9258F4BA926BFCBAA0549" Usage="" Global="TRUE" Comment="Антипомпажный клапан АПК2. СКАДА" />

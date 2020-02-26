@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TAccept" Kind="Struct" UUID="B6A616144C90D7D32B28C5A3EFBF3ECF">
+    <Fields>
+        <Field Name="AOB_kr30_open" Type="BOOL" UUID="4B5ADCF1415BB7BE6E351BBE97534490" Comment="Запрос на открытие крана 30 при АОБ" />
+        <Field Name="AOB_kr30v_open" Type="BOOL" UUID="B1415C5E45BAF54DAA868786A3989A56" Comment="Запрос на открытие крана 30в при АОБ" />
+        <Field Name="AOS_kr30_open" Type="BOOL" UUID="7E41BD584FD2CA5A14D08F87F3B58B74" Comment="Запрос на открытие крана 30 при АОС" />
+        <Field Name="AOS_kr30v_open" Type="BOOL" UUID="34D97D5E42F963CEB2E89A9BBE12A95E" Comment="Запрос на открытие крана 30в при АОС" />
+    </Fields>
+</Type>
