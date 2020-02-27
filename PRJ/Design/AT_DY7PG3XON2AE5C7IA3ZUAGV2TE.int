@@ -905,12 +905,16 @@
         <Signal Name="APS_SAU_KC_flt" UUID="053EEADB450D34B323D53D9147DC949A" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Отказ САУ КЦ" />
         <Signal Name="APS_MD_KC_AOB" UUID="B8F25A784D15FF6F6D87DFB1F289B70B" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется АО без стравливания" />
         <Signal Name="APS_MD_KC_AOS" UUID="1E2D88A34ABC87CC55A112BFAF733711" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется АО со стравливанием" />
+        <Signal Name="APS_MD_KC_NO" UUID="40E26A884A155ACEC14531B300C989FE" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется НО без стравливания" />
         <Signal Name="APS_Global_BTN_AOB" UUID="B9D3D84D4A2349B0954781AF4AEBFDAF" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда с АРМ АО без стравливания" />
         <Signal Name="APS_Global_BTN_AOS" UUID="74E54C5848FF4A0FE71D0C88AD4B7FF0" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда с АРМ АО со стравливанием" />
+        <Signal Name="APS_Global_BTN_NO" UUID="54516A8C46954F741585D597BACFEB7E" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда с АРМ НО без стравливания" />
         <Signal Name="APS_AOB_DONE" UUID="6C79D9244F7D6E9BF8573A8316C56393" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОбс завершен корректно" />
         <Signal Name="APS_AOB_DONE_INCORRECT" UUID="9587C91443B2D97B07439A823558AA49" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОбс завершен некорректно" />
         <Signal Name="APS_AOS_DONE" UUID="093EED974FF25EC1DDA2E3A5F70CF8B4" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОсс завершен корректно" />
         <Signal Name="APS_AOS_DONE_INCORRECT" UUID="69B09A7C40F5BCEF58F6FC85E6F52270" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОсс завершен некорректно" />
+        <Signal Name="APS_NO_DONE" UUID="82DF5D8A47B230C6B03BAAB9AB5C7BBB" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: НО завершен корректно" />
+        <Signal Name="APS_NO_DONE_INCORRECT" UUID="62A7975347F6E91A0DE6CD86146024F2" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: НО завершен некорректно" />
         <Signal Name="APS_GR1_KOL" UUID="7CCB5E9B487D72F11B3B339E5344EF04" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 1 Кольцо" />
         <Signal Name="APS_GR2_KOL" UUID="EFE1BCCF4E895680349F40949C702E66" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: ГРуппа 2 Кольцо" />
         <Signal Name="APS_GR1_MAG" UUID="983568904A10C1AD6D708C9DD224503E" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 1 Магистраль" />

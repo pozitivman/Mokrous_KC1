@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="341B7B8A4F95F1B02B7C7B8B219F9962" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="085DFEFF46432B7F0A93CFAED89CF6D0" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
@@ -26,6 +26,7 @@
         <Signal Name="NO_sound_TS" UUID="C767C63B4240F5C204DDFEB7B245AD85" Type="BOOL" Global="TRUE" Comment="Заглушка для технологических сообщений" />
         <Signal Name="AOS_TO_DO" UUID="2A7989624389343D670696AA1337FAB6" Type="BOOL" Global="TRUE" Comment="Сигнал АОС в другие ПЛК, подсистемы" />
         <Signal Name="AOB_TO_DO" UUID="A602427E4B6133E629EE0894D1638B40" Type="BOOL" Global="TRUE" Comment="Сигнал АОБ в другие ПЛК, подсистемы" />
+        <Signal Name="NO_TO_DO" UUID="15BC01DC4A83A0080AA3558C3C7B8649" Type="BOOL" Global="TRUE" Comment="Сигнал НО в другие ПЛК, подсистемы" />
         <Signal Name="PATH_LOADER" UUID="B145C913497B022F3D5470814669C295" Type="STRING" ArraySize="10" Global="TRUE" Comment="Путь запущенного Loader.exe" />
         <Signal Name="USER_NAME_NOW" UUID="6C7B06AE455CF2F2E501F2ADA0B63BAB" Type="STRING" ArraySize="10" Global="TRUE" Comment="Текущий пользователь" />
         <Signal Name="MakeReport" UUID="C664E4DF46AF2DCEB4688DA1D34BC5F6" Type="BOOL" Global="TRUE" Comment="Составить документ 1" />
@@ -3889,12 +3890,16 @@
         <Signal Name="APS_SAU_KC_flt" UUID="053EEADB450D34B323D53D9147DC949A" Type="BOOL" Global="TRUE" Comment="АПС: Отказ САУ КЦ" />
         <Signal Name="APS_MD_KC_AOB" UUID="B8F25A784D15FF6F6D87DFB1F289B70B" Type="BOOL" Global="TRUE" Comment="АПС: Выполняется АО без стравливания" />
         <Signal Name="APS_MD_KC_AOS" UUID="1E2D88A34ABC87CC55A112BFAF733711" Type="BOOL" Global="TRUE" Comment="АПС: Выполняется АО со стравливанием" />
+        <Signal Name="APS_MD_KC_NO" UUID="40E26A884A155ACEC14531B300C989FE" Type="BOOL" Global="TRUE" Comment="АПС: Выполняется НО без стравливания" />
         <Signal Name="APS_Global_BTN_AOB" UUID="B9D3D84D4A2349B0954781AF4AEBFDAF" Type="BOOL" Global="TRUE" Comment="АПС: Команда с АРМ АО без стравливания" />
         <Signal Name="APS_Global_BTN_AOS" UUID="74E54C5848FF4A0FE71D0C88AD4B7FF0" Type="BOOL" Global="TRUE" Comment="АПС: Команда с АРМ АО со стравливанием" />
+        <Signal Name="APS_Global_BTN_NO" UUID="54516A8C46954F741585D597BACFEB7E" Type="BOOL" Global="TRUE" Comment="АПС: Команда с АРМ НО без стравливания" />
         <Signal Name="APS_AOB_DONE" UUID="6C79D9244F7D6E9BF8573A8316C56393" Type="BOOL" Global="TRUE" Comment="АПС: АОбс завершен корректно" />
         <Signal Name="APS_AOB_DONE_INCORRECT" UUID="9587C91443B2D97B07439A823558AA49" Type="BOOL" Global="TRUE" Comment="АПС: АОбс завершен некорректно" />
         <Signal Name="APS_AOS_DONE" UUID="093EED974FF25EC1DDA2E3A5F70CF8B4" Type="BOOL" Global="TRUE" Comment="АПС: АОсс завершен корректно" />
         <Signal Name="APS_AOS_DONE_INCORRECT" UUID="69B09A7C40F5BCEF58F6FC85E6F52270" Type="BOOL" Global="TRUE" Comment="АПС: АОсс завершен некорректно" />
+        <Signal Name="APS_NO_DONE" UUID="82DF5D8A47B230C6B03BAAB9AB5C7BBB" Type="BOOL" Global="TRUE" Comment="АПС: НО завершен корректно" />
+        <Signal Name="APS_NO_DONE_INCORRECT" UUID="62A7975347F6E91A0DE6CD86146024F2" Type="BOOL" Global="TRUE" Comment="АПС: НО завершен некорректно" />
         <Signal Name="APS_GR1_KOL" UUID="7CCB5E9B487D72F11B3B339E5344EF04" Type="BOOL" Global="TRUE" Comment="АПС: Группа 1 Кольцо" />
         <Signal Name="APS_GR2_KOL" UUID="EFE1BCCF4E895680349F40949C702E66" Type="BOOL" Global="TRUE" Comment="АПС: ГРуппа 2 Кольцо" />
         <Signal Name="APS_GR1_MAG" UUID="983568904A10C1AD6D708C9DD224503E" Type="BOOL" Global="TRUE" Comment="АПС: Группа 1 Магистраль" />

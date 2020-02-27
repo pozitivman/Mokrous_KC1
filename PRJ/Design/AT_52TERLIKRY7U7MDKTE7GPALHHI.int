@@ -38,6 +38,7 @@
         <Signal Name="NO_sound_TS" UUID="C767C63B4240F5C204DDFEB7B245AD85" Type="BOOL" Usage="" Global="TRUE" Comment="Заглушка для технологических сообщений" />
         <Signal Name="AOS_TO_DO" UUID="2A7989624389343D670696AA1337FAB6" Type="BOOL" Usage="" Global="TRUE" Comment="Сигнал АОС в другие ПЛК, подсистемы" />
         <Signal Name="AOB_TO_DO" UUID="A602427E4B6133E629EE0894D1638B40" Type="BOOL" Usage="" Global="TRUE" Comment="Сигнал АОБ в другие ПЛК, подсистемы" />
+        <Signal Name="NO_TO_DO" UUID="15BC01DC4A83A0080AA3558C3C7B8649" Type="BOOL" Usage="" Global="TRUE" Comment="Сигнал НО в другие ПЛК, подсистемы" />
         <Signal Name="Link_GPA1" UUID="B5104EE44512B13A740D8AB09D6DB429" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-1" />
         <Signal Name="Link_GPA2" UUID="2FB75B54477F039CD51EC888574A06FA" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-2" />
         <Signal Name="Link_GPA3" UUID="21718BCE4EA0A2B647CFAF9B8FBC7BD7" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-3" />
@@ -46,6 +47,7 @@
         <Signal Name="Link_GPA6" UUID="0BB108EE486DC8D63F8EC58CA617F00B" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-6" />
         <Signal Name="drumAOB" UUID="0358E49D4BB9F272A893F2B0FFA3E528" Type="F50A677045E9442409AB5EADE4596C71" Usage="" />
         <Signal Name="drumAOS" UUID="2DE0A3FC453755740BDB71AA4308F0AB" Type="F50A677045E9442409AB5EADE4596C71" Usage="" />
+        <Signal Name="drumNO" UUID="4645702943FEBF5361CE42843A345488" Type="F50A677045E9442409AB5EADE4596C71" Usage="" />
         <Signal Name="TMR" UUID="71425B7B4B5D02B5F3D958BA93314FD4" Type="LREAL" ArraySize="8" Usage="" Comment="Вспомогательные таймеры" />
         <Signal Name="set_block_alg_MD_REV" UUID="4512370E41E4C5849D7B2B91B38ACE11" Type="BOOL" Usage="" />
         <Signal Name="TO_REV_prev" UUID="698C816940BBFF80507E5282FB7CBD4D" Type="BOOL" Usage="" />
@@ -91,6 +93,10 @@
         <Signal Name="AOS_KR18A_ON" UUID="564606C64C00C0DB2216A0960EB3E870" Type="BOOL" Usage="" />
         <Signal Name="AOB_by_TON_Pg_ala_hi2KC" UUID="234A15D24359E3DE6B81ECB1D04901E8" Type="BOOL" Usage="" />
         <Signal Name="KC_EAO_done" UUID="159423A94F684EFD64D0A48E11B964DB" Type="BOOL" Usage="" />
+        <Signal Name="NO_KR6_ON" UUID="5B5EA7B948F5ED728AFE01B0B196B673" Type="BOOL" Usage="" />
+        <Signal Name="NO_KR6As_ON" UUID="8B851E3644B5492007CB058CFA167B88" Type="BOOL" Usage="" />
+        <Signal Name="NO_KR6R_ON" UUID="111307034720133AB726F9BA605F40DC" Type="BOOL" Usage="" />
+        <Signal Name="NO_KR6AR_ON" UUID="984F307C4EBB7007BBBF8EB1E04C2B24" Type="BOOL" Usage="" />
         <Signal Name="______________IO______________" UUID="5452534D4DE772F3E7D405ADD8FB5A61" Type="BOOL" Usage="" />
         <Signal Name="SHKU17_AI_A1_31" UUID="B1FAA8FF4FA3358B449220ABD8B86B86" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура наружного воздуха" />
         <Signal Name="SHKU17_AI_A1_32" UUID="18C63D9E447CEDD25C2B6CAE1B8384CD" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура грунта" />
@@ -2909,12 +2915,16 @@
         <Signal Name="APS_dP1KR30B_hi" UUID="07F244E44ACB4FF7A5DDA3B8AECE9E63" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Высокий перепад давления на кр30б" />
         <Signal Name="APS_MD_KC_AOB" UUID="B8F25A784D15FF6F6D87DFB1F289B70B" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется АО без стравливания" />
         <Signal Name="APS_MD_KC_AOS" UUID="1E2D88A34ABC87CC55A112BFAF733711" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется АО со стравливанием" />
+        <Signal Name="APS_MD_KC_NO" UUID="40E26A884A155ACEC14531B300C989FE" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Выполняется НО без стравливания" />
         <Signal Name="APS_Global_BTN_AOB" UUID="B9D3D84D4A2349B0954781AF4AEBFDAF" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда с АРМ АО без стравливания" />
         <Signal Name="APS_Global_BTN_AOS" UUID="74E54C5848FF4A0FE71D0C88AD4B7FF0" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда с АРМ АО со стравливанием" />
+        <Signal Name="APS_Global_BTN_NO" UUID="54516A8C46954F741585D597BACFEB7E" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда с АРМ НО без стравливания" />
         <Signal Name="APS_AOB_DONE" UUID="6C79D9244F7D6E9BF8573A8316C56393" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОбс завершен корректно" />
         <Signal Name="APS_AOB_DONE_INCORRECT" UUID="9587C91443B2D97B07439A823558AA49" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОбс завершен некорректно" />
         <Signal Name="APS_AOS_DONE" UUID="093EED974FF25EC1DDA2E3A5F70CF8B4" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОсс завершен корректно" />
         <Signal Name="APS_AOS_DONE_INCORRECT" UUID="69B09A7C40F5BCEF58F6FC85E6F52270" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АОсс завершен некорректно" />
+        <Signal Name="APS_NO_DONE" UUID="82DF5D8A47B230C6B03BAAB9AB5C7BBB" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: НО завершен корректно" />
+        <Signal Name="APS_NO_DONE_INCORRECT" UUID="62A7975347F6E91A0DE6CD86146024F2" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: НО завершен некорректно" />
         <Signal Name="APS_GR1_KOL" UUID="7CCB5E9B487D72F11B3B339E5344EF04" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 1 Кольцо" />
         <Signal Name="APS_GR2_KOL" UUID="EFE1BCCF4E895680349F40949C702E66" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: ГРуппа 2 Кольцо" />
         <Signal Name="APS_GR1_MAG" UUID="983568904A10C1AD6D708C9DD224503E" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Группа 1 Магистраль" />

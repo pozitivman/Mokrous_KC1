@@ -455,7 +455,94 @@ case drumAOS.step of
 		drumAOS.done_ok := BOOL#0;
 		drumAOS.done_flt := BOOL#0;
 	end_if;		
-end_case;]]></ST>
+end_case;
+
+// Выходы
+Link_GPA1.Command_AOS	:= AOS_to_DO;
+Link_GPA2.Command_AOS	:= AOS_to_DO;
+Link_GPA3.Command_AOS	:= AOS_to_DO;
+Link_GPA4.Command_AOS	:= AOS_to_DO;
+Link_GPA5.Command_AOS	:= AOS_to_DO;
+Link_GPA6.Command_AOS	:= AOS_to_DO;]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="895975F943A11CA6108722AF9FE0C2C5" Name="drum_NO">
+                    <Variables>
+                        <Variable UUID="9F1B71A445ABCD5E8D72F2864ED4FFBA" Name="MD_KC_NO_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[drumNO.start := MD.KC_NO and not MD_KC_NO_prev;
+MD_KC_NO_prev := MD.KC_NO;
+
+// Пуск drum
+if drumNO.start and not drumNO.run then
+	drumNO.run := BOOL#1;
+	drumNO.step := INT#0;
+end_if;
+
+// Останов drum извне
+if MD.AO_KC or FirstScan_MAIN then
+	drumNO.run := BOOL#0;
+	drumNO.step_prev := INT#-1;
+	drumNO.step := INT#-1;
+	NO_to_DO := BOOL#0;
+	AOB_KR6_ON := BOOL#0;
+	AOB_KR6As_ON := BOOL#0;
+	AOB_KR6R_ON := BOOL#0;
+	AOB_KR6AR_ON := BOOL#0;
+end_if;
+
+// Тело drum
+case drumNO.step of
+0:	if drumNO.step_prev <> INT#0 then
+		drumNO.TMR_COM := LREAL#300;
+		drumNO.step_prev := drumNO.step;
+	end_if;
+	NO_to_DO := BOOL#1; (*NO в другие подсистемы и на физические линии*)
+	NO_KR6_ON := BOOL#1;
+	NO_KR6As_ON := BOOL#1;
+	NO_KR6R_ON := BOOL#1;
+	NO_KR6AR_ON := BOOL#1;
+	drumNO.TMR_COM := drumNO.TMR_COM - cycleTime_MAIN;
+
+	if (SHKU17_DI_KR6_ON and not SHKU17_DI_KR6_OFF) and (SHKU17_DI_KR6R_ON and not SHKU17_DI_KR6R_OFF) and (SHKU17_DI_KR6As_ON and not SHKU17_DI_KR6As_OFF) and
+		(SHKU17_DI_KR6AR_ON and not SHKU17_DI_KR6AR_OFF) and Link_GPA1.MD_GR and Link_GPA2.MD_GR and Link_GPA3.MD_GR and Link_GPA4.MD_GR and Link_GPA5.MD_GR and Link_GPA6.MD_GR then
+		drumNO.step := INT#1;
+	end_if;
+//	if drumNO.TMR_COM <= LREAL#0 then drumNO.step := INT#2; end_if; //Переход на шаг: Алгоритм завершен некорректно пока отменяем
+	if drumNO.TMR_COM <= LREAL#0 then drumNO.TMR_COM := LREAL#0; end_if;
+
+1:	drumNO.done_ok := BOOL#1;
+	drumNO.step_prev := drumNO.step;
+	drumNO.step := INT#3;
+
+2:	drumNO.done_flt := BOOL#1;
+	drumNO.step_prev := drumNO.step;
+	drumNO.step := INT#3;
+
+3:	if drumNO.step_prev <> INT#3 then
+		NO_to_DO := BOOL#0;
+		NO_KR6_ON := BOOL#0;
+		NO_KR6As_ON := BOOL#0;
+		NO_KR6R_ON := BOOL#0;
+		NO_KR6AR_ON := BOOL#0;
+		drumNO.step_prev := drumNO.step;
+	end_if;
+	if Deblock and not drumNO.start then
+		drumNO.step := INT#-1;
+		drumNO.step_prev := INT#-1;
+		drumNO.run := BOOL#0;
+		drumNO.done_ok := BOOL#0;
+		drumNO.done_flt := BOOL#0;
+	end_if;		
+end_case;
+
+
+// Выходы
+Link_GPA1.Command_NOB	:= NO_to_DO;
+Link_GPA2.Command_NOB	:= NO_to_DO;
+Link_GPA3.Command_NOB	:= NO_to_DO;
+Link_GPA4.Command_NOB	:= NO_to_DO;
+Link_GPA5.Command_NOB	:= NO_to_DO;
+Link_GPA6.Command_NOB	:= NO_to_DO;]]></ST>
                 </FunctionBlock>
             </Folder>
             <FunctionBlock UUID="3CCFBABB4D0D6396AC67048DBF1A20E4" Name="block_ALG">
@@ -463,12 +550,14 @@ end_case;]]></ST>
                     <Variable UUID="62383D2D4E844FBF8F49ACBC035D38C6" Name="IMIT_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     <Variable UUID="BB351DA94F0897FFD113C39B1C74CC1B" Name="fb_AOB" Type="drum_AOB" TypeUUID="4A0A032D4EBF673D4014CE8C2AE2DA26" Usage="internal" />
                     <Variable UUID="C890A6A5455EEA97D1A5CFA0D317519A" Name="fb_AOS" Type="drum_AOS" TypeUUID="57F7D72C476AA3B953A485866CE8AA4A" Usage="internal" />
+                    <Variable UUID="558D69274BD88ACFFB6650BA31FAC23E" Name="fb_NO" Type="drum_NO" TypeUUID="895975F943A11CA6108722AF9FE0C2C5" Usage="internal" />
                     <Variable UUID="2B083C1C487B251D437C37ACB7C0019C" Name="ton_to_AOB_by_Pg_ala_hi2KC" Type="TON" TypeUUID="EAA43B6B4DCDCEA72AB748B4554FD2AD" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//////////////////////////////////////////////////////////////////////////////////////////
-//Выполнение подпрограм АОБ, АОС
+//Выполнение подпрограм АОБ, АОС, НО
 fb_AOB();
 fb_AOS();
+fb_NO();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1900,6 +1989,11 @@ AE_615(Global_BTN.AOS_kr30_open_not_accept, T#100ms, Deblock, Kvitir, DO_sound_P
 AE_616(Global_BTN.AOS_kr30v_open_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_kr30v_open_accept); //АПС: Подтверждение оператором открытия окна управления краном 30в при АОС
 AE_617(Global_BTN.AOS_kr30v_open_not_accept, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_AOS_kr30v_open_not_accept); //АПС: Отмена от оператора открытия окна управления краном 30в при АОС
 
+AE_618(MD.KC_NO, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_MD_KC_NO); //АПС: Выполняется НО без стравливания
+AE_619(Global_BTN.NO, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Global_BTN_NO); //АПС: Команда с АРМ НО без стравливания
+AE_620(drumNO.done_ok, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_NO_DONE); //АПС: НО завершен корректно
+AE_621(drumNO.done_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_NO_DONE_INCORRECT); //АПС: НО завершен некорректно
+
 
 //Выходы АПС
 IF APS_TASK_alg > APS_TASK THEN
@@ -2264,35 +2358,35 @@ KR30_OFF_prev := MD_REV_KR30_OFF;
 
 
 //Кран 6 открыть
-if (OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON) and not KR6_ON_prev then
+if (OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON or NO_KR6_ON) and not KR6_ON_prev then
 	HMI_SHKU17_KR6_DA := false;
 	CMD_SHKU17_KR6_aOnOff := true;
 end_if;
-KR6_ON_prev := OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON;
+KR6_ON_prev := OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON or NO_KR6_ON;
 
 
 //Кран 6a' открыть
-if (OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON) and not KR6As_ON_prev then
+if (OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON or NO_KR6As_ON) and not KR6As_ON_prev then
 	HMI_SHKU17_KR6As_DA := false;
 	CMD_SHKU17_KR6As_aOnOff := true;
 end_if;
-KR6As_ON_prev := OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON;
+KR6As_ON_prev := OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON or NO_KR6As_ON;
 
 
 //Кран 6р открыть
-if (OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON) and not KR6R_ON_prev then
+if (OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON or NO_KR6R_ON) and not KR6R_ON_prev then
 	HMI_SHKU17_KR6R_DA := false;
 	CMD_SHKU17_KR6R_aOnOff := true;
 end_if;
-KR6R_ON_prev := OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON;
+KR6R_ON_prev := OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON or NO_KR6R_ON;
 
 
 //Кран 6ар открыть
-if (OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON) and not KR6AR_ON_prev then
+if (OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON) and not KR6AR_ON_prev then
 	HMI_SHKU17_KR6AR_DA := false;
 	CMD_SHKU17_KR6AR_aOnOff := true;
 end_if;
-KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON;]]></ST>
+KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON;]]></ST>
             </FunctionBlock>
             <FunctionBlock UUID="C5E1C2D54AF74909AFB82A98431D9D80" Name="fb_IM">
                 <Variables>
@@ -4104,9 +4198,18 @@ if ftrig_MAG_REV.Q then MD.PREV := INT#5; end_if;
 
 //Режим Нормальный останов КЦ
 //////////////////////////////////////////////////////////////////////////////////////////
-MD.KC_NO := not MD.AO_KC and Global_BTN.NO;  
+MD.KC_NO := not MD.AO_KC and (Global_BTN.NO or drumNO.run);  
 if MD.KC_NO then
-	temp_mode_string := 'КЦ Нормальный останов';
+	temp_mode_string := 'НО без стравливания';
+	if (drumNO.step = INT#0) then
+		temp_status_string := 'До завершения: ' + FORMAT_LREAL(drumNO.TMR_COM, UINT#0) + ' сек.';
+	end_if;
+	if drumNO.done_ok then
+		temp_status_string := 'Алгоритм НО КЦ завершён$n$nНажмите Сброс';
+	end_if;
+	if drumNO.done_flt then
+		temp_status_string := 'Алгоритм НО КЦ завершён некорректно$n$nНажмите Сброс';
+	end_if;
 end_if;
 rtrig_KC_NO(CLK:= MD.KC_NO); if rtrig_KC_NO.Q then CREATE_EVENT('Переход в режим - КЦ НО', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 ftrig_NO(CLK:= MD.KC_NO);
@@ -4117,12 +4220,12 @@ if ftrig_NO.Q then MD.PREV := INT#6; end_if;
 //Режим Автоматический цеха
 //////////////////////////////////////////////////////////////////////////////////////////
 RS_KC_AUTO(S:= Global_BTN.KC_AUTO, R1:= MD.EAO_KC or Global_BTN.KC_MAN, Q1 => MD.KC_AUTO);
-if MD.KC_AUTO and not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB) then
+if MD.KC_AUTO and not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB or MD.KC_NO) then
 	temp_status_string := 'Режим Автоматический';
 end_if;
 rtrig_KC_AUTO(CLK:= MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_AUTO.Q then CREATE_EVENT('Переход в режим - КЦ Автоматический', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 
-if not MD.KC_AUTO and not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB) then 
+if not MD.KC_AUTO and not (MD.EAO_KC or MD.KC_AOS or MD.KC_AOB or MD.KC_NO) then 
 	temp_status_string := 'Режим Ручной';
 end_if;
 rtrig_KC_MAN(CLK:= not MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_MAN.Q then CREATE_EVENT('Переход в режим - КЦ Ручной', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
@@ -4131,9 +4234,9 @@ rtrig_KC_MAN(CLK:= not MD.KC_AUTO and not MD.EAO_KC); if rtrig_KC_MAN.Q then CRE
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //Раскраска телевизора
-(*жёлтый*)			Global_TV.Color.0 := MD.KC_KOL or MD.KC_NO or MD.KC_REZ;
+(*жёлтый*)			Global_TV.Color.0 := MD.KC_KOL or MD.KC_REZ;
 (*красный*)			Global_TV.Color.1 := MD.KC_AOS or MD.KC_AOB or MD.EAO_KC;
-(*зелёный*)			Global_TV.Color.2 := MD.KC_START;
+(*зелёный*)			Global_TV.Color.2 := MD.KC_START or MD.KC_NO;
 (*тёмно-зелёный*)	(*Global_TV.Color.3 := MD.KC_UNDEF;*)
 (*коричневый*)		(*Global_TV.Color.4 := MD.KC_UNDEF;*)
 (*серый*)			Global_TV.Color.5 := MD.KC_REP or MD.KC_UNDEF;
