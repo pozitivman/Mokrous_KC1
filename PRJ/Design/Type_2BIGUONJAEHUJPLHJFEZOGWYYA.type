@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TGroupСreate" Kind="Struct" UUID="AC8339B94AE497B01F57F7AED31BD15A">
+    <Fields>
+        <Field Name="start_Config" Type="BOOL" UUID="8A54619B486958BA78EBC0883AC40C69" Comment="Флаг начала формирования группы" />
+        <Field Name="cancel_Config" Type="BOOL" UUID="AEA28F1342F8EAA039F00CAC69E07F4E" Comment="Флаг отмены формирования группы" />
+        <Field Name="apply_Config" Type="BOOL" UUID="2ACA9F5746BDC827C1B1AFB2E283E256" Comment="Флаг подтверждения формирования группы" />
+        <Field Name="reset_Config" Type="BOOL" UUID="353811D54E7718CA163E7285B5431156" Comment="Флаг сброса конфигурации групп" />
+        <Field Name="error_Config" Type="BOOL" UUID="409975AD4DD34595EF0D01AD00BA419D" Comment="Флаг ошибки формирования группы" />
+        <Field Name="error_String" Type="STRING" UUID="96DED84041A707622DD38C849B2ACDBA" Comment="Строка ошибки формирования группы" />
+        <Field Name="active_Group" Type="INT" UUID="13E50F2A43D8A919BCD6F193DBDB19B8" Comment="Текущий номер выбранной группы" />
+        <Field Name="sel_Group_GPA" Type="BYTE" UUID="CCA3C9C742FD2648135361B32352C14F" ArraySize="2" Comment="Текущий временный регистр формирования группы 1,2" />
+        <Field Name="mask_Group_GPA" Type="BYTE" UUID="168DCB0242EDCA3E4C7982B76C77A132" ArraySize="2" Comment="Инверсная маска временного регистра формирования группы 1,2" />
+        <Field Name="temp_Group_GPA" Type="BYTE" UUID="5BD391614C5911A684675BA565B1751E" ArraySize="2" Comment="Временный регистр формирования группы 1,2" />
+        <Field Name="gpa_In_Group" Type="INT" UUID="D5A5A2D545BD6A15B76DA49861586DD6" ArraySize="8" Comment="Группа, в которой находится ГПА. 0 - ГПА не в группе" />
+        <Field Name="btn_EN" Type="BOOL" UUID="0B111AFE4DB53115C1362E96CBFFB0D8" ArraySize="8" Comment="Флаг разблокироваки кнопки" />
+        <Field Name="btn_OUT" Type="BOOL" UUID="058A42FC4DEC39C73E3266AF11B81212" ArraySize="8" Comment="Кнопка из СКАДы нажата" />
+        <Field Name="check_Box_Group_En" Type="BOOL" UUID="B392E0C247A725F8709923A4412B3C86" ArraySize="8" Comment="Флаг разблокироваки флажка выбора группы" />
+        <Field Name="check_Box_Group_Accept_OK" Type="BOOL" UUID="F75C184E429DAF6B0F9A28B83922E67B" ArraySize="8" Comment="Флаг разрешения использовать флажок" />
+        <Field Name="check_Box_Group_Check" Type="BOOL" UUID="BFCFF9634336E3DBC3FACD8C607275FD" ArraySize="8" Comment="Флаг выбора флажка группы" />
+    </Fields>
+</Type>
