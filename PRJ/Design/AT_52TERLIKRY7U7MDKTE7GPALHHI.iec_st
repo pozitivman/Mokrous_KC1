@@ -484,10 +484,10 @@ if MD.AO_KC or FirstScan_MAIN then
 	drumNO.step_prev := INT#-1;
 	drumNO.step := INT#-1;
 	NO_to_DO := BOOL#0;
-	AOB_KR6_ON := BOOL#0;
-	AOB_KR6As_ON := BOOL#0;
-	AOB_KR6R_ON := BOOL#0;
-	AOB_KR6AR_ON := BOOL#0;
+	NO_KR6_ON := BOOL#0;
+	NO_KR6As_ON := BOOL#0;
+	NO_KR6R_ON := BOOL#0;
+	NO_KR6AR_ON := BOOL#0;
 end_if;
 
 // Тело drum
@@ -505,7 +505,7 @@ case drumNO.step of
 
 	if (SHKU17_DI_KR6_ON and not SHKU17_DI_KR6_OFF) and (SHKU17_DI_KR6R_ON and not SHKU17_DI_KR6R_OFF) and (SHKU17_DI_KR6As_ON and not SHKU17_DI_KR6As_OFF) and
 		(SHKU17_DI_KR6AR_ON and not SHKU17_DI_KR6AR_OFF) and Link_GPA1.MD_GR and Link_GPA2.MD_GR and Link_GPA3.MD_GR and Link_GPA4.MD_GR and Link_GPA5.MD_GR and Link_GPA6.MD_GR then
-		drumNO.step := INT#1;
+		drumNO.step := INT#1; //по результату ПНР добавить/убрать нужные режимы
 	end_if;
 //	if drumNO.TMR_COM <= LREAL#0 then drumNO.step := INT#2; end_if; //Переход на шаг: Алгоритм завершен некорректно пока отменяем
 	if drumNO.TMR_COM <= LREAL#0 then drumNO.TMR_COM := LREAL#0; end_if;
@@ -552,12 +552,17 @@ Link_GPA6.Command_NOB	:= NO_to_DO;]]></ST>
                     <Variable UUID="C890A6A5455EEA97D1A5CFA0D317519A" Name="fb_AOS" Type="drum_AOS" TypeUUID="57F7D72C476AA3B953A485866CE8AA4A" Usage="internal" />
                     <Variable UUID="558D69274BD88ACFFB6650BA31FAC23E" Name="fb_NO" Type="drum_NO" TypeUUID="895975F943A11CA6108722AF9FE0C2C5" Usage="internal" />
                     <Variable UUID="2B083C1C487B251D437C37ACB7C0019C" Name="ton_to_AOB_by_Pg_ala_hi2KC" Type="TON" TypeUUID="EAA43B6B4DCDCEA72AB748B4554FD2AD" Usage="internal" />
+                    <Variable UUID="15343893444B20CBC607FBBB4E569340" Name="ton_to_AOB_by_Tg_ala_hi2KC" Type="TON" TypeUUID="EAA43B6B4DCDCEA72AB748B4554FD2AD" Usage="internal" />
+                    <Variable UUID="1E46C337461F66ACED80D98A3B256EF5" Name="fb_GROUP" Type="block_GROUP" TypeUUID="71D265E144971684C09AD797B5F46F40" Usage="internal" />
+                    <Variable UUID="2D42F4D34BC303C82DEBB4AFA02A317A" Name="fb_UNL" Type="block_UNL" TypeUUID="20BBB8F545957D7FD23D8FA61D8C82EB" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//////////////////////////////////////////////////////////////////////////////////////////
-//Выполнение подпрограм АОБ, АОС, НО
+//Выполнение подпрограм АОБ, АОС, НО, Разгрузка
 fb_AOB();
 fb_AOS();
 fb_NO();
+fb_GROUP();
+fb_UNL();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -614,6 +619,12 @@ MD.PPU_FIRE := Link_GPA1.Fire or Link_GPA2.Fire or Link_GPA3.Fire or Link_GPA4.F
 //Есть готовность к пуску КЦ
 MD.PPU_RDY_TO_START := not (APS_PPU_FIRE and APS_PPU_ZAG and Tg_ala_hi2KC and Pg_ala_hi2KC and APS_SAU_UP_flt and APS_SAU_KC_flt and APS_dP1KR30_hi and APS_dP1KR30B_hi) and 
 						SHKU17_DI_KR6_ON and SHKU17_DI_KR6As_ON and SHKU17_DI_KR6R_ON and SHKU17_DI_KR6AR_ON and MD.GPA_RDY or MD.KC_OFF;
+SHKU17_DO_GPA1_Cex_RTR := MD.PPU_RDY_TO_START;
+SHKU17_DO_GPA2_Cex_RTR := MD.PPU_RDY_TO_START;
+SHKU17_DO_GPA3_Cex_RTR := MD.PPU_RDY_TO_START;
+SHKU17_DO_GPA4_Cex_RTR := MD.PPU_RDY_TO_START;
+SHKU17_DO_GPA5_Cex_RTR := MD.PPU_RDY_TO_START;
+SHKU17_DO_GPA6_Cex_RTR := MD.PPU_RDY_TO_START;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -674,20 +685,23 @@ end_if;
 //////////////////////////////////////////////////////////////////////////////////////////
 //Защита по превышению температуры технологического газа на выходе КЦ
 Tg_hi2KC := ((((SHKU17_AI_Tgaz_pos_KR8A > Global_Ust.Tkr8a_lo and SHKU17_AI_Tgaz_pos_KR8A <= Global_Ust.Tkr8a_hi) or 
-			(SHKU17_AI_Tgaz_pos_KR8 > Global_Ust.Tkr8_lo and SHKU17_AI_Tgaz_pos_KR8 <= Global_Ust.Tkr8_hi)) and MD.KC_MAG) or
+			(SHKU17_AI_Tgaz_pos_KR8 > Global_Ust.Tkr8_lo and SHKU17_AI_Tgaz_pos_KR8 <= Global_Ust.Tkr8_hi)) and (MD.KC_MAG or MD.KC_KOL)) or
 
 			(((SHKU17_AI_Tgaz_pos_KR8As > Global_Ust.Tkr8as_lo and SHKU17_AI_Tgaz_pos_KR8As <= Global_Ust.Tkr8as_hi) or 
-			(SHKU17_AI_Tgaz_pos_KR8s > Global_Ust.Tkr8s_lo and SHKU17_AI_Tgaz_pos_KR8s <= Global_Ust.Tkr8s_hi)) and MD.KC_MAG_REV)) and
+			(SHKU17_AI_Tgaz_pos_KR8s > Global_Ust.Tkr8s_lo and SHKU17_AI_Tgaz_pos_KR8s <= Global_Ust.Tkr8s_hi)) and (MD.KC_MAG_REV or MD.KC_KOL))) and
 
 			((SHKU17_AI_Tgaz_out_pos_KR44 > Global_Ust.Tkr44_lo and SHKU17_AI_Tgaz_out_pos_KR44 <= Global_Ust.Tkr44_hi) or 
 			(SHKU17_AI_Tgaz_out_gr2 > Global_Ust.Tgr2_lo and SHKU17_AI_Tgaz_out_gr2 <= Global_Ust.Tgr2_hi));  
 
 
-Tg_ala_hi2KC := ((((SHKU17_AI_Tgaz_pos_KR8A > Global_Ust.Tkr8a_hi) or (SHKU17_AI_Tgaz_pos_KR8 > Global_Ust.Tkr8_hi)) and MD.KC_MAG) or
+Tg_ala_hi2KC := ((((SHKU17_AI_Tgaz_pos_KR8A > Global_Ust.Tkr8a_hi) or (SHKU17_AI_Tgaz_pos_KR8 > Global_Ust.Tkr8_hi)) and (MD.KC_MAG or MD.KC_KOL)) or
 
-				(((SHKU17_AI_Tgaz_pos_KR8As > Global_Ust.Tkr8as_hi) or (SHKU17_AI_Tgaz_pos_KR8s > Global_Ust.Tkr8s_hi)) and MD.KC_MAG_REV)) and
+				(((SHKU17_AI_Tgaz_pos_KR8As > Global_Ust.Tkr8as_hi) or (SHKU17_AI_Tgaz_pos_KR8s > Global_Ust.Tkr8s_hi)) and (MD.KC_MAG_REV or MD.KC_KOL))) and
 
-				((SHKU17_AI_Tgaz_out_pos_KR44 > Global_Ust.Tkr44_hi) or (SHKU17_AI_Tgaz_out_gr2 > Global_Ust.Tgr2_hi));  
+				((SHKU17_AI_Tgaz_out_pos_KR44 > Global_Ust.Tkr44_hi) or (SHKU17_AI_Tgaz_out_gr2 > Global_Ust.Tgr2_hi)); 
+
+ton_to_AOB_by_Tg_ala_hi2KC(IN:= Tg_ala_hi2KC, PT:= T#10s);
+Tg_ala_hi2KC_delay := ton_to_AOB_by_Tg_ala_hi2KC.Q; 
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -708,9 +722,297 @@ ton_to_AOB_by_Pg_ala_hi2KC(IN:= Pg_ala_hi2KC, PT:= T#10m);
 Pg_ala_hi2KC_delay := ton_to_AOB_by_Pg_ala_hi2KC.Q;
 //////////////////////////////////////////////////////////////////////////////////////////
 
-//Выдаем команду по срабатыванию АПС
-AOB_ASUTP_CMD := APS_Tg_ala_hi2KC or APS_Pg_ala_hi2KC_delay; //Выдаем команду на АОБ 
+
+//Выдаем команду на АОБ по срабатыванию таймеров защит по температуре и давлению
+AOB_ASUTP_CMD := Tg_ala_hi2KC_delay or Pg_ala_hi2KC_delay;
+
+//Алгоритм управления задвижками пожарных емкостей
+if Llo1PE_1 or Llo1PE_2 then
+	LVL_LO_Z1_ON := true;
+	LVL_LO_Z2_ON := true;
+	LVL_HI_Z1_OFF := false;
+	LVL_HI_Z2_OFF := false;
+end_if;
+
+if Lhi1PE_1 or Lhi1PE_2 then
+	LVL_HI_Z1_OFF := true;
+	LVL_HI_Z2_OFF := true;
+	LVL_LO_Z1_ON := false;
+	LVL_LO_Z2_ON := false;
+end_if;
+
+
+
+
+
+
+
+
+
 ]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="71D265E144971684C09AD797B5F46F40" Name="block_GROUP">
+                <Variables>
+                    <Variable UUID="E210296B441A3DF898CFCF87254DD5C3" Name="i" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="D1F7FCE548F288CC47D115971801DB6B" Name="gr1_exists" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="CC8A4D6E462BC3825724DA8330D64DD7" Name="gr2_exists" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="C0F8852041765C5E3417DF87CE2D8EE2" Name="gr1_checked" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="B7BA003B452628C895CD8B8DF56C8B78" Name="gr2_checked" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="309E1C3F49786090CDA0EE80B0B0CBB1" Name="gr1_done" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="513BFEBF40D305FAA9A9D5BC3AE7380F" Name="gr2_done" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="D52071B04A8CD7F2119F8AA04F15671E" Name="prev_cmd_stop_cfg" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[//на режиме Кольцо активируем кнопки конфигурирования групп
+if MD.KC_KOL then 
+	Global_gr.btn_EN[0] := true; //начать конфигурирование
+	Global_gr.btn_EN[3] := true; //отменить конфигурирование
+	Global_gr.btn_EN[4] := true; //записать конфигурацию
+	Global_gr.btn_EN[5] := true; //сброс групп ГПА
+else
+	Global_gr.btn_EN[0] := false;
+	Global_gr.btn_EN[3] := false;
+	Global_gr.btn_EN[4] := false;
+	Global_gr.btn_EN[5] := false;
+	Global_gr.start_Config := false; //при уходе с режима Кольцо автоматически отменяем режим конфигурирования групп
+end_if;
+
+//Переходим в режим конфигурирования нажатием на кнопку "Начать конфигурирование"
+if Global_gr.btn_OUT[0] then Global_gr.start_Config := true; end_if;
+
+//Отмена конфигурирования
+if Global_gr.btn_OUT[3] then 
+	Global_gr.btn_EN[1] := false;
+	Global_gr.btn_EN[2] := false;  
+	Global_gr.start_Config := false;
+	Global_gr.active_Group := 0;
+	for i := 0 to 6 do Global_gr.check_Box_Group_Check[i] := false; end_for; //снятие флажков чекбоксов
+    for i := 0 to 6 do Global_gr.check_Box_Group_En[i] := false; end_for; //блокировка чекбоксов    
+end_if;
+
+//Сброс групп ГПА
+if Global_gr.btn_OUT[5] then
+	Global_gr.btn_EN[1] := false;
+	Global_gr.btn_EN[2] := false;  
+	Global_gr.start_Config := false;
+	Global_gr.active_Group := 0;
+	for i := 0 to 6 do Global_gr.check_Box_Group_Check[i] := false; end_for; //снятие флажков чекбоксов
+    for i := 0 to 6 do Global_gr.check_Box_Group_En[i] := false; end_for; //блокировка чекбоксов
+    for i := 1 to 6 do Global_gr.gpa_In_Group[i] := 0; end_for; //убрать все ГПА из групп
+	Global_gr.skip_Group1 := false;
+	Global_gr.skip_Group2 := false;
+	Global_gr.group_Created[1] := false;
+	Global_gr.group_Created[2] := false;
+end_if;
+
+//сбрасываем последнюю ошибку конфигурирования групп 
+if Global_gr.reset_Config then Global_gr.error_Config := false; end_if;
+
+//сбрасываем флаг правильного конфигурированию группы
+if Global_gr.apply_Config then 
+	Global_gr.done_Config := false;
+	Global_gr.done_String := ''; 
+end_if; 
+
+
+//Если группы сформированы, то пропускаем цикл
+if Global_gr.group_Created[1] and Global_gr.group_Created[2] and not prev_cmd_stop_cfg then
+	Global_gr.start_Config := false;
+end_if;
+prev_cmd_stop_cfg := Global_gr.group_Created[1] and Global_gr.group_Created[2]; 
+
+//Цикл конфигурирования групп 
+if Global_gr.start_Config and not Global_gr.error_Config then
+	Global_gr.error_String := '';
+	gr1_done := 0; //инициализация счетчика проверки на ошибки конфигурирования
+	gr2_done := 0; //инициализация счетчика проверки на ошибки конфигурирования
+	//Исключение ГПА из формирования групп по причине нахождения в режиме проверки защит
+	Global_gr.skip_GPA_by_PZ[1] := Link_GPA1.MD_PZ;
+	Global_gr.skip_GPA_by_PZ[2] := Link_GPA2.MD_PZ;
+	Global_gr.skip_GPA_by_PZ[3] := Link_GPA3.MD_PZ;
+	Global_gr.skip_GPA_by_PZ[4] := Link_GPA4.MD_PZ;
+	Global_gr.skip_GPA_by_PZ[5] := Link_GPA5.MD_PZ;
+	Global_gr.skip_GPA_by_PZ[6] := Link_GPA6.MD_PZ;
+
+if not Global_gr.group_Created[1] then	
+	gr1_exists := 0;
+	//проверяем наличие ГПА в группе 1
+	for i := 1 to 6 do 
+		if Global_gr.gpa_In_Group[i] = 1 then gr1_exists := gr1_exists + 1; end_if; 
+	end_for;
+	if gr1_exists = 0 then Global_gr.btn_EN[1] := true; end_if; //разблокировка кнопки группы 1
+		
+	// при нажатой кнопке 1 делаем разблокировку чекбоксов конфигурирования
+	if Global_gr.btn_OUT[1] then 
+		Global_gr.active_Group := 1;
+		for i := 0 to 4 do
+			if not Global_gr.skip_GPA_by_PZ[i] then Global_gr.check_Box_Group_En[i] := true; end_if; 
+		end_for;
+	end_if;
+
+	//проверяем наличие отмеченных галочек ГПА для группы 1
+	gr1_checked := 0;
+	for i := 1 to 4 do 
+		if Global_gr.check_Box_Group_Check[i] then gr1_checked := gr1_checked + 1; end_if; 
+	end_for;
+
+	
+//Проверка на ошибки конфигурации при формировании группы 1
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//если не отмечена галочка пропуск группы 1 и не выбрано ни одного агрегата, то ошибка
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 1 and gr1_checked = 0 and not Global_gr.check_Box_Group_Check[0] then
+		Global_gr.error_Config := true;
+		Global_gr.error_String := 'Попытка записать нулевую$nконфигурацию в гр. №1!';
+	else
+		gr1_done := gr1_done + 1;
+	end_if;
+ 
+	//если отмечена галочка пропуск группы 1 и выбран один или более агрегатов, то ошибка
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 1 and gr1_checked > 0 and Global_gr.check_Box_Group_Check[0] then
+		Global_gr.error_Config := true;
+		Global_gr.error_String := 'Попытка записать недопустимую конфигурацию:$nпропуск группы и наличие ГПА в гр. №1!';
+	else
+		gr1_done := gr1_done + 1;
+	end_if;
+ 
+	//если выбран один ГПА, то ошибка
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 1 and gr1_checked = 1 then
+		Global_gr.error_Config := true;
+		Global_gr.error_String := 'Попытка записать недопустимую конфигурацию:$nодин ГПА в гр. №1!'; 
+	else
+		gr1_done := gr1_done + 1; 
+	end_if;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Запись результирующей конфигурации в регистр групп 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 	//если нет ошибок и галочки пропуска группы, то записываем конфигурацию группы 1
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 1 and gr1_checked > 1 and not Global_gr.check_Box_Group_Check[0] and gr1_done > 0 then
+		Global_gr.done_Config := true;
+		Global_gr.done_String := 'Конфигурация группы №1 сохранена!';
+		Global_gr.group_Created[1] := true;
+		for i := 1 to 4 do
+			if Global_gr.check_Box_Group_Check[i] then Global_gr.gpa_In_Group[i] := 1; end_if; 
+		end_for;
+		Global_gr.btn_EN[1] := false;
+		for i := 0 to 4 do Global_gr.check_Box_Group_Check[i] := false; end_for;
+		for i := 0 to 4 do Global_gr.check_Box_Group_En[i] := false; end_for;  
+	end_if;
+
+ 	//если нет ошибок, есть галочка пропуска группы, то записываем конфигурацию группы 1
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 1 and Global_gr.check_Box_Group_Check[0] and gr1_checked = 0 and gr1_done > 0 then
+		Global_gr.skip_Group1 := true;
+		Global_gr.done_Config := true;
+		Global_gr.done_String := 'Конфигурация группы №1: пропуск группы!';
+		Global_gr.group_Created[1] := true;
+		Global_gr.btn_EN[1] := false;
+		Global_gr.check_Box_Group_En[0] := false;
+		for i := 0 to 4 do Global_gr.check_Box_Group_Check[i] := false; end_for;
+		for i := 0 to 4 do Global_gr.check_Box_Group_En[i] := false; end_for;    
+	end_if;
+
+end_if;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+end_if;
+
+
+if not Global_gr.group_Created[2] then	
+	gr2_exists := 0;
+	//проверяем наличие ГПА в группе 2
+	for i := 1 to 6 do 
+		if Global_gr.gpa_In_Group[i] = 2 then gr2_exists := gr2_exists + 1; end_if; 
+	end_for;
+	if Global_gr.group_Created[1] and gr2_exists = 0 then Global_gr.btn_EN[2] := true; end_if; //разблокировка кнопки группы 2
+
+	// при нажатой кнопке 2 делаем разблокировку чекбоксов конфигурирования доступных для формирования группы ГПА
+	if Global_gr.btn_OUT[2] then 
+		Global_gr.active_Group := 2;
+		//код разблокировки доступных чекбоксов для формирования 2 группы
+		min_Pos := 1;
+		for i := 1 to 6 do
+			if Global_gr.gpa_In_Group[i] = 1 then min_Pos := i + 1; end_if;  
+		end_for;
+		for i := min_Pos to 6 do 
+			if not Global_gr.skip_GPA_by_PZ[i] then Global_gr.check_Box_Group_En[i] := true; end_if; 
+		end_for;
+	//Также проверяем, есть ли пропуск первой группы. Если есть, то галочку пропуск группы 2 оставляем заблокированной
+	if not Global_gr.skip_Group1 then Global_gr.check_Box_Group_En[0] := true; end_if; 
+	end_if;
+	
+	//проверяем наличие отмеченных галочек ГПА в группе 2
+	gr2_checked := 0;
+	for i := 1 to 6 do 
+		if Global_gr.check_Box_Group_Check[i] then gr2_checked := gr2_checked + 1; end_if; 
+	end_for;
+
+
+
+//Проверка на ошибки конфигурации при формировании группы 2
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//если не отмечена галочка пропуск группы 2 и не выбрано ни одного агрегата, то ошибка
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 2 and gr2_checked = 0 and not Global_gr.check_Box_Group_Check[0] then
+		Global_gr.error_Config := true;
+		Global_gr.error_String := 'Попытка записать нулевую$nконфигурацию в гр. №2!';
+	else
+		gr2_done := gr2_done + 1;
+	end_if;
+ 
+	//если отмечена галочка пропуск группы 2 и выбран один или более агрегатов, то ошибка
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 2 and gr2_checked > 0 and Global_gr.check_Box_Group_Check[0] then
+		Global_gr.error_Config := true;
+		Global_gr.error_String := 'Попытка записать недопустимую конфигурацию:$nпропуск группы и наличие ГПА в гр. №2!';
+	else
+		gr2_done := gr2_done + 1;
+	end_if;
+ 
+	//если выбран один ГПА или больше 4 ГПА, то ошибка
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 2 and (gr2_checked = 1 or gr2_checked > 4) then
+		Global_gr.error_Config := true;
+		Global_gr.error_String := 'Попытка записать недопустимую конфигурацию:$nодин или более 4-х ГПА в гр. №2!'; 
+	else
+		gr2_done := gr2_done + 1; 
+	end_if;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//Запись результирующей конфигурации в регистр групп 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 	//если нет ошибок и галочки пропуска группы, то записываем конфигурацию группы 2
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 2 and gr2_checked > 1 and gr2_checked <= 4 and not Global_gr.check_Box_Group_Check[0] and gr2_done > 0 then
+		Global_gr.done_Config := true;
+		Global_gr.done_String := 'Конфигурация группы №2 сохранена!';
+		Global_gr.group_Created[2] := true;
+		for i := 1 to 6 do
+			if Global_gr.check_Box_Group_Check[i] then Global_gr.gpa_In_Group[i] := 2; end_if; 
+		end_for;
+		Global_gr.btn_EN[2] := false;
+		for i := 0 to 6 do Global_gr.check_Box_Group_Check[i] := false; end_for;
+		for i := 0 to 6 do Global_gr.check_Box_Group_En[i] := false; end_for;  
+	end_if;
+
+ 	//если нет ошибок, есть галочка пропуска группы, то записываем конфигурацию группы 2
+	if Global_gr.btn_OUT[4] and Global_gr.active_Group = 2 and Global_gr.check_Box_Group_Check[0] and gr2_checked = 0 and gr2_done > 0 then
+		Global_gr.skip_Group2 := true;
+		Global_gr.done_Config := true;
+		Global_gr.done_String := 'Конфигурация группы №2: пропуск группы!';
+		Global_gr.group_Created[2] := true;
+		Global_gr.btn_EN[2] := false;
+		Global_gr.check_Box_Group_En[0] := false;
+		for i := 0 to 6 do Global_gr.check_Box_Group_Check[i] := false; end_for;
+		for i := 0 to 6 do Global_gr.check_Box_Group_En[i] := false; end_for;    
+	end_if;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+end_if;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="20BBB8F545957D7FD23D8FA61D8C82EB" Name="block_UNL">
+                <Variables />
+                <ST><![CDATA[]]></ST>
             </FunctionBlock>
             <Function UUID="5617DF744661F236FE4C9BA67FE735DC" Name="func_GE2" Comment="Больше либо равно 2" ResultTypeUUID="EC797BDD4541F500AD80A78F1F991834">
                 <Variables>
@@ -1952,8 +2254,8 @@ AE_580(APS_SHKU17_KR49_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_S
 
 //АПС по режимам, уставкам, алгоритмам
 AE_581(Tg_hi2KC, T#10000ms, Deblock, Kvitir, DO_sound_PS, APS_Tg_hi2KC); //превышение температуры технологического газа на выходе КЦ
-AE_582(Tg_ala_hi2KC, T#10000ms, Deblock, Kvitir, DO_sound_AS, APS_Tg_ala_hi2KC); //аварийное превышение температуры технологического газа на выходе КЦ
-AE_583(AOB_ASUTP_CMD, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_AOB_ASUTP_CMD); //команда на АОБ
+AE_582(Tg_ala_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Tg_ala_hi2KC); //аварийное превышение температуры технологического газа на выходе КЦ
+AE_583(AOB_ASUTP_CMD, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_AOB_ASUTP_CMD); //команда на АОБ по превышению давления или температуры газа на выходе КЦ
 AE_584(Pg_hi2KC, T#10000ms, Deblock, Kvitir, DO_sound_PS, APS_Pg_hi2KC); //превышение давления технологического газа на выходе КЦ
 AE_585(Pg_ala_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Pg_ala_hi2KC); //аварийное превышение давления технологического газа на выходе КЦ
 AE_586(Pg_ala_hi2KC_delay, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_Pg_ala_hi2KC_delay); //аварийное превышение давления технологического газа на выходе КЦ через 10 минут
@@ -1993,6 +2295,12 @@ AE_618(MD.KC_NO, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_MD_KC_NO); //АПС:
 AE_619(Global_BTN.NO, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Global_BTN_NO); //АПС: Команда с АРМ НО без стравливания
 AE_620(drumNO.done_ok, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_NO_DONE); //АПС: НО завершен корректно
 AE_621(drumNO.done_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_NO_DONE_INCORRECT); //АПС: НО завершен некорректно
+
+AE_622(Tg_ala_hi2KC_delay, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Tg_ala_hi2KC_delay); //аварийное превышение температуры технологического газа на выходе КЦ через 10 сек
+AE_623(Llo1PE_1, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Llo1PE_1); //Нижний уровень в пожарной емкости 1
+AE_624(Llo1PE_2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Llo1PE_2); //Нижний уровень в пожарной емкости 2
+AE_625(Lhi1PE_1, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Lhi1PE_1); //Верхний уровень в пожарной емкости 1
+AE_626(Lhi1PE_2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Lhi1PE_2); //Верхний уровень в пожарной емкости 2
 
 
 //Выходы АПС
@@ -2206,6 +2514,10 @@ VLV_init := KR;]]></ST>
                     <Variable UUID="B871BAFD47AE12B6DB948DAE665DE20A" Name="KR18_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     <Variable UUID="B1E835E24B3B6FE1B9AEDB9213AE9CEE" Name="KR18A_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                     <Variable UUID="45B72823448F5A8F840810985C232456" Name="dummy" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="7DFC3B67409FA5E948D66987A90F4C77" Name="KR_Z1_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="55306F1B4047FD5572FA65892DD44E44" Name="KR_Z2_ON_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="8A41F82E40DEE5E0ECD040AC25C1AE43" Name="KR_Z1_OFF_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="CC8137294A521F834F63388C1C7ECB0A" Name="KR_Z2_OFF_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[//Кран 17 закрыть
 if (dummy) and not KR17_OFF_prev then
@@ -2386,7 +2698,50 @@ if (OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON) and not KR6AR_ON_p
 	HMI_SHKU17_KR6AR_DA := false;
 	CMD_SHKU17_KR6AR_aOnOff := true;
 end_if;
-KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON;]]></ST>
+KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON;
+
+
+//Задвижку Z1 открыть
+if LVL_LO_Z1_ON and not KR_Z1_ON_prev then
+	HMI_SHKU17_Z1_DA := false;
+	CMD_SHKU17_Z1_aOnOff := true;	
+end_if;
+KR_Z1_ON_prev := LVL_LO_Z1_ON;
+
+//Задвижку Z1 закрыть
+if LVL_HI_Z1_OFF and not KR_Z1_OFF_prev then
+	HMI_SHKU17_Z1_DA := false;
+	CMD_SHKU17_Z1_aOnOff := false;	
+end_if;
+KR_Z1_OFF_prev := LVL_HI_Z1_OFF;
+
+
+//Задвижку Z2 открыть
+if LVL_LO_Z2_ON and not KR_Z2_ON_prev then
+	HMI_SHKU17_Z2_DA := false;
+	CMD_SHKU17_Z2_aOnOff := true;	
+end_if;
+KR_Z2_ON_prev := LVL_LO_Z2_ON;
+
+//Задвижку Z2 закрыть
+if LVL_HI_Z2_OFF and not KR_Z2_OFF_prev then
+	HMI_SHKU17_Z2_DA := false;
+	CMD_SHKU17_Z2_aOnOff := false;	
+end_if;
+KR_Z2_OFF_prev := LVL_HI_Z2_OFF;
+
+
+
+
+
+
+
+
+
+
+
+
+]]></ST>
             </FunctionBlock>
             <FunctionBlock UUID="C5E1C2D54AF74909AFB82A98431D9D80" Name="fb_IM">
                 <Variables>
@@ -4007,6 +4362,12 @@ MD.STOPS := MD.EAO_KC or MD.KC_NO or MD.KC_AOS or MD.KC_AOB;
 
 //Режимы АО КЦ
 MD.AO_KC := MD.EAO_KC or MD.KC_AOS or MD.KC_AOB;
+SHKU17_DO_GPA1_Avar_KC := MD.AO_KC;
+SHKU17_DO_GPA2_Avar_KC := MD.AO_KC;
+SHKU17_DO_GPA3_Avar_KC := MD.AO_KC;
+SHKU17_DO_GPA4_Avar_KC := MD.AO_KC;
+SHKU17_DO_GPA5_Avar_KC := MD.AO_KC;
+SHKU17_DO_GPA6_Avar_KC := MD.AO_KC;
 
 //ГПА Кольцо  
 MD.GPA_KOL := Link_GPA1.MD_K or Link_GPA2.MD_K or Link_GPA3.MD_K or Link_GPA4.MD_K or Link_GPA5.MD_K or Link_GPA6.MD_K;  
@@ -4084,7 +4445,7 @@ if ftrig_EAO.Q then MD.PREV := INT#9; end_if;
 
 // Аварийный останов без стравливания
 //////////////////////////////////////////////////////////////////////////////////////////
-MD.KC_AOB := not (MD.EAO_KC or MD.KC_AOS) and (Global_BTN.AOB or SHKU17_DI_AObs_KC_PU or APS_AOB_ASUTP_CMD or drumAOB.run);
+MD.KC_AOB := not (MD.EAO_KC or MD.KC_AOS) and (Global_BTN.AOB or SHKU17_DI_AObs_KC_PU or AOB_ASUTP_CMD or drumAOB.run);
 if MD.KC_AOB then
 	temp_mode_string := 'АО без стравливания';
 	if drumAOB.step = INT#0 then
@@ -4123,11 +4484,9 @@ if ftrig_AOS.Q then MD.PREV := INT#7; end_if;
 
 //Режим Кольцо
 //////////////////////////////////////////////////////////////////////////////////////////
-MD.KC_KOL := not MD.KC_NO and not MD.AO_KC and MD.GPA_MAG and 
-			((SHKU17_DI_KR6_ON and SHKU17_DI_KR6As_ON and 
-			SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and not MD.KC_MAG_REV and not MD.INT_KC_MAG) or 
-			(SHKU17_DI_KR6_ON and SHKU17_DI_KR6As_ON and 
-			SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and not MD.KC_MAG and not MD.INT_KC_MAG)); 
+MD.KC_KOL := not MD.KC_NO and not MD.AO_KC and MD.GPA_MAG and not MD.KC_MAG and not MD.KC_MAG_REV and 
+				SHKU17_DI_KR6_ON and SHKU17_DI_KR6As_ON and SHKU17_DI_KR17_OFF and 
+				SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF and not MD.INT_KC_MAG; 
 if MD.KC_KOL then
 	temp_mode_string := 'КЦ Кольцо';
 end_if;
@@ -4139,11 +4498,13 @@ if ftrig_KOL.Q then MD.PREV := INT#3; end_if;
 
 //Режим Пуск КЦ
 //////////////////////////////////////////////////////////////////////////////////////////
+(*
 MD.KC_START := MD.GPA_START and not (MD.GPA_MAG or MD.AO_KC or MD.KC_NO);
 if MD.KC_START then
 	temp_mode_string := 'КЦ Пуск';
 end_if;
 rtrig_KC_START(CLK:= MD.KC_START); if rtrig_KC_START.Q then CREATE_EVENT('Переход в режим - КЦ Пуск', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
+*)
 //////////////////////////////////////////////////////////////////////////////////////////
 
 

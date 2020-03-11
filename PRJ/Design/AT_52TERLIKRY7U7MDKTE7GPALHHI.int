@@ -98,6 +98,15 @@
         <Signal Name="NO_KR6As_ON" UUID="8B851E3644B5492007CB058CFA167B88" Type="BOOL" Usage="" />
         <Signal Name="NO_KR6R_ON" UUID="111307034720133AB726F9BA605F40DC" Type="BOOL" Usage="" />
         <Signal Name="NO_KR6AR_ON" UUID="984F307C4EBB7007BBBF8EB1E04C2B24" Type="BOOL" Usage="" />
+        <Signal Name="min_Pos" UUID="49838DAF43CEF0AE34D0E092DD8B3FC7" Type="INT" Usage="" />
+        <Signal Name="Llo1PE_1" UUID="8BEEBF004DA09A9F140EE2AF973EB681" Type="BOOL" Usage="" Comment="Нижний уровень в пожарной емкости 1" />
+        <Signal Name="Llo1PE_2" UUID="EA9266DA41B8862ADB53DA857DAA6B0E" Type="BOOL" Usage="" Comment="Нижний уровень в пожарной емкости 2" />
+        <Signal Name="Lhi1PE_1" UUID="3E0C84BC4FAF94682CE1C9A98673DFE9" Type="BOOL" Usage="" Comment="Верхний уровень в пожарной емкости 1" />
+        <Signal Name="Lhi1PE_2" UUID="411F89564F58610D976CC39269B31B2B" Type="BOOL" Usage="" Comment="Верхний уровень в пожарной емкости 2" />
+        <Signal Name="LVL_LO_Z1_ON" UUID="9516572F4983B87C58E905AE8BC1D1C6" Type="BOOL" Usage="" />
+        <Signal Name="LVL_LO_Z2_ON" UUID="FE1E4EFB41193A92BAB7B2BE2A36E557" Type="BOOL" Usage="" />
+        <Signal Name="LVL_HI_Z1_OFF" UUID="833F1E104C012B571FC4DEADE867DDFC" Type="BOOL" Usage="" />
+        <Signal Name="LVL_HI_Z2_OFF" UUID="FDB3C5A44855137B9891468E27DE21BE" Type="BOOL" Usage="" />
         <Signal Name="______________IO______________" UUID="5452534D4DE772F3E7D405ADD8FB5A61" Type="BOOL" Usage="" />
         <Signal Name="SHKU17_AI_A1_31" UUID="B1FAA8FF4FA3358B449220ABD8B86B86" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура наружного воздуха" />
         <Signal Name="SHKU17_AI_A1_32" UUID="18C63D9E447CEDD25C2B6CAE1B8384CD" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура грунта" />
@@ -2895,6 +2904,7 @@
         <Signal Name="dP1KR30B_hi" UUID="7E4A2A3B4C824FEC4C9C2787363C40C2" Type="BOOL" Usage="" Global="TRUE" Comment="Высокий перепад давления на кр30б" />
         <Signal Name="Tg_hi2KC" UUID="1D51357441BB7C180E87829A554DF538" Type="BOOL" Usage="" Global="TRUE" Comment="Высокая температура газа на выходе КЦ" />
         <Signal Name="Tg_ala_hi2KC" UUID="18175A194DBBFECAA69AF29D689A1AE0" Type="BOOL" Usage="" Global="TRUE" Comment="Аварийно высокая температура газа на выходе КЦ" />
+        <Signal Name="Tg_ala_hi2KC_delay" UUID="05B4F2094452715D25FBC18A646D3340" Type="BOOL" Usage="" Global="TRUE" Comment="Аварийно высокая температура газа на выходе КЦ с задержкой" />
         <Signal Name="Pg_hi2KC" UUID="5660C3FF4AE6BF4EAF6EA5974DED4BE2" Type="BOOL" Usage="" Global="TRUE" Comment="Высокое давление газа на выходе КЦ" />
         <Signal Name="Pg_ala_hi2KC" UUID="20FAFD45403FB0F71EC1098E71654D59" Type="BOOL" Usage="" Global="TRUE" Comment="Аварийно высокое давление газа на выходе КЦ" />
         <Signal Name="Pg_ala_hi2KC_delay" UUID="7CF02C474AA89A0DDA3E3EBF80D252E3" Type="BOOL" Usage="" Global="TRUE" Comment="Аварийно высокое давление газа на выходе КЦ с задержкой" />
@@ -2902,6 +2912,7 @@
         <Signal Name="AOB_ASUTP_CMD" UUID="0B042DB741E13D622076D0BBE190370B" Type="BOOL" Usage="" Global="TRUE" Comment="Команда АОБ от АСУТП" />
         <Signal Name="APS_Tg_hi2KC" UUID="BC376EF54729A6A10DED9B90EF1D6FDD" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Высокая температура газа на выходе КЦ" />
         <Signal Name="APS_Tg_ala_hi2KC" UUID="1D3871004876147CB48E74B8A0933FC6" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Аварийно высокая температура газа на выходе КЦ" />
+        <Signal Name="APS_Tg_ala_hi2KC_delay" UUID="7138C1B44392BD0E7E56ACB088D213B3" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Аварийно высокая температура газа на выходе КЦ с задержкой" />
         <Signal Name="APS_AOB_ASUTP_CMD" UUID="099B2CC641E07A72D7D35BB5A773CE76" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Команда АОБ от АСУТП" />
         <Signal Name="APS_Pg_hi2KC" UUID="DB42B689476C458EFA4D578761BB8CC6" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Высокое давление газа на выходе КЦ" />
         <Signal Name="APS_Pg_ala_hi2KC" UUID="DA9E34EE4444C7C46A199DA0988C6D90" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Аварийно высокое давление газа на выходе КЦ" />
@@ -2943,5 +2954,9 @@
         <Signal Name="APS_AOS_kr30_open_not_accept" UUID="43BEC32B4B865F13B42BC5B5167D6DB4" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOS_kr30_open_not_accept" />
         <Signal Name="APS_AOS_kr30v_open_accept" UUID="7C061F9C46ADB4CEF8B0538D7E6A82A6" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOS_kr30v_open_accept" />
         <Signal Name="APS_AOS_kr30v_open_not_accept" UUID="014153A343D7AEF57614E7A65840DD8F" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: AOS_kr30v_open_not_accept" />
+        <Signal Name="APS_Llo1PE_1" UUID="D927BEDE457EA063A681E9AB0A1E3160" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Нижний уровень в пожарной емкости 1" />
+        <Signal Name="APS_Llo1PE_2" UUID="6B9431BE4E39C542570D4F9AAC9CBAFF" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Нижний уровень в пожарной емкости 2" />
+        <Signal Name="APS_Lhi1PE_1" UUID="5FBB397A48ECD495B2079A835D3EBF1C" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Верхний уровень в пожарной емкости 1" />
+        <Signal Name="APS_Lhi1PE_2" UUID="31162B5049CD7E00446A6FAD0B4FAFDB" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Верхний уровень в пожарной емкости 2" />
     </InterfaceList>
 </SubAppType>
