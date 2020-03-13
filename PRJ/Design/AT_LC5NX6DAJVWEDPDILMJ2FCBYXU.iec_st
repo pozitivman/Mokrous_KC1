@@ -22,14 +22,14 @@ tmpREALtime_prev := tmpREALtime;
 AS36_1_str.Shop_YR3 := 0.0;
 AS36_1_str.Shop_Yr3_valid := false;
  
-for i := 1 to 6 do
-	if ((gpa[i].S > 0.0 and gpa[i].run = true) and (AS36_1_str.Shop_YR3 = 0.0 or AS36_1_str.Shop_YR3 > gpa[i].S)) then
+for i := 1 to 4 do
+	if ((gpa[i].S > 0.0 and gpa[i].run = true and GPA_in_Group[i] = 1) and (AS36_1_str.Shop_YR3 = 0.0 or AS36_1_str.Shop_YR3 > gpa[i].S)) then
 		AS36_1_str.Shop_YR3 := gpa[i].S;
 		AS36_1_str.Shop_Yr3_valid := TRUE;
 	end_if;
 end_for;
-Eout_valid := (shop_1.Eout > 0.0);
-EoutEin_valid := (shop_1.EoutEin > 0.0);
+Eout_valid := (shop.Eout > 0.0);
+EoutEin_valid := (shop.EoutEin > 0.0);
 // конфигурация пид-контуров и селектор выхода
 AS_conf(
 	on_1 :=  AS36_1_str.Shop_Yr3_valid,
@@ -38,7 +38,7 @@ AS_conf(
 	);
 	
 // расчет пид-контуров	
-//sig_sel_21019(as_MStruct, as_test_reg);	
+sig_sel_21019(as_MStruct, as_test_reg);	
 
 // логика ручного или автоматического регулирования
 if not krAPK1.DA then	
@@ -166,9 +166,11 @@ gpa[6].run	:= Link_GPA4.run;	//	агрегат в магистрали
 
 // Задание на КХР со скады
 AS36_1_str.CV_Manual := krAPK1.SP_manual;
+
 // Сюда привязываем команду "Разгрузка 36 крана"
 AS36_1_str.BTN_Unload := krAPK1.BTN_Unload;
 krAPK1.BTN_Unload := BOOL#0;
+
 // Сюда привязываем команду "Загрузка 36 крана"
 AS36_1_str.BTN_Load := krAPK1.BTN_Load;
 krAPK1.BTN_Load := BOOL#0;
@@ -178,18 +180,19 @@ krAPK1.BTN_Load := BOOL#0;
 
 // отсюда забираем задание на 36 Кран
 krAPK1.SP_algoritm := as_MStruct.CV;
-//SHKU17_A1_AO_HMI.APK3_pos := AS36_1_str.AS_CV_out;
+SHKU17_AO_Ctrl_APK1 := AS36_1_str.AS_CV_out;
+if Global_BTN.IMIT then SHKU17_AI_Pos_APK1 := SHKU17_AO_Ctrl_APK1; end_if;
 
 as_MStruct.pid_struct[1].act_SP := AS36_1_str.SP_S;
 as_MStruct.pid_struct[1].PV := AS36_1_str.Shop_YR3;
 as_MStruct.pid_struct[1].delt_t := TSCAN;
 
 as_MStruct.pid_struct[2].act_SP := AS36_1_str.SP_Pout;
-as_MStruct.pid_struct[2].PV := shop_1.Eout;
+as_MStruct.pid_struct[2].PV := shop.Eout;
 as_MStruct.pid_struct[2].delt_t := TSCAN;
 
 as_MStruct.pid_struct[3].act_SP := AS36_1_str.SP_PoutPin;
-as_MStruct.pid_struct[3].PV := shop_1.EoutEin;
+as_MStruct.pid_struct[3].PV := shop.EoutEin;
 as_MStruct.pid_struct[3].delt_t := TSCAN;
 
 d_pd := as_MStruct.PplusD_selected - PD_prev;

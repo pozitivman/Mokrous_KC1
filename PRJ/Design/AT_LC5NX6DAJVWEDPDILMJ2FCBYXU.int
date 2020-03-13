@@ -13,7 +13,8 @@
         <Signal Name="@RESERVE" UUID="CDE5C2514501A8052E7DA9AF41701589" Type="BOOL" />
         <Signal Name="@LICENSE" UUID="B604D1A849DB8D37FAE43BA7D8A1D9E8" Type="STRING" Usage="output" />
         <Signal Name="@NODE_RUN" UUID="11CFC95F39784D0797BFCEAB0F98BF6A" Type="BOOL" />
-        <Signal Name="shop_1" UUID="C9FF6FD74EF955D242136BA14DB22DFB" Type="281325D34B9E0412DA6D6689C005003F" Usage="" Global="TRUE" />
+        <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
+        <Signal Name="shop" UUID="C9FF6FD74EF955D242136BA14DB22DFB" Type="281325D34B9E0412DA6D6689C005003F" Usage="" Global="TRUE" />
         <Signal Name="AS36_1_str" UUID="A54C19E04D724343ADEC5FBAC60A7375" Type="451CBCFB43885A4E3D000AAF3394BE87" Usage="" Global="TRUE" />
         <Signal Name="CONST_T" UUID="BAB0F7B04A38CB37124125AF8F49ECAC" Type="REAL" />
         <Signal Name="TSCAN" UUID="D28619194A97DC7528AB5891492748EA" Type="REAL" Usage="" />
@@ -21,11 +22,14 @@
         <Signal Name="gpa" UUID="A96FF41943C11E60A99C9A904F158127" Type="BFA29D114211BEBF973A11BF32F99F51" ArraySize="10" Usage="" />
         <Signal Name="AS_MStruct" UUID="1F768BA34E09BA3EF8CD4681D5E12E3B" Type="DA56C2BC463D79102699DABEDD1175B4" Usage="" />
         <Signal Name="krAPK1" UUID="4F35E7D9418A3B8D3F735897509E6041" Type="635099BE48C9258F4BA926BFCBAA0549" Usage="" Global="TRUE" Comment="Антипомпажный клапан АПК1. СКАДА" />
+        <Signal Name="SHKU17_AO_Ctrl_APK1" UUID="D247427A4B17A8635E745B8FACC58D89" Type="REAL" Usage="" Global="TRUE" Comment="Аналоговый выход (логика): Управление АПК1" />
+        <Signal Name="SHKU17_AI_Pos_APK1" UUID="011D7291408F68B2F6F94E8CE380218E" Type="REAL" Usage="" Global="TRUE" Comment="Обработанный сигнал: Положение АПК №1" />
         <Signal Name="Link_GPA1" UUID="B5104EE44512B13A740D8AB09D6DB429" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-1" />
         <Signal Name="Link_GPA2" UUID="2FB75B54477F039CD51EC888574A06FA" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-2" />
         <Signal Name="Link_GPA3" UUID="21718BCE4EA0A2B647CFAF9B8FBC7BD7" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-3" />
         <Signal Name="Link_GPA4" UUID="30DEAC05486DDE308D876DA7B37AE66E" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-4" />
         <Signal Name="Link_GPA5" UUID="31C5441D40788384DE9E0789ED70F3CA" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-5" />
         <Signal Name="Link_GPA6" UUID="0BB108EE486DC8D63F8EC58CA617F00B" Type="FBA07BFA420F40EAC2D41A949BC69296" Usage="" Global="TRUE" Comment="Связь с ГПА-6" />
+        <Signal Name="GPA_in_Group" UUID="43CD35914FF4ABC2192948AFB6DEBB15" Type="INT" ArraySize="8" Usage="" Global="TRUE" Comment="Группа, в которой находится ГПА. 0 - ГПА не в группе" />
     </InterfaceList>
 </SubAppType>

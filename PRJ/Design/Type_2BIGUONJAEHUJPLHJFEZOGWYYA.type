@@ -13,6 +13,7 @@
         <Field Name="active_Group" Type="INT" UUID="13E50F2A43D8A919BCD6F193DBDB19B8" Comment="Текущий номер выбранной группы" />
         <Field Name="group_Created" Type="BOOL" UUID="4C0F6FC04EAA324603BD54896FF86B2F" ArraySize="3" Comment="Группа ГПА сформирована" />
         <Field Name="gpa_In_Group" Type="INT" UUID="D5A5A2D545BD6A15B76DA49861586DD6" ArraySize="8" Comment="Группа, в которой находится ГПА. 0 - ГПА не в группе" />
+        <Field Name="AO_from_GPA" Type="BOOL" UUID="493F988341499E655F8DDD8A59375543" ArraySize="8" Comment="Бит аварийного останова ГПА, приходящий по физ. линии" />
         <Field Name="btn_EN" Type="BOOL" UUID="0B111AFE4DB53115C1362E96CBFFB0D8" ArraySize="8" Comment="Флаг разблокироваки кнопки" />
         <Field Name="btn_OUT" Type="BOOL" UUID="058A42FC4DEC39C73E3266AF11B81212" ArraySize="8" Comment="Кнопка из СКАДы нажата" />
         <Field Name="check_Box_Group_En" Type="BOOL" UUID="B392E0C247A725F8709923A4412B3C86" ArraySize="8" Comment="Флаг разблокироваки флажка выбора группы" />

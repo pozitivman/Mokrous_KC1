@@ -252,30 +252,25 @@ case drumAOB.step of
 		drumAOB.TMR_COM := LREAL#300;
 		drumAOB.step_prev := drumAOB.step;
 		TMR[0] := LREAL#0.0;
-		TMR[1] := LREAL#0.0;
 	end_if;
 	AOB_to_DO := BOOL#1; (*АОбс в другие подсистемы и на физические линии*)
 	AOB_KR6_ON := BOOL#1;
 	AOB_KR6As_ON := BOOL#1;
 	AOB_KR6R_ON := BOOL#1;
 	AOB_KR6AR_ON := BOOL#1;
-	TMR[0] := TMR[0] + cycleTime_MAIN;
-	
-	if (TMR[0] >= LREAL#5.0) then // После задержки 5сек* выдаем команды на остальные краны
-		AOB_KR7_OFF := BOOL#1;
-		AOB_KR8_OFF := BOOL#1;
-		AOB_KR8A_OFF := BOOL#1;
-		AOB_KR8s_OFF := BOOL#1;
-		AOB_KR8As_OFF := BOOL#1;
-		TMR[1] := TMR[1] + cycleTime_MAIN; //Делаем выдержку 180сек*. Если не закроется кран 7, то выдаем команду на закрытие через резервный блок ЭПУУ
-		if (MD.PREV = INT#4) then
-			Need_accept.AOB_kr30_open := BOOL#1; 
-		end_if;
-		if (MD.PREV = INT#5) then
-			Need_accept.AOB_kr30v_open := BOOL#1; 
-		end_if;
+	AOB_KR7_OFF := BOOL#1;
+	AOB_KR8_OFF := BOOL#1;
+	AOB_KR8A_OFF := BOOL#1;
+	AOB_KR8s_OFF := BOOL#1;
+	AOB_KR8As_OFF := BOOL#1;
+	TMR[0] := TMR[0] + cycleTime_MAIN; //Делаем выдержку 180сек*. Если не закроется кран 7, то выдаем команду на закрытие через резервный блок ЭПУУ
+	if (MD.PREV = INT#4 or not SHKU17_DI_KR30_ON) then
+		Need_accept.AOB_kr30_open := BOOL#1; 
 	end_if;
-	if (TMR[1] >= LREAL#180.0 and not SHKU17_DI_KR7_OFF) then
+	if (MD.PREV = INT#5 or not SHKU17_DI_KR30V_ON) then
+		Need_accept.AOB_kr30v_open := BOOL#1; 
+	end_if;
+	if (TMR[0] >= LREAL#180.0 and not SHKU17_DI_KR7_OFF) then
 		AOB_KR7R_OFF := BOOL#1; 
 	end_if;
 	drumAOB.TMR_COM := drumAOB.TMR_COM - cycleTime_MAIN;
@@ -284,8 +279,7 @@ case drumAOB.step of
 		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON) then
 		drumAOB.step := INT#1;
 	end_if;
-//	if drumAOB.TMR_COM <= LREAL#0 then drumAOB.step := INT#2; end_if; //Переход на шаг: Алгоритм завершен некорректно пока отменяем
-	if drumAOB.TMR_COM <= LREAL#0 then drumAOB.TMR_COM := LREAL#0; end_if;
+	if drumAOB.TMR_COM <= LREAL#0 then drumAOB.TMR_COM := LREAL#0; end_if; //останавливаем таймер по превышению времени алгоритма
 
 1:	drumAOB.done_ok := BOOL#1;
 	drumAOB.step_prev := drumAOB.step;
@@ -370,39 +364,34 @@ case drumAOS.step of
 		drumAOS.TMR_COM := LREAL#300;
 		drumAOS.step_prev := drumAOS.step;
 		TMR[0] := LREAL#0.0;
-		TMR[1] := LREAL#0.0;
 	end_if;
 	AOS_to_DO := BOOL#1; (*АОсс в другие подсистемы и на физические линии*)
 	AOS_KR6_ON := BOOL#1;
 	AOS_KR6As_ON := BOOL#1;
 	AOS_KR6R_ON := BOOL#1;
 	AOS_KR6AR_ON := BOOL#1;
-	TMR[0] := TMR[0] + cycleTime_MAIN;
-
-	if (TMR[0] >= LREAL#5.0) then // После задержки 5сек* выдаем команды на остальные краны
-		AOS_KR7_OFF := BOOL#1;
-		AOS_KR8_OFF := BOOL#1;
-		AOS_KR8A_OFF := BOOL#1;
-		AOS_KR8s_OFF := BOOL#1;
-		AOS_KR8As_OFF := BOOL#1;
-		TMR[1] := TMR[1] + cycleTime_MAIN; //Делаем выдержку 180сек*. Если не закроется кран 7, то выдаем команду на закрытие через резервный блок ЭПУУ
-		if (MD.PREV = INT#4) then
-			Need_accept.AOS_kr30_open := BOOL#1; 
-		end_if;
-		if (MD.PREV = INT#5) then
-			Need_accept.AOS_kr30v_open := BOOL#1; 
-		end_if;
+	AOS_KR7_OFF := BOOL#1;
+	AOS_KR8_OFF := BOOL#1;
+	AOS_KR8A_OFF := BOOL#1;
+	AOS_KR8s_OFF := BOOL#1;
+	AOS_KR8As_OFF := BOOL#1;
+	TMR[0] := TMR[0] + cycleTime_MAIN; //Делаем выдержку 180сек*. Если не закроется кран 7, то выдаем команду на закрытие через резервный блок ЭПУУ
+	if (MD.PREV = INT#4 or not SHKU17_DI_KR30_ON) then
+		Need_accept.AOS_kr30_open := BOOL#1; 
 	end_if;
-	if (TMR[1] >= LREAL#180.0 and not SHKU17_DI_KR7_OFF) then
+	if (MD.PREV = INT#5 or not SHKU17_DI_KR30V_ON) then
+		Need_accept.AOS_kr30v_open := BOOL#1; 
+	end_if;
+	if (TMR[0] >= LREAL#180.0 and not SHKU17_DI_KR7_OFF) then
 		AOS_KR7R_OFF := BOOL#1; 
 	end_if;
 	drumAOS.TMR_COM := drumAOS.TMR_COM - cycleTime_MAIN;
 
 	if ((SHKU17_DI_KR7_OFF and not SHKU17_DI_KR7_ON) and (SHKU17_DI_KR8_OFF and not SHKU17_DI_KR8_ON) and (SHKU17_DI_KR8A_OFF and not SHKU17_DI_KR8A_ON) and
-		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON)) or TMR[1] >= LREAL#180.0  then
+		(SHKU17_DI_KR8s_OFF and not SHKU17_DI_KR8s_ON) and (SHKU17_DI_KR8As_OFF and not SHKU17_DI_KR8As_ON)) or TMR[0] >= LREAL#180.0  then
 		drumAOS.step := INT#1;
 	end_if;
-	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.step := INT#2; end_if;
+	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.TMR_COM := LREAL#0; end_if; //останавливаем таймер по превышению времени алгоритма
 
 
 1:	if drumAOS.step_prev <> INT#1 then
@@ -425,8 +414,7 @@ case drumAOS.step of
 	if (SHKU17_DI_KR17_ON and not SHKU17_DI_KR17_OFF) and (SHKU17_DI_KR18_ON and not SHKU17_DI_KR18_OFF) and (SHKU17_DI_KR18A_ON and not SHKU17_DI_KR18A_OFF) then
 		drumAOS.step := INT#2;
 	end_if;
-//	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.step := INT#3; end_if; //Переход на шаг: Алгоритм завершен некорректно пока отменяем
-	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.TMR_COM := LREAL#0; end_if;
+	if drumAOS.TMR_COM <= LREAL#0 then drumAOS.TMR_COM := LREAL#0; end_if; //останавливаем таймер по превышению времени алгоритма
 
 
 2:	drumAOS.done_ok := BOOL#1;
@@ -742,6 +730,9 @@ if Lhi1PE_1 or Lhi1PE_2 then
 end_if;
 
 
+//Разрешение на дистанционное управление кранами станции и узла подключения
+
+
 
 
 
@@ -914,7 +905,6 @@ if not Global_gr.group_Created[1] then
 
 end_if;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 end_if;
 
 
@@ -948,7 +938,6 @@ if not Global_gr.group_Created[2] then
 	end_for;
 
 
-
 //Проверка на ошибки конфигурации при формировании группы 2
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -978,8 +967,6 @@ if not Global_gr.group_Created[2] then
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
 //Запись результирующей конфигурации в регистр групп 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  	//если нет ошибок и галочки пропуска группы, то записываем конфигурацию группы 2
@@ -1007,8 +994,21 @@ if not Global_gr.group_Created[2] then
 		for i := 0 to 6 do Global_gr.check_Box_Group_En[i] := false; end_for;    
 	end_if;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+end_if;
 
-end_if;]]></ST>
+
+//Передаем флаги формирования групп в блок формирования состояний цеха
+MD.INT_GR1_WORK := Global_gr.group_Created[1];
+MD.INT_GR2_WORK := Global_gr.group_Created[2];
+
+//Передаем в другие подпрограммы нахождение ГПА в группе
+for i := 1 to 6 do
+	GPA_in_Group[i] := Global_gr.gpa_In_Group[i];
+end_for;
+
+
+
+]]></ST>
             </FunctionBlock>
             <FunctionBlock UUID="20BBB8F545957D7FD23D8FA61D8C82EB" Name="block_UNL">
                 <Variables />

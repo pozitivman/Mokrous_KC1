@@ -6,5 +6,15 @@
         <Field Name="AOB_kr30v_open" Type="BOOL" UUID="B1415C5E45BAF54DAA868786A3989A56" Comment="Запрос на открытие крана 30в при АОБ" />
         <Field Name="AOS_kr30_open" Type="BOOL" UUID="7E41BD584FD2CA5A14D08F87F3B58B74" Comment="Запрос на открытие крана 30 при АОС" />
         <Field Name="AOS_kr30v_open" Type="BOOL" UUID="34D97D5E42F963CEB2E89A9BBE12A95E" Comment="Запрос на открытие крана 30в при АОС" />
+        <Field Name="dP_kr30_DU_on" Type="BOOL" UUID="30206FDC43F3F7B9AA8D708B21BEE08E" Comment="Разрешение на ДУ по перепаду давления на кране 30" />
+        <Field Name="dP_kr30v_DU_on" Type="BOOL" UUID="EA42C89E4793E52777086BA0BCF77691" Comment="Разрешение на ДУ по перепаду давления на кране 30в" />
+        <Field Name="kr7_DU_on" Type="BOOL" UUID="DC42F6564DF3DE9F77B4F48720812366" Comment="Разрешение на ДУ кран 7" />
+        <Field Name="kr8_DU_on" Type="BOOL" UUID="E034D32846EE9F6F3EBE3EB4C73367F2" Comment="Разрешение на ДУ кран 8" />
+        <Field Name="kr8s_DU_on" Type="BOOL" UUID="FED1F0334033C91422A29AA9E4A8196D" Comment="Разрешение на ДУ кран 8&apos;" />
+        <Field Name="kr8a_DU_on" Type="BOOL" UUID="7E36E751434920D33BD90DA6E16E9F7E" Comment="Разрешение на ДУ кран 8a" />
+        <Field Name="kr8as_DU_on" Type="BOOL" UUID="5FFF4C514B763573E709E69D92CE0227" Comment="Разрешение на ДУ кран 8a&apos;" />
+        <Field Name="kr17_DU_on" Type="BOOL" UUID="7BAD475B4D9D4CC637C70CB739B0DE03" Comment="Разрешение на ДУ кран 17" />
+        <Field Name="kr18_DU_on" Type="BOOL" UUID="F498E6654D52BFFC4E8087A3279BC1F7" Comment="Разрешение на ДУ кран 18" />
+        <Field Name="kr18a_DU_on" Type="BOOL" UUID="FCD582A048E7A7C1CC48DF9ECE3D9289" Comment="Разрешение на ДУ кран 18a" />
     </Fields>
 </Type>
