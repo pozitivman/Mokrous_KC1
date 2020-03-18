@@ -14,5 +14,6 @@
         <SubApp Name="AppDrv_PRU" Type="6FD295994E932A99D86DEEA846C62B19" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="4F2285E04246A21E4C4EE2AACCA6B9E7" />
         <SubApp Name="AppDrv_AUX_SAU" Type="0A4D67B8469CB69FF3730E94B27126F4" Disabled="TRUE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="4F2285E04246A21E4C4EE2AACCA6B9E7" />
         <SubApp Name="Mnemo" Type="13D6559441DFF69C9FB93FB723DA9420" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="79A3CDA14EF1D54DF15F6CBDFE0D71C0" />
+        <SubApp Name="AppArchive" Type="05E38F844D4B81B911FCA78E6F6B08A5" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="D7BF0DD94EC0B88FA92E84BF5827A943" />
     </InterfaceList>
 </Node>

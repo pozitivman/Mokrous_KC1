@@ -731,16 +731,25 @@ end_if;
 
 
 //Разрешение на дистанционное управление кранами станции и узла подключения
+Need_accept.kr7_DU_on := (SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF) or IMIT;
 
+Need_accept.kr8_DU_on := (SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF) or IMIT;
 
+Need_accept.kr8s_DU_on := (SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF) or IMIT;
 
+Need_accept.kr8a_DU_on := (SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF) or IMIT;
 
+Need_accept.kr8as_DU_on := (SHKU17_DI_KR17_OFF and SHKU17_DI_KR18_OFF and SHKU17_DI_KR18A_OFF) or IMIT;
 
+Need_accept.kr17_DU_on := (SHKU17_DI_KR7_OFF and SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF) or IMIT;
 
+Need_accept.kr18_DU_on := (SHKU17_DI_KR7_OFF and SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF) or IMIT;
 
+Need_accept.kr18a_DU_on := (SHKU17_DI_KR7_OFF and SHKU17_DI_KR8_OFF and SHKU17_DI_KR8A_OFF and SHKU17_DI_KR8s_OFF and SHKU17_DI_KR8As_OFF) or IMIT;
 
+//Need_accept.dP_kr30_DU_on := (SHKU17_DI_KR30_ON or SHKU17_DI_KR30V_ON) and (true); блокировка перевода в ДУ временно отсутствует, так как нет датчика перепада давления 
 
-]]></ST>
+//Need_accept.dP_kr30v_DU_on := (SHKU17_DI_KR30_ON or SHKU17_DI_KR30V_ON) and (true); блокировка перевода в ДУ временно отсутствует, так как нет датчика перепада давления ]]></ST>
             </FunctionBlock>
             <FunctionBlock UUID="71D265E144971684C09AD797B5F46F40" Name="block_GROUP">
                 <Variables>
@@ -1011,8 +1020,72 @@ end_for;
 ]]></ST>
             </FunctionBlock>
             <FunctionBlock UUID="20BBB8F545957D7FD23D8FA61D8C82EB" Name="block_UNL">
-                <Variables />
-                <ST><![CDATA[]]></ST>
+                <Variables>
+                    <Variable UUID="77AF187A4096DBC9547E8B8E1882041D" Name="i" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="C8700F834CB0AD75667B3F93D6F1D37C" Name="j" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+                    <Variable UUID="2E980A1E43F87D1B256C6E966874B52B" Name="AO_From_GPA_prev" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Size="8" Array="TRUE" Usage="internal" />
+                    <Variable UUID="1A2BF3594C12C193E2C0DD8B2D224062" Name="tp_send_AO1" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="CDB192824EFDC191FADB5885AE3C09CA" Name="tp_send_AO2" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="A9C923194793CBC83A0E2BA6E70D1A90" Name="tp_send_AO3" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="F29702DB488750478EFD94B6DF8F51EA" Name="tp_send_AO4" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="43ECEA044527ED75314C6588D3128CE1" Name="tp_send_AO5" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="7B8995CD40051806347A2EA274A9E4BA" Name="tp_send_AO6" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="EA04EAD24EFC7395E9AA6387FF8ACC24" Name="send_Open_kr6_kr6r" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="5A10CE834ED9D7A3097E429E36C0027B" Name="send_Open_kr6As_kr6Ar" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="C6EED086454F3F2746946588EDCEC058" Name="tp_send_open_kr6" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="5406A70A42170D99FE4040A7EE9BC881" Name="tp_send_open_kr6r" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="83D874E44973F7CCEF02D2B2A31DBC41" Name="tp_send_open_kr6As" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                    <Variable UUID="A3C6F1114E7E3E03574DE5A983AB9542" Name="tp_send_open_kr6Ar" Type="TP" TypeUUID="309F798841A1CEA956C92C9F7216E403" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[//Упаковываем в массив входные дискретные сигналы 'ГПА №хх Останов в группе'
+Global_gr.AO_From_GPA[1] := SHKU17_DI_GPA1_Stop_in_gr;
+Global_gr.AO_From_GPA[2] := SHKU17_DI_GPA2_Stop_in_gr;
+Global_gr.AO_From_GPA[3] := SHKU17_DI_GPA3_Stop_in_gr;
+Global_gr.AO_From_GPA[4] := SHKU17_DI_GPA4_Stop_in_gr;
+Global_gr.AO_From_GPA[5] := SHKU17_DI_GPA5_Stop_in_gr;
+Global_gr.AO_From_GPA[6] := SHKU17_DI_GPA6_Stop_in_gr;
+
+for i := 1 to 6 do
+	if Global_gr.AO_From_GPA[i] and not AO_From_GPA_prev[i] then
+		for j := 1 to 6 do
+			//Отправляем разгрузку в группе всем агрегатам в первой группе
+			if Global_gr.gpa_In_Group[i] = 1 and Global_gr.gpa_In_Group[j] = 1 then
+				Global_gr.send_AO_to_GPA[j] := true;
+				send_Open_kr6_kr6r := true;	
+			end_if;
+
+			//Отправляем разгрузку в группе всем агрегатам во второй группе
+			if Global_gr.gpa_In_Group[i] = 2 and Global_gr.gpa_In_Group[j] = 2 then
+				Global_gr.send_AO_to_GPA[j] := true;
+				send_Open_kr6As_kr6Ar := true;	
+			end_if;      
+		end_for;
+	end_if;
+	AO_From_GPA_prev[i] := Global_gr.AO_From_GPA[i]; 
+end_for;
+
+//Разгружаем ГПА за исключением того, который в этой группе упал
+tp_send_AO1(IN:= Global_gr.send_AO_to_GPA[1] and not Global_gr.AO_From_GPA[1], PT:= T#5s, Q=> SHKU17_DO_GPA1_AO_in_gr);
+tp_send_AO2(IN:= Global_gr.send_AO_to_GPA[2] and not Global_gr.AO_From_GPA[2], PT:= T#5s, Q=> SHKU17_DO_GPA2_AO_in_gr);
+tp_send_AO3(IN:= Global_gr.send_AO_to_GPA[3] and not Global_gr.AO_From_GPA[3], PT:= T#5s, Q=> SHKU17_DO_GPA3_AO_in_gr);
+tp_send_AO4(IN:= Global_gr.send_AO_to_GPA[4] and not Global_gr.AO_From_GPA[4], PT:= T#5s, Q=> SHKU17_DO_GPA4_AO_in_gr);
+tp_send_AO5(IN:= Global_gr.send_AO_to_GPA[5] and not Global_gr.AO_From_GPA[5], PT:= T#5s, Q=> SHKU17_DO_GPA5_AO_in_gr);
+tp_send_AO6(IN:= Global_gr.send_AO_to_GPA[6] and not Global_gr.AO_From_GPA[6], PT:= T#5s, Q=> SHKU17_DO_GPA6_AO_in_gr);
+
+//Открываем 6 краны соответствующей группы
+tp_send_open_kr6(IN:= send_Open_kr6_kr6r, PT:= T#5s, Q=> UNL_KR6_ON);
+tp_send_open_kr6r(IN:= send_Open_kr6_kr6r, PT:= T#5s, Q=> UNL_KR6R_ON);
+
+tp_send_open_kr6As(IN:= send_Open_kr6As_kr6Ar, PT:= T#5s, Q=> UNL_KR6As_ON);
+tp_send_open_kr6Ar(IN:= send_Open_kr6As_kr6Ar, PT:= T#5s, Q=> UNL_KR6AR_ON);
+
+
+for i := 1 to 6 do
+	Global_gr.send_AO_to_GPA[i] := false;
+end_for;
+
+send_Open_kr6_kr6r := false;
+send_Open_kr6As_kr6Ar := false;]]></ST>
             </FunctionBlock>
             <Function UUID="5617DF744661F236FE4C9BA67FE735DC" Name="func_GE2" Comment="Больше либо равно 2" ResultTypeUUID="EC797BDD4541F500AD80A78F1F991834">
                 <Variables>
@@ -2301,6 +2374,8 @@ AE_623(Llo1PE_1, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Llo1PE_1); //Ниж�
 AE_624(Llo1PE_2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Llo1PE_2); //Нижний уровень в пожарной емкости 2
 AE_625(Lhi1PE_1, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Lhi1PE_1); //Верхний уровень в пожарной емкости 1
 AE_626(Lhi1PE_2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Lhi1PE_2); //Верхний уровень в пожарной емкости 2
+AE_627(UNL_KR6_ON or UNL_KR6R_ON, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_AO_In_Group1); //АО в группе 1
+AE_627(UNL_KR6As_ON or UNL_KR6AR_ON, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_AO_In_Group2); //АО в группе 2
 
 
 //Выходы АПС
@@ -2670,35 +2745,35 @@ KR30_OFF_prev := MD_REV_KR30_OFF;
 
 
 //Кран 6 открыть
-if (OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON or NO_KR6_ON) and not KR6_ON_prev then
+if (OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON or NO_KR6_ON or UNL_KR6_ON) and not KR6_ON_prev then
 	HMI_SHKU17_KR6_DA := false;
 	CMD_SHKU17_KR6_aOnOff := true;
 end_if;
-KR6_ON_prev := OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON or NO_KR6_ON;
+KR6_ON_prev := OPG_KR_ON or AOB_KR6_ON or AOS_KR6_ON or NO_KR6_ON or UNL_KR6_ON;
 
 
 //Кран 6a' открыть
-if (OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON or NO_KR6As_ON) and not KR6As_ON_prev then
+if (OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON or NO_KR6As_ON or UNL_KR6As_ON) and not KR6As_ON_prev then
 	HMI_SHKU17_KR6As_DA := false;
 	CMD_SHKU17_KR6As_aOnOff := true;
 end_if;
-KR6As_ON_prev := OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON or NO_KR6As_ON;
+KR6As_ON_prev := OPG_KR_ON or AOB_KR6As_ON or AOS_KR6As_ON or NO_KR6As_ON or UNL_KR6As_ON;
 
 
 //Кран 6р открыть
-if (OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON or NO_KR6R_ON) and not KR6R_ON_prev then
+if (OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON or NO_KR6R_ON or UNL_KR6R_ON) and not KR6R_ON_prev then
 	HMI_SHKU17_KR6R_DA := false;
 	CMD_SHKU17_KR6R_aOnOff := true;
 end_if;
-KR6R_ON_prev := OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON or NO_KR6R_ON;
+KR6R_ON_prev := OPG_KR_ON or AOB_KR6R_ON or AOS_KR6R_ON or NO_KR6R_ON or UNL_KR6R_ON;
 
 
 //Кран 6ар открыть
-if (OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON) and not KR6AR_ON_prev then
+if (OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON or UNL_KR6AR_ON) and not KR6AR_ON_prev then
 	HMI_SHKU17_KR6AR_DA := false;
 	CMD_SHKU17_KR6AR_aOnOff := true;
 end_if;
-KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON;
+KR6AR_ON_prev := OPG_KR_ON or AOB_KR6AR_ON or AOS_KR6AR_ON or NO_KR6AR_ON or UNL_KR6AR_ON;
 
 
 //Задвижку Z1 открыть

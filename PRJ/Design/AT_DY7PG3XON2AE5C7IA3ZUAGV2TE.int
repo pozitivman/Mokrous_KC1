@@ -937,5 +937,7 @@
         <Signal Name="APS_Llo1PE_2" UUID="6B9431BE4E39C542570D4F9AAC9CBAFF" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Нижний уровень в пожарной емкости 2" />
         <Signal Name="APS_Lhi1PE_1" UUID="5FBB397A48ECD495B2079A835D3EBF1C" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Верхний уровень в пожарной емкости 1" />
         <Signal Name="APS_Lhi1PE_2" UUID="31162B5049CD7E00446A6FAD0B4FAFDB" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Верхний уровень в пожарной емкости 2" />
+        <Signal Name="APS_AO_In_Group1" UUID="EE5A8CB04DD4589FF5C06E87B35C97E7" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АО в группе 1" />
+        <Signal Name="APS_AO_In_Group2" UUID="97FF0997420B7FA85ED299A086CCAB1D" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АО в группе 2" />
     </InterfaceList>
 </SubAppType>

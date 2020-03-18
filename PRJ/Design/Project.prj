@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="53D9B753412A8B1825D51FA39743FACE" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="B3D451CF40587450FD251EA3804ABBE5" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
@@ -3924,6 +3924,8 @@
         <Signal Name="APS_Llo1PE_2" UUID="6B9431BE4E39C542570D4F9AAC9CBAFF" Type="BOOL" Global="TRUE" Comment="АПС: Нижний уровень в пожарной емкости 2" />
         <Signal Name="APS_Lhi1PE_1" UUID="5FBB397A48ECD495B2079A835D3EBF1C" Type="BOOL" Global="TRUE" Comment="АПС: Верхний уровень в пожарной емкости 1" />
         <Signal Name="APS_Lhi1PE_2" UUID="31162B5049CD7E00446A6FAD0B4FAFDB" Type="BOOL" Global="TRUE" Comment="АПС: Верхний уровень в пожарной емкости 2" />
+        <Signal Name="APS_AO_In_Group1" UUID="EE5A8CB04DD4589FF5C06E87B35C97E7" Type="BOOL" Global="TRUE" Comment="АПС: АО в группе 1" />
+        <Signal Name="APS_AO_In_Group2" UUID="97FF0997420B7FA85ED299A086CCAB1D" Type="BOOL" Global="TRUE" Comment="АПС: АО в группе 2" />
     </Globals>
     <Connections />
 </Project>

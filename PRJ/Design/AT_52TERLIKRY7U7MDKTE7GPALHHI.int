@@ -108,6 +108,10 @@
         <Signal Name="LVL_LO_Z2_ON" UUID="FE1E4EFB41193A92BAB7B2BE2A36E557" Type="BOOL" Usage="" />
         <Signal Name="LVL_HI_Z1_OFF" UUID="833F1E104C012B571FC4DEADE867DDFC" Type="BOOL" Usage="" />
         <Signal Name="LVL_HI_Z2_OFF" UUID="FDB3C5A44855137B9891468E27DE21BE" Type="BOOL" Usage="" />
+        <Signal Name="UNL_KR6_ON" UUID="2826490147E1720B0A0824820179F7DB" Type="BOOL" Usage="" />
+        <Signal Name="UNL_KR6As_ON" UUID="FE0B575C414278CC45422691A38229CA" Type="BOOL" Usage="" />
+        <Signal Name="UNL_KR6R_ON" UUID="D2209ED14957CCBE94A006B084D44CC8" Type="BOOL" Usage="" />
+        <Signal Name="UNL_KR6AR_ON" UUID="B3D9A1254BD3B4F1E927FC92CCB8A49B" Type="BOOL" Usage="" />
         <Signal Name="______________IO______________" UUID="5452534D4DE772F3E7D405ADD8FB5A61" Type="BOOL" Usage="" />
         <Signal Name="SHKU17_AI_A1_31" UUID="B1FAA8FF4FA3358B449220ABD8B86B86" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура наружного воздуха" />
         <Signal Name="SHKU17_AI_A1_32" UUID="18C63D9E447CEDD25C2B6CAE1B8384CD" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура грунта" />
@@ -2959,5 +2963,7 @@
         <Signal Name="APS_Llo1PE_2" UUID="6B9431BE4E39C542570D4F9AAC9CBAFF" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Нижний уровень в пожарной емкости 2" />
         <Signal Name="APS_Lhi1PE_1" UUID="5FBB397A48ECD495B2079A835D3EBF1C" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Верхний уровень в пожарной емкости 1" />
         <Signal Name="APS_Lhi1PE_2" UUID="31162B5049CD7E00446A6FAD0B4FAFDB" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: Верхний уровень в пожарной емкости 2" />
+        <Signal Name="APS_AO_In_Group1" UUID="EE5A8CB04DD4589FF5C06E87B35C97E7" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АО в группе 1" />
+        <Signal Name="APS_AO_In_Group2" UUID="97FF0997420B7FA85ED299A086CCAB1D" Type="BOOL" Usage="" Global="TRUE" Comment="АПС: АО в группе 2" />
     </InterfaceList>
 </SubAppType>

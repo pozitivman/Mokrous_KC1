@@ -890,6 +890,8 @@ local signals = {
 ["APS_Llo1PE_2"]={["Comment"]="Нижний уровень в пожарной емкости 2", ["eval"]=function() local Tag = "APS_Llo1PE_2" local signal = Core[Tag] local text = "Нижний уровень в пожарной емкости 2" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
 ["APS_Lhi1PE_1"]={["Comment"]="Верхний уровень в пожарной емкости 1", ["eval"]=function() local Tag = "APS_Lhi1PE_1" local signal = Core[Tag] local text = "Верхний уровень в пожарной емкости 1" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
 ["APS_Lhi1PE_2"]={["Comment"]="Верхний уровень в пожарной емкости 2", ["eval"]=function() local Tag = "APS_Lhi1PE_2" local signal = Core[Tag] local text = "Верхний уровень в пожарной емкости 2" Add_Event (Tag, signal, text, event.w, source.a) oldsignal[Tag] = signal end},
+["APS_AO_In_Group1"]={["Comment"]="АО в группе 1", ["eval"]=function() local Tag = "APS_AO_In_Group1" local signal = Core[Tag] local text = "АО в группе 1" Add_Event (Tag, signal, text, event.a, source.a) oldsignal[Tag] = signal end},
+["APS_AO_In_Group2"]={["Comment"]="АО в группе 2", ["eval"]=function() local Tag = "APS_AO_In_Group2" local signal = Core[Tag] local text = "АО в группе 2" Add_Event (Tag, signal, text, event.a, source.a) oldsignal[Tag] = signal end},
 
 
 --АПС системные
