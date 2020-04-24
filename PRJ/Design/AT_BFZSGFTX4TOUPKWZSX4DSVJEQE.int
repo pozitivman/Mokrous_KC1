@@ -128,11 +128,11 @@
         <Signal Name="SHKU17_DI_A4_102" UUID="50D364B34F16F5E841841A9A7280C482" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 49. Открыт" />
         <Signal Name="SHKU17_DI_A4_103" UUID="5672028343D115B51360209D426B7389" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 49. Контроль цепи ИМ" />
         <Signal Name="SHKU17_DI_A4_104" UUID="D8A544464932155780B4988BAC432184" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 49. Контроль цепи ВК" />
-        <Signal Name="SHKU17_DI_A4_105" UUID="447A23A74E661686B2C5039F0682F67C" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_106" UUID="C7B28BD44C249446CEF3658536EE0C96" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_107" UUID="41D41FB0498243E089F0EAB3F09BCDFA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_108" UUID="EB07F09846BA24B0CED5D1B39ED5A5EA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_109" UUID="F8E8C48A4F31952D6A962C91ACF4E9E2" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_DI_A4_105" UUID="447A23A74E661686B2C5039F0682F67C" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 32. Закрыт" />
+        <Signal Name="SHKU17_DI_A4_106" UUID="C7B28BD44C249446CEF3658536EE0C96" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 32. Открыт" />
+        <Signal Name="SHKU17_DI_A4_107" UUID="41D41FB0498243E089F0EAB3F09BCDFA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 32. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_A4_108" UUID="EB07F09846BA24B0CED5D1B39ED5A5EA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 32. Контроль цепи ВК" />
+        <Signal Name="SHKU17_DI_A4_109" UUID="F8E8C48A4F31952D6A962C91ACF4E9E2" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 1294 -3.7. Закрыт" />
         <Signal Name="SHKU17_A4_3_flt" UUID="330E3AF04E4E504E6761F0903FF16AA2" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A4_3" />
         <Signal Name="SHKU17_A4_4_flt" UUID="0C5635354F6CC9B99CC375AFD936C8A0" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A4_4" />
         <Signal Name="SHKU17_A4_5_flt" UUID="DAF918324D587ADD790A1DB12956AD25" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A4_5" />
@@ -141,13 +141,13 @@
         <Signal Name="SHKU17_A4_8_flt" UUID="7F15B8544CEF943F74741F850FEE40F4" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A4_8" />
         <Signal Name="SHKU17_A4_9_flt" UUID="735B1E9943981E89F7713194EDBB3CE4" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A4_9" />
         <Signal Name="SHKU17_A4_10_flt" UUID="A4E09D964AF3C86C90ACC19F65439326" Type="BOOL" Global="TRUE" Comment="Ошибка модуля Сонет: A4_10" />
-        <Signal Name="SHKU17_DI_A4_1010" UUID="0EFC2E364BF238317BE7C1B4146337BB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1011" UUID="2EA2F8724BE3304A9A7C93A89EC6C2DB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1012" UUID="4A747116430864F144A8F4933A7329C6" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1013" UUID="973D9D1A407F434121074D8FA64ED7AB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1014" UUID="33DF7AE34D641E17DDDDAC98E2E47AEB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1015" UUID="C228B2BC4D3538496470028DDCEB222D" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1016" UUID="FF3A485247C96A5AFB7A63B7ED00AF0B" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_DI_A4_1010" UUID="0EFC2E364BF238317BE7C1B4146337BB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 1294 -3.7. Открыт" />
+        <Signal Name="SHKU17_DI_A4_1011" UUID="2EA2F8724BE3304A9A7C93A89EC6C2DB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 1294 -3.7. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_A4_1012" UUID="4A747116430864F144A8F4933A7329C6" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 1294 -3.7. Контроль цепи ВК" />
+        <Signal Name="SHKU17_DI_A4_1013" UUID="973D9D1A407F434121074D8FA64ED7AB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 30Т. Закрыт" />
+        <Signal Name="SHKU17_DI_A4_1014" UUID="33DF7AE34D641E17DDDDAC98E2E47AEB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 30Т. Открыт" />
+        <Signal Name="SHKU17_DI_A4_1015" UUID="C228B2BC4D3538496470028DDCEB222D" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 30Т. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_A4_1016" UUID="FF3A485247C96A5AFB7A63B7ED00AF0B" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 30Т. Контроль цепи ВК" />
         <Signal Name="SHKU17_A4_status" UUID="8F7A18554E34759F1FC532A74A7DB60C" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А4" />
     </InterfaceList>
 </SubAppType>

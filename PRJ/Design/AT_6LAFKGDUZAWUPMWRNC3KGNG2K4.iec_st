@@ -825,9 +825,9 @@ Deblock_last := Deblock;
 
 
 //АПС модулей Сонет
-AE_060(SHKU17_A6_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A6_3_flt);
-AE_061(SHKU17_A6_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A6_4_flt);
-AE_062(SHKU17_A6_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A6_5_flt);
+AE_060(SHKU17_A6_status[1] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A6_3_flt);
+AE_061(SHKU17_A6_status[2] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A6_4_flt);
+AE_062(SHKU17_A6_status[3] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A6_5_flt);
 
 //АПС каналов аналогового ввода Сонет
 AE_118(SHKU17_AI_Pgaz_do_KR30V_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_AI_Pgaz_do_KR30V_flt);

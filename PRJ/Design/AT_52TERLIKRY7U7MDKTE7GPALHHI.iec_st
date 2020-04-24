@@ -581,7 +581,6 @@ if IMIT and not IMIT_prev then
 	CMD_SHKU17_KR6As_aOnOff := bool#1;
 	SHKU17_DI_KR6AR_ON := bool#1;
 	CMD_SHKU17_KR6AR_aOnOff := bool#1;
-
 end_if;
 IMIT_prev := IMIT;
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1822,28 +1821,28 @@ AE_004(SHKU17_AI_Lpozh_emk1 < REAL#200.0, T#100ms, Deblock, Kvitir, DO_sound_PS,
 AE_005(SHKU17_AI_Lpozh_emk2 <= REAL#200.0, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_AI_Lpozh_emk2);
 
 //АПС модулей Сонет
-AE_022(SHKU17_A1_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_3_flt);
-AE_023(SHKU17_A1_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_4_flt);
-AE_024(SHKU17_A1_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_5_flt);
-AE_025(SHKU17_A1_6_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_6_flt);
-AE_026(SHKU17_A1_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_7_flt);
-AE_027(SHKU17_A1_8_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_8_flt);
-AE_028(SHKU17_A1_9_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_9_flt);
-AE_029(SHKU17_A1_10_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_10_flt);
-AE_030(SHKU17_A2_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_3_flt);
-AE_031(SHKU17_A2_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_4_flt);
-AE_032(SHKU17_A2_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_5_flt);
-AE_033(SHKU17_A2_6_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_6_flt);
-AE_034(SHKU17_A2_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_7_flt);
-AE_035(SHKU17_A2_8_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_8_flt);
-AE_036(SHKU17_A2_9_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_9_flt);
-AE_037(SHKU17_A2_10_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_10_flt);
-AE_038(SHKU17_A3_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_3_flt);
-AE_039(SHKU17_A3_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_4_flt);
-AE_040(SHKU17_A3_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_5_flt);
-AE_041(SHKU17_A3_6_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_6_flt);
-AE_042(SHKU17_A3_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_7_flt);
-AE_043(SHKU17_A3_8_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_8_flt);
+AE_022(SHKU17_A1_status[1] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_3_flt);
+AE_023(SHKU17_A1_status[2] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_4_flt);
+AE_024(SHKU17_A1_status[3] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_5_flt);
+AE_025(SHKU17_A1_status[4] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_6_flt);
+AE_026(SHKU17_A1_status[5] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_7_flt);
+AE_027(SHKU17_A1_status[6] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_8_flt);
+AE_028(SHKU17_A1_status[7] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_9_flt);
+AE_029(SHKU17_A1_status[8] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A1_10_flt);
+AE_030(SHKU17_A2_status[1] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_3_flt);
+AE_031(SHKU17_A2_status[2] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_4_flt);
+AE_032(SHKU17_A2_status[3] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_5_flt);
+AE_033(SHKU17_A2_status[4] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_6_flt);
+AE_034(SHKU17_A2_status[5] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_7_flt);
+AE_035(SHKU17_A2_status[6] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_8_flt);
+AE_036(SHKU17_A2_status[7] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_9_flt);
+AE_037(SHKU17_A2_status[8] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A2_10_flt);
+AE_038(SHKU17_A3_status[1] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_3_flt);
+AE_039(SHKU17_A3_status[2] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_4_flt);
+AE_040(SHKU17_A3_status[3] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_5_flt);
+AE_041(SHKU17_A3_status[4] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_6_flt);
+AE_042(SHKU17_A3_status[5] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_7_flt);
+AE_043(SHKU17_A3_status[6] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_8_flt);
 (*
 AE_044(SHKU17_A4_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_3_flt);
 AE_045(SHKU17_A4_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_4_flt);
@@ -1946,6 +1945,10 @@ AE_147(APS_SHKU17_KR47_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU1
 AE_148(APS_SHKU17_KR48_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_non);
 AE_149(APS_SHKU17_KR49_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_non);
 
+AE_628(APS_SHKU17_KR32_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_non);
+AE_629(APS_SHKU17_KR1294_3_7_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_non);
+AE_630(APS_SHKU17_KR30T_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_non);
+
 AE_162(APS_SHKU17_KR30_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30_noff);
 AE_163(APS_SHKU17_KR30V_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30V_noff);
 AE_164(APS_SHKU17_KR7_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR7_noff);
@@ -1970,6 +1973,10 @@ AE_182(APS_SHKU17_KR46_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU
 AE_183(APS_SHKU17_KR47_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR47_noff);
 AE_184(APS_SHKU17_KR48_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_noff);
 AE_185(APS_SHKU17_KR49_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_noff);
+
+AE_631(APS_SHKU17_KR32_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_noff);
+AE_632(APS_SHKU17_KR1294_3_7_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_noff);
+AE_633(APS_SHKU17_KR30T_noff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_noff);
 
 AE_198(APS_SHKU17_KR30_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30_nstart);
 AE_199(APS_SHKU17_KR30V_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30V_nstart);
@@ -1996,6 +2003,10 @@ AE_219(APS_SHKU17_KR47_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SH
 AE_220(APS_SHKU17_KR48_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_nstart);
 AE_221(APS_SHKU17_KR49_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_nstart);
 
+AE_634(APS_SHKU17_KR32_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_nstart);
+AE_635(APS_SHKU17_KR1294_3_7_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_nstart);
+AE_636(APS_SHKU17_KR30T_nstart, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_nstart);
+
 AE_234(APS_SHKU17_KR30_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30_selfon);
 AE_235(APS_SHKU17_KR30V_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30V_selfon);
 AE_236(APS_SHKU17_KR7_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR7_selfon);
@@ -2020,6 +2031,10 @@ AE_254(APS_SHKU17_KR46_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SH
 AE_255(APS_SHKU17_KR47_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR47_selfon);
 AE_256(APS_SHKU17_KR48_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_selfon);
 AE_257(APS_SHKU17_KR49_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_selfon);
+
+AE_637(APS_SHKU17_KR32_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_selfon);
+AE_638(APS_SHKU17_KR1294_3_7_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_selfon);
+AE_639(APS_SHKU17_KR30T_selfon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_selfon);
 
 AE_270(APS_SHKU17_KR30_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30_selfoff);
 AE_271(APS_SHKU17_KR30V_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30V_selfoff);
@@ -2046,6 +2061,10 @@ AE_291(APS_SHKU17_KR47_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_S
 AE_292(APS_SHKU17_KR48_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_selfoff);
 AE_293(APS_SHKU17_KR49_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_selfoff);
 
+AE_640(APS_SHKU17_KR32_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_selfoff);
+AE_641(APS_SHKU17_KR1294_3_7_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_selfoff);
+AE_642(APS_SHKU17_KR30T_selfoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_selfoff);
+
 AE_306(APS_SHKU17_KR30_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30_flt);
 AE_307(APS_SHKU17_KR30V_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30V_flt);
 AE_308(APS_SHKU17_KR7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR7_flt);
@@ -2070,6 +2089,10 @@ AE_326(APS_SHKU17_KR46_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU1
 AE_327(APS_SHKU17_KR47_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR47_flt);
 AE_328(APS_SHKU17_KR48_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_flt);
 AE_329(APS_SHKU17_KR49_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_flt);
+
+AE_643(APS_SHKU17_KR32_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_flt);
+AE_644(APS_SHKU17_KR1294_3_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_flt);
+AE_645(APS_SHKU17_KR30T_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_flt);
 
 AE_342(APS_SHKU17_KR30_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30_ncon);
 AE_343(APS_SHKU17_KR30V_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30V_ncon);
@@ -2096,6 +2119,10 @@ AE_363(APS_SHKU17_KR47_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU
 AE_364(APS_SHKU17_KR48_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_ncon);
 AE_365(APS_SHKU17_KR49_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_ncon);
 
+AE_646(APS_SHKU17_KR32_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_ncon);
+AE_647(APS_SHKU17_KR1294_3_7_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_ncon);
+AE_648(APS_SHKU17_KR30T_ncon, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_ncon);
+
 AE_378(APS_SHKU17_KR30_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30_ncoff);
 AE_379(APS_SHKU17_KR30V_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30V_ncoff);
 AE_380(APS_SHKU17_KR7_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR7_ncoff);
@@ -2120,6 +2147,10 @@ AE_398(APS_SHKU17_KR46_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHK
 AE_399(APS_SHKU17_KR47_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR47_ncoff);
 AE_400(APS_SHKU17_KR48_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_ncoff);
 AE_401(APS_SHKU17_KR49_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_ncoff);
+
+AE_649(APS_SHKU17_KR32_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_ncoff);
+AE_650(APS_SHKU17_KR1294_3_7_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_ncoff);
+AE_651(APS_SHKU17_KR30T_ncoff, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_ncoff);
 
 //АПС по дискретам
 AE_414(SHKU17_DI_Ala_ispr_pit_preobr, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Ala_ispr_pit_preobr);
@@ -2325,6 +2356,11 @@ AE_578(APS_SHKU17_KR47_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_S
 AE_579(APS_SHKU17_KR48_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR48_general);
 AE_580(APS_SHKU17_KR49_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR49_general);
 
+AE_652(APS_SHKU17_KR32_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR32_general);
+AE_653(APS_SHKU17_KR1294_3_7_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR1294_3_7_general);
+AE_654(APS_SHKU17_KR30T_general, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHKU17_KR30T_general);
+//AE_655() -> строка 614. Продолжение
+
 //АПС по режимам, уставкам, алгоритмам
 AE_581(Tg_hi2KC, T#10000ms, Deblock, Kvitir, DO_sound_PS, APS_Tg_hi2KC); //превышение температуры технологического газа на выходе КЦ
 AE_582(Tg_ala_hi2KC, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Tg_ala_hi2KC); //аварийное превышение температуры технологического газа на выходе КЦ
@@ -2376,7 +2412,9 @@ AE_625(Lhi1PE_1, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Lhi1PE_1); //Вер�
 AE_626(Lhi1PE_2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_Lhi1PE_2); //Верхний уровень в пожарной емкости 2
 AE_627(UNL_KR6_ON or UNL_KR6R_ON, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_AO_In_Group1); //АО в группе 1
 AE_627(UNL_KR6As_ON or UNL_KR6AR_ON, T#100ms, Deblock, Kvitir, DO_sound_AS, APS_AO_In_Group2); //АО в группе 2
+//AE_628() -> строка 144. АПС по добавленным в проект кранам 32, 1294-3-7, 30Т 
 
+//AE_655()
 
 //Выходы АПС
 IF APS_TASK_alg > APS_TASK THEN
@@ -2980,6 +3018,18 @@ KR_Z2_OFF_prev := LVL_HI_Z2_OFF;
                     <Variable UUID="0EC0086306C64BC3A09230E6C570756C" Name="imit_SHKU17_DN1" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                     <Variable UUID="16F036033E8E41B7B980ADAB09CCAD52" Name="imit_SHKU17_DN2" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                     <Variable UUID="AC8455E2439814AF80FBD396DD910178" Name="Dummy" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+                    <Variable UUID="EB93E4D7453ED843A9673CA2BC4774C6" Name="SEN_SHKU17_KR32" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="D9EA5A4D4DFBA4366A771B87ABD72008" Name="SEN_SHKU17_KR1294_3_7" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="250654B14710546C4CD0EFB544610095" Name="SEN_SHKU17_KR30T" Type="support_ACT" TypeUUID="F8F45F094BC0B9B02BAD3E86AEBF0AD5" Usage="internal" />
+                    <Variable UUID="1176B82E4766DF9377610F85701D6173" Name="cfg_SHKU17_KR32" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
+                    <Variable UUID="8BA764C841F92BE1F0D9968287B1446C" Name="cfg_SHKU17_KR1294_3_7" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
+                    <Variable UUID="6DB011AD4026DAAC225FCAA5F1A8970B" Name="cfg_SHKU17_KR30T" Type="VLV_cfg" TypeUUID="18EB02704F118805590372B54A8A8BCA" Usage="internal" />
+                    <Variable UUID="69FC68AE4070E189ACF1709F7A082900" Name="vlv_SHKU17_KR32" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="5486388C4778E232F931568DD2D09CC4" Name="vlv_SHKU17_KR1294_3_7" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="50BCE8D94F718F903523B5A7BAAB4F8F" Name="vlv_SHKU17_KR30T" Type="proc_VLV22" TypeUUID="D462FA7146F4E9F333226CA88FF08990" Usage="internal" />
+                    <Variable UUID="B2524D3645416572CEE75D812ABDC7A5" Name="imit_SHKU17_KR32" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="E6256BCD4ECE3EACEB911190A1B33765" Name="imit_SHKU17_KR1294_3_7" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
+                    <Variable UUID="908B9B694AC4F5D9C26D60903BD19DB9" Name="imit_SHKU17_KR30T" Type="VLV_imit" TypeUUID="5D3CCED94186C4C21A966E96887B1FD6" Usage="internal" />
                 </Variables>
                 <ST><![CDATA[clock_VLV_cur := CLOCK();
 IF FirstScan_MAIN THEN clock_VLV_prev := clock_VLV_cur; END_IF;
@@ -2988,46 +3038,49 @@ clock_VLV_prev := clock_VLV_cur;
 
 
 IF FirstScan_MAIN THEN
-	SEN_SHKU17_KR30  := VLV_init(SEN_SHKU17_KR30, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR30V := VLV_init(SEN_SHKU17_KR30V, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR7   := VLV_init(SEN_SHKU17_KR7, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-//	SEN_SHKU17_KR7R  := VLV_init(SEN_SHKU17_KR7R, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR8   := VLV_init(SEN_SHKU17_KR8, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR8s  := VLV_init(SEN_SHKU17_KR8s, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR8A  := VLV_init(SEN_SHKU17_KR8A, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR8As := VLV_init(SEN_SHKU17_KR8As, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR17  := VLV_init(SEN_SHKU17_KR17, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR18  := VLV_init(SEN_SHKU17_KR18, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR18A := VLV_init(SEN_SHKU17_KR18A, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR6   := VLV_init(SEN_SHKU17_KR6, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR6R  := VLV_init(SEN_SHKU17_KR6R, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR6As := VLV_init(SEN_SHKU17_KR6As, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR6AR := VLV_init(SEN_SHKU17_KR6AR, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR41  := VLV_init(SEN_SHKU17_KR41, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR42  := VLV_init(SEN_SHKU17_KR42, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR43  := VLV_init(SEN_SHKU17_KR43, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR44  := VLV_init(SEN_SHKU17_KR44, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR45  := VLV_init(SEN_SHKU17_KR45, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR46  := VLV_init(SEN_SHKU17_KR46, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR47  := VLV_init(SEN_SHKU17_KR47, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR48  := VLV_init(SEN_SHKU17_KR48, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_KR49  := VLV_init(SEN_SHKU17_KR49, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_Z1    := VLV_init(SEN_SHKU17_Z1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_Z2    := VLV_init(SEN_SHKU17_Z2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR30  		:= VLV_init(SEN_SHKU17_KR30, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR30V 		:= VLV_init(SEN_SHKU17_KR30V, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR7   		:= VLV_init(SEN_SHKU17_KR7, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+//	SEN_SHKU17_KR7R  		:= VLV_init(SEN_SHKU17_KR7R, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR8   		:= VLV_init(SEN_SHKU17_KR8, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR8s  		:= VLV_init(SEN_SHKU17_KR8s, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR8A  		:= VLV_init(SEN_SHKU17_KR8A, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR8As 		:= VLV_init(SEN_SHKU17_KR8As, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR17 		 := VLV_init(SEN_SHKU17_KR17, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR18  		:= VLV_init(SEN_SHKU17_KR18, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR18A 		:= VLV_init(SEN_SHKU17_KR18A, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR6   		:= VLV_init(SEN_SHKU17_KR6, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR6R  		:= VLV_init(SEN_SHKU17_KR6R, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR6As 		:= VLV_init(SEN_SHKU17_KR6As, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR6AR 		:= VLV_init(SEN_SHKU17_KR6AR, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR41  		:= VLV_init(SEN_SHKU17_KR41, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR42  		:= VLV_init(SEN_SHKU17_KR42, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR43  		:= VLV_init(SEN_SHKU17_KR43, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR44  		:= VLV_init(SEN_SHKU17_KR44, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR45  		:= VLV_init(SEN_SHKU17_KR45, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR46  		:= VLV_init(SEN_SHKU17_KR46, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR47  		:= VLV_init(SEN_SHKU17_KR47, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR48  		:= VLV_init(SEN_SHKU17_KR48, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR49  		:= VLV_init(SEN_SHKU17_KR49, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR32  		:= VLV_init(SEN_SHKU17_KR32, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR1294_3_7	:= VLV_init(SEN_SHKU17_KR1294_3_7, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_KR30T  		:= VLV_init(SEN_SHKU17_KR30T, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_Z1    		:= VLV_init(SEN_SHKU17_Z1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_Z2    		:= VLV_init(SEN_SHKU17_Z2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
 
-	SEN_Obogr_APK1    := VLV_init(SEN_Obogr_APK1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_Obogr_APK2    := VLV_init(SEN_Obogr_APK2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_PN1    := VLV_init(SEN_SHKU17_PN1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_PN2    := VLV_init(SEN_SHKU17_PN2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_PN3    := VLV_init(SEN_SHKU17_PN3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_XPN1   := VLV_init(SEN_SHKU17_XPN1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_XPN2   := VLV_init(SEN_SHKU17_XPN2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_XPN3   := VLV_init(SEN_SHKU17_XPN3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_NC1    := VLV_init(SEN_SHKU17_NC1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_NC2    := VLV_init(SEN_SHKU17_NC2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_NC3    := VLV_init(SEN_SHKU17_NC3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_DN1    := VLV_init(SEN_SHKU17_DN1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
-	SEN_SHKU17_DN2    := VLV_init(SEN_SHKU17_DN2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_Obogr_APK1    		:= VLV_init(SEN_Obogr_APK1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_Obogr_APK2    		:= VLV_init(SEN_Obogr_APK2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_PN1    		:= VLV_init(SEN_SHKU17_PN1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_PN2    		:= VLV_init(SEN_SHKU17_PN2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_PN3    		:= VLV_init(SEN_SHKU17_PN3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_XPN1   		:= VLV_init(SEN_SHKU17_XPN1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_XPN2   		:= VLV_init(SEN_SHKU17_XPN2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_XPN3   		:= VLV_init(SEN_SHKU17_XPN3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_NC1    		:= VLV_init(SEN_SHKU17_NC1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_NC2    		:= VLV_init(SEN_SHKU17_NC2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_NC3    		:= VLV_init(SEN_SHKU17_NC3, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_DN1    		:= VLV_init(SEN_SHKU17_DN1, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
+	SEN_SHKU17_DN2    		:= VLV_init(SEN_SHKU17_DN2, LREAL#15, LREAL#1, BYTE#1, BYTE#1, BOOL#1);
 END_IF;
 
 
@@ -3062,6 +3115,9 @@ cfg_SHKU17_KR46(SEN_SHKU17_KR46,	HMI_SHKU17_KR46_DA,			HMI_SHKU17_KR46_rOn,		HMI
 cfg_SHKU17_KR47(SEN_SHKU17_KR47,	HMI_SHKU17_KR47_DA,			HMI_SHKU17_KR47_rOn,		HMI_SHKU17_KR47_rOff,		CMD_SHKU17_KR47_rOnOff, 		CMD_SHKU17_KR47_aOnOff, 		HMI_SHKU17_KR47_rep, 		SHKU17_DI_KR47_ON, 			SHKU17_DI_KR47_OFF, 	true, true, APS_SHKU17_KR47_non, APS_SHKU17_KR47_noff, APS_SHKU17_KR47_nstart, APS_SHKU17_KR47_selfon, APS_SHKU17_KR47_selfoff, APS_SHKU17_KR47_flt, APS_SHKU17_KR47_ncon, APS_SHKU17_KR47_ncoff, SHKU17_KR47_state, APS_SHKU17_KR47_general);
 cfg_SHKU17_KR48(SEN_SHKU17_KR48,	HMI_SHKU17_KR48_DA,			HMI_SHKU17_KR48_rOn,		HMI_SHKU17_KR48_rOff,		CMD_SHKU17_KR48_rOnOff, 		CMD_SHKU17_KR48_aOnOff, 		HMI_SHKU17_KR48_rep, 		SHKU17_DI_KR48_ON, 			SHKU17_DI_KR48_OFF, 	true, true, APS_SHKU17_KR48_non, APS_SHKU17_KR48_noff, APS_SHKU17_KR48_nstart, APS_SHKU17_KR48_selfon, APS_SHKU17_KR48_selfoff, APS_SHKU17_KR48_flt, APS_SHKU17_KR48_ncon, APS_SHKU17_KR48_ncoff, SHKU17_KR48_state, APS_SHKU17_KR48_general);
 cfg_SHKU17_KR49(SEN_SHKU17_KR49,	HMI_SHKU17_KR49_DA,			HMI_SHKU17_KR49_rOn,		HMI_SHKU17_KR49_rOff,		CMD_SHKU17_KR49_rOnOff, 		CMD_SHKU17_KR49_aOnOff, 		HMI_SHKU17_KR49_rep, 		SHKU17_DI_KR49_ON, 			SHKU17_DI_KR49_OFF, 	true, true, APS_SHKU17_KR49_non, APS_SHKU17_KR49_noff, APS_SHKU17_KR49_nstart, APS_SHKU17_KR49_selfon, APS_SHKU17_KR49_selfoff, APS_SHKU17_KR49_flt, APS_SHKU17_KR49_ncon, APS_SHKU17_KR49_ncoff, SHKU17_KR49_state, APS_SHKU17_KR49_general);
+cfg_SHKU17_KR32(SEN_SHKU17_KR32,	HMI_SHKU17_KR32_DA,			HMI_SHKU17_KR32_rOn,		HMI_SHKU17_KR32_rOff,		CMD_SHKU17_KR32_rOnOff, 		CMD_SHKU17_KR32_aOnOff, 		HMI_SHKU17_KR32_rep, 		SHKU17_DI_KR32_ON, 			SHKU17_DI_KR32_OFF, 	true, true, APS_SHKU17_KR32_non, APS_SHKU17_KR32_noff, APS_SHKU17_KR32_nstart, APS_SHKU17_KR32_selfon, APS_SHKU17_KR32_selfoff, APS_SHKU17_KR32_flt, APS_SHKU17_KR32_ncon, APS_SHKU17_KR32_ncoff, SHKU17_KR32_state, APS_SHKU17_KR32_general);
+cfg_SHKU17_KR1294_3_7(SEN_SHKU17_KR1294_3_7,	HMI_SHKU17_KR1294_3_7_DA,			HMI_SHKU17_KR1294_3_7_rOn,		HMI_SHKU17_KR1294_3_7_rOff,		CMD_SHKU17_KR1294_3_7_rOnOff, 		CMD_SHKU17_KR1294_3_7_aOnOff, 		HMI_SHKU17_KR1294_3_7_rep, 		SHKU17_DI_KR1294_3_7_ON, 			SHKU17_DI_KR1294_3_7_OFF, 	true, true, APS_SHKU17_KR1294_3_7_non, APS_SHKU17_KR1294_3_7_noff, APS_SHKU17_KR1294_3_7_nstart, APS_SHKU17_KR1294_3_7_selfon, APS_SHKU17_KR1294_3_7_selfoff, APS_SHKU17_KR1294_3_7_flt, APS_SHKU17_KR1294_3_7_ncon, APS_SHKU17_KR1294_3_7_ncoff, SHKU17_KR1294_3_7_state, APS_SHKU17_KR1294_3_7_general);
+cfg_SHKU17_KR30T(SEN_SHKU17_KR30T,	HMI_SHKU17_KR30T_DA,		HMI_SHKU17_KR30T_rOn,		HMI_SHKU17_KR30T_rOff,		CMD_SHKU17_KR30T_rOnOff, 		CMD_SHKU17_KR30T_aOnOff, 		HMI_SHKU17_KR30T_rep, 		SHKU17_DI_KR30T_ON, 		SHKU17_DI_KR30T_OFF, 	true, true, APS_SHKU17_KR30T_non, APS_SHKU17_KR30T_noff, APS_SHKU17_KR30T_nstart, APS_SHKU17_KR30T_selfon, APS_SHKU17_KR30T_selfoff, APS_SHKU17_KR30T_flt, APS_SHKU17_KR30T_ncon, APS_SHKU17_KR30T_ncoff, SHKU17_KR30T_state, APS_SHKU17_KR30T_general);
 
 cfg_SHKU17_PN1(SEN_SHKU17_PN1,		HMI_SHKU17_PN1_DA,			HMI_SHKU17_PN1_rOn,			HMI_SHKU17_PN1_rOff,		CMD_SHKU17_PN1_rOnOff,			CMD_SHKU17_PN1_aOnOff, 			HMI_SHKU17_PN1_rep, 		SHKU17_DI_PN1_on, 			false, 					true, true, APS_SHKU17_PN1_non, APS_SHKU17_PN1_noff, APS_SHKU17_PN1_nstart, APS_SHKU17_PN1_selfon, APS_SHKU17_PN1_selfoff, APS_SHKU17_PN1_flt, APS_SHKU17_PN1_ncon, APS_SHKU17_PN1_ncoff, SHKU17_PN1_state, APS_SHKU17_PN1_general);
 cfg_SHKU17_PN2(SEN_SHKU17_PN2,		HMI_SHKU17_PN2_DA,			HMI_SHKU17_PN2_rOn,			HMI_SHKU17_PN2_rOff,		CMD_SHKU17_PN2_rOnOff,			CMD_SHKU17_PN2_aOnOff, 			HMI_SHKU17_PN2_rep, 		SHKU17_DI_PN2_on, 			false, 					true, true, APS_SHKU17_PN2_non, APS_SHKU17_PN2_noff, APS_SHKU17_PN2_nstart, APS_SHKU17_PN2_selfon, APS_SHKU17_PN2_selfoff, APS_SHKU17_PN2_flt, APS_SHKU17_PN2_ncon, APS_SHKU17_PN2_ncoff, SHKU17_PN2_state, APS_SHKU17_PN2_general);
@@ -3106,6 +3162,9 @@ vlv_SHKU17_KR46(SEN_SHKU17_KR46, cycleTime_VLV);
 vlv_SHKU17_KR47(SEN_SHKU17_KR47, cycleTime_VLV);
 vlv_SHKU17_KR48(SEN_SHKU17_KR48, cycleTime_VLV);
 vlv_SHKU17_KR49(SEN_SHKU17_KR49, cycleTime_VLV);
+vlv_SHKU17_KR32(SEN_SHKU17_KR32, cycleTime_VLV);
+vlv_SHKU17_KR1294_3_7(SEN_SHKU17_KR1294_3_7, cycleTime_VLV);
+vlv_SHKU17_KR30T(SEN_SHKU17_KR30T, cycleTime_VLV);
 vlv_SHKU17_Z1(SEN_SHKU17_Z1, cycleTime_VLV);
 vlv_SHKU17_Z2(SEN_SHKU17_Z2, cycleTime_VLV);
 
@@ -3151,6 +3210,9 @@ SHKU17_DO_KR46_ON 		:= SEN_SHKU17_KR46.Outs.outon.0;
 SHKU17_DO_KR47_ON 		:= SEN_SHKU17_KR47.Outs.outon.0;
 SHKU17_DO_KR48_ON 		:= SEN_SHKU17_KR48.Outs.outon.0;
 SHKU17_DO_KR49_ON 		:= SEN_SHKU17_KR49.Outs.outon.0;
+SHKU17_DO_KR32_ON 		:= SEN_SHKU17_KR32.Outs.outon.0;
+SHKU17_DO_KR1294_3_7_ON := SEN_SHKU17_KR1294_3_7.Outs.outon.0;
+SHKU17_DO_KR30T_ON 		:= SEN_SHKU17_KR30T.Outs.outon.0;
 SHKU17_DO_Z1_on 		:= SEN_SHKU17_Z1.Outs.outon.0;
 SHKU17_DO_Z2_on 		:= SEN_SHKU17_Z2.Outs.outon.0;
 SHKU17_DO_Obogr_APK1_on := SEN_Obogr_APK1.Outs.outon.0; 
@@ -3189,6 +3251,9 @@ SHKU17_DO_KR46_OFF 		:= SEN_SHKU17_KR46.Outs.outoff.0;
 SHKU17_DO_KR47_OFF 		:= SEN_SHKU17_KR47.Outs.outoff.0;
 SHKU17_DO_KR48_OFF 		:= SEN_SHKU17_KR48.Outs.outoff.0;
 SHKU17_DO_KR49_OFF 		:= SEN_SHKU17_KR49.Outs.outoff.0;
+SHKU17_DO_KR32_OFF 		:= SEN_SHKU17_KR32.Outs.outoff.0;
+SHKU17_DO_KR1294_3_7_OFF := SEN_SHKU17_KR1294_3_7.Outs.outoff.0;
+SHKU17_DO_KR30T_OFF 		:= SEN_SHKU17_KR30T.Outs.outoff.0;
 SHKU17_DO_Z1_off 		:= SEN_SHKU17_Z1.Outs.outoff.0;
 SHKU17_DO_Z2_off 		:= SEN_SHKU17_Z2.Outs.outoff.0;
 
@@ -3219,6 +3284,9 @@ IF IMIT THEN
 	imit_SHKU17_KR47(SHKU17_DO_KR47_ON, SHKU17_DO_KR47_OFF, SHKU17_DI_KR47_ON, SHKU17_DI_KR47_OFF);
 	imit_SHKU17_KR48(SHKU17_DO_KR48_ON, SHKU17_DO_KR48_OFF, SHKU17_DI_KR48_ON, SHKU17_DI_KR48_OFF);
 	imit_SHKU17_KR49(SHKU17_DO_KR49_ON, SHKU17_DO_KR49_OFF, SHKU17_DI_KR49_ON, SHKU17_DI_KR49_OFF);
+	imit_SHKU17_KR32(SHKU17_DO_KR32_ON, SHKU17_DO_KR32_OFF, SHKU17_DI_KR32_ON, SHKU17_DI_KR32_OFF);
+	imit_SHKU17_KR1294_3_7(SHKU17_DO_KR1294_3_7_ON, SHKU17_DO_KR1294_3_7_OFF, SHKU17_DI_KR1294_3_7_ON, SHKU17_DI_KR1294_3_7_OFF);
+	imit_SHKU17_KR30T(SHKU17_DO_KR30T_ON, SHKU17_DO_KR30T_OFF, SHKU17_DI_KR30T_ON, SHKU17_DI_KR30T_OFF);
 	imit_SHKU17_Z1(SHKU17_DO_Z1_on, SHKU17_DO_Z1_off, SHKU17_DI_Z1_opened, SHKU17_DI_Z1_closed);
 	imit_SHKU17_Z2(SHKU17_DO_Z2_on, SHKU17_DO_Z2_off, SHKU17_DI_Z2_opened, SHKU17_DI_Z2_closed);
 	imit_Obogr_APK1(SHKU17_DO_Obogr_APK1_on, not SHKU17_DO_Obogr_APK1_on, SHKU17_DI_APK1_obogr_on, Dummy);
@@ -3262,6 +3330,9 @@ SEN_SHKU17_KR46.Control.rep.0 := BOOL#0;
 SEN_SHKU17_KR47.Control.rep.0 := BOOL#0;
 SEN_SHKU17_KR48.Control.rep.0 := BOOL#0;
 SEN_SHKU17_KR49.Control.rep.0 := BOOL#0;
+SEN_SHKU17_KR32.Control.rep.0 := BOOL#0;
+SEN_SHKU17_KR1294_3_7.Control.rep.0 := BOOL#0;
+SEN_SHKU17_KR30T.Control.rep.0 := BOOL#0;
 SEN_SHKU17_Z1.Control.rep.0 := BOOL#0;
 SEN_SHKU17_Z2.Control.rep.0 := BOOL#0;
 SEN_Obogr_APK1.Control.rep.0 := BOOL#0;
@@ -3305,6 +3376,9 @@ IF FirstScan_MAIN THEN
 	CMD_SHKU17_KR47_aOnOff			:= SEN_SHKU17_KR47.Control.aOnOff.0;
 	CMD_SHKU17_KR48_aOnOff 			:= SEN_SHKU17_KR48.Control.aOnOff.0;
 	CMD_SHKU17_KR49_aOnOff 			:= SEN_SHKU17_KR49.Control.aOnOff.0;
+	CMD_SHKU17_KR32_aOnOff 			:= SEN_SHKU17_KR32.Control.aOnOff.0;
+	CMD_SHKU17_KR1294_3_7_aOnOff 	:= SEN_SHKU17_KR1294_3_7.Control.aOnOff.0;
+	CMD_SHKU17_KR30T_aOnOff 		:= SEN_SHKU17_KR30T.Control.aOnOff.0;
 	CMD_SHKU17_Z1_aOnOff   			:= SEN_SHKU17_Z1.Control.aOnOff.0;
 	CMD_SHKU17_Z2_aOnOff   			:= SEN_SHKU17_Z2.Control.aOnOff.0;
 	CMD_SHKU17_Obogr_APK1_aOnOff	:= SEN_Obogr_APK1.Control.aOnOff.0;
@@ -4568,18 +4642,6 @@ end_if;
 rtrig_KC_KOL(CLK:= MD.KC_KOL); if rtrig_KC_KOL.Q then CREATE_EVENT('Переход в режим - КЦ Кольцо', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 ftrig_KOL(CLK:= MD.KC_KOL);
 if ftrig_KOL.Q then MD.PREV := INT#3; end_if;  
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//Режим Пуск КЦ
-//////////////////////////////////////////////////////////////////////////////////////////
-(*
-MD.KC_START := MD.GPA_START and not (MD.GPA_MAG or MD.AO_KC or MD.KC_NO);
-if MD.KC_START then
-	temp_mode_string := 'КЦ Пуск';
-end_if;
-rtrig_KC_START(CLK:= MD.KC_START); if rtrig_KC_START.Q then CREATE_EVENT('Переход в режим - КЦ Пуск', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
-*)
 //////////////////////////////////////////////////////////////////////////////////////////
 
 

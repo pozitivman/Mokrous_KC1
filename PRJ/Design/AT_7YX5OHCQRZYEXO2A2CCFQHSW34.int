@@ -27,6 +27,8 @@
         <Signal Name="cycleTime_VLV_sys" UUID="B05AFC1F496F89D8C5DA50980F26A336" Type="LREAL" Usage="" />
         <Signal Name="cycleTime_APS" UUID="03922A7446F9BFBA604A68BB81A2C3DB" Type="LREAL" Usage="" />
         <Signal Name="cycleTime_APS_sys" UUID="666A94444038D3B5F7106087848DDB70" Type="LREAL" Usage="" />
+        <Signal Name="SHU14_A1_status" UUID="CFA530614CF575EC0373BFB69EFEFA50" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
+        <Signal Name="SHU14_A2_status" UUID="5BB4AA014338DF181C5298B0191172B1" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШУ-14. Состояние корзины А1" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
         <Signal Name="DO_sound_AS" UUID="06E8EC0C4B1D426CD0799885F9C844D5" Type="BOOL" Usage="" Global="TRUE" Comment="Включение звуковой сигнализации АС" />
         <Signal Name="DO_sound_PS" UUID="91EF99D440F55561FFA76D9BD418EA59" Type="BOOL" Usage="" Global="TRUE" Comment="Включение звуковой сигнализации ПС" />

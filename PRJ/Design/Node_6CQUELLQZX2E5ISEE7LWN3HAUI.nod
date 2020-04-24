@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Node v. 1.3 >
-<Node Name="TST" Comment="Тестовая машина" Disabled="FALSE" Address="172.16.200.109" TimeSourcePriority="1" TimeResolution="2" NetworkTimeout="2000" PingInterval="300" RetryTimeout="100" AggregationInterval="10" LocalTimeout="2000" LocalPingInterval="300" LocalRetryTimeout="50" LocalAggregationInterval="4" UseSharedMem="FALSE" EventQueue="2000" StoreEventQueue="FALSE" StartState="Default" UUID="D9B12A8B481666260E1B0D8669EEC574">
+<Node Name="TST" Comment="Тестовая машина" Disabled="FALSE" Address="192.168.1.17" TimeSourcePriority="1" TimeResolution="2" NetworkTimeout="2000" PingInterval="300" RetryTimeout="100" AggregationInterval="10" LocalTimeout="2000" LocalPingInterval="300" LocalRetryTimeout="50" LocalAggregationInterval="4" UseSharedMem="FALSE" EventQueue="2000" StoreEventQueue="FALSE" StartState="Default" UUID="D9B12A8B481666260E1B0D8669EEC574">
     <InterfaceList>
         <SubApp Name="Path" Type="9E8EC5254FD166E55FBC80A47CA0B27A" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="AC8F638B416EB2B24A3394BF571EC12C" />
         <SubApp Name="AppEventLog" Type="39C8F16443B88933CAABDBA94E953B60" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="9D8D67EE4C9FEB8DBA722E977192C6B6" />
@@ -12,8 +12,9 @@
         <SubApp Name="AppAS36_1" Type="0761B2C44387D66CC5224899C62127A8" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="48C548714C332401A869BE8BC07AD2A7" />
         <SubApp Name="AppAS36_2" Type="BF847540499ECF1E33354F9DE7FD1E84" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="48C548714C332401A869BE8BC07AD2A7" />
         <SubApp Name="AppDrv_PRU" Type="6FD295994E932A99D86DEEA846C62B19" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="4F2285E04246A21E4C4EE2AACCA6B9E7" />
+        <SubApp Name="AppReports" Type="794992B5420E1636041A54B4F50225A5" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="4F2285E04246A21E4C4EE2AACCA6B9E7" />
         <SubApp Name="AppDrv_AUX_SAU" Type="0A4D67B8469CB69FF3730E94B27126F4" Disabled="TRUE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="4F2285E04246A21E4C4EE2AACCA6B9E7" />
-        <SubApp Name="Mnemo" Type="13D6559441DFF69C9FB93FB723DA9420" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="79A3CDA14EF1D54DF15F6CBDFE0D71C0" />
+        <SubApp Name="AppMnemo" Type="13D6559441DFF69C9FB93FB723DA9420" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="79A3CDA14EF1D54DF15F6CBDFE0D71C0" />
         <SubApp Name="AppArchive" Type="05E38F844D4B81B911FCA78E6F6B08A5" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="D7BF0DD94EC0B88FA92E84BF5827A943" />
     </InterfaceList>
 </Node>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Folder config v. 1.0 >
-<Folder Name="Proc">
+<Folder Name="Programs">
     <Items>
         <Item Name="AT_52TERLIKRY7U7MDKTE7GPALHHI.int" />
         <Item Name="AT_6LAFKGDUZAWUPMWRNC3KGNG2K4.int" />
@@ -10,10 +10,12 @@
         <Item Name="AT_DOKGJQXH2M2UVD4SFPAFUDZU7Q.int" />
         <Item Name="AT_DY7PG3XON2AE5C7IA3ZUAGV2TE.int" />
         <Item Name="AT_EWKMX5GULCNUPNBZ3LPFJROWEA.int" />
+        <Item Name="AT_FG6CCC5RU2LUBN7ZJNR2RHSYTI.int" />
         <Item Name="AT_LC5NX6DAJVWEDPDILMJ2FCBYXU.int" />
         <Item Name="AT_Q6ORRHZLRK6EHHNSOC3EQTDJCM.int" />
         <Item Name="AT_QHE4CJY76M5EJOX5BYDKWUBDX4.int" />
         <Item Name="AT_QKJJMWER4HUEVJP7DZOMVB6RJI.int" />
+        <Item Name="AT_QQEQ2RVAQSCUPOK3CMSNXHJGRQ.int" />
         <Item Name="AT_V3LEDT4SP6NUVH4KI4JGHLRWAA.int" />
     </Items>
 </Folder>
