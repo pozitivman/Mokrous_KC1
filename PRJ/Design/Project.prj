@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="83C47DFC4D9BC639B596CBA9082D960A" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="ACB9162740899DC870A859BC594159E5" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
@@ -11,6 +11,10 @@
         <Signal Name="Global_gr" UUID="3583945E4E488761B26A39BCE01353F6" Type="AC8339B94AE497B01F57F7AED31BD15A" Global="TRUE" Comment="Переменные алгоритма группирования ГПА" />
         <Signal Name="GPA_in_Group" UUID="43CD35914FF4ABC2192948AFB6DEBB15" Type="INT" ArraySize="8" Global="TRUE" Comment="Группа, в которой находится ГПА. 0 - ГПА не в группе" />
         <Signal Name="PRU_Link" UUID="DD472C334C6C376AA71888B9C43CF535" Type="WORD" Global="TRUE" Comment="Статус связи с ПРУ" />
+        <Signal Name="IBE" UUID="6ADF660B4B564D8A7CB2498BDA24437C" Type="E734958D4774D2B4B01747B68929B910" Global="TRUE" />
+        <Signal Name="IBE_Teh" UUID="D4A91A1E4651A0C6E1E3CA8C7764E96A" Type="44255E4D45199B78AD5D93A5AB861C2C" Global="TRUE" />
+        <Signal Name="MainServerFlag" UUID="D560A01348CC7B71BC5A088F048E5628" Type="WORD" InitialValue="1" Global="TRUE" Comment="Текущий основной сервер (1 или 2)" />
+        <Signal Name="IS" UUID="1E03E0B241518954DA4E9CBAC9904AD1" Type="5F8BE35044E475170D88C5AD88003473" InitialValue="(CF50DC014E524D10B37B4C81D0BE5D95:=[T#1d,T#1d,T#1d,T#1d,T#1d])" Global="TRUE" Storage="persistent" />
         <Signal Name="SHKU17_A1_status" UUID="276C480041784377E721C59E557C76E9" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А1" />
         <Signal Name="SHKU17_A2_status" UUID="E0D0DF6C47F5B289F65262B670771ED2" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А2" />
         <Signal Name="SHKU17_A3_status" UUID="43A281F7484695252CE0ADB425F9A8E1" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А3" />

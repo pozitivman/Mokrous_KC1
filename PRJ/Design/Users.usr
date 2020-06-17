@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE UserList v. 1.0 >
-<GroupList CRC16="52298">
+<GroupList CRC16="60303">
     <Group Name="ALL" Rights="@SYSTEM_ColdRestart,@SYSTEM_HotRestart,@SYSTEM_RunApp,@SYSTEM_SetDateTime,@SYSTEM_Stop,AI_config,AI_control,IM_control,SU,Sys_utilities,Ust_control">
         <SessionRestrictions>
             <Duration Restricted="FALSE" Value="T#0s" />
@@ -17,7 +17,7 @@
             <Nodes Restricted="FALSE" Items="" />
         </SessionRestrictions>
     </Group>
-    <Group Name="Администратор" Rights="@SYSTEM_BlockSysFunc,@SYSTEM_ColdRestart,@SYSTEM_HotRestart,@SYSTEM_RunApp,@SYSTEM_SetDateTime,@SYSTEM_Stop,SU,Sys_utilities,securuty">
+    <Group Name="Администратор" Rights="@SYSTEM_BlockSysFunc,@SYSTEM_ColdRestart,@SYSTEM_HotRestart,@SYSTEM_RunApp,@SYSTEM_SetDateTime,@SYSTEM_Stop,SU,Sys_utilities,security">
         <SessionRestrictions>
             <Duration Restricted="FALSE" Value="T#0s" />
             <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
@@ -65,7 +65,7 @@
             <Nodes Restricted="FALSE" Items="" />
         </SessionRestrictions>
     </Group>
-    <Group Name="СБ" Rights="@SYSTEM_BlockSysFunc,@SYSTEM_ColdRestart,@SYSTEM_HotRestart,@SYSTEM_RunApp,@SYSTEM_SetDateTime,@SYSTEM_Stop,securuty" Comment="Служба безопасности">
+    <Group Name="СБ" Rights="@SYSTEM_BlockSysFunc,@SYSTEM_ColdRestart,@SYSTEM_HotRestart,@SYSTEM_RunApp,@SYSTEM_SetDateTime,@SYSTEM_Stop,security" Comment="Служба безопасности">
         <SessionRestrictions>
             <Duration Restricted="FALSE" Value="T#0s" />
             <Dates RestrictedFrom="FALSE" DateFrom="D#1970-01-01" RestrictedTo="FALSE" DateTo="D#1970-01-01" />
@@ -168,4 +168,4 @@
 
 <SecurityPolicy CRC16="37677" Use="FALSE" MinPasswordLen="1" DiffCharCases="FALSE" SpecialChars="" />
 
-<RightsList Items="AI_config,AI_control,IM_control,SU,Sys_utilities,Ust_control,securuty" />
+<RightsList Items="AI_config,AI_control,IM_control,SU,Sys_utilities,Ust_control,security" />

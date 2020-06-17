@@ -5,6 +5,7 @@
         <SubApp Name="Path" Type="9E8EC5254FD166E55FBC80A47CA0B27A" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="AC8F638B416EB2B24A3394BF571EC12C" />
         <SubApp Name="AppEventLog" Type="39C8F16443B88933CAABDBA94E953B60" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="9D8D67EE4C9FEB8DBA722E977192C6B6" />
         <SubApp Name="AppEventReg" Type="9DC2006644500A69B2EBBDA8442F4371" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="9D8D67EE4C9FEB8DBA722E977192C6B6" />
+        <SubApp Name="AppEventReg_IB" Type="2DD41B024E595FF7B27767B47E7724B9" Disabled="FALSE" Args="" ExecTimeout="10000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="9D8D67EE4C9FEB8DBA722E977192C6B6" />
         <SubApp Name="AppMain_SHKU17_A1" Type="5A5D8EC1449495F1F24E388E84A05DC7" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="DCF8B30B48BE39EF5A1D3DB9037A81AF" />
         <SubApp Name="AppMain_SHKU17_A4" Type="1E9A0C6E46334CA468A0A693C3A84892" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="DCF8B30B48BE39EF5A1D3DB9037A81AF" />
         <SubApp Name="AppMain_SHKU17_A6" Type="B5AB47464D4580383967BBB2D4399651" Disabled="FALSE" Args="" ExecTimeout="1000000" ShutdownTimeout="1000" GoodResult="0" Comment="" UUID="DCF8B30B48BE39EF5A1D3DB9037A81AF" />

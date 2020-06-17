@@ -30,6 +30,10 @@
         <Signal Name="No_Valid_CRC_Alg" UUID="A285E74B4F33DBA66105BD9A524AA8EC" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Alg" />
         <Signal Name="No_Valid_CRC_Users" UUID="84E6DCC24CC33FD4292D419273ED647F" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Users" />
         <Signal Name="No_Valid_CRC_PRJ" UUID="C5AE4C6B43E3A4E151E1BD8220EFC22F" Type="BOOL" Usage="" Comment="Ошибка подсчета CRC Project.prj" />
+        <Signal Name="IBE" UUID="6ADF660B4B564D8A7CB2498BDA24437C" Type="E734958D4774D2B4B01747B68929B910" Usage="" Global="TRUE" />
+        <Signal Name="IBE_Teh" UUID="D4A91A1E4651A0C6E1E3CA8C7764E96A" Type="44255E4D45199B78AD5D93A5AB861C2C" Usage="" Global="TRUE" />
+        <Signal Name="MainServerFlag" UUID="D560A01348CC7B71BC5A088F048E5628" Type="WORD" InitialValue="1" Usage="" Global="TRUE" Comment="Текущий основной сервер (1 или 2)" />
+        <Signal Name="IS" UUID="1E03E0B241518954DA4E9CBAC9904AD1" Type="5F8BE35044E475170D88C5AD88003473" InitialValue="(CF50DC014E524D10B37B4C81D0BE5D95:=[T#1d,T#1d,T#1d,T#1d,T#1d])" Usage="" Global="TRUE" Storage="persistent" />
         <Signal Name="Make_reports" UUID="84B92002468AD4E1D47AE78DFE350604" Type="BOOL" ArraySize="5" Usage="" Global="TRUE" Comment="Создание отчётов" />
         <Signal Name="PATH_LOADER" UUID="B145C913497B022F3D5470814669C295" Type="STRING" ArraySize="10" Global="TRUE" Comment="Путь запущенного Loader.exe" />
         <Signal Name="Global_TV" UUID="B08A57C1485568D23B996BB069F03151" Type="26B66B4D4EE8F7BAC7367CAE287EFD5F" Usage="" Global="TRUE" Comment="Scada. Данные для телевизора" />
