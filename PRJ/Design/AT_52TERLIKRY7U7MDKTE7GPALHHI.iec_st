@@ -581,7 +581,6 @@ if IMIT and not IMIT_prev then
 	CMD_SHKU17_KR6As_aOnOff := bool#1;
 	SHKU17_DI_KR6AR_ON := bool#1;
 	CMD_SHKU17_KR6AR_aOnOff := bool#1;
-
 end_if;
 IMIT_prev := IMIT;
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -4568,18 +4567,6 @@ end_if;
 rtrig_KC_KOL(CLK:= MD.KC_KOL); if rtrig_KC_KOL.Q then CREATE_EVENT('Переход в режим - КЦ Кольцо', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
 ftrig_KOL(CLK:= MD.KC_KOL);
 if ftrig_KOL.Q then MD.PREV := INT#3; end_if;  
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//Режим Пуск КЦ
-//////////////////////////////////////////////////////////////////////////////////////////
-(*
-MD.KC_START := MD.GPA_START and not (MD.GPA_MAG or MD.AO_KC or MD.KC_NO);
-if MD.KC_START then
-	temp_mode_string := 'КЦ Пуск';
-end_if;
-rtrig_KC_START(CLK:= MD.KC_START); if rtrig_KC_START.Q then CREATE_EVENT('Переход в режим - КЦ Пуск', DINT#102, INT#1, 'САУ КЦ', '', CURRENT_DATE_TIME(), ''); end_if;
-*)
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
