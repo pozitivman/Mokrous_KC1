@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Project v. 1.0 >
-<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="B3D451CF40587450FD251EA3804ABBE5" SignProject="FALSE" UsersUpdateMode="ASK">
+<Project Name="KC1_Mokrous" Comment="" Port="10000" EndPort="30000" UUID="ACB9162740899DC870A859BC594159E5" SignProject="FALSE" UsersUpdateMode="ASK">
     <Globals>
         <Signal Name="MD" UUID="DE2E652046D751B86000D4A3EF56DD38" Type="26D9A9F246C72153DDCE3B89A90CB414" Global="TRUE" Comment="Режимы работы КЦ" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Global="TRUE" Comment="Scada. Кнопки" />
@@ -11,6 +11,10 @@
         <Signal Name="Global_gr" UUID="3583945E4E488761B26A39BCE01353F6" Type="AC8339B94AE497B01F57F7AED31BD15A" Global="TRUE" Comment="Переменные алгоритма группирования ГПА" />
         <Signal Name="GPA_in_Group" UUID="43CD35914FF4ABC2192948AFB6DEBB15" Type="INT" ArraySize="8" Global="TRUE" Comment="Группа, в которой находится ГПА. 0 - ГПА не в группе" />
         <Signal Name="PRU_Link" UUID="DD472C334C6C376AA71888B9C43CF535" Type="WORD" Global="TRUE" Comment="Статус связи с ПРУ" />
+        <Signal Name="IBE" UUID="6ADF660B4B564D8A7CB2498BDA24437C" Type="E734958D4774D2B4B01747B68929B910" Global="TRUE" />
+        <Signal Name="IBE_Teh" UUID="D4A91A1E4651A0C6E1E3CA8C7764E96A" Type="44255E4D45199B78AD5D93A5AB861C2C" Global="TRUE" />
+        <Signal Name="MainServerFlag" UUID="D560A01348CC7B71BC5A088F048E5628" Type="WORD" InitialValue="1" Global="TRUE" Comment="Текущий основной сервер (1 или 2)" />
+        <Signal Name="IS" UUID="1E03E0B241518954DA4E9CBAC9904AD1" Type="5F8BE35044E475170D88C5AD88003473" InitialValue="(CF50DC014E524D10B37B4C81D0BE5D95:=[T#1d,T#1d,T#1d,T#1d,T#1d])" Global="TRUE" Storage="persistent" />
         <Signal Name="SHKU17_A1_status" UUID="276C480041784377E721C59E557C76E9" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А1" />
         <Signal Name="SHKU17_A2_status" UUID="E0D0DF6C47F5B289F65262B670771ED2" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А2" />
         <Signal Name="SHKU17_A3_status" UUID="43A281F7484695252CE0ADB425F9A8E1" Type="WORD" ArraySize="9" Global="TRUE" Comment="ШКУ-17. Состояние корзины А3" />
@@ -32,6 +36,7 @@
         <Signal Name="PATH_LOADER" UUID="B145C913497B022F3D5470814669C295" Type="STRING" ArraySize="10" Global="TRUE" Comment="Путь запущенного Loader.exe" />
         <Signal Name="USER_NAME_NOW" UUID="6C7B06AE455CF2F2E501F2ADA0B63BAB" Type="STRING" ArraySize="10" Global="TRUE" Comment="Текущий пользователь" />
         <Signal Name="MakeReport" UUID="C664E4DF46AF2DCEB4688DA1D34BC5F6" Type="BOOL" Global="TRUE" Comment="Составить документ 1" />
+        <Signal Name="Make_reports" UUID="84B92002468AD4E1D47AE78DFE350604" Type="BOOL" ArraySize="5" Global="TRUE" Comment="Создание отчётов" />
         <Signal Name="Test_connection_SHKU17" UUID="AC5213544A2ED545F1C75F9396BF7C1E" Type="LREAL" Global="TRUE" Comment="Проверка связи АРМ с ШКУ-17" />
         <Signal Name="Test_internal_SHKU17" UUID="5C617C59432436338B194DA5395FAA14" Type="LREAL" Global="TRUE" Comment="Проверка связи АРМ с ШКУ-17 (служебная)" />
         <Signal Name="Test_connection_SHU14" UUID="F624562E449C8D8A3D92EAA48CB53194" Type="LREAL" Global="TRUE" Comment="Проверка связи АРМ с ШУ-14" />
@@ -57,6 +62,11 @@
         <Signal Name="FirstscanMAIN_KC" UUID="6C0C8AA64C5CEDD8AFAB5BB7E7B0F0F9" Type="BOOL" InitialValue="TRUE" Global="TRUE" Comment="Признак запуска приложения" />
         <Signal Name="cycleTimeMAIN_KC" UUID="3CB34FF04B027B4E45235CB09AB613AC" Type="LREAL" Global="TRUE" Comment="Время периодичности запуска" />
         <Signal Name="cycleTimeMAIN_KC_dur" UUID="DE4DF99841BCBB7F949FA6ACF8584473" Type="LREAL" Global="TRUE" Comment="Время выполнения приложения" />
+        <Signal Name="Cur_server_work" UUID="E13635A743F515CE0F148BA75DC06157" Type="INT" Global="TRUE" />
+        <Signal Name="Work_S1" UUID="A9A027794DF4420FF763F2AAFDA7F1F9" Type="BOOL" Global="TRUE" />
+        <Signal Name="Work_S2" UUID="6330247F4AF821C07A595CA3D77CEEF9" Type="BOOL" Global="TRUE" />
+        <Signal Name="Link_Status" UUID="5F11A3EF427C2F2B7A6AF690A9ADE87D" Type="B1A462444BF27429F17C1698EB172F22" Global="TRUE" />
+        <Signal Name="Server_rab" UUID="0B1781E741EDA736C4BB1BAE64AD339D" Type="BOOL" Global="TRUE" />
         <Signal Name="SHKU17_AI_A1_31" UUID="B1FAA8FF4FA3358B449220ABD8B86B86" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура наружного воздуха" />
         <Signal Name="SHKU17_AI_A1_32" UUID="18C63D9E447CEDD25C2B6CAE1B8384CD" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура грунта" />
         <Signal Name="SHKU17_AI_A1_33" UUID="895289D64E1E53B4626647911DB2AAD2" Type="DINT" Global="TRUE" Comment="Необработанный сигнал: Температура газа до крана 7" />
@@ -1025,18 +1035,18 @@
         <Signal Name="SHKU17_DI_A4_102" UUID="50D364B34F16F5E841841A9A7280C482" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 49. Открыт" />
         <Signal Name="SHKU17_DI_A4_103" UUID="5672028343D115B51360209D426B7389" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 49. Контроль цепи ИМ" />
         <Signal Name="SHKU17_DI_A4_104" UUID="D8A544464932155780B4988BAC432184" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 49. Контроль цепи ВК" />
-        <Signal Name="SHKU17_DI_A4_105" UUID="447A23A74E661686B2C5039F0682F67C" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_106" UUID="C7B28BD44C249446CEF3658536EE0C96" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_107" UUID="41D41FB0498243E089F0EAB3F09BCDFA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_108" UUID="EB07F09846BA24B0CED5D1B39ED5A5EA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_109" UUID="F8E8C48A4F31952D6A962C91ACF4E9E2" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1010" UUID="0EFC2E364BF238317BE7C1B4146337BB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1011" UUID="2EA2F8724BE3304A9A7C93A89EC6C2DB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1012" UUID="4A747116430864F144A8F4933A7329C6" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1013" UUID="973D9D1A407F434121074D8FA64ED7AB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1014" UUID="33DF7AE34D641E17DDDDAC98E2E47AEB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1015" UUID="C228B2BC4D3538496470028DDCEB222D" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_A4_1016" UUID="FF3A485247C96A5AFB7A63B7ED00AF0B" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_DI_A4_105" UUID="447A23A74E661686B2C5039F0682F67C" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 32. Закрыт" />
+        <Signal Name="SHKU17_DI_A4_106" UUID="C7B28BD44C249446CEF3658536EE0C96" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 32. Открыт" />
+        <Signal Name="SHKU17_DI_A4_107" UUID="41D41FB0498243E089F0EAB3F09BCDFA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 32. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_A4_108" UUID="EB07F09846BA24B0CED5D1B39ED5A5EA" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 32. Контроль цепи ВК" />
+        <Signal Name="SHKU17_DI_A4_109" UUID="F8E8C48A4F31952D6A962C91ACF4E9E2" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 1294 -3.7. Закрыт" />
+        <Signal Name="SHKU17_DI_A4_1010" UUID="0EFC2E364BF238317BE7C1B4146337BB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 1294 -3.7. Открыт" />
+        <Signal Name="SHKU17_DI_A4_1011" UUID="2EA2F8724BE3304A9A7C93A89EC6C2DB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 1294 -3.7. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_A4_1012" UUID="4A747116430864F144A8F4933A7329C6" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 1294 -3.7. Контроль цепи ВК" />
+        <Signal Name="SHKU17_DI_A4_1013" UUID="973D9D1A407F434121074D8FA64ED7AB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 30Т. Закрыт" />
+        <Signal Name="SHKU17_DI_A4_1014" UUID="33DF7AE34D641E17DDDDAC98E2E47AEB" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 30Т. Открыт" />
+        <Signal Name="SHKU17_DI_A4_1015" UUID="C228B2BC4D3538496470028DDCEB222D" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 30Т. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_A4_1016" UUID="FF3A485247C96A5AFB7A63B7ED00AF0B" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Кран 30Т. Контроль цепи ВК" />
         <Signal Name="SHU14_DI_A1_31" UUID="F0F5DF8E479BE1F37B1A04BD2822DC41" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
         <Signal Name="SHU14_DI_A1_32" UUID="130DCF59497BF24C6E31FFB8E4066172" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
         <Signal Name="SHU14_DI_A1_33" UUID="F4BAE66E48E6760BA8EEF096B7779874" Type="BOOL" Global="TRUE" Comment="Необработанный сигнал: Резерв" />
@@ -1457,18 +1467,18 @@
         <Signal Name="SHKU17_DI_KR49_ON" UUID="7B4D445F4FEC92245A9F87A95415DC18" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 49. Открыт" />
         <Signal Name="SHKU17_DI_KR49_IM" UUID="84D8B6F34FD25C0DAEAB3CB9A0EF57F8" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 49. Контроль цепи ИМ" />
         <Signal Name="SHKU17_DI_KR49_VK" UUID="0C7249814D2B3D06DEFC369BD038E23C" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 49. Контроль цепи ВК" />
-        <Signal Name="SHKU17_DI_Res_83" UUID="6816598843710FEF118E609F34B40C9B" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_84" UUID="7BF91EDE43B607EFFD4B47802BA00107" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_85" UUID="28C0CE384E342197D8664AA8012CFDE4" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_86" UUID="2AAB280D44C4AFF4C98628862747832C" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_87" UUID="21F29AC944EA60F3A7B2D1A1C483E4B6" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_88" UUID="4026C70D4800AF6A24F9D7A60B702B4E" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_89" UUID="505C92024893B606559338BFBE41A2E1" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_90" UUID="C1035A4C4C4DA01D38EAD58C4D07AD7B" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_91" UUID="018F727F47C63760EB4481AEEE08FD83" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_92" UUID="1C5003224C86C1BE1C3689A366418225" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_93" UUID="A209465B4775107967AD89BD75BF7D76" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
-        <Signal Name="SHKU17_DI_Res_94" UUID="1D7E8FC24837AB5FBC5D068224A0BA4E" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
+        <Signal Name="SHKU17_DI_KR32_OFF" UUID="6816598843710FEF118E609F34B40C9B" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 32. Закрыт" />
+        <Signal Name="SHKU17_DI_KR32_ON" UUID="7BF91EDE43B607EFFD4B47802BA00107" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 32. Открыт" />
+        <Signal Name="SHKU17_DI_KR32_IM" UUID="28C0CE384E342197D8664AA8012CFDE4" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 32. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_KR32_VK" UUID="2AAB280D44C4AFF4C98628862747832C" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 32. Контроль цепи ВК" />
+        <Signal Name="SHKU17_DI_KR1294_3_7_OFF" UUID="21F29AC944EA60F3A7B2D1A1C483E4B6" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 1294 -3.7. Закрыт" />
+        <Signal Name="SHKU17_DI_KR1294_3_7_ON" UUID="4026C70D4800AF6A24F9D7A60B702B4E" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 1294 -3.7. Открыт" />
+        <Signal Name="SHKU17_DI_KR1294_3_7_IM" UUID="505C92024893B606559338BFBE41A2E1" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 1294 -3.7. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_KR1294_3_7_VK" UUID="C1035A4C4C4DA01D38EAD58C4D07AD7B" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 1294 -3.7. Контроль цепи ВК" />
+        <Signal Name="SHKU17_DI_KR30T_OFF" UUID="018F727F47C63760EB4481AEEE08FD83" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 30Т. Закрыт" />
+        <Signal Name="SHKU17_DI_KR30T_ON" UUID="1C5003224C86C1BE1C3689A366418225" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 30Т. Открыт" />
+        <Signal Name="SHKU17_DI_KR30T_IM" UUID="A209465B4775107967AD89BD75BF7D76" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 30Т. Контроль цепи ИМ" />
+        <Signal Name="SHKU17_DI_KR30T_VK" UUID="1D7E8FC24837AB5FBC5D068224A0BA4E" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Кран 30Т. Контроль цепи ВК" />
         <Signal Name="SHU14_DI_Res_1" UUID="38FCED37461EB7690ED70ABA31E61988" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
         <Signal Name="SHU14_DI_Res_2" UUID="B4EFFC8B490666E63D0684B56F4576E4" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
         <Signal Name="SHU14_DI_Res_3" UUID="F36A1D2E49DCC5965F761C9C564D939F" Type="BOOL" Global="TRUE" Comment="Обработанный сигнал: Резерв" />
@@ -1703,12 +1713,12 @@
         <Signal Name="SHKU17_DO_A5_98" UUID="FA28FF194B5728AC4931C085169453AC" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 48 открыть" />
         <Signal Name="SHKU17_DO_A5_99" UUID="DBDC168A4C919D7137FE118E7549EA07" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 49 закрыть" />
         <Signal Name="SHKU17_DO_A5_910" UUID="43B32CDF48C075FB9598B3A8F0CC823E" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 49 открыть" />
-        <Signal Name="SHKU17_DO_A5_911" UUID="E6DF0F88465C900BA0399498A0331E36" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_912" UUID="BD49E0864F8FC759EC2D5B895326EBDF" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_913" UUID="20E4731B4305E217DDB96C9578B35A84" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_914" UUID="01A0D4AC45A4A1F708DFF19348161F04" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_915" UUID="E277736D4346E03F5835748CA0C7FF67" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_916" UUID="615930534B25A41F98AC378C3A73B70A" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
+        <Signal Name="SHKU17_DO_A5_911" UUID="E6DF0F88465C900BA0399498A0331E36" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран  32 закрыть" />
+        <Signal Name="SHKU17_DO_A5_912" UUID="BD49E0864F8FC759EC2D5B895326EBDF" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран  32 открыть" />
+        <Signal Name="SHKU17_DO_A5_913" UUID="20E4731B4305E217DDB96C9578B35A84" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 1294-3.7 закрыть" />
+        <Signal Name="SHKU17_DO_A5_914" UUID="01A0D4AC45A4A1F708DFF19348161F04" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран  1294-3.7  открыть" />
+        <Signal Name="SHKU17_DO_A5_915" UUID="E277736D4346E03F5835748CA0C7FF67" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 30Т закрыть" />
+        <Signal Name="SHKU17_DO_A5_916" UUID="615930534B25A41F98AC378C3A73B70A" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 30Т открыть" />
         <Signal Name="SHKU17_DO_A5_101" UUID="E629B34C4B246EB58F4201BF65F5E120" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Индикация АО КЦ бс" />
         <Signal Name="SHKU17_DO_A5_102" UUID="483EA4F540B413B81020AFA808B68ACD" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Индикация АО КЦ сс" />
         <Signal Name="SHKU17_DO_A5_103" UUID="D8C0F3F44627061E683B748DFEDEA3EF" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Предупредительный звуковой сигнал" />
@@ -1879,12 +1889,12 @@
         <Signal Name="SHKU17_DO_KR48_ON" UUID="8413DF5147276CB09F563ABCCB367B57" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран 48 открыть" />
         <Signal Name="SHKU17_DO_KR49_OFF" UUID="B20E5A304470355C587A88B85F3E4282" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран 49 закрыть" />
         <Signal Name="SHKU17_DO_KR49_ON" UUID="E435DFCD4D8649A4377B3CB7F59345BC" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран 49 открыть" />
-        <Signal Name="SHKU17_DO_Res_21" UUID="877760084A44BEE0523AE48545F23FB0" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Резерв" />
-        <Signal Name="SHKU17_DO_Res_22" UUID="F470D768491DD4849FB7999BA5A99007" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Резерв" />
-        <Signal Name="SHKU17_DO_Res_23" UUID="9CAF580349EC2CAF5CCBD28EAA97615C" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Резерв" />
-        <Signal Name="SHKU17_DO_Res_24" UUID="8E03F2014D4B24A99D8B7489D0625B9E" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Резерв" />
-        <Signal Name="SHKU17_DO_Res_25" UUID="EE4992AE4110C10D8DF0778A20463AF6" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Резерв" />
-        <Signal Name="SHKU17_DO_Res_26" UUID="255132404148D90BC04B6AB7EBC717DC" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Резерв" />
+        <Signal Name="SHKU17_DO_KR32_OFF" UUID="877760084A44BEE0523AE48545F23FB0" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран  32 закрыть" />
+        <Signal Name="SHKU17_DO_KR32_ON" UUID="F470D768491DD4849FB7999BA5A99007" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран  32 открыть" />
+        <Signal Name="SHKU17_DO_KR1294_3_7_OFF" UUID="9CAF580349EC2CAF5CCBD28EAA97615C" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран 1294-3.7 закрыть" />
+        <Signal Name="SHKU17_DO_KR1294_3_7_ON" UUID="8E03F2014D4B24A99D8B7489D0625B9E" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран  1294-3.7  открыть" />
+        <Signal Name="SHKU17_DO_KR30T_OFF" UUID="EE4992AE4110C10D8DF0778A20463AF6" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран 30Т закрыть" />
+        <Signal Name="SHKU17_DO_KR30T_ON" UUID="255132404148D90BC04B6AB7EBC717DC" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Кран 30Т открыть" />
         <Signal Name="SHKU17_DO_Indic_AObs_KC" UUID="135683D2447E944643CBD8B18A0175CC" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Индикация АО КЦ бс" />
         <Signal Name="SHKU17_DO_Indic_AOss_KC" UUID="2E5D788C4F2D565C8F967B8119783A3A" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Индикация АО КЦ сс" />
         <Signal Name="SHKU17_DO_Predupr_zvuk_sign" UUID="6ABABA6C4FC86CA4D5B31A9D8E0D1D66" Type="BOOL" Global="TRUE" Comment="Дискретный выход (логика): Предупредительный звуковой сигнал" />
@@ -2033,6 +2043,9 @@
         <Signal Name="HMI_SHKU17_KR47_DA" UUID="902284D84BEE04984F10028EA6AC804F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. 0 - автомат, 1 - дист" />
         <Signal Name="HMI_SHKU17_KR48_DA" UUID="D7373CEB4E6D26220A7DB899C9835623" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. 0 - автомат, 1 - дист" />
         <Signal Name="HMI_SHKU17_KR49_DA" UUID="FEC4C7A04041A65E51A27C80D075071B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. 0 - автомат, 1 - дист" />
+        <Signal Name="HMI_SHKU17_KR32_DA" UUID="77F679824DD082A6880FCFBCF7056BFC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 - автомат, 1 - дист" />
+        <Signal Name="HMI_SHKU17_KR1294_3_7_DA" UUID="52DB195B40C7545F2B1C13BDB194DC6D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 - автомат, 1 - дист" />
+        <Signal Name="HMI_SHKU17_KR30T_DA" UUID="54B7F3674E8AAF37996150BDBAD9C0EB" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т - автомат, 1 - дист" />
         <Signal Name="HMI_SHKU17_APK_1_DA" UUID="0EC76F054949CD79471502ACCB034D66" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-1. 0 - автомат, 1 - дист" />
         <Signal Name="HMI_SHKU17_APK_2_DA" UUID="E9CA702A492504B42A5DC59D473ECECE" Type="BOOL" Global="TRUE" Comment="ШКУ 17. АПК-2. 0 - автомат, 1 - дист" />
         <Signal Name="HMI_SHU14_KRL1_DA" UUID="25BA3B13404516B6E3659192C299ED0B" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. 0 - автомат, 1 - дист" />
@@ -2086,6 +2099,9 @@
         <Signal Name="HMI_SHKU17_KR47_rOn" UUID="9990D1A548E6374D158A57AE63CAC8E6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHKU17_KR48_rOn" UUID="81F528F644B980FEFB2069B0C9952837" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHKU17_KR49_rOn" UUID="C08AC4214AB1529AD78AE7BA3ACE9F98" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_KR32_rOn" UUID="5417654B4B1C97A06F2322831B3BAFC3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_KR1294_3_7_rOn" UUID="501DBF6D4C60B1B528EBA79FA67F9757" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 Кнопка &quot;Открыть&quot;" />
+        <Signal Name="HMI_SHKU17_KR30T_rOn" UUID="5BEEAB764D9B3E5DF18A25A0826A6F6F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHU14_KRL1_rOn" UUID="9FBAE2864BEBBD917D0AE8925392A151" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHU14_KRSOK2_rOn" UUID="2C1641884C31C318C0BCC9A44EDD7894" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. Кнопка &quot;Открыть&quot;" />
         <Signal Name="HMI_SHU14_KRSOK3_rOn" UUID="CB0304804812185B5069E39CBA60E1EC" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. Кнопка &quot;Открыть&quot;" />
@@ -2137,6 +2153,9 @@
         <Signal Name="HMI_SHKU17_KR47_rOff" UUID="F225ED17457702560174B0BA44C464C0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHKU17_KR48_rOff" UUID="008B3D914A02A52039F653A06643BD0B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHKU17_KR49_rOff" UUID="AF33A1AD406BD561E4ECB19F66D74748" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_KR32_rOff" UUID="9029C32F41B759F0310A0EACE4640892" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_KR1294_3_7_rOff" UUID="7965775D4ED9AB74DD94C791B3863369" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 Кнопка &quot;Закрыть&quot;" />
+        <Signal Name="HMI_SHKU17_KR30T_rOff" UUID="4C6D90EC48A34A2AA59032BC06793539" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHU14_KRL1_rOff" UUID="AC86FA6241418DDC901A8CAAE4A15405" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHU14_KRSOK2_rOff" UUID="58AE579B4BD5B92F9CF4F8B25D0D99F0" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. Кнопка &quot;Закрыть&quot;" />
         <Signal Name="HMI_SHU14_KRSOK3_rOff" UUID="EB9EBDC3499CFCDB1B3388A775124A56" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. Кнопка &quot;Закрыть&quot;" />
@@ -2189,6 +2208,9 @@
         <Signal Name="HMI_SHKU17_KR47_rep" UUID="74B8EEFD420D458D666F269E283D1808" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHKU17_KR48_rep" UUID="918BED174D4033BC7CC2909EE1C36D2B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHKU17_KR49_rep" UUID="BB348EE441FFAED69A86469CCF9CA0D0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_KR32_rep" UUID="FA797D6941F8BEE59336A29589CF9626" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_KR1294_3_7_rep" UUID="0D6603764C9C2359F89EC187627F303F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 Кнопка &quot;Повтор команды&quot;" />
+        <Signal Name="HMI_SHKU17_KR30T_rep" UUID="3D5A15C440DD20E8C48B87AD747D7B51" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHU14_KRL1_rep" UUID="4DA3BAB845313AA02BF218B173217EA3" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHU14_KRSOK2_rep" UUID="9676763847066C83282B74862773C55A" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. Кнопка &quot;Повтор команды&quot;" />
         <Signal Name="HMI_SHU14_KRSOK3_rep" UUID="E38C1EA046C840FAE2D8F6BC60FCCBE1" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. Кнопка &quot;Повтор команды&quot;" />
@@ -2240,6 +2262,9 @@
         <Signal Name="CMD_SHKU17_KR47_rOnOff" UUID="61D78BB44DFC44EA510B0A8E86BA4812" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. Команда в ДУ" />
         <Signal Name="CMD_SHKU17_KR48_rOnOff" UUID="EB4871E84290877A891931A0BFCC8F56" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. Команда в ДУ" />
         <Signal Name="CMD_SHKU17_KR49_rOnOff" UUID="6FBC88DA443C8436808CC19E7171CFF3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_KR32_rOnOff" UUID="74BAD6D34377C4569598DF84B4537201" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_KR1294_3_7_rOnOff" UUID="C61BDC984F9BE91840953EB8F6E4E5B3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 Команда в ДУ" />
+        <Signal Name="CMD_SHKU17_KR30T_rOnOff" UUID="358F194C487ADC1BEE43C697840A4377" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т Команда в ДУ" />
         <Signal Name="CMD_SHU14_KRL1_rOnOff" UUID="DC2E98BE45230BD14D148BAD384B5126" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. Команда в ДУ" />
         <Signal Name="CMD_SHU14_KRSOK2_rOnOff" UUID="D92DF7E047B063C66CA96C82CBE74752" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. Команда в ДУ" />
         <Signal Name="CMD_SHU14_KRSOK3_rOnOff" UUID="AE7CAC2549D33C4C9E20F3A5AB227E1F" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. Команда в ДУ" />
@@ -2291,6 +2316,9 @@
         <Signal Name="CMD_SHKU17_KR47_aOnOff" UUID="923A6A9B43FDD6E411135381114F1771" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. Команда в автомате" />
         <Signal Name="CMD_SHKU17_KR48_aOnOff" UUID="BC5FBF464805ABA30A195B97B6116DB1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. Команда в автомате" />
         <Signal Name="CMD_SHKU17_KR49_aOnOff" UUID="D1DD86AB44F16F76119023BA2ECB1896" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. Команда в автомате" />
+        <Signal Name="CMD_SHKU17_KR32_aOnOff" UUID="E6ED34874D0677A6EA2F808DAD6434E2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 Команда в автомате" />
+        <Signal Name="CMD_SHKU17_KR1294_3_7_aOnOff" UUID="ACFFF381416086F1C1A011B0AD17C1CC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 Команда в автомате" />
+        <Signal Name="CMD_SHKU17_KR30T_aOnOff" UUID="9790B3644B7B39C01ACAF68370676CB8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т Команда в автомате" />
         <Signal Name="CMD_SHU14_KRL1_aOnOff" UUID="925694394B0D03A7F806D5B6374F681C" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. Команда в автомате" />
         <Signal Name="CMD_SHU14_KRSOK2_aOnOff" UUID="268A1C7B44AA3B4E3D77BCA5CD5024CA" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. Команда в автомате" />
         <Signal Name="CMD_SHU14_KRSOK3_aOnOff" UUID="8583395947BF5A2E8F33428C99C1017B" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. Команда в автомате" />
@@ -2342,6 +2370,9 @@
         <Signal Name="APS_SHKU17_KR47_non" UUID="CAECCDE842F4E8908D89929D0CDABC3B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHKU17_KR48_non" UUID="407BA7564CE0096CE27900AEF98BF420" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHKU17_KR49_non" UUID="9785AEFE4FB79DDF488161B92EBA21EF" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_KR32_non" UUID="BF43F3664891FBA5869998B25AF30C99" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_non" UUID="A3295A864BE7B6E900AEF7A54E2CA7EA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_non" UUID="7CB8AEFF4D333A4F874602AE07820CE4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHU14_KRL1_non" UUID="84F944C14AC938EAEC649DA1C9B71790" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_non" UUID="87696077486227CCB3B321AD04C54DA7" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_non" UUID="BF4DA599488869C34B1D5AB296D0F521" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;не открылся&quot;" />
@@ -2393,6 +2424,10 @@
         <Signal Name="APS_SHKU17_KR47_noff" UUID="0CA43DF44967B546ABE93BBBA4CD5B98" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHKU17_KR48_noff" UUID="853745B34388EC66D608CF9309BC623B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHKU17_KR49_noff" UUID="A489B61F46B94954209437A300F33D4E" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_KR32_noff" UUID="0A0892644C50A4DF794F9BB5C951F161" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_noff" UUID="09CA1CB94E72B7F96A4A209E50CC9E43" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_noff" UUID="2D8F0B854F76B3764F023A8A7B8B2819" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_SHU14_KRL1_non_1" UUID="4C07C1AE46CB711C70E6A9B40389147A" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;не открылся&quot;" />
         <Signal Name="APS_SHU14_KRL1_noff" UUID="37A23AC441D853CBEBF582AC3E09B1C4" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_noff" UUID="B6A386C14B12170E106495B5902F667B" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_noff" UUID="61FF13C241A9E7C35F14D69CE918E746" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;не закрылся&quot;" />
@@ -2444,6 +2479,9 @@
         <Signal Name="APS_SHKU17_KR47_nstart" UUID="66442F39491AC4104CDED1B5AABFC39B" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHKU17_KR48_nstart" UUID="CDF59DC7428DDED62C5DB9B5C3598204" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHKU17_KR49_nstart" UUID="3F799BDE408A83A9DA3DC8909C0A1623" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_KR32_nstart" UUID="D18870F44278BBD1FF3E118A1788A1CC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_nstart" UUID="E30BECAF4B963851C3A9249009E0C0A5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_nstart" UUID="A51DFDF746D44BBE7EC67380D50E68FA" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHU14_KRL1_nstart" UUID="B5AEF73A4E4DCF7DA5A38B896ED7884B" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_nstart" UUID="97A45AE54DFA5173FCA214A253588C07" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_nstart" UUID="E92B45FF46AB9A7429155D9B5F1D6F8A" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;не стронулся&quot;" />
@@ -2495,6 +2533,9 @@
         <Signal Name="APS_SHKU17_KR47_selfon" UUID="78DCD6A246018A9B3F72C2BE4332B24A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHKU17_KR48_selfon" UUID="91AFFD6F48D351097A1A47B57D46BF08" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHKU17_KR49_selfon" UUID="A1A38B0A48077B13789C738B41A2FF54" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_KR32_selfon" UUID="672FDE994630AC4E33DE9CB908C5C620" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_selfon" UUID="96E256AD412765885F6777847DE51FF7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_selfon" UUID="981C80C749BA1E05EF90CAB63AE3EF3D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHU14_KRL1_selfon" UUID="8FB6A5714A9C17EC2AD9C5AEBDA81EEB" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_selfon" UUID="D41860E843F59A513D1694B79E609469" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_selfon" UUID="B1E450CE4011F8D38F5110BC7A087CD5" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;Самопроизвольное открытие&quot;" />
@@ -2546,6 +2587,9 @@
         <Signal Name="APS_SHKU17_KR47_selfoff" UUID="DD1FD4C9420629092CA2BC889B0BA5C2" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHKU17_KR48_selfoff" UUID="F6EFD14F4CD4CDB0C7E8D78864F0DA44" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHKU17_KR49_selfoff" UUID="5CE298BF45632DED35551C95199F6751" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_KR32_selfoff" UUID="661A20EB45899844325BE2AF77DFD659" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_selfoff" UUID="D476E13340C2DFC16D6E5FB5CCE90EA5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_selfoff" UUID="773EE897425D8A169BA37483DB388D5F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHU14_KRL1_selfoff" UUID="44AE2E4F422FB7D36C46E49D4A3FE208" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_selfoff" UUID="C3E4AC3D4BE77AF7D088B18971B08A37" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_selfoff" UUID="064B41F744A53118B2A62A8B7C948DD2" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;Самопроизвольное закрытие&quot;" />
@@ -2597,6 +2641,9 @@
         <Signal Name="APS_SHKU17_KR47_flt" UUID="348D10C742CE6EC7CADF67BD5DF6BC7A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHKU17_KR48_flt" UUID="70C256AA4349B724229482B921D0D508" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHKU17_KR49_flt" UUID="DD2AFEC6453A8850C5AD14B639DCE9CE" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_KR32_flt" UUID="74BD92D84BD6980F301871888E30F17D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_flt" UUID="CCC58F4A401F77D82D6E90BF1C80F3F8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_flt" UUID="FD6886884CC95E725F3D189D2E22A0A1" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHU14_KRL1_flt" UUID="4BA59A6742DBDDECF48E7183E49B45D8" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_flt" UUID="CF918828400F2FDA17029C96D504B3CB" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_flt" UUID="CE318F1F4B770987703BFD9622370D06" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;Ошибка концевиков&quot;" />
@@ -2648,6 +2695,9 @@
         <Signal Name="APS_SHKU17_KR47_ncon" UUID="486DD890434B4D12EA530AB4F40E0041" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHKU17_KR48_ncon" UUID="49EC2B2648D10483F8C16798E6E134AC" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHKU17_KR49_ncon" UUID="E21EE45840786537FC0DCFB31534F40F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_KR32_ncon" UUID="E00C90F14CC62DCFBBCA28B75C89216F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_ncon" UUID="FDEFDC154B8CE6812386979607B435A7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_ncon" UUID="BC770C7D45C805F9B63D70901DAFD6B6" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHU14_KRL1_ncon" UUID="C620B9654B283F1D24DF399BCBA833C9" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_ncon" UUID="063F26FD473C5438686B1FBB939BF1B6" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_ncon" UUID="27E755144606290389457FBDD1E3AB97" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;Нет КЦУ открытия&quot;" />
@@ -2699,6 +2749,9 @@
         <Signal Name="APS_SHKU17_KR47_ncoff" UUID="2CA0EF774EB33C0FCDACB297F03BF134" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHKU17_KR48_ncoff" UUID="78BE4AA346E19DBAC60FD6B96C8E75A3" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHKU17_KR49_ncoff" UUID="B9D62BCA40706196534058B734A59A3F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_KR32_ncoff" UUID="CD2F52754140E08D32A987A80BB03843" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_ncoff" UUID="0EB4DC504E734327C7E663A588A72EAD" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_ncoff" UUID="A2039F734333BD1BCE20FC89A118E9C8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHU14_KRL1_ncoff" UUID="A9ACD9BE4872FCA08EA6C7895DC8628D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_ncoff" UUID="CB13A3C44D21523B19511BBF234F039E" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_ncoff" UUID="69AB131E4DA3A5F8E9E70C94B5D6ABCB" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;Нет КЦУ закрытия&quot;" />
@@ -2750,6 +2803,9 @@
         <Signal Name="APS_SHKU17_KR47_general" UUID="E6BB06384D8E371C96D03A9017346CF5" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_KR48_general" UUID="829447664834C6D547F8189F6ECACAC8" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHKU17_KR49_general" UUID="CBAE49184E72D40E792D0EA6F23B803F" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_KR32_general" UUID="ABC6314443524FCD8B70BD9444802BC0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_KR1294_3_7_general" UUID="F0DBA99140ED74FC3E0D0DAFDA672EE4" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_SHKU17_KR30T_general" UUID="F8F0901940D4875F279BCBB3E6BC39E9" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHU14_KRL1_general" UUID="207D66DF40CE5769804E6C9B24F6C5E4" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHU14_KRSOK2_general" UUID="74CEB75C4699F603F210628601325694" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_SHU14_KRSOK3_general" UUID="FE487F96470D587082DE7588B085698F" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;Общая ошибка ИМ&quot;" />
@@ -2801,6 +2857,9 @@
         <Signal Name="SHKU17_KR47_state" UUID="74DC2B1A43829825CC2EA5BABE464371" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран 47. Состояние для SCADA" />
         <Signal Name="SHKU17_KR48_state" UUID="9AF693044A038158B0964ABDA21B1BB9" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран 48. Состояние для SCADA" />
         <Signal Name="SHKU17_KR49_state" UUID="5FECF1C6449A4BCD612212A1237A9783" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран 49. Состояние для SCADA" />
+        <Signal Name="SHKU17_KR32_state" UUID="D995A5A643658253AA93BA8D5713AC15" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран 32 Состояние для SCADA" />
+        <Signal Name="SHKU17_KR1294_3_7_state" UUID="91610D1D47988E7259A8DB87E2488FE5" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 Состояние для SCADA" />
+        <Signal Name="SHKU17_KR30T_state" UUID="DFD870B242E530EC358A56BA76DC3E9F" Type="WORD" Global="TRUE" Comment="ШКУ 17. Кран 30Т Состояние для SCADA" />
         <Signal Name="SHU14_KRL1_state" UUID="3FEFF64E453A316BFBECA58A036A8596" Type="WORD" Global="TRUE" Comment="ШУ14. Кран Л1. Состояние для SCADA" />
         <Signal Name="SHU14_KRSOK2_state" UUID="C754F4E9418B4D43CC8966A4AEB0109A" Type="WORD" Global="TRUE" Comment="ШУ14. Кран  СОК2. Состояние для SCADA" />
         <Signal Name="SHU14_KRSOK3_state" UUID="320A21C84B9AFDE0A676468E89F110AB" Type="WORD" Global="TRUE" Comment="ШУ14. Кран СОК3. Состояние для SCADA" />
@@ -2997,6 +3056,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_non" UUID="6CEF7F0C43865152D9C838B5DB20229D" Type="BOOL" Global="TRUE" Comment="Кран 47  не открылся" />
         <Signal Name="APS_APS_SHKU17_KR48_non" UUID="275F70EC4006503479805CA08AB30B54" Type="BOOL" Global="TRUE" Comment="Кран 48  не открылся" />
         <Signal Name="APS_APS_SHKU17_KR49_non" UUID="292398D647CFE0ED98E827B9160ACD46" Type="BOOL" Global="TRUE" Comment="Кран 49  не открылся" />
+        <Signal Name="APS_APS_SHKU17_KR32_non" UUID="D71B208A4534CD873D9354946D79CEA9" Type="BOOL" Global="TRUE" Comment="Кран 32 АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_non" UUID="6FE93E1F4AE6E0E695A7E78F6876C211" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7 АПС &quot;не открылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_non" UUID="DB0C7F9D437BC845E2DFE4A38C2FE64A" Type="BOOL" Global="TRUE" Comment="Кран 30Т АПС &quot;не открылся&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_non" UUID="513930344E9A1E0C4E2A4BAE869D80F9" Type="BOOL" Global="TRUE" Comment="Кран Л1  не открылся" />
         <Signal Name="APS_APS_SHU14_KRSOK2_non" UUID="2D43BB5146EE7C03A38CF8808B865E11" Type="BOOL" Global="TRUE" Comment="Кран  СОК2  не открылся" />
         <Signal Name="APS_APS_SHU14_KRSOK3_non" UUID="E92900544840BE420C16D38C8AF83B65" Type="BOOL" Global="TRUE" Comment="Кран СОК3  не открылся" />
@@ -3048,6 +3110,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_noff" UUID="C82206F143B7F781043BF4BF20659E4E" Type="BOOL" Global="TRUE" Comment="Кран 47  не закрылся" />
         <Signal Name="APS_APS_SHKU17_KR48_noff" UUID="CB6A1F6C4ABFAA5121528E90FD314926" Type="BOOL" Global="TRUE" Comment="Кран 48  не закрылся" />
         <Signal Name="APS_APS_SHKU17_KR49_noff" UUID="0661320B4CEE5E07651CB5810D5FBE4A" Type="BOOL" Global="TRUE" Comment="Кран 49  не закрылся" />
+        <Signal Name="APS_APS_SHKU17_KR32_noff" UUID="121513D047C80EE5D8FB52A2B2317F1D" Type="BOOL" Global="TRUE" Comment="Кран 32 АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_noff" UUID="8E3139D940381D856C1C2A94A9F3DED8" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7 АПС &quot;не закрылся&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_noff" UUID="665BD5D048E0FFBB0BD491B29A46AD37" Type="BOOL" Global="TRUE" Comment="Кран 30Т АПС &quot;не закрылся&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_noff" UUID="594450C647A4F9F0ECDFA0A01D7B2729" Type="BOOL" Global="TRUE" Comment="Кран Л1  не закрылся" />
         <Signal Name="APS_APS_SHU14_KRSOK2_noff" UUID="E46705EE4BE6D3C60B687D8B538DB92E" Type="BOOL" Global="TRUE" Comment="Кран  СОК2  не закрылся" />
         <Signal Name="APS_APS_SHU14_KRSOK3_noff" UUID="B2A350294C6369184ED923BD9D318067" Type="BOOL" Global="TRUE" Comment="Кран СОК3  не закрылся" />
@@ -3099,6 +3164,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_nstart" UUID="2969CDCE4E696F7B4213B5B075CD210B" Type="BOOL" Global="TRUE" Comment="Кран 47  не стронулся" />
         <Signal Name="APS_APS_SHKU17_KR48_nstart" UUID="604E840F4DFF0B72D93FA28DFACAB6A0" Type="BOOL" Global="TRUE" Comment="Кран 48  не стронулся" />
         <Signal Name="APS_APS_SHKU17_KR49_nstart" UUID="86FFF6D94116CBAB920708A0FEE33007" Type="BOOL" Global="TRUE" Comment="Кран 49  не стронулся" />
+        <Signal Name="APS_APS_SHKU17_KR32_nstart" UUID="F038E8034CB441E77B598283AF9E55E9" Type="BOOL" Global="TRUE" Comment="Кран 32 АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_nstart" UUID="08871518444528E6546489860295B934" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7 АПС &quot;не стронулся&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_nstart" UUID="6D97C2A142DBB7CA552E468B82A36992" Type="BOOL" Global="TRUE" Comment="Кран 30Т АПС &quot;не стронулся&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_nstart" UUID="802A8F414C4B2EF32700659395BDC049" Type="BOOL" Global="TRUE" Comment="Кран Л1  не стронулся" />
         <Signal Name="APS_APS_SHU14_KRSOK2_nstart" UUID="DF023C2C40811AC9664775A74CD5BE01" Type="BOOL" Global="TRUE" Comment="Кран  СОК2  не стронулся" />
         <Signal Name="APS_APS_SHU14_KRSOK3_nstart" UUID="0EAFBAE5411E110C74DAD99A03D2699D" Type="BOOL" Global="TRUE" Comment="Кран СОК3  не стронулся" />
@@ -3150,6 +3218,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_selfon" UUID="0BC4F6044B468FC51F603193281AC9FC" Type="BOOL" Global="TRUE" Comment="Кран 47  Самопроизвольное открытие" />
         <Signal Name="APS_APS_SHKU17_KR48_selfon" UUID="10EF51A14D8FA55BF639D2A48E43F1AA" Type="BOOL" Global="TRUE" Comment="Кран 48  Самопроизвольное открытие" />
         <Signal Name="APS_APS_SHKU17_KR49_selfon" UUID="410A65034AA6832472E6F090B17E180C" Type="BOOL" Global="TRUE" Comment="Кран 49  Самопроизвольное открытие" />
+        <Signal Name="APS_APS_SHKU17_KR32_selfon" UUID="308737CC4BBF863B1BEE1AAD82D13F97" Type="BOOL" Global="TRUE" Comment="Кран 32 АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_selfon" UUID="0902281C46F6F8567C1DB58D6269B3C1" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7 АПС &quot;Самопроизвольное открытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_selfon" UUID="187163D24428DD35297FBA96187F1B72" Type="BOOL" Global="TRUE" Comment="Кран 30Т АПС &quot;Самопроизвольное открытие&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_selfon" UUID="5140D93E4BE9DD0305CF99AC77D0C7E0" Type="BOOL" Global="TRUE" Comment="Кран Л1  Самопроизвольное открытие" />
         <Signal Name="APS_APS_SHU14_KRSOK2_selfon" UUID="BB2F8353427CE6F5EFC3C0B63FB7AA94" Type="BOOL" Global="TRUE" Comment="Кран  СОК2  Самопроизвольное открытие" />
         <Signal Name="APS_APS_SHU14_KRSOK3_selfon" UUID="F9D2197B4403B5D28F7A7FA2C69739F4" Type="BOOL" Global="TRUE" Comment="Кран СОК3  Самопроизвольное открытие" />
@@ -3201,6 +3272,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_selfoff" UUID="31F4479741D42072A737CB80CF0C6D3F" Type="BOOL" Global="TRUE" Comment="Кран 47  Самопроизвольное закрытие" />
         <Signal Name="APS_APS_SHKU17_KR48_selfoff" UUID="B989CAC54442C6B7B6F2C599B12818FE" Type="BOOL" Global="TRUE" Comment="Кран 48  Самопроизвольное закрытие" />
         <Signal Name="APS_APS_SHKU17_KR49_selfoff" UUID="F3D1A9AA4D4B8A83203B65A846C190D2" Type="BOOL" Global="TRUE" Comment="Кран 49  Самопроизвольное закрытие" />
+        <Signal Name="APS_APS_SHKU17_KR32_selfoff" UUID="FFA166974C334043F3679A8DECE402A2" Type="BOOL" Global="TRUE" Comment="Кран 32 АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_selfoff" UUID="A7BEE3644C86D6C6523E5ABFD0B57C5E" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7 АПС &quot;Самопроизвольное закрытие&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_selfoff" UUID="B1EE6B9A493CE7C93963AEBCB7ED887F" Type="BOOL" Global="TRUE" Comment="Кран 30Т АПС &quot;Самопроизвольное закрытие&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_selfoff" UUID="BCBAECAB402197A79BCAE288842E6558" Type="BOOL" Global="TRUE" Comment="Кран Л1  Самопроизвольное закрытие" />
         <Signal Name="APS_APS_SHU14_KRSOK2_selfoff" UUID="C947BC1043954ACEC7520D9C04E1B424" Type="BOOL" Global="TRUE" Comment="Кран  СОК2  Самопроизвольное закрытие" />
         <Signal Name="APS_APS_SHU14_KRSOK3_selfoff" UUID="9E1E90FE424CA1DBACEECEA941A4AC96" Type="BOOL" Global="TRUE" Comment="Кран СОК3  Самопроизвольное закрытие" />
@@ -3252,6 +3326,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_flt" UUID="DE71625543E3F1E85CACF6899898DFB1" Type="BOOL" Global="TRUE" Comment="Кран 47  Ошибка концевиков" />
         <Signal Name="APS_APS_SHKU17_KR48_flt" UUID="0C272EE34EEA5D4E280447949874116C" Type="BOOL" Global="TRUE" Comment="Кран 48  Ошибка концевиков" />
         <Signal Name="APS_APS_SHKU17_KR49_flt" UUID="4B9D38E545843023D93ED28A35339724" Type="BOOL" Global="TRUE" Comment="Кран 49  Ошибка концевиков" />
+        <Signal Name="APS_APS_SHKU17_KR32_flt" UUID="62517DC64EAD2FDC3876BCAFED36472D" Type="BOOL" Global="TRUE" Comment="Кран 32 АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_flt" UUID="E357655044F52F7472FBCFB0729EC67B" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7 АПС &quot;Ошибка концевиков&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_flt" UUID="50EF134C466B07B5B215AEB91A3B0A2A" Type="BOOL" Global="TRUE" Comment="Кран 30Т АПС &quot;Ошибка концевиков&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_flt" UUID="5D7A197847AD46FEEEB3089E03CC06B9" Type="BOOL" Global="TRUE" Comment="Кран Л1  Ошибка концевиков" />
         <Signal Name="APS_APS_SHU14_KRSOK2_flt" UUID="A1D7375C4C2C97345DF6489CDFE4B5F7" Type="BOOL" Global="TRUE" Comment="Кран  СОК2  Ошибка концевиков" />
         <Signal Name="APS_APS_SHU14_KRSOK3_flt" UUID="2F6F16D74F07E7A5482F448491205EB2" Type="BOOL" Global="TRUE" Comment="Кран СОК3  Ошибка концевиков" />
@@ -3303,6 +3380,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_ncon" UUID="A13EF200427CC9F6CD5887984EDA6FFF" Type="BOOL" Global="TRUE" Comment="Кран 47  Нет КЦУ открытия" />
         <Signal Name="APS_APS_SHKU17_KR48_ncon" UUID="E451E69C4A74CDB58F5894880FC410B6" Type="BOOL" Global="TRUE" Comment="Кран 48  Нет КЦУ открытия" />
         <Signal Name="APS_APS_SHKU17_KR49_ncon" UUID="518C1E7246FC7E3A84B019A6FE014D45" Type="BOOL" Global="TRUE" Comment="Кран 49  Нет КЦУ открытия" />
+        <Signal Name="APS_APS_SHKU17_KR32_ncon" UUID="98BCBDB441488BDC3A2CCF819DE728CA" Type="BOOL" Global="TRUE" Comment="Кран 32 АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_ncon" UUID="5FC0D0F74C864B43E4185999CE6752D4" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7 АПС &quot;Нет КЦУ открытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_ncon" UUID="34C0896A40BCF182125894BD8BF4227F" Type="BOOL" Global="TRUE" Comment="Кран 30Т АПС &quot;Нет КЦУ открытия&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_ncon" UUID="61BCFC1C42C882510D5A0B9792698AF2" Type="BOOL" Global="TRUE" Comment="Кран Л1  Нет КЦУ открытия" />
         <Signal Name="APS_APS_SHU14_KRSOK2_ncon" UUID="0643215D43F63DA26D3DCC9BC835016C" Type="BOOL" Global="TRUE" Comment="Кран  СОК2  Нет КЦУ открытия" />
         <Signal Name="APS_APS_SHU14_KRSOK3_ncon" UUID="295531AB48B0DA3A0D22CD95083E1772" Type="BOOL" Global="TRUE" Comment="Кран СОК3  Нет КЦУ открытия" />
@@ -3354,6 +3434,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_ncoff" UUID="E677ACC047C9431E693C0F9C64727FE0" Type="BOOL" Global="TRUE" Comment="Кран 47  Нет КЦУ закрытия" />
         <Signal Name="APS_APS_SHKU17_KR48_ncoff" UUID="F6B788D4401AE3D9C911938BA404B871" Type="BOOL" Global="TRUE" Comment="Кран 48  Нет КЦУ закрытия" />
         <Signal Name="APS_APS_SHKU17_KR49_ncoff" UUID="AC0707FB44C61165E2350B90636A1EF9" Type="BOOL" Global="TRUE" Comment="Кран 49  Нет КЦУ закрытия" />
+        <Signal Name="APS_APS_SHKU17_KR32_ncoff" UUID="CD55D5B94AB105AA55246F924F40CAE6" Type="BOOL" Global="TRUE" Comment="Кран 32 АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_ncoff" UUID="C14BD66A4893181FF0C513B5436B6B27" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7 АПС &quot;Нет КЦУ закрытия&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_ncoff" UUID="5EBBBB1E4CE1F7655215159C096EBBEF" Type="BOOL" Global="TRUE" Comment="Кран 30Т АПС &quot;Нет КЦУ закрытия&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_ncoff" UUID="D8DD4ACE405B4A960F03BF87CBB5387E" Type="BOOL" Global="TRUE" Comment="Кран Л1  Нет КЦУ закрытия" />
         <Signal Name="APS_APS_SHU14_KRSOK2_ncoff" UUID="39F32B3745F4DE4F687E91B36A49718E" Type="BOOL" Global="TRUE" Comment="Кран  СОК2  Нет КЦУ закрытия" />
         <Signal Name="APS_APS_SHU14_KRSOK3_ncoff" UUID="B570B716465B5A8E7E78B1AE78BA3F3F" Type="BOOL" Global="TRUE" Comment="Кран СОК3  Нет КЦУ закрытия" />
@@ -3405,6 +3488,9 @@
         <Signal Name="APS_APS_SHKU17_KR47_general" UUID="1FD8E8A44476402DF26FDE9E36E39BE7" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 47. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHKU17_KR48_general" UUID="B5839B06461692EB06B6FC894EA9CF0A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 48. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHKU17_KR49_general" UUID="F1AEC74B4FA68727DE88D3BF7483B86D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 49. АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR32_general" UUID="B9C2220D479E9E58139F809A8E62302D" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 32 АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR1294_3_7_general" UUID="B553B8B9487EF731B29301B3065F783A" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 1294 -3.7 АПС &quot;Общая ошибка ИМ&quot;" />
+        <Signal Name="APS_APS_SHKU17_KR30T_general" UUID="E61BD0E940C8A90B0AA34DB2A43F26C0" Type="BOOL" Global="TRUE" Comment="ШКУ 17. Кран 30Т АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHU14_KRL1_general" UUID="E6F29FC8400304193CC10DBDEA15995A" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран Л1. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHU14_KRSOK2_general" UUID="6E9DF55A44574B4A11C1DCAD6A5DA96D" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран  СОК2. АПС &quot;Общая ошибка ИМ&quot;" />
         <Signal Name="APS_APS_SHU14_KRSOK3_general" UUID="BF6D4D844C2DBE172071BF9861B9F010" Type="BOOL" Global="TRUE" Comment="ШУ14. Кран СОК3. АПС &quot;Общая ошибка ИМ&quot;" />
@@ -3724,18 +3810,18 @@
         <Signal Name="APS_SHKU17_DI_KR49_ON" UUID="A9D8F9A14A7E159D74633BBDA48721AF" Type="BOOL" Global="TRUE" Comment="Кран 49. Открыт" />
         <Signal Name="APS_SHKU17_DI_KR49_IM" UUID="2FFB08D84235DDCC12FAB5A00782B8B0" Type="BOOL" Global="TRUE" Comment="Кран 49. Контроль цепи ИМ" />
         <Signal Name="APS_SHKU17_DI_KR49_VK" UUID="903217EA4C3B0AC600D2D29238732585" Type="BOOL" Global="TRUE" Comment="Кран 49. Контроль цепи ВК" />
-        <Signal Name="APS_SHKU17_DI_Res_83" UUID="95DA816940B989F4AADC29BB9B218808" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_84" UUID="423078C6400905D2F185DBB29857DFDE" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_85" UUID="91F558FF48E4AEBD8DECA6B76F26A9E3" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_86" UUID="78AFFCE94C77DC3A33475C8CED898D22" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_87" UUID="81A4BC6E452EFD1C335479A41CF8AE36" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_88" UUID="6B019A724A55205BE85F58995D677F2D" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_89" UUID="7446DA5F42A84BACD40E938D0428DF5B" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_90" UUID="EB3456014AFF80000E880C93EE2CEF74" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_91" UUID="B96007A142D48D7AD2C164BFFEE905C1" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_92" UUID="EA24E68E4FBD22700DE8DABB12DE1566" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_93" UUID="4843E4964F19A35F174C6998C759C0A5" Type="BOOL" Global="TRUE" Comment="Резерв" />
-        <Signal Name="APS_SHKU17_DI_Res_94" UUID="FC6E3EA5437FF0D3E9413DB5ED3BE34B" Type="BOOL" Global="TRUE" Comment="Резерв" />
+        <Signal Name="APS_SHKU17_DI_KR32_OFF" UUID="95DA816940B989F4AADC29BB9B218808" Type="BOOL" Global="TRUE" Comment="Кран 32. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR32_ON" UUID="423078C6400905D2F185DBB29857DFDE" Type="BOOL" Global="TRUE" Comment="Кран 32. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR32_IM" UUID="91F558FF48E4AEBD8DECA6B76F26A9E3" Type="BOOL" Global="TRUE" Comment="Кран 32. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR32_VK" UUID="78AFFCE94C77DC3A33475C8CED898D22" Type="BOOL" Global="TRUE" Comment="Кран 32. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR1294_3_7_OFF" UUID="81A4BC6E452EFD1C335479A41CF8AE36" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR1294_3_7_ON" UUID="6B019A724A55205BE85F58995D677F2D" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR1294_3_7_IM" UUID="7446DA5F42A84BACD40E938D0428DF5B" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR1294_3_7_VK" UUID="EB3456014AFF80000E880C93EE2CEF74" Type="BOOL" Global="TRUE" Comment="Кран 1294 -3.7. Контроль цепи ВК" />
+        <Signal Name="APS_SHKU17_DI_KR30T_OFF" UUID="B96007A142D48D7AD2C164BFFEE905C1" Type="BOOL" Global="TRUE" Comment="Кран 30Т. Закрыт" />
+        <Signal Name="APS_SHKU17_DI_KR30T_ON" UUID="EA24E68E4FBD22700DE8DABB12DE1566" Type="BOOL" Global="TRUE" Comment="Кран 30Т. Открыт" />
+        <Signal Name="APS_SHKU17_DI_KR30T_IM" UUID="4843E4964F19A35F174C6998C759C0A5" Type="BOOL" Global="TRUE" Comment="Кран 30Т. Контроль цепи ИМ" />
+        <Signal Name="APS_SHKU17_DI_KR30T_VK" UUID="FC6E3EA5437FF0D3E9413DB5ED3BE34B" Type="BOOL" Global="TRUE" Comment="Кран 30Т. Контроль цепи ВК" />
         <Signal Name="APS_AOS_OUT_DONE" UUID="9F14917C447600FC6804C2B36A041541" Type="BOOL" Global="TRUE" Comment="АО со стравливанием завершен корректно" />
         <Signal Name="APS_AOS_OUT_DONE_INCORRECT" UUID="C5E7C67E4A597BE8C0E8619ACB980C53" Type="BOOL" Global="TRUE" Comment="АО со стравливанием завершен некорректно" />
         <Signal Name="APS_SHU14_DI_Res_1" UUID="4A844250474C2FB7015AA19737B4EE87" Type="BOOL" Global="TRUE" Comment="Резерв" />

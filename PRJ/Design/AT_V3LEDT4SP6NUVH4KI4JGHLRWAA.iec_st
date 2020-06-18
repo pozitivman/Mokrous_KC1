@@ -863,22 +863,22 @@ AE_041(SHKU17_A3_6_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_6_f
 AE_042(SHKU17_A3_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_7_flt);
 AE_043(SHKU17_A3_8_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A3_8_flt);
 *)
-AE_044(SHKU17_A4_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_3_flt);
-AE_045(SHKU17_A4_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_4_flt);
-AE_046(SHKU17_A4_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_5_flt);
-AE_047(SHKU17_A4_6_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_6_flt);
-AE_048(SHKU17_A4_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_7_flt);
-AE_049(SHKU17_A4_8_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_8_flt);
-AE_050(SHKU17_A4_9_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_9_flt);
-AE_051(SHKU17_A4_10_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_10_flt);
-AE_052(SHKU17_A5_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_3_flt);
-AE_053(SHKU17_A5_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_4_flt);
-AE_054(SHKU17_A5_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_5_flt);
-AE_055(SHKU17_A5_6_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_6_flt);
-AE_056(SHKU17_A5_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_7_flt);
-AE_057(SHKU17_A5_8_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_8_flt);
-AE_058(SHKU17_A5_9_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_9_flt);
-AE_059(SHKU17_A5_10_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_10_flt);
+AE_044(SHKU17_A4_status[1] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_3_flt);
+AE_045(SHKU17_A4_status[2] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_4_flt);
+AE_046(SHKU17_A4_status[3] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_5_flt);
+AE_047(SHKU17_A4_status[4] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_6_flt);
+AE_048(SHKU17_A4_status[5] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_7_flt);
+AE_049(SHKU17_A4_status[6] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_8_flt);
+AE_050(SHKU17_A4_status[7] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_9_flt);
+AE_051(SHKU17_A4_status[8] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A4_10_flt);
+AE_052(SHKU17_A5_status[1] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_3_flt);
+AE_053(SHKU17_A5_status[2] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_4_flt);
+AE_054(SHKU17_A5_status[3] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_5_flt);
+AE_055(SHKU17_A5_status[4] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_6_flt);
+AE_056(SHKU17_A5_status[5] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_7_flt);
+AE_057(SHKU17_A5_status[6] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_8_flt);
+AE_058(SHKU17_A5_status[7] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_9_flt);
+AE_059(SHKU17_A5_status[8] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A5_10_flt);
 (*
 AE_060(SHKU17_A6_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A6_3_flt);
 AE_061(SHKU17_A6_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_A6_4_flt);
@@ -1258,18 +1258,18 @@ AE_631(SHKU17_DI_KR49_OFF, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_
 AE_632(SHKU17_DI_KR49_ON, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR49_ON);
 AE_633(NOT SHKU17_DI_KR49_IM, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR49_IM);
 AE_634(NOT SHKU17_DI_KR49_VK, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR49_VK);
-AE_635(SHKU17_DI_Res_83, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_83);
-AE_636(SHKU17_DI_Res_84, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_84);
-AE_637(SHKU17_DI_Res_85, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_85);
-AE_638(SHKU17_DI_Res_86, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_86);
-AE_639(SHKU17_DI_Res_87, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_87);
-AE_640(SHKU17_DI_Res_88, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_88);
-AE_641(SHKU17_DI_Res_89, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_89);
-AE_642(SHKU17_DI_Res_90, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_90);
-AE_643(SHKU17_DI_Res_91, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_91);
-AE_644(SHKU17_DI_Res_92, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_92);
-AE_645(SHKU17_DI_Res_93, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_93);
-AE_646(SHKU17_DI_Res_94, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_Res_94);
+AE_635(SHKU17_DI_KR32_OFF, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR32_OFF);
+AE_636(SHKU17_DI_KR32_ON, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR32_ON);
+AE_637(NOT SHKU17_DI_KR32_IM, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR32_IM);
+AE_638(NOT SHKU17_DI_KR32_VK, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR32_VK);
+AE_639(SHKU17_DI_KR1294_3_7_OFF, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR1294_3_7_OFF);
+AE_640(SHKU17_DI_KR1294_3_7_ON, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR1294_3_7_ON);
+AE_641(NOT SHKU17_DI_KR1294_3_7_IM, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR1294_3_7_IM);
+AE_642(NOT SHKU17_DI_KR1294_3_7_VK, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR1294_3_7_VK);
+AE_643(SHKU17_DI_KR30T_OFF, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR30T_OFF);
+AE_644(SHKU17_DI_KR30T_ON, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR30T_ON);
+AE_645(NOT SHKU17_DI_KR30T_IM, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR30T_IM);
+AE_646(NOT SHKU17_DI_KR30T_VK, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHKU17_DI_KR30T_VK);
 
 
 //Выходы АПС
@@ -2186,18 +2186,18 @@ IF NOT IMIT THEN
 	DI_290(SHKU17_DI_A4_102, INT#3, BOOL#0, SHKU17_DI_KR49_ON);
 	DI_291(SHKU17_DI_A4_103, INT#3, BOOL#0, SHKU17_DI_KR49_IM);
 	DI_292(SHKU17_DI_A4_104, INT#3, BOOL#0, SHKU17_DI_KR49_VK);
-	DI_293(SHKU17_DI_A4_105, INT#3, BOOL#0, SHKU17_DI_Res_83);
-	DI_294(SHKU17_DI_A4_106, INT#3, BOOL#0, SHKU17_DI_Res_84);
-	DI_295(SHKU17_DI_A4_107, INT#3, BOOL#0, SHKU17_DI_Res_85);
-	DI_296(SHKU17_DI_A4_108, INT#3, BOOL#0, SHKU17_DI_Res_86);
-	DI_297(SHKU17_DI_A4_109, INT#3, BOOL#0, SHKU17_DI_Res_87);
-	DI_298(SHKU17_DI_A4_1010, INT#3, BOOL#0, SHKU17_DI_Res_88);
-	DI_299(SHKU17_DI_A4_1011, INT#3, BOOL#0, SHKU17_DI_Res_89);
-	DI_300(SHKU17_DI_A4_1012, INT#3, BOOL#0, SHKU17_DI_Res_90);
-	DI_301(SHKU17_DI_A4_1013, INT#3, BOOL#0, SHKU17_DI_Res_91);
-	DI_302(SHKU17_DI_A4_1014, INT#3, BOOL#0, SHKU17_DI_Res_92);
-	DI_303(SHKU17_DI_A4_1015, INT#3, BOOL#0, SHKU17_DI_Res_93);
-	DI_304(SHKU17_DI_A4_1016, INT#3, BOOL#0, SHKU17_DI_Res_94);
+	DI_293(SHKU17_DI_A4_105, INT#3, BOOL#0, SHKU17_DI_KR32_OFF);
+	DI_294(SHKU17_DI_A4_106, INT#3, BOOL#0, SHKU17_DI_KR32_ON);
+	DI_295(SHKU17_DI_A4_107, INT#3, BOOL#0, SHKU17_DI_KR32_IM);
+	DI_296(SHKU17_DI_A4_108, INT#3, BOOL#0, SHKU17_DI_KR32_VK);
+	DI_297(SHKU17_DI_A4_109, INT#3, BOOL#0, SHKU17_DI_KR1294_3_7_OFF);
+	DI_298(SHKU17_DI_A4_1010, INT#3, BOOL#0, SHKU17_DI_KR1294_3_7_ON);
+	DI_299(SHKU17_DI_A4_1011, INT#3, BOOL#0, SHKU17_DI_KR1294_3_7_IM);
+	DI_300(SHKU17_DI_A4_1012, INT#3, BOOL#0, SHKU17_DI_KR1294_3_7_VK);
+	DI_301(SHKU17_DI_A4_1013, INT#3, BOOL#0, SHKU17_DI_KR30T_OFF);
+	DI_302(SHKU17_DI_A4_1014, INT#3, BOOL#0, SHKU17_DI_KR30T_ON);
+	DI_303(SHKU17_DI_A4_1015, INT#3, BOOL#0, SHKU17_DI_KR30T_IM);
+	DI_304(SHKU17_DI_A4_1016, INT#3, BOOL#0, SHKU17_DI_KR30T_VK);
 END_IF;
 
 (*
@@ -2317,12 +2317,12 @@ SHKU17_DO_A5_97 := SHKU17_DO_KR48_OFF;  //Дискретный выход (мо�
 SHKU17_DO_A5_98 := SHKU17_DO_KR48_ON;  //Дискретный выход (модуль): Кран 48 открыть
 SHKU17_DO_A5_99 := SHKU17_DO_KR49_OFF;  //Дискретный выход (модуль): Кран 49 закрыть
 SHKU17_DO_A5_910 := SHKU17_DO_KR49_ON;  //Дискретный выход (модуль): Кран 49 открыть
-SHKU17_DO_A5_911 := SHKU17_DO_Res_21;  //Дискретный выход (модуль): Резерв
-SHKU17_DO_A5_912 := SHKU17_DO_Res_22;  //Дискретный выход (модуль): Резерв
-SHKU17_DO_A5_913 := SHKU17_DO_Res_23;  //Дискретный выход (модуль): Резерв
-SHKU17_DO_A5_914 := SHKU17_DO_Res_24;  //Дискретный выход (модуль): Резерв
-SHKU17_DO_A5_915 := SHKU17_DO_Res_25;  //Дискретный выход (модуль): Резерв
-SHKU17_DO_A5_916 := SHKU17_DO_Res_26;  //Дискретный выход (модуль): Резерв
+SHKU17_DO_A5_911 := SHKU17_DO_KR32_OFF;  //Дискретный выход (модуль): Резерв
+SHKU17_DO_A5_912 := SHKU17_DO_KR32_ON;  //Дискретный выход (модуль): Резерв
+SHKU17_DO_A5_913 := SHKU17_DO_KR1294_3_7_OFF;  //Дискретный выход (модуль): Резерв
+SHKU17_DO_A5_914 := SHKU17_DO_KR1294_3_7_ON;  //Дискретный выход (модуль): Резерв
+SHKU17_DO_A5_915 := SHKU17_DO_KR30T_OFF;  //Дискретный выход (модуль): Резерв
+SHKU17_DO_A5_916 := SHKU17_DO_KR30T_ON;  //Дискретный выход (модуль): Резерв
 SHKU17_DO_A5_101 := SHKU17_DO_Indic_AObs_KC;  //Дискретный выход (модуль): Индикация АО КЦ бс
 SHKU17_DO_A5_102 := SHKU17_DO_Indic_AOss_KC;  //Дискретный выход (модуль): Индикация АО КЦ сс
 SHKU17_DO_A5_103 := SHKU17_DO_Predupr_zvuk_sign;  //Дискретный выход (модуль): Предупредительный звуковой сигнал

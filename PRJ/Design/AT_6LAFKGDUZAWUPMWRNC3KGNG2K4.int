@@ -27,6 +27,7 @@
         <Signal Name="cycleTime_VLV_sys" UUID="B2F8CF214B14D4BFC1C599B4ACFC4DCC" Type="LREAL" Usage="" />
         <Signal Name="cycleTime_APS" UUID="0CD5CB7D4ED087285B9D2DBB1B5F11F2" Type="LREAL" Usage="" />
         <Signal Name="cycleTime_APS_sys" UUID="6B18419148B6507FCAB8769D2D74D1A4" Type="LREAL" Usage="" />
+        <Signal Name="SHKU17_A6_status" UUID="FFB24144429F258BE50D889DF8ACB31F" Type="WORD" ArraySize="9" Usage="" Global="TRUE" Comment="ШКУ-17. Состояние корзины А6" />
         <Signal Name="Global_BTN" UUID="8149509C4E02F97BC935BFBA225D941E" Type="3ABCD8324DFB751E8CAE308269A30199" Usage="" Global="TRUE" Comment="Scada. Кнопки" />
         <Signal Name="Global_PRU" UUID="5CA346F84ED8B42055AD1B866DDC325D" Type="276E10E74011327F462F5EABFCC2FAE9" Usage="" Global="TRUE" Comment="Данные для ПРУ с ПЛК А1" />
         <Signal Name="PRU_Link" UUID="DD472C334C6C376AA71888B9C43CF535" Type="WORD" Usage="" Global="TRUE" Comment="Статус связи с ПРУ" />

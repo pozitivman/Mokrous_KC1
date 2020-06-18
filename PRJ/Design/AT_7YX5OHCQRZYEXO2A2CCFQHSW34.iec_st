@@ -626,17 +626,17 @@ Deblock_last := Deblock;
 
 
 //АПС ошибок модулей
-AE_063(SHU14_A1_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_3_flt);
-AE_064(SHU14_A1_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_4_flt);
-AE_065(SHU14_A1_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_5_flt);
-AE_066(SHU14_A1_6_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_6_flt);
-AE_067(SHU14_A1_7_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_7_flt);
-AE_068(SHU14_A1_8_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_8_flt);
-AE_069(SHU14_A1_9_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_9_flt);
-AE_070(SHU14_A1_10_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_10_flt);
-AE_071(SHU14_A2_3_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_3_flt);
-AE_072(SHU14_A2_4_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_4_flt);
-AE_073(SHU14_A2_5_flt, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_5_flt);
+AE_063(SHU14_A1_status[1] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_3_flt);
+AE_064(SHU14_A1_status[2] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_4_flt);
+AE_065(SHU14_A1_status[3] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_5_flt);
+AE_066(SHU14_A1_status[4] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_6_flt);
+AE_067(SHU14_A1_status[5] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_7_flt);
+AE_068(SHU14_A1_status[6] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_8_flt);
+AE_069(SHU14_A1_status[7] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_9_flt);
+AE_070(SHU14_A1_status[8] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A1_10_flt);
+AE_071(SHU14_A2_status[1] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_3_flt);
+AE_072(SHU14_A2_status[2] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_4_flt);
+AE_073(SHU14_A2_status[3] >= WORD#2, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_SHU14_A2_5_flt);
 
 //АПС ошибок кранов
 AE_150(APS_SHU14_KRL1_non, T#100ms, Deblock, Kvitir, DO_sound_PS, APS_APS_SHU14_KRL1_non);

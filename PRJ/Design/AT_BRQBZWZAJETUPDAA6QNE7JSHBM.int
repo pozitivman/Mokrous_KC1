@@ -118,12 +118,12 @@
         <Signal Name="SHKU17_DO_A5_98" UUID="FA28FF194B5728AC4931C085169453AC" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 48 открыть" />
         <Signal Name="SHKU17_DO_A5_99" UUID="DBDC168A4C919D7137FE118E7549EA07" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 49 закрыть" />
         <Signal Name="SHKU17_DO_A5_910" UUID="43B32CDF48C075FB9598B3A8F0CC823E" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 49 открыть" />
-        <Signal Name="SHKU17_DO_A5_911" UUID="E6DF0F88465C900BA0399498A0331E36" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_912" UUID="BD49E0864F8FC759EC2D5B895326EBDF" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_913" UUID="20E4731B4305E217DDB96C9578B35A84" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_914" UUID="01A0D4AC45A4A1F708DFF19348161F04" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_915" UUID="E277736D4346E03F5835748CA0C7FF67" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
-        <Signal Name="SHKU17_DO_A5_916" UUID="615930534B25A41F98AC378C3A73B70A" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Резерв" />
+        <Signal Name="SHKU17_DO_A5_911" UUID="E6DF0F88465C900BA0399498A0331E36" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран  32 закрыть" />
+        <Signal Name="SHKU17_DO_A5_912" UUID="BD49E0864F8FC759EC2D5B895326EBDF" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран  32 открыть" />
+        <Signal Name="SHKU17_DO_A5_913" UUID="20E4731B4305E217DDB96C9578B35A84" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 1294-3.7 закрыть" />
+        <Signal Name="SHKU17_DO_A5_914" UUID="01A0D4AC45A4A1F708DFF19348161F04" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран  1294-3.7  открыть" />
+        <Signal Name="SHKU17_DO_A5_915" UUID="E277736D4346E03F5835748CA0C7FF67" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 30Т закрыть" />
+        <Signal Name="SHKU17_DO_A5_916" UUID="615930534B25A41F98AC378C3A73B70A" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Кран 30Т открыть" />
         <Signal Name="SHKU17_DO_A5_101" UUID="E629B34C4B246EB58F4201BF65F5E120" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Индикация АО КЦ бс" />
         <Signal Name="SHKU17_DO_A5_102" UUID="483EA4F540B413B81020AFA808B68ACD" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Индикация АО КЦ сс" />
         <Signal Name="SHKU17_DO_A5_103" UUID="D8C0F3F44627061E683B748DFEDEA3EF" Type="BOOL" Global="TRUE" Comment="Дискретный выход (модуль): Предупредительный звуковой сигнал" />
